@@ -14,7 +14,7 @@ const hooks = {
 
 const tableName = 'users';
 
-const User = sequelize.define('User', {
+const User = sequelize.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,

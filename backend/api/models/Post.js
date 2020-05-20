@@ -4,7 +4,7 @@ const sequelize = require('../../config/database');
 
 const Comment = require('./Comment');
 
-const Post = sequelize.define('Post', {
+const Post = sequelize.define('post', {
   title: {
     type: Sequelize.STRING,
   },

@@ -14,7 +14,7 @@ const PostController = () => {
         page: 1,
         result: result.map((i) => {
           const x = i.get({ plain: true });
-          return { ...x, commentsCount: x.Comments.length, Comments: undefined };
+          return { ...x, commentsCount: x.comments.length, comments: undefined };
         }),
       });
     } catch (err) {
@@ -25,7 +25,13 @@ const PostController = () => {
 
   const get = async (req, res) => {
     try {
-      const result = await Post.findOne({ where: { id: req.params.id }, include: [User, { model: Comment, include: [User] }] });
+      const result = (await Post.findOne({
+        where: { id: req.params.id },
+        include: [
+          { model: User, attributes: ['firstName', 'lastName', 'id'] },
+          { model: Comment, include: { model: User, attributes: ['firstName', 'lastName', 'id'] } },
+        ],
+      })).toJSON();
       // const x = await result.getUser();
       // console.log(x)
       return res.status(200).json(result);
@@ -70,9 +76,9 @@ const PostController = () => {
 
   const create = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).get({ plain: true });
-      const post = await Post.create({ ...req.body, UserId: user.id });
-      return res.status(200).json({ ...post.get({ plain: true }), User: user });
+      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const post = await Post.create({ ...req.body, userId: user.id });
+      return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -81,8 +87,8 @@ const PostController = () => {
 
   const createComment = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).get({ plain: true });
-      const comment = await Comment.create({ ...req.body, UserId: user.id, PostId: req.params.postId });
+      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const comment = await Comment.create({ ...req.body, userId: user.id, postId: req.params.postId });
       return res.status(200).json(comment);
     } catch (err) {
       console.log(err);
