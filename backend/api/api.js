@@ -53,8 +53,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // secure your private routes with jwt authentication middleware
-// TODO Remove in production.
-// app.all('/api/*', (req, res, next) => auth(req, res, next));
+app.all('/api/*', (req, res, next) => auth(req, res, next));
 
 // fill routes for express application
 app.use('/auth', mappedOpenRoutes);

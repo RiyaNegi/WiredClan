@@ -1,4 +1,5 @@
 const database = require('../../config/database');
+const seed = require('./seed');
 
 const dbService = (environment, migrate) => {
   const authenticateDB = () => database.authenticate();
@@ -7,9 +8,10 @@ const dbService = (environment, migrate) => {
 
   const syncDB = () => database.sync();
 
-  const successfulDBStart = () => (
-    console.info('connection to the database has been established successfully')
-  );
+  const successfulDBStart = async () => {
+    await seed();
+    console.info('connection to the database has been established successfully');
+  };
 
   const errorDBStart = (err) => (
     console.info('unable to connect to the database:', err)
@@ -23,7 +25,7 @@ const dbService = (environment, migrate) => {
   const startMigrateTrue = async () => {
     try {
       await syncDB();
-      successfulDBStart();
+      await successfulDBStart();
     } catch (err) {
       errorDBStart(err);
     }

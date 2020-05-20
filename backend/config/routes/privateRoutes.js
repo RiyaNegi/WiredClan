@@ -1,5 +1,16 @@
 const privateRoutes = {
-  'GET /users': 'UserController.getAll',
+  // Account routes
+  'GET /account': 'AccountController.get',
+  'PATCH /account': 'AccountController.update',
+
+  // User routes
+  'GET /users/:id': 'UserController.get',
+
+  // Posts routes
+  'GET /posts': 'PostController.getAll',
+  'GET /posts/:id': 'PostController.get',
+  'POST /posts': 'PostController.create',
+  'POST /posts/:postId/comments': 'PostController.createComment',
 
   // Dashboard routes
   'GET /accounts': 'DashboardController.getAccounts',

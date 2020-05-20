@@ -3,8 +3,11 @@ const bcryptService = require('../services/bcrypt.service');
 
 const sequelize = require('../../config/database');
 
+const Post = require('./Post');
+const Comment = require('./Comment');
+
 const hooks = {
-  beforeCreate(user) {
+  beforeSave(user) {
     user.password = bcryptService().password(user); // eslint-disable-line no-param-reassign
   },
 };
@@ -15,6 +18,12 @@ const User = sequelize.define('User', {
   email: {
     type: Sequelize.STRING,
     unique: true,
+  },
+  firstName: {
+    type: Sequelize.STRING,
+  },
+  lastName: {
+    type: Sequelize.STRING,
   },
   password: {
     type: Sequelize.STRING,
@@ -29,5 +38,10 @@ User.prototype.toJSON = function () {
 
   return values;
 };
+
+User.hasMany(Post);
+Post.belongsTo(User);
+User.hasMany(Comment);
+Comment.belongsTo(User);
 
 module.exports = User;

@@ -1,5 +1,5 @@
 const development = {
-  database: process.env.DB_NAME || 'cdn_db',
+  database: process.env.DB_NAME || 'jimmy_db',
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASS || 'postgres',
   host: process.env.HOST || 'localhost',

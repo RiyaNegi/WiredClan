@@ -6,7 +6,7 @@ const Account = require('../models/Account');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
 
-const UserController = () => {
+const AccountController = () => {
   const register = async (req, res) => {
     const { body } = req;
     if (body.password === body.confirmPassword) {
@@ -70,23 +70,22 @@ const UserController = () => {
     });
   };
 
-  const get = async (req, res) => {
+  const update = async (req, res) => {
     try {
-      const users = await User.findAll();
-
-      return res.status(200).json({ users });
+      const user = await User.findOne({ where: { id: req.token.id } });
+      const result = await user.update(req.body);
+      return res.status(200).json({ result });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
 
-  const account = async (req, res) => {
+  const get = async (req, res) => {
     try {
-      console.log(req.token, 'xxxxxxx');
-      const users = await User.findOne({ where: { id: req.token.id }, include: [Post] });
+      const user = await User.findOne({ where: { id: req.token.id }, include: [Post] });
 
-      return res.status(200).json({ users });
+      return res.status(200).json({ user });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -98,8 +97,8 @@ const UserController = () => {
     login,
     validate,
     get,
-    account,
+    update,
   };
 };
 
-module.exports = UserController;
+module.exports = AccountController;
