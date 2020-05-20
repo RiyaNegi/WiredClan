@@ -1,0 +1,77 @@
+.my-navbar {
+  background-color: rgb(234, 222, 235);
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 22px;
+  font-family: "Press Start 2P", cursive;
+}
+.user {
+  display: flex;
+  flex-direction: row;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.card-title {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.card-subtitle {
+  font-size: 16px;
+  color: grey;
+}
+.username {
+  margin-left: 10px;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+}
+.post-date {
+  margin-left: 10px;
+  font-size: 13px;
+  color: rgb(80, 80, 80);
+  margin-top: 2px;
+}
+.usericon {
+  size: 5x;
+}
+
+.comments-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.post-comments {
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.comment {
+  margin-right: 2px;
+}
+
+.date-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-stack {
+  display: flex;
+  flex-direction: row;
+}
+.tech {
+  font-size: 16px;
+  font-weight: 500;
+}
+.tech-details {
+  font-size: 16px;
+  margin-left: 5px;
+}
