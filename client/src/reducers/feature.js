@@ -1,13 +1,11 @@
-import {
-    FETCH_FEATURE
-} from '../actions/types';
+import { FETCH_FEATURE } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
-
-    switch (action.type) {
-        case FETCH_FEATURE:
-            return { ...state, homePageFeatures: action.payload}
-        default:
-            return state;
-    }
+  console.log("called FEATURE reducer", state);
+  switch (action.type) {
+    case FETCH_FEATURE:
+      return { ...state, homePageFeatures: action.payload.result };
+    default:
+      return state;
+  }
 };
