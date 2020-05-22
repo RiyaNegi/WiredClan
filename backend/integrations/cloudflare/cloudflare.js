@@ -11,6 +11,7 @@ class Cloudflare {
       rules: object.actions.map((action) => ({
         ...action,
         // eslint-disable-next-line max-len
+        // TODO: There's an extra nested array here.
         properties: allRules.result.filter((rule) => action.id === rule.id).map((rule) => rule.properties),
       })),
       status: object.status,

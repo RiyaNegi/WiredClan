@@ -34,6 +34,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
+console.log(mappedOpenRoutes, 'wwwwww');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
 

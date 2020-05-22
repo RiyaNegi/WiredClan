@@ -6,7 +6,7 @@ const PostController = () => {
   const getAll = async (req, res) => {
     try {
       const result = await Post.findAll({
-        include: { model: Comment },
+        include: [Comment, User],
         limit: 20,
         offset: (parseInt(req.query.page, 10) - 1) || 0 * 20,
       });

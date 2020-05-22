@@ -5,18 +5,21 @@ const Comment = require('../models/Comment');
 const seed = async () => {
   await User.bulkCreate([
     {
+      userName: 'random_user',
       firstName: 'Abcd',
       lastName: 'Alpha',
       email: 'abcd@gmail.com',
       password: 'password',
     },
     {
+      userName: 'abcde',
       firstName: 'Abcde',
       lastName: 'Beta',
       email: 'abcde@gmail.com',
       password: 'password',
     },
     {
+      userName: 'thecodersblock',
       firstName: 'Raj',
       lastName: 'Negi',
       email: 'raj@gmail.com',

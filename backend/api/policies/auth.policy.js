@@ -22,6 +22,9 @@ module.exports = (req, res, next) => {
   } else if (req.body.token) {
     tokenToVerify = req.body.token;
     delete req.query.token;
+  } else if (['/api/posts', '/api/users'].filter((whitelist) => req.path.startsWith(whitelist))
+    && req.method === 'GET') {
+    return next();
   } else {
     return res.status(401).json({ msg: 'No Authorization was found' });
   }

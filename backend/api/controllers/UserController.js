@@ -72,9 +72,9 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
-      const users = await User.findAll();
+      const user = await User.findOne({ where: { id: req.params.id } });
 
-      return res.status(200).json({ users });
+      return res.status(200).json(user);
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
