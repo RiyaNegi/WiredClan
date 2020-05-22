@@ -1,7 +1,13 @@
 import axios from "axios";
 import History from "../history.js";
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_FEATURE } from "./types";
-import HomePage from "../components/HomePage.js";
+import {
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_POSTS,
+  FETCH_POST_DETAILS
+} from "./types";
+import HomePage from "../components/hoomePage.js";
 
 const ROOT_URL = "http://localhost:8000";
 
@@ -17,8 +23,8 @@ export const signinUser = ({ email, password }) => {
 
         // - save the jwt token
         localStorage.setItem("token", response.data.token);
-        // - redirect to the route '/feature'
-        History.push("/feature");
+        // - redirect to the route '/posts'
+        History.push("/HomePage");
       })
       .catch(() => {
         // if request is bad...
@@ -36,7 +42,7 @@ export const signupUser = ({ email, password }) => {
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
-        History.push("/feature");
+        History.push("/posts");
       })
       .catch(err => {
         dispatch(authError(err.response.data.error));
@@ -56,16 +62,31 @@ export const signoutUser = () => {
   return { type: UNAUTH_USER };
 };
 
-export const fetchFeature = () => {
+export const fetchPosts = () => {
   return dispatch => {
     axios
       .get(`${ROOT_URL}/api/posts`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(response => {
+        dispatch({
+          type: FETCH_POSTS,
+          payload: response.data
+        });
+      });
+  };
+};
+
+export const fetchPostDetails = id => {
+  return dispatch => {
+    axios
+      .get(`${ROOT_URL}/api/posts/${id}`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
         console.log("response:", response);
         dispatch({
-          type: FETCH_FEATURE,
+          type: FETCH_POST_DETAILS,
           payload: response.data
         });
       });
