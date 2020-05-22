@@ -28,12 +28,10 @@ const PostController = () => {
       const result = (await Post.findOne({
         where: { id: req.params.id },
         include: [
-          { model: User, attributes: ['firstName', 'lastName', 'id'] },
-          { model: Comment, include: { model: User, attributes: ['firstName', 'lastName', 'id'] } },
+          { model: User, attributes: ['userName', 'firstName', 'lastName', 'id'] },
+          { model: Comment, include: { model: User, attributes: ['userName', 'firstName', 'lastName', 'id'] } },
         ],
       })).toJSON();
-      // const x = await result.getUser();
-      // console.log(x)
       return res.status(200).json(result);
     } catch (err) {
       console.log(err);

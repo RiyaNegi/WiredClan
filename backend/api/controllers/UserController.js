@@ -83,7 +83,6 @@ const UserController = () => {
 
   const account = async (req, res) => {
     try {
-      console.log(req.token, 'xxxxxxx');
       const users = await User.findOne({ where: { id: req.token.id }, include: [Post] });
 
       return res.status(200).json({ users });
