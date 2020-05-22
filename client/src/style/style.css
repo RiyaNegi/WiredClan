@@ -1,5 +1,5 @@
 .my-navbar {
-  background-color: rgb(234, 222, 235);
+  background-color: rgb(211, 198, 212);
   display: flex;
   justify-content: space-between;
 }
@@ -17,9 +17,11 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
+  margin-top: 10px;
+  border-bottom: 1px solid rgb(197, 197, 197);
 }
 .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
 

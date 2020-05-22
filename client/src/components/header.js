@@ -32,7 +32,7 @@ class Header extends PureComponent {
     return (
       <nav className="navbar navbar-toggleable-md navbar-light my-navbar">
         <Link to="/" className="navbar-brand">
-          Jimmy
+          CodeJimmy
         </Link>
 
         <ul className="navbar-nav">{this.renderLinks()}</ul>
