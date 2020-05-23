@@ -34,7 +34,7 @@ const PostController = () => {
             where: { parentId: null },
             include: [
               { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] },
-              { model: Comment, as: 'replyComments' },
+              { model: Comment, as: 'replyComments', include: { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] } },
             ],
           },
         ],
