@@ -29,7 +29,14 @@ const PostController = () => {
         where: { id: req.params.id },
         include: [
           { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] },
-          { model: Comment, include: { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] } },
+          {
+            model: Comment,
+            where: { parentId: null },
+            include: [
+              { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] },
+              { model: Comment, as: 'replyComments' },
+            ],
+          },
         ],
       })).toJSON();
       return res.status(200).json(result);

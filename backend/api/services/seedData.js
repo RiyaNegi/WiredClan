@@ -73,11 +73,30 @@ const seed = async () => {
             text: 'Nice',
             userId: users[1].id,
             postId: posts[0].id,
+            replyComments: [
+              {
+                text: 'Thank you!',
+                userId: users[0].id,
+                postId: posts[0].id,
+              },
+            ],
           },
           {
             text: 'This is my first post',
             userId: users[1].id,
             postId: posts[1].id,
+            replyComments: [
+              {
+                text: 'This is great. How did you do it?',
+                userId: users[2].id,
+                postId: posts[1].id,
+              },
+              {
+                text: 'By myself. And a lot of Horlicks. I am sponsored by them to be honest.',
+                userId: users[1].id,
+                postId: posts[1].id,
+              },
+            ],
           },
           {
             text: 'Very cool',
@@ -89,7 +108,7 @@ const seed = async () => {
             userId: users[0].id,
             postId: posts[2].id,
           },
-        ]);
+        ], { include: { model: Comment, as: 'replyComments' } });
       });
     })
     .catch((e) => {

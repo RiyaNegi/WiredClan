@@ -8,4 +8,6 @@ const Comment = sequelize.define('comment', {
   },
 }, { tableName: 'comments' });
 
+Comment.hasMany(Comment, { as: 'replyComments', foreignKey: 'parentId', useJunctionTable: false });
+
 module.exports = Comment;
