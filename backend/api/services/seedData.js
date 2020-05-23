@@ -8,7 +8,7 @@ const seed = async () => {
       userName: 'random_user',
       firstName: 'Abcd',
       lastName: 'Alpha',
-      imageUrl: 'https://api.adorable.io/avatars/80/abcd@gmail.com.png',
+      imageUrl: 'https://api.adorable.io/avatars/80/random_user.png',
       email: 'abcd@gmail.com',
       password: 'password',
     },
@@ -16,7 +16,7 @@ const seed = async () => {
       userName: 'abcde',
       firstName: 'Abcde',
       lastName: 'Beta',
-      imageUrl: 'https://api.adorable.io/avatars/80/abcde@gmail.com.png',
+      imageUrl: 'https://api.adorable.io/avatars/80/abcde.png',
       email: 'abcde@gmail.com',
       password: 'password',
     },
@@ -24,7 +24,7 @@ const seed = async () => {
       userName: 'thecodersblock',
       firstName: 'Raj',
       lastName: 'Negi',
-      imageUrl: 'https://api.adorable.io/avatars/80/raj@gmail.com.png',
+      imageUrl: 'https://api.adorable.io/avatars/80/thecodersblock.png',
       email: 'raj@gmail.com',
       password: 'password',
     },
@@ -33,64 +33,64 @@ const seed = async () => {
       await Post.bulkCreate([
         {
           userId: users[0].id,
-          title: "ABCD's project",
+          title:
+                        "I've Been Making a Video Series about Building a 16-bit Virtual Machine. This Episode Is All about Writing a Generic Parser for the Assembly Instructions.",
           description: 'a lot of description',
         },
         {
           userId: users[1].id,
-          title: "ABCDE's project",
+          title: 'Generators in Rust, C++20, Go, and More',
           description: 'This is something I made',
         },
         {
           userId: users[2].id,
-          title: 'A random blog',
+          title: "The Colorful Game of Life - a variant of Conway's Game of Life",
           description: 'This is something I wrote',
         },
         {
           userId: users[2].id,
-          title: 'A mobile app',
+          title: 'Feel-O-Meter (visualize the dominant emotions in your Spotify playlists based on lyrics)',
           description: 'This is something I wrote by myself',
         },
         {
           userId: users[1].id,
-          title: 'Wow, check this out',
+          title: 'What a typical 100% Serverless Architecture looks like in AWS!',
           description: '',
         },
         {
           userId: users[2].id,
-          title: 'Another random blog',
+          title: 'One-pass Compiler Primer',
           description: 'How to become a great developer',
         },
         {
           userId: users[0].id,
-          title: "Another of ABCD's project",
+          title: 'I built an open-source personal assistant powered by an artificial neural network in Go',
           description: 'niceeeee',
         },
-      ])
-        .then(async (posts) => {
-          await Comment.bulkCreate([
-            {
-              text: 'Nice',
-              userId: users[1].id,
-              postId: posts[0].id,
-            },
-            {
-              text: 'This is my first post',
-              userId: users[1].id,
-              postId: posts[1].id,
-            },
-            {
-              text: 'Very cool',
-              userId: users[0].id,
-              postId: posts[1].id,
-            },
-            {
-              text: 'Very cool',
-              userId: users[0].id,
-              postId: posts[2].id,
-            },
-          ]);
-        });
+      ]).then(async (posts) => {
+        await Comment.bulkCreate([
+          {
+            text: 'Nice',
+            userId: users[1].id,
+            postId: posts[0].id,
+          },
+          {
+            text: 'This is my first post',
+            userId: users[1].id,
+            postId: posts[1].id,
+          },
+          {
+            text: 'Very cool',
+            userId: users[0].id,
+            postId: posts[1].id,
+          },
+          {
+            text: 'Very cool',
+            userId: users[0].id,
+            postId: posts[2].id,
+          },
+        ]);
+      });
     })
     .catch((e) => {
       console.log(e);

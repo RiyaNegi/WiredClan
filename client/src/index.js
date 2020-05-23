@@ -7,6 +7,11 @@ import { BrowserRouter, Router, Switch } from 'react-router-dom';
 import History from './history.js';
 import Routes from './routes';
 import { AUTH_USER } from './actions/types';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import $ from 'jquery';
+import Popper from 'popper.js';
 
 import rootReducer from './reducers';
 

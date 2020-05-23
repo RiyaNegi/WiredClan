@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-
+import Comments from "./comments";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faComments } from "@fortawesome/free-solid-svg-icons";
-
-// 1. Render all the posts with the correct ID in the URLs.
-// 2. Pass them to the post component when you click on a post
-// 3. Before rendering fetch post from API. You will have to pass the id that you got to the API
 
 class PostDetails extends Component {
   componentWillMount() {
@@ -16,14 +12,25 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className=" post card">
+      <div className=" post-details">
         <div className="user">
           <div className="usericon">
-            <FontAwesomeIcon icon={faUserCircle} size="3x" color="gray" />
+            <img
+              src={post.user.imageUrl}
+              style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
+            />
           </div>
           <div className="date-div">
-            <div className="username">{post.user.userName}</div>
-            <div className="post-date">20th May 2020</div>
+            <span className="username">{post.user.userName}</span>
+            <span className="post-date">
+              {" "}
+              Posted on{" "}
+              {
+                ["4th July", "22nd May", "15th Nov"][
+                Math.floor(Math.random() * 3)
+                ]
+              }{" "}
+            </span>
           </div>
         </div>
         <div className="card-title">{post.title}</div>
@@ -37,14 +44,14 @@ class PostDetails extends Component {
   }
 
   render() {
-    console.log("post", this.props.post);
     if (!this.props.post) {
       return <div>Loading...</div>;
     }
-
+    console.log("post->>>>", this.props.post)
     return (
       <div>
         <ul>{this.renderPostDetails()}</ul>
+        <Comments comments={this.props.post.comments} />
       </div>
     );
   }
