@@ -5,9 +5,10 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_POSTS,
-  FETCH_POST_DETAILS
+  FETCH_POST_DETAILS,
+  FETCH_ACCOUNT
 } from "./types";
-import HomePage from "../components/hoomePage.js";
+
 
 const ROOT_URL = "http://localhost:8000";
 
@@ -24,7 +25,12 @@ export const signinUser = ({ email, password }) => {
         // - save the jwt token
         localStorage.setItem("token", response.data.token);
         // - redirect to the route '/posts'
+        fetchAccount()(dispatch);
+        // (dispatch) => {
+        //   // do api call...
+        // }();
         History.push("/HomePage");
+
       })
       .catch(() => {
         // if request is bad...
@@ -59,6 +65,7 @@ export const authError = error => {
 
 export const signoutUser = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("profileData");
   return { type: UNAUTH_USER };
 };
 
@@ -84,13 +91,33 @@ export const fetchPostDetails = id => {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(response => {
-        console.log("response:", response);
         dispatch({
           type: FETCH_POST_DETAILS,
           payload: response.data
         });
       });
   };
+};
+
+export const fetchAccount = () => {
+  return dispatch => {
+    axios
+      .get(`${ROOT_URL}/api/account`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      }
+      )
+      .then(response => {
+        console.log("account:", response);
+        dispatch({
+          type: FETCH_ACCOUNT,
+          payload: response.data.user
+        });
+        localStorage.setItem("profileData", JSON.stringify(response.data.user));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 };
 
 

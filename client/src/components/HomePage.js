@@ -30,7 +30,7 @@ class HomePage extends PureComponent {
                 />
               </div>
               <div className="date-div">
-                <span className="username">{post.user.userName}</span>
+                <span className="username username-main">{post.user.userName}</span>
                 <span className="post-date">
                   {" "}
                   Posted on{" "}
@@ -52,7 +52,7 @@ class HomePage extends PureComponent {
               <div className="post-comments">
                 <div>
                   {post.commentsCount}{" "}
-                  {post.commentsCount === 1 ? "comment" : "comments"}
+                  {post.commentsCount === 1 ? "Comment" : "Comments"}
                 </div>
               </div>
             </div>

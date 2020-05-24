@@ -1,4 +1,5 @@
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from "../actions/types";
+import { FETCH_ACCOUNT } from "../actions/types"
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -8,6 +9,8 @@ export const reducer = (state = {}, action) => {
       return { ...state, authenticated: false };
     case AUTH_ERROR:
       return { ...state, error: action.payload };
+    case FETCH_ACCOUNT:
+      return { ...state, data: action.payload }
     default:
       return state;
   }

@@ -7,7 +7,7 @@ class Header extends PureComponent {
     if (this.props.authenticated) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/signout">
+          <Link className="nav-link" to="/profile">
             <span className='nav-text'>Profile</span>
           </Link>
           <Link className="nav-link" to="/signout">

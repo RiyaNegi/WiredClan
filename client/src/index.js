@@ -6,7 +6,7 @@ import reduxThunk from 'redux-thunk';
 import { BrowserRouter, Router, Switch } from 'react-router-dom';
 import History from './history.js';
 import Routes from './routes';
-import { AUTH_USER } from './actions/types';
+import { AUTH_USER, FETCH_ACCOUNT } from './actions/types';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -36,10 +36,15 @@ const store = createStore(
 //
 
 const token = localStorage.getItem('token');
+const profileData = JSON.parse(localStorage.getItem('profileData'));
+console.log("profile : ", profileData)
 // if we have a token, consiger the user to be signed in
+// And set profile details in navbar.
 if (token) {
     // we need to update application state
+
     store.dispatch({ type: AUTH_USER });
+    store.dispatch({ type: FETCH_ACCOUNT, payload: profileData });
 }
 
 ReactDOM.render(

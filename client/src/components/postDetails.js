@@ -17,12 +17,12 @@ class PostDetails extends Component {
           <div className="usericon">
             <img
               src={post.user.imageUrl}
-              style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
+              style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
             />
           </div>
-          <div className="date-div">
-            <span className="username">{post.user.userName}</span>
-            <span className="post-date">
+          <div className="date-div details">
+            <span className="username username-main">{post.user.userName}</span>
+            <span className="post-date" style={{ marginTop: 9 }}>
               {" "}
               Posted on{" "}
               {
@@ -33,7 +33,7 @@ class PostDetails extends Component {
             </span>
           </div>
         </div>
-        <div className="card-title">{post.title}</div>
+        <div className="card-title post-detail">{post.title}</div>
         <div className="card-text">{post.description}</div>
         <div className="tech-stack">
           <div className="tech">Technology Stack :</div>
@@ -49,7 +49,7 @@ class PostDetails extends Component {
     }
     console.log("post->>>>", this.props.post)
     return (
-      <div>
+      <div className="col-md-11">
         <ul>{this.renderPostDetails()}</ul>
         <Comments comments={this.props.post.comments} />
       </div>
