@@ -6,8 +6,10 @@ import {
   AUTH_ERROR,
   FETCH_POSTS,
   FETCH_POST_DETAILS,
-  FETCH_ACCOUNT
+  FETCH_ACCOUNT,
+  POST_COMMENT
 } from "./types";
+import postDetails from "../components/postDetails.js";
 
 
 const ROOT_URL = "http://localhost:8000";
@@ -117,6 +119,28 @@ export const fetchAccount = () => {
       .catch(error => {
         console.log(error);
       });
+  }
+};
+
+export const postComment = (postId, text, parentId) => {
+  console.log("sdf", text)
+  return (dispatch, getState) => {
+    axios
+      .post(`${ROOT_URL}/api/posts/${postId}/comments`, { postId, text, parentId }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        response.data.user = getState().auth.data;
+        response.data.replyComments = [];
+        dispatch({
+          type: POST_COMMENT,
+          payload: response.data,
+        });
+      })
+      .catch(err => {
+        console.log("error:", err.response);
+      });
+
   }
 };
 

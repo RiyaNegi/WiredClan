@@ -12,12 +12,13 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className=" post-details">
+      <div className="post-details" key={post.id}>
         <div className="user">
           <div className="usericon">
             <img
               src={post.user.imageUrl}
               style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+              alt="userIcon"
             />
           </div>
           <div className="date-div details">
@@ -47,18 +48,17 @@ class PostDetails extends Component {
     if (!this.props.post) {
       return <div>Loading...</div>;
     }
-    console.log("post->>>>", this.props.post)
     return (
-      <div className="col-md-11">
+      <div className="col-md-10">
         <ul>{this.renderPostDetails()}</ul>
-        <Comments comments={this.props.post.comments} />
+        <Comments comments={this.props.comments} postId={this.props.post.id} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return { post: state.postDetails.data };
+  return { post: state.postDetails.details, comments: state.postDetails.comments };
 };
 
 export default connect(mapStateToProps, actions)(PostDetails);

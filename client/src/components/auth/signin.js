@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {
-    console.log(this.props.signinUser({ email, password }));
+    this.props.signinUser({ email, password });
   }
 
   renderError() {

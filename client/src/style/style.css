@@ -1,3 +1,6 @@
+.ul{
+  margin-bottom: 0.5rem !important;
+}
 .my-navbar {
   background-color: rgba(255, 227, 27, 0.95);
   display: flex;
@@ -32,7 +35,6 @@
 .user {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
 }
 
 .post {
@@ -96,6 +98,8 @@ padding-left: 6px;
   display: flex;
   justify-content: space-evenly;
   color: grey;
+  overflow:hidden;
+  resize:none;
 }
 
 .comment {
@@ -104,6 +108,7 @@ padding-left: 6px;
 
 .date-div {
   display: flex;
+  margin-top: 5 ;
 }
 
 .tech-stack {
@@ -191,15 +196,14 @@ button {
 .post-detail{
   margin-top: 15px;
 }
-.comment-text{
+.comment-text {
   display: flex;
   flex-direction: column;
-  margin-top:4px;
+  margin-top: 4px;
 }
 .reply-box{
   margin-left:30px;
   border-left: 1px solid gray;
-  margin-top:10px;
 }
 
 .reply-items{
@@ -211,14 +215,14 @@ button {
   flex-direction: row;
 }
 
-.details{
+.details {
   display:flex;
   align-items: flex-end;
   margin-bottom: 2px !important;
 }
 
 .post-comment{
-  width: 100%;
+  width: 600px;
   margin: 8px 0;
   border: none;
   border-bottom: 1px solid gray;
@@ -250,6 +254,7 @@ button {
   font-size:14px;
   margin-left: 0px;
   width:70px;
+  padding-bottom: 0px;
 }
 .reply-button:hover{
 
@@ -257,3 +262,26 @@ button {
   background-color: rgb(230, 230, 230);
 }
 .reply-button:focus {outline:0;}
+
+.post-reply{
+  border: 1px solid grey;
+  color: grey;
+  font-weight: 600;
+  font-size:14px;
+  margin-left: 0px;
+  width:70px;
+  background-color: white;
+  padding:2px;
+}
+.post-reply:hover{
+
+  outline:none;
+  background-color:rgba(255, 227, 27, 0.95);
+  color:black;
+}
+.post-reply:focus {outline:0;}
+.post-reply-but{
+  margin-left: 5px; 
+}
+.post-reply-sec{
+}
