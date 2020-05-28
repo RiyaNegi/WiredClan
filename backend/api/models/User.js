@@ -34,6 +34,15 @@ const User = sequelize.define('user', {
   password: {
     type: Sequelize.STRING,
   },
+  department: {
+    type: Sequelize.STRING,
+  },
+  college: {
+    type: Sequelize.STRING,
+  },
+  year: {
+    type: Sequelize.INTEGER,
+  },
 }, { hooks, tableName });
 
 // eslint-disable-next-line

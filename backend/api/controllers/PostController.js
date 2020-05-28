@@ -28,13 +28,14 @@ const PostController = () => {
       const result = (await Post.findOne({
         where: { id: req.params.id },
         include: [
-          { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] },
+          { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college', 'year', 'department', 'id'] },
           {
             model: Comment,
             where: { parentId: null },
+            required: false,
             include: [
-              { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] },
-              { model: Comment, as: 'replyComments', include: { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'id'] } },
+              { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college', 'year', 'department', 'id'] },
+              { model: Comment, as: 'replyComments', include: { model: User, attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college', 'year', 'department', 'id'] } },
             ],
           },
         ],

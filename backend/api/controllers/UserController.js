@@ -72,7 +72,7 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.params.id } });
+      const user = await User.findOne({ where: { id: req.params.id }, include: [Post] });
 
       return res.status(200).json(user);
     } catch (err) {
