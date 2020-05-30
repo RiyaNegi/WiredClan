@@ -1,3 +1,13 @@
+.container {
+  min-height: 100%;
+}
+
+.loader{
+  width: fit-content;
+  margin: auto;
+  margin-top: 250px;
+}
+
 .ul{
   margin-bottom: 0.5rem !important;
 }
@@ -9,16 +19,39 @@
 }
 .nav-text {
   font-weight: 600;
-  color:rgb(31, 31, 31);
+  color:rgb(12, 12, 12);
 }
 
 .nav-text:hover {
-  color:rgb(124, 124, 124) !important;
+  color:rgb(0, 0, 0) !important;
 
 }
+.nav-icon{
+  display: flex;
+  align-items:center;
+  margin-right: 8px;
+}
+.nav-username{
+  display: flex;
+  align-items:center;
+}
 
+.navbar-userbox{
+  display: flex;
+  background-color:  rgb(255, 226, 3); 
+  outline:none;
+  border: none;
+  padding: 0px!important;
+  margin: 0px!important;
+}
+.navbar-userbox:focus {outline:0;}
+
+.navbar-items{
+display: flex;
+flex-direction: row;
+}
 .navbar{
-  padding:0.3rem 1rem;
+  padding:0.2rem 1rem;
 }
 
 .nav-item{
@@ -32,9 +65,22 @@
   font-family: "Press Start 2P", cursive;
   float: left;
 }
+.nav-profile-card{
+  display: flex;
+  border: 1px rgb(179, 179, 179) solid;
+  height:150px;
+  width:200px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.commentrow-div{
+  display: flex;
+}
 .user {
   display: flex;
   flex-direction: row;
+  margin-top: 12px;
 }
 
 .post {
@@ -202,8 +248,9 @@ button {
   margin-top: 4px;
 }
 .reply-box{
-  margin-left:30px;
+  margin-left:48px;
   border-left: 1px solid gray;
+  margin-top: 5px;
 }
 
 .reply-items{
@@ -241,6 +288,13 @@ button {
   flex-direction: column;
   padding-left: 6px;
 }
+.comment-row{
+  display: flex;
+  flex-direction: row;
+}
+.edit-comment{
+  
+}
 
 .reply-sec{
   margin-top:0px;
@@ -252,7 +306,7 @@ button {
   outline:none;
   font-weight: 600;
   font-size:14px;
-  margin-left: 0px;
+  margin: 0px !important;
   width:70px;
   padding-bottom: 0px;
 }
@@ -274,7 +328,6 @@ button {
   padding:2px;
 }
 .post-reply:hover{
-
   outline:none;
   background-color:rgba(255, 227, 27, 0.95);
   color:black;
@@ -283,5 +336,69 @@ button {
 .post-reply-but{
   margin-left: 5px; 
 }
-.post-reply-sec{
+
+.row-div-profile{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 35px;
+}
+
+.profile-posts{
+  text-align: center ;
+}
+
+.prof-post-header{
+  font-size: 22px;
+  font-weight: 800px !important;
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+.profile-card{
+  display:flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  flex-direction: column;
+  padding: 0 25px;
+  margin-left: -40px;
+  width: 250px;
+}
+
+.profileDet-icon{
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  margin: 15px 0;
+  align-self: center;
+}
+
+.user-prof-det{
+  align-self: center;
+  font-weight: 600;
+}
+ .user-prof-details-username{
+   font-weight: 600;
+ } 
+
+ .user-prof-details-name{
+  font-weight: 200;
+  color: grey;
+} 
+
+.prof-title{
+  text-align: left !important;
+}
+
+.prof-post-box{
+  margin-left: 80px;
+}
+.image-col{
+display: flex;
+flex-direction: column;
+}
+.prof-image-deets{
+  margin-top: 80px;
+  margin-left: -120px;
+}
+.signup-field {
+  margin-top: -12px;
 }

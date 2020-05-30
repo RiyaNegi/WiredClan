@@ -4,7 +4,7 @@ import * as actions from "../actions";
 import Comments from "./comments";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faComments } from "@fortawesome/free-solid-svg-icons";
-
+import Loader from 'react-loader-spinner'
 class PostDetails extends Component {
   componentWillMount() {
     this.props.fetchPostDetails(this.props.match.params.id);
@@ -15,14 +15,24 @@ class PostDetails extends Component {
       <div className="post-details" key={post.id}>
         <div className="user">
           <div className="usericon">
-            <img
-              src={post.user.imageUrl}
-              style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
-              alt="userIcon"
-            />
+            <a
+              href={`/Users/${post.userId}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <img
+                src={post.user.imageUrl}
+                style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+                alt="userIcon"
+              />
+            </a>
           </div>
           <div className="date-div details">
-            <span className="username username-main">{post.user.userName}</span>
+            <a
+              href={`/Users/${post.userId}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <span className="username username-main">{post.user.userName}</span>
+            </a>
             <span className="post-date" style={{ marginTop: 9 }}>
               {" "}
               Posted on{" "}
@@ -46,7 +56,16 @@ class PostDetails extends Component {
 
   render() {
     if (!this.props.post) {
-      return <div>Loading...</div>;
+      return (
+        <div className="loader">
+          <Loader
+            type="ThreeDots"
+            color="#ffe31a"
+            height={100}
+            width={100}
+          />
+        </div >
+      )
     }
     return (
       <div className="col-md-10">

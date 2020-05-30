@@ -9,6 +9,8 @@ import HomePage from "../components/HomePage";
 import postDetails from "../components/postDetails";
 import Profile from "../components/Profile";
 
+
+
 const Routes = () => {
   return (
     <App>
@@ -19,7 +21,7 @@ const Routes = () => {
         <Route path="/signup" component={Signup} />
         <Route path="/postdetails/:id" component={postDetails} />
         <Route path="/HomePage" component={RequireAuth(HomePage)} />
-        {/* <Route path="/profile" component={Profile} /> */}
+        <Route path="/Users/:id" component={Profile} />
       </Switch>
     </App>
   );

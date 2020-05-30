@@ -7,9 +7,9 @@ import {
   FETCH_POSTS,
   FETCH_POST_DETAILS,
   FETCH_ACCOUNT,
-  POST_COMMENT
+  POST_COMMENT,
+  FETCH_USER
 } from "./types";
-import postDetails from "../components/postDetails.js";
 
 
 const ROOT_URL = "http://localhost:8000";
@@ -21,16 +21,10 @@ export const signinUser = ({ email, password }) => {
       .post(`${ROOT_URL}/auth/login`, { email, password })
       .then(response => {
         // if request is good...
-        // - update state to indicate user is authenticated
-        dispatch({ type: AUTH_USER });
-
         // - save the jwt token
         localStorage.setItem("token", response.data.token);
         // - redirect to the route '/posts'
         fetchAccount()(dispatch);
-        // (dispatch) => {
-        //   // do api call...
-        // }();
         History.push("/HomePage");
 
       })
@@ -68,36 +62,41 @@ export const authError = error => {
 export const signoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("profileData");
+  History.push("/");
   return { type: UNAUTH_USER };
 };
 
 export const fetchPosts = () => {
   return dispatch => {
-    axios
-      .get(`${ROOT_URL}/api/posts`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-      })
-      .then(response => {
-        dispatch({
-          type: FETCH_POSTS,
-          payload: response.data
+    setTimeout(function () {
+      axios
+        .get(`${ROOT_URL}/api/posts`, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        })
+        .then(response => {
+          dispatch({
+            type: FETCH_POSTS,
+            payload: response.data
+          });
         });
-      });
-  };
+    }, 0)
+  }
 };
 
 export const fetchPostDetails = id => {
   return dispatch => {
-    axios
-      .get(`${ROOT_URL}/api/posts/${id}`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-      })
-      .then(response => {
-        dispatch({
-          type: FETCH_POST_DETAILS,
-          payload: response.data
+    setTimeout(function () {
+      axios
+        .get(`${ROOT_URL}/api/posts/${id}`, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        })
+        .then(response => {
+          dispatch({
+            type: FETCH_POST_DETAILS,
+            payload: response.data
+          });
         });
-      });
+    }, 0)
   };
 };
 
@@ -114,16 +113,16 @@ export const fetchAccount = () => {
           type: FETCH_ACCOUNT,
           payload: response.data.user
         });
+        dispatch({ type: AUTH_USER });
         localStorage.setItem("profileData", JSON.stringify(response.data.user));
       })
       .catch(error => {
-        console.log(error);
+        console.log("Account error:", error);
       });
   }
 };
 
 export const postComment = (postId, text, parentId) => {
-  console.log("sdf", text)
   return (dispatch, getState) => {
     axios
       .post(`${ROOT_URL}/api/posts/${postId}/comments`, { postId, text, parentId }, {
@@ -144,4 +143,19 @@ export const postComment = (postId, text, parentId) => {
   }
 };
 
+export const fetchUser = (id) => {
+  return dispatch => {
+    console.log("user response called:")
+    axios
+      .get(`${ROOT_URL}/api/users/${id}`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        dispatch({
+          type: FETCH_USER,
+          payload: response.data
+        });
+      });
+  };
+};
 

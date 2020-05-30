@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import "./auth.css";
+import croodSignin from "./Signin.png";
 
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {
@@ -22,30 +24,37 @@ class Signin extends PureComponent {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <Field
-            className="form-control"
-            name="email"
-            component="input"
-            type="text"
-          />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password:</label>
-          <Field
-            className="form-control"
-            name="password"
-            component="input"
-            type="password"
-          />
-        </fieldset>
-        {this.renderError()}
-        <button action="submit" className="btn btn-primary">
-          Sign in
+      <div className="signin-back">
+        <div className='yellow-bg'></div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <div className="sign-box" >
+            <fieldset className="form-group sign-text">
+              <label>Email:</label>
+              <Field
+                className="form-control "
+                name="email"
+                component="input"
+                type="text"
+              />
+            </fieldset>
+            <fieldset className="form-group sign-text">
+              <label>Password:</label>
+              <Field
+                className="form-control"
+                name="password"
+                component="input"
+                type="password"
+              />
+            </fieldset>
+            {this.renderError()}
+            <button action="submit" className="btn site-button">
+              Sign in
         </button>
-      </form>
+          </div>
+        </form>
+        <div className="signin-image"><img src={croodSignin} style={{ width: 350, height: 270 }}
+          alt="userIcon" /></div>
+      </div>
     );
   }
 }

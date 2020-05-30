@@ -4,7 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import * as actions from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
-
+import Loader from 'react-loader-spinner'
 class Comments extends Component {
     state = {
         replyClicked: [],
@@ -22,19 +22,29 @@ class Comments extends Component {
             return (
                 <div className="reply-box" key={replyComment.id}>
                     <div className="reply-items user">
-                        <div className="usericon">
-                            <img
-                                src={replyComment.user.imageUrl}
-                                style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
-                                alt=""
-                            />
-                        </div>
+                        <a
+                            href={`/Users/${replyComment.user.id}`}
+                            style={{ textDecoration: "none", color: "black" }}
+                        >
+                            <div className="usericon">
+                                <img
+                                    src={replyComment.user.imageUrl}
+                                    style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+                                    alt=""
+                                />
+                            </div>
+                        </a>
                         <div className="text-reply">
                             <div className="comment-text">
-                                <div className="date-div" >
-                                    <span className="username">{replyComment.user.userName}</span>
-                                </div>
-                                <div className="card-text">{replyComment.text}</div>
+                                <a
+                                    href={`/Users/${replyComment.user.id}`}
+                                    style={{ textDecoration: "none", color: "black" }}
+                                >
+                                    <div className="date-div" >
+                                        <span className="username">{replyComment.user.userName}</span>
+                                    </div>
+                                </a>
+                                <div className="card-text"> {replyComment.text}</div>
                             </div>
                             <button className="reply-button reply-sec" onClick={this.handleClick(replyComment.id)}>
                                 <FontAwesomeIcon
@@ -57,18 +67,29 @@ class Comments extends Component {
             return (
                 <div key={comment.id}>
                     <div className="user">
-                        <div className="usericon">
-                            <img
-                                src={comment.user.imageUrl}
-                                style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
-                                alt="userIcon"
-                            />
-                        </div>
+                        <a
+                            href={`/Users/${comment.user.id}`}
+                            style={{ textDecoration: "none", color: "black" }}
+                        >
+                            <div className="usericon">
+                                <img
+                                    src={comment.user.imageUrl}
+                                    style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
+                                    alt="userIcon"
+                                />
+                            </div>
+                        </a>
                         <div className="text-reply">
                             <div className="comment-text">
                                 <div className="date-div" >
-                                    <span className="username">{comment.user.userName}</span>
+                                    <a
+                                        href={`/Users/${comment.user.id}`}
+                                        style={{ textDecoration: "none", color: "black" }}
+                                    >
+                                        <span className="username">{comment.user.userName}</span>
+                                    </a >
                                 </div>
+
                                 <div className="card-text">{comment.text}</div>
                             </div>
                             <button className="reply-button reply-sec" onClick={this.handleClick(comment.id)}>
@@ -87,15 +108,18 @@ class Comments extends Component {
         });
     }
 
+
     handleFormSubmit = (parentId, replyId) => {
         return (params) => {
-            if (!parentId) {
-                this.props.postComment(this.props.postId, params['comment' + replyId])
+            if (!!params['comment' + replyId]) {
+                if (!parentId) {
+                    this.props.postComment(this.props.postId, params['comment' + replyId])
+                }
+                else {
+                    this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
+                }
+                this.setState({ replyClicked: [] })
             }
-            else {
-                this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
-            }
-            this.setState({ replyClicked: [] })
         };
     }
 

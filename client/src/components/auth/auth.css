@@ -1,0 +1,82 @@
+.signin-container{
+   margin: 0 !important;
+   padding: 0 !important;
+   min-width:100% !important;
+}
+
+.signin-back{
+    background-color: white;
+}
+
+.sign-box{
+    border : 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding:30px;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: -100px;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+}
+.signup-box{
+    border : 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding:30px;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: -250px;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+}
+.sign-text{
+    color:black;
+    font-weight: 800;
+
+}
+.yellow-bg {
+    height: 600px;
+    margin-top: -300px;
+    background-color: rgba(255, 227, 27, 0.95);
+    
+}
+
+.signuptext-danger{
+    border:2px solid red;
+}
+
+.signup-row{
+    display: flex;
+    flex-direction: row;
+    width:80%;
+}
+
+.signup-el{
+    margin-left: 25px;
+}
+
+.signin-image{
+    margin-top: -450px;
+    position: relative;
+   
+}
+
+.site-button:hover{
+    background-color: rgba(255, 227, 27, 0.95);
+    color: white;
+}
+
+.signup-image{
+    margin-top: -480px;
+}
+.signup-image-area{
+    margin-top:-270px;
+    margin-left: 1030px
+}
+
+.bg-text{
+    font:20px;
+    color: black;
+    margin-top: -120px;
+}

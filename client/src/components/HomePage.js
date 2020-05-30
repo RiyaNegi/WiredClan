@@ -9,6 +9,7 @@ import {
   faSearch,
   faSearchDollar
 } from "@fortawesome/free-solid-svg-icons";
+import Loader from 'react-loader-spinner'
 
 class HomePage extends PureComponent {
   componentWillMount() {
@@ -19,7 +20,7 @@ class HomePage extends PureComponent {
       return (
         <div key={post.id} className="post">
           <a
-            href={`/profile/${post.userId}`}
+            href={`/Users/${post.userId}`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className="user">
@@ -95,7 +96,15 @@ class HomePage extends PureComponent {
 
   render() {
     if (!this.props.posts) {
-      return <div>Loading...</div>;
+      return (
+        <div className="loader">
+          <Loader
+            type="ThreeDots"
+            color="#ffe31a"
+            height={100}
+            width={100}
+          />
+        </div >)
     }
 
     return (

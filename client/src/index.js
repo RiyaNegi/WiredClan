@@ -14,6 +14,7 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 
 import rootReducer from './reducers';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 import './style/style.css';
 
