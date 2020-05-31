@@ -62,17 +62,17 @@ export const authError = error => {
 export const signoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("profileData");
-  History.push("/");
-  return { type: UNAUTH_USER };
+  History.push("/HomePage");
+  return {
+    type: UNAUTH_USER
+  };
 };
 
 export const fetchPosts = () => {
   return dispatch => {
     setTimeout(function () {
       axios
-        .get(`${ROOT_URL}/api/posts`, {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-        })
+        .get(`${ROOT_URL}/api/posts`)
         .then(response => {
           dispatch({
             type: FETCH_POSTS,
@@ -87,9 +87,7 @@ export const fetchPostDetails = id => {
   return dispatch => {
     setTimeout(function () {
       axios
-        .get(`${ROOT_URL}/api/posts/${id}`, {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-        })
+        .get(`${ROOT_URL}/api/posts/${id}`)
         .then(response => {
           dispatch({
             type: FETCH_POST_DETAILS,
@@ -147,9 +145,7 @@ export const fetchUser = (id) => {
   return dispatch => {
     console.log("user response called:")
     axios
-      .get(`${ROOT_URL}/api/users/${id}`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-      })
+      .get(`${ROOT_URL}/api/users/${id}`)
       .then(response => {
         dispatch({
           type: FETCH_USER,

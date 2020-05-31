@@ -10,7 +10,6 @@ import postDetails from "../components/postDetails";
 import Profile from "../components/Profile";
 
 
-
 const Routes = () => {
   return (
     <App>
@@ -20,7 +19,7 @@ const Routes = () => {
         <Route path="/signout" component={Signout} />
         <Route path="/signup" component={Signup} />
         <Route path="/postdetails/:id" component={postDetails} />
-        <Route path="/HomePage" component={RequireAuth(HomePage)} />
+        <Route path="/HomePage" component={HomePage} />
         <Route path="/Users/:id" component={Profile} />
       </Switch>
     </App>
