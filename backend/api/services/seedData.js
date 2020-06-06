@@ -67,6 +67,7 @@ const seed = async () => {
         {
           userId: users[2].id,
           title: "The Colorful Game of Life - a variant of Conway's Game of Life",
+          published: false,
           description: {
             blocks: [{
               key: 'fhjbh', data: {}, text: 'This is something I wrote. Some of it is in bold.', type: 'unstyled', depth: 0, entityRanges: [], inlineStyleRanges: [{ style: 'BOLD', length: 22, offset: 23 }],

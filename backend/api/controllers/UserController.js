@@ -5,6 +5,7 @@ const Cdn = require('../models/Cdn');
 const Account = require('../models/Account');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
+const Sequelize = require('sequelize');
 
 const UserController = () => {
   const register = async (req, res) => {
@@ -72,7 +73,13 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.params.id }, include: [Post] });
+      const user = await User.findOne({
+        where: {
+          id: req.params.id,
+          [Sequelize.Op.and]: Sequelize.literal('posts.published = true'),
+        },
+        include: [Post],
+      });
       user.publishedPosts = user.posts.filter((post) => post.published);
       return res.status(200).json(user);
     } catch (err) {
