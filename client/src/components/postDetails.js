@@ -5,9 +5,41 @@ import Comments from "./comments";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faComments } from "@fortawesome/free-solid-svg-icons";
 import Loader from 'react-loader-spinner'
+import { stateToHTML } from 'draft-js-export-html';
+import { convertFromRaw } from 'draft-js';
+
 class PostDetails extends Component {
   componentWillMount() {
     this.props.fetchPostDetails(this.props.match.params.id);
+  }
+  convertDataFromJSONToHTML = (object) => {
+
+    const html = stateToHTML(convertFromRaw((object)));
+    console.log("HTML IS: ", html);
+    const cleanHtml = (html) => {
+      // Clean spaces between tags
+      var newText = html.replace(/(<(pre|script|style|textarea)[^]+?<\/\2)|(^|>)\s+|\s+(?=<|$)/g, "$1$3")
+
+      // Clean empty paragraphs before the content
+      // <p><br/><p> && <p></p>
+      var slicer;
+      while (newText.slice(0, 20) === '<p></p>' || newText.slice(0, 11) === '<p><br></p>') {
+        if (newText.slice(0, 20) === '<p></p>') slicer = 7
+        else slicer = 11
+        newText = newText.substring(slicer, newText.length)
+      }
+
+      // Clean empty paragraphs after the content
+      while (newText.slice(-7) === '<p></p>' || newText.slice(-11) === '<p><br></p>') {
+        if (newText.slice(-7) === '<p></p>') slicer = 7
+        else slicer = 11
+        newText = newText.substring(0, newText.length - slicer)
+      }
+      // Return the clean Text
+      return newText
+    }
+
+    return cleanHtml(html);
   }
   renderPostDetails() {
     let post = this.props.post;
@@ -44,11 +76,9 @@ class PostDetails extends Component {
             </span>
           </div>
         </div>
-        <div className="card-title post-detail">{post.title}</div>
-        <div className="card-text">{post.description}</div>
-        <div className="tech-stack">
-          <div className="tech">Technology Stack :</div>
-          <div className="tech-details">React, redux, nodeJS</div>
+        <div className="post-detail  post-detail-title">{post.title}</div>
+        <div className="card-body">
+          <div dangerouslySetInnerHTML={{ __html: this.convertDataFromJSONToHTML(post.description) }}></div>
         </div>
       </div>
     );

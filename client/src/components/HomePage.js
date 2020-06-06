@@ -10,6 +10,7 @@ import {
   faSearchDollar
 } from "@fortawesome/free-solid-svg-icons";
 import Loader from 'react-loader-spinner'
+import { Link } from "react-router-dom";
 
 class HomePage extends PureComponent {
   componentWillMount() {
@@ -55,6 +56,11 @@ class HomePage extends PureComponent {
                   {post.commentsCount}{" "}
                   {post.commentsCount === 1 ? "Comment" : "Comments"}
                 </div>
+                {/* <div className="user-prof-det">
+                  <label className="user-prof-details-name com-branch">
+                    {this.props.user.department}
+                  </label>
+                </div> */}
               </div>
             </div>
           </a>
@@ -67,7 +73,7 @@ class HomePage extends PureComponent {
     return (
       <div className="search-box">
         <button type="button" className="btn btn-light site-button post-button">
-          + New Post
+          <Link className="com-links" to="/CreatePost"> + New Post</Link>
         </button>
         <span className="search-bar">
           <input type="text" className="search-input" />

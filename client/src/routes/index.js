@@ -8,6 +8,7 @@ import Signup from "../components/auth/signup";
 import HomePage from "../components/HomePage";
 import postDetails from "../components/postDetails";
 import Profile from "../components/Profile";
+import CreatePost from "../components/CreatePost";
 
 
 const Routes = () => {
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route path="/signup" component={Signup} />
         <Route path="/postdetails/:id" component={postDetails} />
         <Route path="/HomePage" component={HomePage} />
+        <Route path="/CreatePost" component={CreatePost} />
         <Route path="/Users/:id" component={Profile} />
       </Switch>
     </App>

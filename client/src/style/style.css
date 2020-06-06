@@ -116,7 +116,7 @@ flex-direction: row;
   flex-direction: column;
   margin-top: 15px;
   border-bottom: 1px solid #dadada;
-  padding-bottom: 8px;
+
 }
 
 .post-details {
@@ -124,8 +124,12 @@ flex-direction: row;
   flex-direction: column;
   margin-top: 55px;
   border-bottom: 1px solid #dadada;
-  padding-bottom: 8px;
   color : black;
+}
+.post-detail-title{
+  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Libre Baskerville', serif;
 }
 .card-title {
   font-size: 20px;
@@ -133,8 +137,12 @@ flex-direction: row;
   margin: 0px;
 }
 
-.card-text{
-  margin-bottom: -2px;
+.card-body {
+ padding: 0px;
+}
+.card-body img {
+  max-height: 300px !important;
+  max-width: 500px !important;
 }
 
 .card-subtitle {
@@ -481,3 +489,48 @@ flex-direction: column;
   color: inherit;
   text-decoration: none !important;  
 }
+
+.demo-editor {
+  height: 275px !important;
+  border: 1px solid #F1F1F1 !important;
+  padding: 5px !important;
+  border-radius: 2px !important;
+}
+.create-title-div{
+  padding:20px 0;
+}
+
+.post-create-title{
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border: 1px solid grey;
+}
+.post-create-title:active{
+  outline: none;
+}
+.create-post{
+  display: flex;
+  font-weight: 800;
+}
+
+.create-post-item{
+  padding-bottom: 1px;
+}
+.create-post-card{
+  display: flex;
+  border:1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding:20px;
+  margin-top: 20px;
+  flex-direction: column;
+}
+.create-post-but-div{
+  display: flex;
+}
+.com-branch{
+  margin-left: 25px;
+  color: red;
+}
+

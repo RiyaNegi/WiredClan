@@ -4,13 +4,15 @@ import { reducer as postReducer } from "./post";
 import { reducer as formReducer } from "redux-form";
 import { reducer as postDetailsReducer } from "./postDetails";
 import { reducer as profileDetailsReducer } from "./profileDetails";
+import { reducer as createPostReducer } from "./createPost";
 
 const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
   posts: postReducer,
   postDetails: postDetailsReducer,
-  userDetails: profileDetailsReducer
+  userDetails: profileDetailsReducer,
+  createPost: createPostReducer
 });
 
 export default rootReducer;

@@ -49,6 +49,11 @@ class Profile extends Component {
                                     {post.commentsCount}{" "}
                                     {post.commentsCount === 1 ? "Comment" : "Comments"}
                                 </div>
+                                <div className="user-prof-det">
+                                    <label className="user-prof-details-name com-branch">
+                                        {this.props.user.department}
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -82,8 +87,21 @@ class Profile extends Component {
                                 alt="userIcon"
                             />
                         </div>
-                        <div className="user-prof-det"> <label className="user-prof-details-username">{this.props.user.userName}</label></div>
-                        <div className="user-prof-det"> <label className="user-prof-details-name">{this.props.user.firstName} {this.props.user.lastName}</label></div>
+                        <div className="user-prof-det">
+                            <label className="user-prof-details-username">
+                                {this.props.user.userName}
+                            </label>
+                        </div>
+                        <div className="user-prof-det">
+                            <label className="user-prof-details-name">
+                                {this.props.user.firstName} {this.props.user.lastName}
+                            </label>
+                        </div>
+                        <div className="user-prof-det">
+                            <label className="user-prof-details-name">
+                                Branch: {this.props.user.department}
+                            </label>
+                        </div>
                     </div>
                     <div className="prof-image-deets"><img src={Croods} style={{ width: 370, height: 290 }}
                         alt="userIcon" /></div>

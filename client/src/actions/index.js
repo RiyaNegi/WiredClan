@@ -8,7 +8,8 @@ import {
   FETCH_POST_DETAILS,
   FETCH_ACCOUNT,
   POST_COMMENT,
-  FETCH_USER
+  FETCH_USER,
+  CREATE_POST
 } from "./types";
 
 
@@ -74,6 +75,7 @@ export const fetchPosts = () => {
       axios
         .get(`${ROOT_URL}/api/posts`)
         .then(response => {
+          console.log(response)
           dispatch({
             type: FETCH_POSTS,
             payload: response.data
@@ -155,3 +157,22 @@ export const fetchUser = (id) => {
   };
 };
 
+export const createPost = (title, description) => {
+  return (dispatch) => {
+    console.log("coll data:", title, description)
+    axios
+      .post(`${ROOT_URL}/api/posts`, { title, description }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        dispatch({
+          type: CREATE_POST,
+          payload: response.data,
+        });
+        History.push(`/PostDetails/${response.data.id}`);
+      })
+      .catch(err => {
+        console.log("error:", err.response);
+      });
+  }
+};
