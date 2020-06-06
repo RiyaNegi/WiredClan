@@ -9,7 +9,7 @@ const Post = sequelize.define('post', {
     type: Sequelize.STRING,
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.JSONB,
   },
   created: {
     type: Sequelize.VIRTUAL,
