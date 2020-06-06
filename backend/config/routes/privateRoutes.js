@@ -10,7 +10,10 @@ const privateRoutes = {
   'GET /posts': 'PostController.getAll',
   'GET /posts/:id': 'PostController.get',
   'POST /posts': 'PostController.create',
+  'POST /posts/:id/': 'PostController.edit',
   'POST /posts/:postId/comments': 'PostController.createComment',
+  'POST /posts/:postId/comments/:id': 'PostController.createComment',
+  'DELETE /posts/:postId/comments/:id': 'PostController.deleteComment',
 
   // Dashboard routes
   'GET /accounts': 'DashboardController.getAccounts',

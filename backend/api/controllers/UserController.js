@@ -73,7 +73,7 @@ const UserController = () => {
   const get = async (req, res) => {
     try {
       const user = await User.findOne({ where: { id: req.params.id }, include: [Post] });
-
+      user.publishedPosts = user.posts.filter((post) => post.published);
       return res.status(200).json(user);
     } catch (err) {
       console.log(err);

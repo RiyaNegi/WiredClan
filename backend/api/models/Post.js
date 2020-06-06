@@ -11,6 +11,10 @@ const Post = sequelize.define('post', {
   description: {
     type: Sequelize.JSONB,
   },
+  published: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+  },
   created: {
     type: Sequelize.VIRTUAL,
     get() {

@@ -84,7 +84,6 @@ const AccountController = () => {
   const get = async (req, res) => {
     try {
       const user = await User.findOne({ where: { id: req.token.id }, include: [Post] });
-
       return res.status(200).json({ user });
     } catch (err) {
       console.log(err);
