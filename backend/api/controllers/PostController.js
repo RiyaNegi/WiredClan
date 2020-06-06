@@ -7,7 +7,7 @@ const PostController = () => {
   const getAll = async (req, res) => {
     try {
       const result = await Post.findAll({
-        where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search}%` } },
+        where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ' '}%` } },
         include: [Comment, User],
         limit: 20,
         offset: (parseInt(req.query.page, 10) - 1) || 0 * 20,
