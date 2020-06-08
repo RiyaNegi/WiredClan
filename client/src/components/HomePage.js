@@ -72,9 +72,14 @@ class HomePage extends PureComponent {
   renderSearch() {
     return (
       <div className="search-box">
-        <button type="button" className="btn btn-light site-button post-button">
-          <Link className="com-links" to="/CreatePost"> + New Post</Link>
-        </button>
+        {this.props.account ? (
+          <button type="button" className="btn btn-light site-button post-button">
+            <Link className="com-links" to="/CreatePost"> + New Post</Link>
+          </button>
+        )
+          : (<button type="button" className="btn btn-light site-button post-button">
+            <Link className="com-links" to="/signin"> + New Post</Link>
+          </button>)}
         <span className="search-bar">
           <input type="text" className="search-input" />
           <span className="search-icon">
@@ -123,7 +128,7 @@ class HomePage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts.homePage };
+  return { posts: state.posts.homePage, account: state.auth.data };
 };
 
 export default connect(mapStateToProps, actions)(HomePage);

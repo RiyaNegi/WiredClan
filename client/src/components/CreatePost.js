@@ -43,9 +43,16 @@ class CreatePost extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        var convertedData = convertToRaw(this.state.editorState.getCurrentContent())
-        this.props.createPost(this.state.title, convertedData)
-        this.setState({ editorState: EditorState.createEmpty() })
+        if (e.target.name === "submit") {
+            var convertedData = convertToRaw(this.state.editorState.getCurrentContent())
+            this.props.createPost(this.state.title, true, convertedData)
+            this.setState({ editorState: EditorState.createEmpty() })
+        }
+        else {
+            convertedData = convertToRaw(this.state.editorState.getCurrentContent())
+            this.props.createPost(this.state.title, false, convertedData)
+            this.setState({ editorState: EditorState.createEmpty() })
+        }
     }
     render() {
         return (
@@ -81,11 +88,20 @@ class CreatePost extends Component {
                                 <button
                                     className="btn btn-light site-button post-button"
                                     action="submit"
+                                    name="submit"
                                     onClick={this.handleSubmit}>
                                     Submit Post
                             </button>
                             </div>
-                            <div className="create-post-save"></div>
+                            <div className="create-post-save">
+                                <button
+                                    className="btn btn-secondary site-button dept-button draft-button"
+                                    action="submit"
+                                    name="save"
+                                    onClick={this.handleSubmit}>
+                                    Save Draft
+                            </button>
+                            </div>
                         </div>
                     </form>
                 </div>

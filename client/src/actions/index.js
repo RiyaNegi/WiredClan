@@ -157,7 +157,7 @@ export const fetchUser = (id) => {
   };
 };
 
-export const createPost = (title, description) => {
+export const createPost = (title, published, description) => {
   return (dispatch) => {
     console.log("coll data:", title, description)
     axios

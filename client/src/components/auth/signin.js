@@ -1,9 +1,12 @@
+/* eslint-disable react-app/react/jsx-no-undef */
 import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import "./auth.css";
 import croodSignin from "./Signin.png";
+import { Link } from "react-router-dom";
+import Loader from 'react-loader-spinner'
 
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {
@@ -22,7 +25,6 @@ class Signin extends PureComponent {
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <div className="signin-back">
         <div className='yellow-bg'></div>
@@ -50,6 +52,9 @@ class Signin extends PureComponent {
             <button action="submit" className="btn site-button">
               Sign in
         </button>
+            <div style={{ marginLeft: 11, marginTop: 8 }}>
+              Don't have an account? Click here to <Link to="/signup">Sign up</Link>
+            </div>
           </div>
         </form>
         <div className="signin-image"><img src={croodSignin} style={{ width: 350, height: 270 }}

@@ -110,6 +110,9 @@ class Signup extends PureComponent {
             <button type="submit" className="btn site-button" disabled={submitting}>
               Sign Up
         </button>
+            <div style={{ marginLeft: 11, marginTop: 8 }}>
+              Already have an account? Click here to <Link to="/signin">Sign in</Link>
+            </div>
           </div>
         </form>
         <div className="signup-image"><img src={croodSignup} style={{ width: 380, height: 270 }}

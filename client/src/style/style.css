@@ -90,6 +90,7 @@ flex-direction: row;
 .comment-row-sec{
   display: flex;
   flex-direction: row;
+  margin-left: 16px;
 }
 
 .edit-comment-but{
@@ -97,7 +98,7 @@ flex-direction: row;
   background-color: white;
   border:none;
   outline:none;
-  border-radius:50%;
+  border-radius: 0;
 }
 .edit-comment-but:hover{
   color: rgb(255, 226, 3);
@@ -106,9 +107,18 @@ flex-direction: row;
 }
 .edit-comment-but:focus{
   outline:0;
+  color:rgb(173, 173, 173);
+  background-color: white;
+  border: 0 !important;
+  border-radius:0;
 }
+
 .comment-edit{
-  margin-top: 29px;
+  margin-top: 4px;
+}
+
+.newedit{
+  margin-left:0px;
 }
 
 .post {
@@ -127,7 +137,7 @@ flex-direction: row;
   color : black;
 }
 .post-detail-title{
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
   font-family: 'Libre Baskerville', serif;
 }
@@ -187,7 +197,9 @@ padding-left: 6px;
 .comment {
   margin-right: 2px;
 }
-
+.com-user{
+  margin-top: 8px;
+}
 .date-div {
   display: flex;
   margin-top: 5 ;
@@ -246,6 +258,11 @@ button {
   padding: 0px 40px;
 }
 
+.dept-button:hover {
+  background-color: #3a3a3a;
+  color: white;
+}
+
 .search-bar {
   padding: 0 40px;
   align-self: center;
@@ -285,8 +302,8 @@ button {
 }
 .reply-box{
   margin-left:48px;
-  border-left: 1px solid gray;
-  margin-top: 5px;
+  border-left: 1px solid rgb(201, 201, 201);
+  padding-top: 4px;
 }
 
 .reply-items{
@@ -295,7 +312,13 @@ button {
 
 .profile-items{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin:16px 20px;
+  min-width:500px;
+}
+
+.prof-row-item{
+  display: flex;
 }
 
 .details {
@@ -305,7 +328,7 @@ button {
 }
 
 .post-comment{
-  width: 600px;
+  width: 100%;
   margin: 8px 0;
   border: none;
   border-bottom: 1px solid gray;
@@ -318,6 +341,7 @@ button {
 
 .com-box{
   margin-left: 18px;
+  width: 100%;
 }
 .text-reply{
   display: flex;
@@ -351,23 +375,22 @@ button {
 .reply-button:focus {outline:0;}
 
 .post-reply{
-  border: 1px solid grey;
-  color: grey;
   font-weight: 600;
   font-size:14px;
   margin-left: 0px;
   width:70px;
-  background-color: white;
   padding:2px;
 }
-.post-reply:hover{
-  outline:none;
-  background-color:rgba(255, 227, 27, 0.95);
-  color:black;
-}
-.post-reply:focus {outline:0;}
+
 .post-reply-but{
   margin-left: 5px; 
+  display: flex;
+  justify-content: flex-end;
+}
+.cancel-btn{
+  padding: 0px 9px;
+  font-weight: 600;
+  font-size:14px;
 }
 
 .row-div-profile{
@@ -378,6 +401,25 @@ button {
 
 .profile-posts{
   text-align: center ;
+  margin-left: 280px;
+}
+.nav-tabs-profile{
+margin-left:80px;
+font-size: 18px;
+}
+.nav-items-profile{
+  padding: 0px 20px;
+}
+.nav-links-profile{
+  color:black;
+}
+
+.nav-links-profile:focus{
+  color:black;
+}
+
+.nav-links-profile:hover{
+  color:black;
 }
 
 .prof-post-header{
@@ -385,6 +427,7 @@ button {
   font-weight: 800px !important;
   padding-bottom: 20px;
   border-bottom: 1px solid black;
+  margin-top: 20px;
 }
 .profile-card{
   display:flex;
@@ -427,10 +470,12 @@ button {
 .image-col{
 display: flex;
 flex-direction: column;
+position: fixed;
 }
 .prof-image-deets{
-  margin-top: 80px;
+  margin-top: 280px;
   margin-left: -120px;
+  position: fixed;
 }
 .signup-field {
   margin-top: -12px;
@@ -534,3 +579,6 @@ flex-direction: column;
   color: red;
 }
 
+.draft-button{
+  padding: 7px 12px;
+}

@@ -107,8 +107,28 @@ class Profile extends Component {
                         alt="userIcon" /></div>
                 </div>
                 <div className="profile-posts col-md-9">
-                    <label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                    {this.renderPosts()}
+                    {this.props.account && this.props.account.id === this.props.user.id ? (
+                        <React.Fragment>
+                            <ul class="nav nav-tabs nav-tabs-profile" id="myTab" role="tablist">
+                                <li class="nav-item nav-items-profile">
+                                    <a class="nav-link active nav-links-profile" id="post-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Posts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-links-profile" id="draft-tab" data-toggle="tab" href="#drafts" role="tab" aria-controls="drafts" aria-selected="false">Drafts</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab"><label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
+                                    {this.renderPosts()}</div>
+                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">...</div>
+                            </div>
+                        </React.Fragment>
+                    ) :
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
+                            <label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
+                            {this.renderPosts()}
+                        </div>}
+
                 </div>
             </div>
         );
@@ -116,7 +136,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.userDetails.users };
+    return { user: state.userDetails.users, account: state.auth.data };
 };
 
 export default connect(mapStateToProps, actions)(Profile);
