@@ -29,6 +29,7 @@ class Comments extends Component {
 
   renderReplies = (comment, parentId) => {
     return comment.replyComments.map(replyComment => {
+      console.log("called it redner replies")
       return (
         <div className="reply-box" key={replyComment.id}>
           {
@@ -45,6 +46,7 @@ class Comments extends Component {
   }
 
   renderComment(comment) {
+    console.log("called it render com")
     return <div className="user com-user">
       <div className="comment-space">
         <div className="comment-row-sec">
@@ -84,16 +86,16 @@ class Comments extends Component {
         </div>
         <div className="comment-edit">
           {this.props.account && comment.userId === this.props.account.id ? (
-            <div class="dropdown">
-              <button type="button" class="btn btn-secondary  edit-comment-but" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" >
+            <div className="dropdown">
+              <button type="button" className="btn btn-secondary  edit-comment-but" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" >
                 <FontAwesomeIcon
                   icon={faEllipsisV}
                   size="1x"
                 />
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <button class="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</button>
-                <button class="dropdown-item" href="#">Delete</button>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <button className="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</button>
+                <button className="dropdown-item" href="#">Delete</button>
               </div>
             </div>
           ) : null}
@@ -104,6 +106,7 @@ class Comments extends Component {
 
   renderComments() {
     return this.props.comments.map(comment => {
+      console.log("called it render coms")
       return (
         <div key={comment.id}>
           {
@@ -120,31 +123,42 @@ class Comments extends Component {
   }
 
 
-  handleFormSubmit = (parentId, replyId) => {
+  handleFormSubmit = (parentId, replyId, edit) => {
     return (params) => {
-      if (!!params['comment' + replyId]) {
-        if (!parentId) {
-          this.props.postComment(this.props.postId, params['comment' + replyId])
+      if (edit) {
+        if (params['comment' + replyId]) {
+          this.props.updateComment(this.props.postId, params['comment' + replyId], replyId)
+          this.setState({ replyClicked: [], editClicked: [] })
         }
-        else {
-          this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
+      }
+      else {
+        if (params['comment' + replyId]) {
+          if (!parentId) {
+            this.props.postComment(this.props.postId, params['comment' + replyId])
+          }
+          else {
+            this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
+          }
+          this.setState({ replyClicked: [], editClicked: [] })
         }
-        this.setState({ replyClicked: [] })
       }
     };
   }
 
   handleCancel = (commentId) => {
     return (e) => {
-      let filteredArray = this.state.replyClicked.filter(i => i.id !== commentId)
-      this.setState({ replyClicked: filteredArray });
-      console.log("state:", this.state.replyClicked)
+      let filteredReplyArray = this.state.replyClicked.filter(i => i.id !== commentId)
+      let filteredEditArray = this.state.editClicked.filter(i => i.id !== commentId)
+      this.setState({ replyClicked: filteredReplyArray, editClicked: filteredEditArray });
     }
   }
   UserReply(parentId, replyId, edit) {
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit(parentId, replyId).bind(this))}>
+      <form onSubmit={edit ?
+        handleSubmit(this.handleFormSubmit(parentId, replyId, edit).bind(this))
+        :
+        handleSubmit(this.handleFormSubmit(parentId, replyId).bind(this))}>
         <div className={"post-reply-sec" + edit ? "newedit" : ""}>
           <div className="profile-items">
             <div className="prof-row-item">

@@ -9,7 +9,8 @@ import {
   FETCH_ACCOUNT,
   POST_COMMENT,
   FETCH_USER,
-  CREATE_POST
+  CREATE_POST,
+  UPDATE_COMMENT
 } from "./types";
 
 
@@ -143,9 +144,29 @@ export const postComment = (postId, text, parentId) => {
   }
 };
 
+export const updateComment = (postId, text, commentId) => {
+  return (dispatch, getState) => {
+    axios
+      .post(`${ROOT_URL}/api/posts/${postId}/comments/${commentId}`, { postId, text, commentId }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        console.log("res", response);
+        response.data.user = getState().auth.data;
+        dispatch({
+          type: UPDATE_COMMENT,
+          payload: response.data
+        });
+      })
+      .catch(err => {
+        console.log("error:", err.response || err);
+      });
+
+  }
+};
+
 export const fetchUser = (id) => {
   return dispatch => {
-    console.log("user response called:")
     axios
       .get(`${ROOT_URL}/api/users/${id}`)
       .then(response => {
@@ -159,7 +180,6 @@ export const fetchUser = (id) => {
 
 export const createPost = (title, published, description) => {
   return (dispatch) => {
-    console.log("coll data:", title, description)
     axios
       .post(`${ROOT_URL}/api/posts`, { title, description }, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
@@ -167,7 +187,7 @@ export const createPost = (title, published, description) => {
       .then(response => {
         dispatch({
           type: CREATE_POST,
-          payload: response.data,
+          payload: response.data
         });
         History.push(`/PostDetails/${response.data.id}`);
       })
