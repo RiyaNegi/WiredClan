@@ -12,7 +12,7 @@ const privateRoutes = {
   'POST /posts': 'PostController.create',
   'POST /posts/:id/': 'PostController.edit',
   'POST /posts/:postId/comments': 'PostController.createComment',
-  'POST /posts/:postId/comments/:id': 'PostController.createComment',
+  'POST /posts/:postId/comments/:id': 'PostController.editComment',
   'DELETE /posts/:postId/comments/:id': 'PostController.deleteComment',
 
   // Dashboard routes
