@@ -119,7 +119,18 @@ const PostController = () => {
   const editComment = async (req, res) => {
     try {
       const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
-      const comment = await Comment.findOne({ where: { id: req.params.id, userId: user.id } });
+      const comment = await Comment.findOne({
+        where: { id: req.params.id, userId: user.id },
+        include: {
+          model: Comment,
+          as: 'replyComments',
+          include: {
+            model: User,
+            attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
+              'year', 'department', 'id'],
+          },
+        },
+      });
       await comment.update(req.body);
 
       return res.status(200).json(comment);
