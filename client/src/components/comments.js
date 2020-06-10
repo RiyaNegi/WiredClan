@@ -27,6 +27,12 @@ class Comments extends Component {
     }
   }
 
+  handleDeleteClick = (commentId, parentId) => {
+    return (e) => {
+      this.props.deleteComment(this.props.postId, commentId, parentId)
+    }
+  }
+
   renderReplies = (comment, parentId) => {
     return comment.replyComments.map(replyComment => {
       console.log("called it redner replies")
@@ -34,11 +40,11 @@ class Comments extends Component {
         <div className="reply-box" key={replyComment.id}>
           {
             this.state.editClicked.filter(ci => ci.id === replyComment.id).length && this.props.account ?
-              this.UserReply(parentId, replyComment.id, true)
+              this.UserReply(parentId, replyComment.id, true, false)
               :
               this.renderComment(replyComment)
           }
-          {this.state.replyClicked.filter(ci => ci.id === replyComment.id).length && this.props.account ? this.UserReply(parentId, replyComment.id) : null}
+          {this.state.replyClicked.filter(ci => ci.id === replyComment.id).length && this.props.account ? this.UserReply(parentId, replyComment.id, false, true) : null}
         </div >
       );
     });
@@ -95,7 +101,7 @@ class Comments extends Component {
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <button className="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</button>
-                <button className="dropdown-item" href="#">Delete</button>
+                <button className="dropdown-item" onClick={this.handleDeleteClick(comment.id, comment.parentId)}>Delete</button>
               </div>
             </div>
           ) : null}
@@ -111,11 +117,11 @@ class Comments extends Component {
         <div key={comment.id}>
           {
             this.state.editClicked.filter(ci => ci.id === comment.id).length && this.props.account ?
-              this.UserReply(comment.id, comment.id, true)
+              this.UserReply(comment.id, comment.id, true, false)
               :
               this.renderComment(comment)
           }
-          {this.state.replyClicked.filter(ci => ci.id === comment.id).length && this.props.account ? this.UserReply(comment.id, comment.id) : null}
+          {this.state.replyClicked.filter(ci => ci.id === comment.id).length && this.props.account ? this.UserReply(comment.id, comment.id, false, true) : null}
           {comment.replyComments.length ? this.renderReplies(comment, comment.id) : null}
         </div >
       );
@@ -123,24 +129,30 @@ class Comments extends Component {
   }
 
 
-  handleFormSubmit = (parentId, replyId, edit) => {
+  handleFormSubmit = (parentId, replyId) => {
     return (params) => {
-      if (edit) {
-        if (params['comment' + replyId]) {
-          this.props.updateComment(this.props.postId, params['comment' + replyId], replyId)
-          this.setState({ replyClicked: [], editClicked: [] })
+      debugger;
+      if (params['replyComment' + replyId]) {
+        if (!parentId) {
+          this.props.postComment(this.props.postId, params['replyComment' + replyId])
         }
+        else {
+          this.props.postComment(this.props.postId, params['replyComment' + replyId], parentId)
+        }
+        this.setState({ replyClicked: [], editClicked: [] })
       }
-      else {
-        if (params['comment' + replyId]) {
-          if (!parentId) {
-            this.props.postComment(this.props.postId, params['comment' + replyId])
-          }
-          else {
-            this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
-          }
-          this.setState({ replyClicked: [], editClicked: [] })
+      else if (params['comment' + replyId]) {
+        if (!parentId) {
+          this.props.postComment(this.props.postId, params['comment' + replyId])
         }
+        else {
+          this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
+        }
+        this.setState({ replyClicked: [], editClicked: [] })
+      }
+      else if (params['editComment' + replyId]) {
+        this.props.updateComment(this.props.postId, params['editComment' + replyId], replyId)
+        this.setState({ replyClicked: [], editClicked: [] })
       }
     };
   }
@@ -152,7 +164,7 @@ class Comments extends Component {
       this.setState({ replyClicked: filteredReplyArray, editClicked: filteredEditArray });
     }
   }
-  UserReply(parentId, replyId, edit) {
+  UserReply(parentId, replyId, edit, reply) {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={edit ?
@@ -170,12 +182,11 @@ class Comments extends Component {
                 />
               </div>
               <fieldset className="com-box" >
-
                 < Field className="post-comment"
                   type='text'
                   placeholder="Type your reply here."
                   component='input'
-                  name={'comment' + replyId}
+                  name={reply ? ('replyComment' + replyId) : edit ? ('editComment' + replyId) : ('comment' + replyId)}
                 />
               </fieldset>
             </div>
@@ -227,10 +238,30 @@ class Comments extends Component {
 
 }
 
+const populateCommentValues = (state) => {
+  var i, a;
+  var coms = {};
+  let comments = state.postDetails.comments;
+  for (i in comments) {
+    coms['editComment' + comments[i].id] = comments[i].text;
+    if (comments[i].replyComments.length > 0) {
+      for (a in comments[i].replyComments) {
+        coms['editComment' + comments[i].replyComments[a].id] = comments[i].replyComments[a].text
+      }
+    }
+  }
+  return coms;
+}
+
 const mapStateToProps = state => {
-  return { account: state.auth.data };
+  return {
+    account: state.auth.data,
+    initialValues: populateCommentValues(state)
+  };
 };
 
-export default reduxForm({
-  form: "postComment"
-})(connect(mapStateToProps, actions)(Comments));
+const CommentsWithForm = reduxForm({
+  form: "postComment", enableReinitialize: true
+})(Comments)
+
+export default (connect(mapStateToProps, actions))(CommentsWithForm);

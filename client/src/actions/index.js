@@ -10,7 +10,8 @@ import {
   POST_COMMENT,
   FETCH_USER,
   CREATE_POST,
-  UPDATE_COMMENT
+  UPDATE_COMMENT,
+  DELETE_COMMENT
 } from "./types";
 
 
@@ -151,11 +152,31 @@ export const updateComment = (postId, text, commentId) => {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(response => {
-        console.log("res", response);
         response.data.user = getState().auth.data;
         dispatch({
           type: UPDATE_COMMENT,
           payload: response.data
+        });
+      })
+      .catch(err => {
+        console.log("error:", err.response || err);
+      });
+
+  }
+};
+
+export const deleteComment = (postId, commentId, parentId) => {
+  return (dispatch) => {
+    console.log("delete action called", commentId)
+    axios
+      .delete(`${ROOT_URL}/api/posts/${postId}/comments/${commentId}`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_COMMENT,
+          commentId,
+          parentId
         });
       })
       .catch(err => {
