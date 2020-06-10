@@ -5,11 +5,23 @@ import * as actions from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
+import "../style/style2.css"
+
 class Comments extends Component {
   state = {
     replyClicked: [],
-    editClicked: []
+    editClicked: [],
+    showModal: false
   }
+  handleShowModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
 
   handleClick = (commentId) => {
     return (e) => {
@@ -30,6 +42,7 @@ class Comments extends Component {
   handleDeleteClick = (commentId, parentId) => {
     return (e) => {
       this.props.deleteComment(this.props.postId, commentId, parentId)
+      this.handleCloseModal()
     }
   }
 
@@ -54,6 +67,21 @@ class Comments extends Component {
   renderComment(comment) {
     console.log("called it render com")
     return <div className="user com-user">
+      <Modal className="modal-background" show={this.state.showModal} onHide={this.handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Comment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Delete this comment permanently?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.handleDeleteClick(comment.id, comment.parentId)}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <div className="comment-space">
         <div className="comment-row-sec">
           <a
@@ -100,8 +128,10 @@ class Comments extends Component {
                 />
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <button className="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</button>
-                <button className="dropdown-item" onClick={this.handleDeleteClick(comment.id, comment.parentId)}>Delete</button>
+                <Button className="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</Button>
+                <Button className="dropdown-item" onClick={this.handleShowModal}>
+                  Delete
+                </Button>
               </div>
             </div>
           ) : null}
@@ -194,7 +224,7 @@ class Comments extends Component {
               <button className="site-button post-button post-reply " action="submit" >
                 Post
               </button>
-              <button className="btn-secondary site-button dept-button cancel-btn " action="cancel" onClick={this.handleCancel(replyId)} >
+              <button className=" site-button dept-button cancel-btn " action="cancel" onClick={this.handleCancel(replyId)} >
                 Cancel
               </button>
             </div>

@@ -1,0 +1,9 @@
+.modal-backdrop
+{
+    opacity:0.2 !important;
+}
+
+.dropdown-item{
+    width:90% !important;
+    padding:0.25rem 1rem !important;
+}
