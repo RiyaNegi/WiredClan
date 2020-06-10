@@ -9,8 +9,8 @@ class Profile extends Component {
         this.props.fetchUser(this.props.match.params.id);
     }
 
-    renderPosts() {
-        return this.props.user.posts.map(post => {
+    renderPosts(posts) {
+        return posts.map(post => {
             return (
                 <div key={post.id} className="post prof-post-box">
                     <a
@@ -22,6 +22,7 @@ class Profile extends Component {
                                 <img
                                     src={this.props.user.imageUrl}
                                     style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
+                                    alt="usericon"
                                 />
                             </div>
                             <div className="date-div">
@@ -62,6 +63,7 @@ class Profile extends Component {
         });
     }
     render() {
+        let posts = {};
         if (!this.props.user) {
             return (
                 <div className="loader">
@@ -119,14 +121,14 @@ class Profile extends Component {
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab"><label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                                    {this.renderPosts()}</div>
-                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">...</div>
+                                    {this.renderPosts(this.props.account.posts.filter(i => i.published === true))}</div>
+                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">{this.renderPosts(this.props.account.posts.filter(i => i.published === false))}</div>
                             </div>
                         </React.Fragment>
                     ) :
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
                             <label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                            {this.renderPosts()}
+                            {this.renderPosts(this.props.account.posts.filter(i => i.published === true))}
                         </div>}
 
                 </div>
