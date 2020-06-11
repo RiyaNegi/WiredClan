@@ -73,14 +73,17 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
-      const user = await User.findOne({
+      let user = await User.findOne({
         where: {
           id: req.params.id,
-          [Sequelize.Op.and]: Sequelize.literal('posts.published = true'),
         },
         include: [Post],
       });
-      user.publishedPosts = user.posts.filter((post) => post.published);
+      user = user.get({ plain: true });
+      if (req.token && user.id === req.token.id) {
+        user.drafts = user.posts.filter((post) => !(post.published));
+      }
+      user.posts = user.posts.filter((post) => post.published);
       return res.status(200).json(user);
     } catch (err) {
       console.log(err);
