@@ -28,7 +28,14 @@ const PostController = () => {
   const get = async (req, res) => {
     try {
       const result = (await Post.findOne({
-        where: { id: req.params.id, published: true },
+        where: Sequelize.or(
+          {
+            id: req.params.id, published: true,
+          },
+          {
+            id: req.params.id, published: false, userId: req.token ? req.token.id : -1,
+          },
+        ),
         include: [
           {
             model: User,
