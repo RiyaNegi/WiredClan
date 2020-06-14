@@ -3,12 +3,9 @@ import Header from "./header";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { withRouter } from 'react-router-dom';
-import signin from "./auth/signin";
-import HomePage from "./HomePage";
 
 class App extends Component {
   render() {
-    console.log(this.props.location.pathname);
     return (
       <div>
         <Header />

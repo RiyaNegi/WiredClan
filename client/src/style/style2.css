@@ -7,3 +7,24 @@
     width:90% !important;
     padding:0.25rem 1rem !important;
 }
+
+.post-com-item{
+    margin-left:15px;
+}
+.edit-button{
+    background-color: white;
+    border:none;
+    color: gray;
+    outline:none;
+    font-weight: 600;
+    font-size:14px;
+    margin: 0px !important;
+    width:70px;
+    padding-bottom: 0px;
+  }
+  .edit-button:hover{
+  
+    outline:none;
+    background-color: rgb(230, 230, 230);
+  }
+  .edit-button:focus {outline:0;}

@@ -7,7 +7,8 @@ export const reducer = (state = {}, action) => {
       return {
         ...state,
         details: { ...action.payload, comments: null },
-        comments: action.payload.comments
+        comments: action.payload.comments,
+        description: action.payload.description
       };
     case POST_COMMENT:
       let newState = JSON.parse(JSON.stringify(state));

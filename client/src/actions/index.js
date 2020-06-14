@@ -8,10 +8,12 @@ import {
   FETCH_POST_DETAILS,
   FETCH_ACCOUNT,
   POST_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
   FETCH_USER,
   CREATE_POST,
-  UPDATE_COMMENT,
-  DELETE_COMMENT
+  UPDATE_POST,
+  DELETE_POST
 } from "./types";
 
 
@@ -87,18 +89,18 @@ export const fetchPosts = () => {
   }
 };
 
-export const fetchPostDetails = id => {
+export const fetchPostDetails = (id, draft) => {
   return dispatch => {
-    setTimeout(function () {
-      axios
-        .get(`${ROOT_URL}/api/posts/${id}`)
-        .then(response => {
-          dispatch({
-            type: FETCH_POST_DETAILS,
-            payload: response.data
-          });
+    axios
+      .get(`${ROOT_URL}/api/posts/${id}`, draft ? {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      } : {})
+      .then(response => {
+        dispatch({
+          type: FETCH_POST_DETAILS,
+          payload: response.data
         });
-    }, 0)
+      });
   };
 };
 
@@ -186,10 +188,12 @@ export const deleteComment = (postId, commentId, parentId) => {
   }
 };
 
-export const fetchUser = (id) => {
+export const fetchUser = (id, draft) => {
   return dispatch => {
     axios
-      .get(`${ROOT_URL}/api/users/${id}`)
+      .get(`${ROOT_URL}/api/users/${id}`, draft ? {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      } : {})
       .then(response => {
         dispatch({
           type: FETCH_USER,
@@ -202,12 +206,50 @@ export const fetchUser = (id) => {
 export const createPost = (title, published, description) => {
   return (dispatch) => {
     axios
-      .post(`${ROOT_URL}/api/posts`, { title, description }, {
+      .post(`${ROOT_URL}/api/posts`, { title, published, description }, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(response => {
         dispatch({
           type: CREATE_POST,
+          payload: response.data
+        });
+        History.push(`/postDetails/${response.data.id}`);
+      })
+      .catch(err => {
+        console.log("error:", err.response);
+      });
+  }
+};
+
+export const updatePost = (postId, title, published, description) => {
+  debugger;
+  return (dispatch) => {
+    axios
+      .post(`${ROOT_URL}/api/posts/${postId}`, { postId, title, published, description }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        dispatch({
+          type: UPDATE_POST,
+          payload: response.data
+        });
+        History.push(`/postDetails/${response.data.id}`);
+      })
+      .catch(err => {
+        console.log("error:", err.response);
+      });
+  }
+};
+export const deletePost = (postId, title, published, description) => {
+  return (dispatch) => {
+    axios
+      .post(`${ROOT_URL}/api/posts/${postId}`, { postId, title, published, description }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
+      .then(response => {
+        dispatch({
+          type: UPDATE_POST,
           payload: response.data
         });
         History.push(`/PostDetails/${response.data.id}`);

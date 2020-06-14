@@ -3,13 +3,36 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 import Croods from "./croods.png";
 import Loader from 'react-loader-spinner'
-class Profile extends Component {
-    componentWillMount() {
-        console.log("fetch user called:", this.props.match.params.id)
-        this.props.fetchUser(this.props.match.params.id);
-    }
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import CreatePost from "./Post/post/CreatePost";
 
-    renderPosts(posts) {
+class Profile extends Component {
+    state = { edit: 'edit' }
+    componentWillMount() {
+        let id = parseInt(this.props.match.params.id);
+        if (id === this.props.account.id) {
+            this.props.fetchUser(this.props.match.params.id, true);
+        }
+        else {
+            this.props.fetchUser(this.props.match.params.id, false);
+
+        }
+
+    }
+    handleEditPost(postId) {
+        return (e) => {
+            let id = parseInt(this.props.match.params.id);
+            if (id === this.props.account.id) {
+                this.props.fetchPostDetails(postId, true)
+            }
+            else {
+                this.props.fetchPostDetails(postId, false)
+            }
+        }
+    }
+    renderPosts(posts, edit) {
         return posts.map(post => {
             return (
                 <div key={post.id} className="post prof-post-box">
@@ -39,31 +62,40 @@ class Profile extends Component {
                             </div>
                         </div>
                     </a>
-                    <a
-                        href={`/postDetails/${post.id}`}
-                        style={{ textDecoration: "none", color: "black" }}
-                    >
+                    <Link
+                        to={edit ? { pathname: `/posts/${post.id}/edit`, state: { edit: true } } : `/postDetails/${post.id}`}
+                        className="com-links"                    >
                         <div className="card-title prof-title">{post.title}</div>
-                        <div className="comments-box">
-                            <div className="post-comments">
-                                <div>
-                                    {post.commentsCount}{" "}
-                                    {post.commentsCount === 1 ? "Comment" : "Comments"}
-                                </div>
-                                <div className="user-prof-det">
-                                    <label className="user-prof-details-name com-branch">
+                    </Link>
+                    <div className="comments-box">
+                        <div className="post-comments">
+                            <div>
+                                {post.commentsCount}{" "}
+                                {post.commentsCount === 1 ? "Comment" : "Comments"}
+                            </div>
+                            <div className="user-prof-det">
+                                {/* <label className="user-prof-details-name com-branch">
                                         {this.props.user.department}
-                                    </label>
-                                </div>
+                                    </label> */}
+                            </div>
+                            <div className="post-com-item">
+                                <button className="edit-button" onClick={this.handleEditPost(post.id)} >
+                                    <Link className="com-links" to={{ pathname: `/posts/${post.id}/edit`, state: { edit: true } }} >
+                                        <FontAwesomeIcon
+                                            icon={faPen}
+                                            size="1x"
+                                            color="gray"
+                                        /> Edit
+                                        </Link>
+                                </button>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </div >
             );
         });
     }
     render() {
-        let posts = {};
         if (!this.props.user) {
             return (
                 <div className="loader">
@@ -77,7 +109,6 @@ class Profile extends Component {
             )
         }
 
-        console.log("user data: ", this.props.user)
         return (
             <div className="row-div-profile">
                 <div className="image-col">
@@ -121,14 +152,14 @@ class Profile extends Component {
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab"><label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                                    {this.renderPosts(this.props.account.posts.filter(i => i.published === true))}</div>
-                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">{this.renderPosts(this.props.account.posts.filter(i => i.published === false))}</div>
+                                    {this.renderPosts(this.props.user.posts)}</div>
+                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">{this.renderPosts(this.props.user.drafts, true || [], true)}</div>
                             </div>
                         </React.Fragment>
                     ) :
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
                             <label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                            {this.renderPosts(this.props.account.posts.filter(i => i.published === true))}
+                            {this.renderPosts(this.props.user.posts)}
                         </div>}
 
                 </div>
@@ -138,7 +169,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.userDetails.users, account: state.auth.data };
+    return { user: state.userDetails.user, account: state.auth.data };
 };
 
 export default connect(mapStateToProps, actions)(Profile);

@@ -8,14 +8,14 @@ import Loader from 'react-loader-spinner'
 import { stateToHTML } from 'draft-js-export-html';
 import { convertFromRaw } from 'draft-js';
 
+
 class PostDetails extends Component {
   componentWillMount() {
     this.props.fetchPostDetails(this.props.match.params.id);
   }
   convertDataFromJSONToHTML = (object) => {
-
-    const html = stateToHTML(convertFromRaw((object)));
-    console.log("HTML IS: ", html);
+    const html = object
+    console.log(html, 'htmlllll')
     const cleanHtml = (html) => {
       // Clean spaces between tags
       var newText = html.replace(/(<(pre|script|style|textarea)[^]+?<\/\2)|(^|>)\s+|\s+(?=<|$)/g, "$1$3")
@@ -107,7 +107,7 @@ class PostDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  return { post: state.postDetails.details, comments: state.postDetails.comments };
+  return { post: state.postDetails.details, comments: state.postDetails.comments, edit: state.postDetails.edit };
 };
 
 export default connect(mapStateToProps, actions)(PostDetails);

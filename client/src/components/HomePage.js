@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,
@@ -10,9 +11,12 @@ import {
   faSearchDollar
 } from "@fortawesome/free-solid-svg-icons";
 import Loader from 'react-loader-spinner'
-import { Link } from "react-router-dom";
+
+
+
 
 class HomePage extends PureComponent {
+
   componentWillMount() {
     this.props.fetchPosts();
   }
@@ -29,6 +33,7 @@ class HomePage extends PureComponent {
                 <img
                   src={post.user.imageUrl}
                   style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
+                  alt="usericon"
                 />
               </div>
               <div className="date-div">
@@ -45,9 +50,7 @@ class HomePage extends PureComponent {
               </div>
             </div>
           </a>
-          <a
-            href={`/postDetails/${post.id}`}
-            style={{ textDecoration: "none", color: "black" }}
+          <Link className="com-links" to={{ pathname: `/postDetails/${post.id}`, state: { edit: false } }}
           >
             <div className="card-title">{post.title}</div>
             <div className="comments-box">
@@ -63,8 +66,8 @@ class HomePage extends PureComponent {
                 </div> */}
               </div>
             </div>
-          </a>
-        </div>
+          </Link>
+        </div >
       );
     });
   }
@@ -74,12 +77,13 @@ class HomePage extends PureComponent {
       <div className="search-box">
         {this.props.account ? (
           <button type="button" className="btn btn-light site-button post-button">
-            <Link className="com-links" to="/CreatePost"> + New Post</Link>
+            <Link className="com-links" to={`/CreatePost`} > + New Post</Link>
           </button>
         )
           : (<button type="button" className="btn btn-light site-button post-button">
             <Link className="com-links" to="/signin"> + New Post</Link>
-          </button>)}
+          </button>)
+        }
         <span className="search-bar">
           <input type="text" className="search-input" />
           <span className="search-icon">
@@ -100,7 +104,7 @@ class HomePage extends PureComponent {
           <a className="dropdown-item filter-text " href="#">IT</a>
           <a className="dropdown-item filter-text" href="#">ENTC</a>
         </div>
-      </div>
+      </div >
 
     );
   }
