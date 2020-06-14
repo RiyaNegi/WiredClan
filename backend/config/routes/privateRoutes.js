@@ -11,6 +11,7 @@ const privateRoutes = {
   'GET /posts/:id': 'PostController.get',
   'POST /posts': 'PostController.create',
   'POST /posts/:id/': 'PostController.edit',
+  'DELETE /posts/:id/': 'PostController.destroy',
   'POST /posts/:postId/comments': 'PostController.createComment',
   'POST /posts/:postId/comments/:id': 'PostController.editComment',
   'DELETE /posts/:postId/comments/:id': 'PostController.deleteComment',

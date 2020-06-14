@@ -74,14 +74,8 @@ const PostController = () => {
 
   const destroy = async (req, res) => {
     try {
-      const dns = new Post(
-        process.env.ZONE_ID,
-        process.env.AUTH_KEY,
-        process.env.EMAIL,
-      );
-
-      const result = await dns.destroy(req.params.dnsId);
-      return res.status(200).json(result);
+      const result = await Post.destroy({ where: { id: req.params.id, userId: req.token.id } });
+      return res.status(200).json({ status: !!result });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });

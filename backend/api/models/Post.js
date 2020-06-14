@@ -9,7 +9,7 @@ const Post = sequelize.define('post', {
     type: Sequelize.STRING,
   },
   description: {
-    type: Sequelize.JSONB,
+    type: Sequelize.TEXT,
   },
   published: {
     type: Sequelize.BOOLEAN,
