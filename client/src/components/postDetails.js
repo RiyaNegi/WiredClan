@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Comments from "./comments";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faComments } from "@fortawesome/free-solid-svg-icons";
 import Loader from 'react-loader-spinner'
-import { stateToHTML } from 'draft-js-export-html';
-import { convertFromRaw } from 'draft-js';
+
 
 
 class PostDetails extends Component {

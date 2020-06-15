@@ -89,18 +89,23 @@ export const fetchPosts = () => {
   }
 };
 
-export const fetchPostDetails = (id, draft) => {
+export const fetchPostDetails = (id) => {
   return dispatch => {
     axios
-      .get(`${ROOT_URL}/api/posts/${id}`, draft ? {
+      .get(`${ROOT_URL}/api/posts/${id}`, localStorage.getItem("token") ? {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       } : {})
       .then(response => {
+        debugger;
         dispatch({
           type: FETCH_POST_DETAILS,
           payload: response.data
         });
+      })
+      .catch(err => {
+        console.log("error:", err.response || err);
       });
+
   };
 };
 
@@ -223,7 +228,6 @@ export const createPost = (title, published, description) => {
 };
 
 export const updatePost = (postId, title, published, description) => {
-  debugger;
   return (dispatch) => {
     axios
       .post(`${ROOT_URL}/api/posts/${postId}`, { postId, title, published, description }, {
@@ -241,21 +245,20 @@ export const updatePost = (postId, title, published, description) => {
       });
   }
 };
-export const deletePost = (postId, title, published, description) => {
+export const deletePost = (postId) => {
   return (dispatch) => {
     axios
-      .post(`${ROOT_URL}/api/posts/${postId}`, { postId, title, published, description }, {
+      .delete(`${ROOT_URL}/api/posts/${postId}`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(response => {
         dispatch({
-          type: UPDATE_POST,
-          payload: response.data
+          type: DELETE_POST,
+          postId
         });
-        History.push(`/PostDetails/${response.data.id}`);
       })
       .catch(err => {
-        console.log("error:", err.response);
+        console.log("error:", err);
       });
   }
 };

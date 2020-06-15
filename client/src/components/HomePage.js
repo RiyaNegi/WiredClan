@@ -50,7 +50,7 @@ class HomePage extends PureComponent {
               </div>
             </div>
           </a>
-          <Link className="com-links" to={{ pathname: `/postDetails/${post.id}`, state: { edit: false } }}
+          <Link className="com-links" to={{ pathname: `/postDetails/${post.id}`, state: { edit: false, draft: false } }}
           >
             <div className="card-title">{post.title}</div>
             <div className="comments-box">
@@ -76,9 +76,11 @@ class HomePage extends PureComponent {
     return (
       <div className="search-box">
         {this.props.account ? (
-          <button type="button" className="btn btn-light site-button post-button">
-            <Link className="com-links" to={`/CreatePost`} > + New Post</Link>
+          <Link className="com-links" to={`/CreatePost`} >
+            <button type="button" className="btn btn-light site-button post-button">
+              + New Post
           </button>
+          </Link>
         )
           : (<button type="button" className="btn btn-light site-button post-button">
             <Link className="com-links" to="/signin"> + New Post</Link>

@@ -8,7 +8,7 @@ import Signup from "../components/auth/signup";
 import HomePage from "../components/HomePage";
 import postDetails from "../components/postDetails";
 import Profile from "../components/Profile";
-import CreatePost from "../components/Post/post/CreatePost";
+import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
 
 
@@ -21,6 +21,7 @@ const Routes = () => {
         <Route path="/signout" component={Signout} />
         <Route path="/signup" component={Signup} />
         <Route path="/postdetails/:id" component={postDetails} />
+        <Route path="/previewPost/:id" component={postDetails} />
         <Route path="/HomePage" component={HomePage} />
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />

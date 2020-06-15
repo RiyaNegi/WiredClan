@@ -17,12 +17,11 @@ export const reducer = (state = {}, action) => {
           .find(comment => comment.id === action.payload.parentId).replyComments
           .push(action.payload);
       } else {
-        newState.comments.push(action.payload);
+        newState.comments.unshift(action.payload);
       }
       return newState;
     case UPDATE_COMMENT:
       let newEditState = JSON.parse(JSON.stringify(state));
-      debugger;
       var arrIndex;
       if (action.payload.parentId) {
         arrIndex = newEditState.comments
@@ -32,7 +31,6 @@ export const reducer = (state = {}, action) => {
           .find(comment => comment.id === action.payload.parentId).replyComments
           .splice(arrIndex, 1, action.payload);
       } else {
-        debugger;
         arrIndex = newEditState.comments.findIndex(i => i.id === action.payload.id);
         newEditState.comments.splice(arrIndex, 1, action.payload);
       }
@@ -40,7 +38,6 @@ export const reducer = (state = {}, action) => {
     case DELETE_COMMENT:
       // eslint-disable-next-line no-redeclare
       var arrIndex;
-      debugger;
       let newDelState = JSON.parse(JSON.stringify(state));
       if (action.parentId) {
         arrIndex = newDelState.comments

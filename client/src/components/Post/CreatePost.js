@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import * as actions from "../../../actions";
+import * as actions from "../../actions";
 import { Editor } from 'react-draft-wysiwyg';
-import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Loader from 'react-loader-spinner';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
@@ -50,13 +50,12 @@ class CreatePost extends Component {
 
     handleFormSubmit = (name) => {
         return (params) => {
-            debugger;
-            if (name === "submit") {
+            if (name === "submit" && params['postTitle']) {
                 let convertedData = draftToHtml(convertToRaw(this.state.postEditorState.getCurrentContent()));
                 this.props.createPost(params['postTitle'], true, convertedData)
                 this.setState({ postEditorState: EditorState.createEmpty() })
             }
-            else if (name === "save") {
+            else if (name === "save" && params['postTitle']) {
                 let convertedData = draftToHtml(convertToRaw(this.state.postEditorState.getCurrentContent()));
                 this.props.createPost(params['postTitle'], false, convertedData)
                 this.setState({ postEditorState: EditorState.createEmpty() })
@@ -65,7 +64,7 @@ class CreatePost extends Component {
         }
     }
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, submitting, pristine } = this.props;
         if (!this.state.postEditorState) {
             console.log("loaderrr");
             return (
@@ -97,6 +96,7 @@ class CreatePost extends Component {
                                 onEditorStateChange={this.onChangePost}
                                 wrapperStyle={{ border: "1px solid gray", marginBottom: "20px" }}
                                 editorStyle={{ height: "300px", padding: "10px" }}
+                                stripPastedStyles={true}
                                 placeholder="Enter Post Contents here..."
                                 toolbar={{
                                     options: ['inline', 'blockType', 'list', 'link', 'emoji', 'image', 'history'],
@@ -115,6 +115,7 @@ class CreatePost extends Component {
                                     className="btn btn-light site-button post-button"
                                     action="submit"
                                     name="submit"
+                                    disabled={submitting || pristine}
                                     onClick={handleSubmit(this.handleFormSubmit('submit'))} >
                                     Submit Post
                         </button>
@@ -124,8 +125,9 @@ class CreatePost extends Component {
                                     className="btn btn-secondary site-button dept-button draft-button"
                                     action="submit"
                                     name="save"
+                                    disabled={submitting || pristine}
                                     onClick={handleSubmit(this.handleFormSubmit('save'))} >
-                                    Save Draft
+                                    Save As Draft
                             </button>
                             </div>
                         </div>

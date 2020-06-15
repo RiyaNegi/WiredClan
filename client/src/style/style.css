@@ -132,7 +132,7 @@ flex-direction: row;
 .post-details {
   display: flex;
   flex-direction: column;
-  margin-top: 55px;
+  margin-top: 20px;
   border-bottom: 1px solid #dadada;
   color : black;
 }

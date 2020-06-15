@@ -47,6 +47,7 @@ const WysiwygEditor =
                         onEditorStateChange={onEditorStateChange}
                         wrapperStyle={{ border: "1px solid gray", marginBottom: "20px" }}
                         editorStyle={{ height: "300px", padding: "10px" }}
+                        stripPastedStyles={true}
                         placeholder="Enter Post Contents here..."
                         toolbar={{
                             options: ['inline', 'blockType', 'list', 'link', 'emoji', 'image', 'history'],

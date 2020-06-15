@@ -5,9 +5,8 @@ import * as actions from "../../actions";
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertToRaw } from 'draft-js';
 import Loader from 'react-loader-spinner';
-import ControlledEditor from './post/controlledEditor';
-
-
+import ControlledEditor from './controlledEditor';
+import { Link } from "react-router-dom";
 
 
 class CreatePost extends Component {
@@ -43,11 +42,11 @@ class CreatePost extends Component {
         let postId = parseInt(this.props.match.params.id)
         return (params) => {
             debugger;
-            if (name === "save") {
+            if (name === "save" && params['title']) {
                 this.props.updatePost(postId, params['title'], false, params['postEditor'])
                 this.setState({ editorState: EditorState.createEmpty() })
             }
-            else if (name === "publish") {
+            else if (name === "publish" && params['title']) {
                 this.props.updatePost(postId, params['title'], true, params['postEditor'])
                 this.setState({ editorState: EditorState.createEmpty() })
             }
@@ -55,9 +54,9 @@ class CreatePost extends Component {
         }
     }
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, submitting, pristine } = this.props;
         let edit = this.props.location.state.edit ? this.props.location.state.edit : false
-        if (!this.state.editorState) {
+        if (!this.props.post) {
             console.log("loaderrr");
             return (
                 <div className="loader">
@@ -94,6 +93,17 @@ class CreatePost extends Component {
                                     onClick={handleSubmit(this.handleFormSubmit('publish', edit))} >
                                     Publish Draft
                             </button>
+                            </div>
+                            <div className="create-post-save">
+                                <Link className="com-links" to={`/previewPost/${this.props.post.id}`} >
+                                    <button
+                                        className="btn btn-secondary site-button dept-button draft-button"
+                                        action="submit"
+                                        name="save"
+                                    >
+                                        Preview
+                            </button>
+                                </Link>
                             </div>
                             <div className="create-post-save">
                                 <button

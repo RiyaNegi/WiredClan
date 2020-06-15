@@ -7,6 +7,9 @@ import { faReply, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
 import "../style/style2.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class Comments extends Component {
   state = {
@@ -65,7 +68,6 @@ class Comments extends Component {
   }
 
   renderComment(comment) {
-    console.log("called it render com")
     return <div className="user com-user">
       <Modal className="modal-background" show={this.state.showModal} onHide={this.handleCloseModal}>
         <Modal.Header closeButton>
@@ -81,7 +83,6 @@ class Comments extends Component {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <div className="comment-space">
         <div className="comment-row-sec">
           <a
@@ -106,7 +107,6 @@ class Comments extends Component {
                   <span className="username">{comment.user.userName}</span>
                 </a >
               </div>
-
               <div className="card-text">{comment.text}</div>
             </div>
             <button className="reply-button reply-sec" onClick={this.handleClick(comment.id)}>
@@ -115,7 +115,7 @@ class Comments extends Component {
                 size="1x"
                 color="gray"
               /> Reply
-                    </button>
+            </button>
           </div>
         </div>
         <div className="comment-edit">
@@ -195,6 +195,15 @@ class Comments extends Component {
     }
   }
   UserReply(parentId, replyId, edit, reply) {
+    const notify = () => toast.success('🦄 Comment Posted!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });;
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={edit ?
@@ -221,9 +230,18 @@ class Comments extends Component {
               </fieldset>
             </div>
             <div className="post-reply-but">
-              <button className="site-button post-button post-reply " action="submit" >
-                Post
-              </button>
+              <button className="site-button post-button post-reply " action="submit" onClick={notify}>Post</button>
+              <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover={false}
+              />
               <button className=" site-button dept-button cancel-btn " action="cancel" onClick={this.handleCancel(replyId)} >
                 Cancel
               </button>

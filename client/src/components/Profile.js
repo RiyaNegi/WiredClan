@@ -4,12 +4,16 @@ import { connect } from "react-redux";
 import Croods from "./croods.png";
 import Loader from 'react-loader-spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CreatePost from "./Post/post/CreatePost";
+import { Modal, Button } from 'react-bootstrap';
 
 class Profile extends Component {
-    state = { edit: 'edit' }
+    state = {
+        edit: 'edit',
+        showModal: false
+    }
+
     componentWillMount() {
         let id = parseInt(this.props.match.params.id);
         if (id === this.props.account.id) {
@@ -21,6 +25,14 @@ class Profile extends Component {
         }
 
     }
+    handleShowModal = () => {
+        this.setState({ showModal: true });
+    };
+
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
+    };
+
     handleEditPost(postId) {
         return (e) => {
             let id = parseInt(this.props.match.params.id);
@@ -32,10 +44,33 @@ class Profile extends Component {
             }
         }
     }
+
+    handleDeleteClick = (postId) => {
+        return (e) => {
+            this.props.deletePost(postId)
+            this.handleCloseModal()
+        }
+
+    }
+
     renderPosts(posts, edit) {
         return posts.map(post => {
             return (
                 <div key={post.id} className="post prof-post-box">
+                    <Modal className="modal-background" show={this.state.showModal} onHide={this.handleCloseModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Delete Post</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Delete this post permanently?</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleCloseModal}>
+                                Close
+                         </Button>
+                            <Button variant="primary" onClick={this.handleDeleteClick(post.id)}>
+                                Delete
+                         </Button>
+                        </Modal.Footer>
+                    </Modal>
                     <a
                         href={`/Users/${post.userId}`}
                         style={{ textDecoration: "none", color: "black" }}
@@ -64,11 +99,11 @@ class Profile extends Component {
                     </a>
                     <Link
                         to={edit ? { pathname: `/posts/${post.id}/edit`, state: { edit: true } } : `/postDetails/${post.id}`}
-                        className="com-links"                    >
+                        className="com-links" >
                         <div className="card-title prof-title">{post.title}</div>
                     </Link>
                     <div className="comments-box">
-                        <div className="post-comments">
+                        <div className="post-comments feature-div">
                             <div>
                                 {post.commentsCount}{" "}
                                 {post.commentsCount === 1 ? "Comment" : "Comments"}
@@ -78,17 +113,35 @@ class Profile extends Component {
                                         {this.props.user.department}
                                     </label> */}
                             </div>
-                            <div className="post-com-item">
-                                <button className="edit-button" onClick={this.handleEditPost(post.id)} >
-                                    <Link className="com-links" to={{ pathname: `/posts/${post.id}/edit`, state: { edit: true } }} >
+                            {this.props.account.id === this.props.user.id ? (<div className="feature-but-div">
+                                <Link className="com-links" to={{ pathname: `/posts/${post.id}/edit`, state: { edit: true } }} >
+                                    <button className=" post-item-buttons edit-button" onClick={this.handleEditPost(post.id)} >
                                         <FontAwesomeIcon
                                             icon={faPen}
                                             size="1x"
                                             color="gray"
                                         /> Edit
-                                        </Link>
                                 </button>
-                            </div>
+                                </Link>
+                                <button className="post-item-buttons delete-button" onClick={this.handleShowModal} >
+                                    <FontAwesomeIcon
+                                        icon={faTrash}
+                                        size="1x"
+                                        color="gray"
+                                    /> Delete
+                                </button>
+                                {edit ? (
+                                    <Link className="com-links" to={`/previewPost/${post.id}`} >
+                                        <button className="post-item-buttons preview-button">
+                                            <FontAwesomeIcon
+                                                icon={faEye}
+                                                size="1x"
+                                                color="gray"
+                                            /> Preview
+                                </button>
+                                    </Link>
+                                ) : null}
+                            </div>) : null}
                         </div>
                     </div>
                 </div >
@@ -151,17 +204,19 @@ class Profile extends Component {
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab"><label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                                    {this.renderPosts(this.props.user.posts)}</div>
-                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">{this.renderPosts(this.props.user.drafts, true || [], true)}</div>
+                                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
+                                    <label className="prof-post-header">{this.props.posts.length > 1 ? this.props.posts.length + " Posts Created" : this.props.posts.length === 1 ? this.props.posts.length + " Post Created" : " No Posts Created"}</label>
+                                    {this.renderPosts(this.props.posts)}</div>
+                                <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="draft-tab">
+                                    <label className="prof-post-header">{this.props.drafts.length > 1 ? this.props.drafts.length + " Drafts Created" : this.props.drafts.length === 1 ? this.props.drafts.length + " Draft Created" : " No Drafts Created"}</label>
+                                    {this.renderPosts(this.props.drafts, true || [], true)}</div>
                             </div>
                         </React.Fragment>
                     ) :
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
-                            <label className="prof-post-header">{this.props.user.posts.length} Posts Created</label>
-                            {this.renderPosts(this.props.user.posts)}
+                            <label className="prof-post-header">{this.props.posts.length > 1 ? this.props.posts.length + " Posts Created" : this.props.posts.length === 0 ? this.props.posts.length + " Post Created" : " No Posts Created"}</label>
+                            {this.renderPosts(this.props.posts)}
                         </div>}
-
                 </div>
             </div>
         );
@@ -169,7 +224,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.userDetails.user, account: state.auth.data };
+    return { user: state.userDetails.user, account: state.auth.data, posts: state.userDetails.posts, drafts: state.userDetails.drafts };
 };
 
 export default connect(mapStateToProps, actions)(Profile);

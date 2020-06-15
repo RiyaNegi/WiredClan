@@ -8,23 +8,37 @@
     padding:0.25rem 1rem !important;
 }
 
-.post-com-item{
-    margin-left:15px;
+.feature-but-div{
+  display: flex;
+  margin-left:10px;
 }
-.edit-button{
+
+.feature-div{
+  margin-top: 8px;
+}
+
+.post-item-buttons{
     background-color: white;
     border:none;
     color: gray;
     outline:none;
     font-weight: 600;
     font-size:14px;
-    margin: 0px !important;
+    margin: 0px 5px!important;
     width:70px;
     padding-bottom: 0px;
   }
-  .edit-button:hover{
+  .post-item-buttons:hover{
   
     outline:none;
     background-color: rgb(230, 230, 230);
   }
-  .edit-button:focus {outline:0;}
+  .post-item-buttons:focus {outline:0;}
+
+ .delete-button{
+    width:80px;
+  }
+
+  .preview-button{
+    width : 90px;
+  }
