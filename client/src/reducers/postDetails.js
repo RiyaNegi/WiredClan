@@ -38,6 +38,7 @@ export const reducer = (state = {}, action) => {
     case DELETE_COMMENT:
       // eslint-disable-next-line no-redeclare
       var arrIndex;
+      debugger;
       let newDelState = JSON.parse(JSON.stringify(state));
       if (action.parentId) {
         arrIndex = newDelState.comments

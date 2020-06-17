@@ -10,21 +10,29 @@ import "../style/style2.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 class Comments extends Component {
-  state = {
-    replyClicked: [],
-    editClicked: [],
-    showModal: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      replyClicked: [],
+      editClicked: [],
+      showModalArray: []
+    }
   }
-  handleShowModal = () => {
-    this.setState({ showModal: true });
+  handleShowModal = (commentId) => {
+    return () => {
+      var newStateArray = this.state.showModalArray.slice();
+      newStateArray.push({ "id": commentId });
+      this.setState({ showModalArray: newStateArray });
+    }
   };
 
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
+  handleCloseModal = (commentId) => {
+    return () => {
+      let filteredModalArray = this.state.editClicked.filter(i => i.id !== commentId)
+      this.setState({ showModalArray: filteredModalArray });
+    }
   };
-
 
   handleClick = (commentId) => {
     return (e) => {
@@ -45,13 +53,11 @@ class Comments extends Component {
   handleDeleteClick = (commentId, parentId) => {
     return (e) => {
       this.props.deleteComment(this.props.postId, commentId, parentId)
-      this.handleCloseModal()
     }
   }
 
   renderReplies = (comment, parentId) => {
     return comment.replyComments.map(replyComment => {
-      console.log("called it redner replies")
       return (
         <div className="reply-box" key={replyComment.id}>
           {
@@ -69,7 +75,7 @@ class Comments extends Component {
 
   renderComment(comment) {
     return <div className="user com-user">
-      <Modal className="modal-background" show={this.state.showModal} onHide={this.handleCloseModal}>
+      {this.state.showModalArray.filter(ci => ci.id === comment.id).length && this.props.account ? (<Modal className="modal-background" show={true} onHide={this.handleCloseModal(comment.id)}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Comment</Modal.Title>
         </Modal.Header>
@@ -82,7 +88,8 @@ class Comments extends Component {
             Delete
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>) : null}
+
       <div className="comment-space">
         <div className="comment-row-sec">
           <a
@@ -129,7 +136,7 @@ class Comments extends Component {
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <Button className="dropdown-item" onClick={this.handleEditClick(comment.id)}>Edit</Button>
-                <Button className="dropdown-item" onClick={this.handleShowModal}>
+                <Button className="dropdown-item" onClick={this.handleShowModal(comment.id)}>
                   Delete
                 </Button>
               </div>
@@ -161,29 +168,39 @@ class Comments extends Component {
 
   handleFormSubmit = (parentId, replyId) => {
     return (params) => {
-      debugger;
       if (params['replyComment' + replyId]) {
+        console.log("11111")
         if (!parentId) {
           this.props.postComment(this.props.postId, params['replyComment' + replyId])
+          this.notify()
         }
         else {
           this.props.postComment(this.props.postId, params['replyComment' + replyId], parentId)
+          this.notify()
         }
         this.setState({ replyClicked: [], editClicked: [] })
+        return
       }
       else if (params['comment' + replyId]) {
+        console.log("22222")
         if (!parentId) {
           this.props.postComment(this.props.postId, params['comment' + replyId])
+          this.notify()
         }
         else {
           this.props.postComment(this.props.postId, params['comment' + replyId], parentId)
+          this.notify()
         }
         this.setState({ replyClicked: [], editClicked: [] })
+        return
       }
       else if (params['editComment' + replyId]) {
+        console.log("3333")
         this.props.updateComment(this.props.postId, params['editComment' + replyId], replyId)
         this.setState({ replyClicked: [], editClicked: [] })
+        this.notify()
       }
+
     };
   }
 
@@ -194,17 +211,19 @@ class Comments extends Component {
       this.setState({ replyClicked: filteredReplyArray, editClicked: filteredEditArray });
     }
   }
+
+  notify = () => toast.dark('🚀  Comment Posted!', {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+  });;
+
   UserReply(parentId, replyId, edit, reply) {
-    const notify = () => toast.success('🦄 Comment Posted!', {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-    });;
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, submitting } = this.props;
     return (
       <form onSubmit={edit ?
         handleSubmit(this.handleFormSubmit(parentId, replyId, edit).bind(this))
@@ -225,12 +244,13 @@ class Comments extends Component {
                   type='text'
                   placeholder="Type your reply here."
                   component='input'
+                  autoFocus
                   name={reply ? ('replyComment' + replyId) : edit ? ('editComment' + replyId) : ('comment' + replyId)}
                 />
               </fieldset>
             </div>
             <div className="post-reply-but">
-              <button className="site-button post-button post-reply " action="submit" onClick={notify}>Post</button>
+              <button className="site-button post-button post-reply " action="submit" disabled={submitting || pristine} >Post</button>
               <ToastContainer
                 position="top-right"
                 autoClose={2000}
@@ -255,7 +275,6 @@ class Comments extends Component {
     if (!this.props.comments) {
       return <div>woah! No comments here..</div>;
     }
-
     return (
       <div>
         <ul className="comments-title">

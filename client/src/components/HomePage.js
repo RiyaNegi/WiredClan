@@ -13,10 +13,13 @@ import {
 import Loader from 'react-loader-spinner'
 
 
-
-
 class HomePage extends PureComponent {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: ''
+    }
+  }
   componentWillMount() {
     this.props.fetchPosts();
   }
@@ -72,7 +75,21 @@ class HomePage extends PureComponent {
     });
   }
 
+  onChange = (e) => {
+    [e.target.name] = e.target.value;
+  }
+  handleSearch = (e) => {
+    if (this.state.search) {
+      this.setState({ search: e.target.value })
+      this.props.fetchSearch(this.state.search)
+      this.setState({ search: '' })
+      this.props.fetchPosts();
+      console.log("serach :", this.state.search)
+    }
+
+  }
   renderSearch() {
+    console.log("rendderserach :", this.state.search)
     return (
       <div className="search-box">
         {this.props.account ? (
@@ -87,17 +104,21 @@ class HomePage extends PureComponent {
           </button>)
         }
         <span className="search-bar">
-          <input type="text" className="search-input" />
-          <span className="search-icon">
+          <input type="text" className="search-input" name="search" onKeyPress={event => {
+            if (event.key === "Enter") {
+              this.setState({ search: event.target.value })
+              this.props.fetchSearch(event.target.value);
+            }
+          }} onChange={this.onChange} />
+          <button className="search-icon" onClick={this.handleSearch}>
             <FontAwesomeIcon
               icon={faSearch}
               size="1x"
               style={{ fontSize: "1.5em" }}
               color="gray"
             />
-          </span>
+          </button>
         </span>
-
         <button className=" dropdown btn btn-secondary dropdown-toggle site-button dept-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ALL
           </button>
@@ -112,6 +133,7 @@ class HomePage extends PureComponent {
   }
 
   render() {
+
     if (!this.props.posts) {
       return (
         <div className="loader">
@@ -134,7 +156,7 @@ class HomePage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  return { posts: state.posts.homePage, account: state.auth.data };
+  return { posts: state.posts.homePage, account: state.auth.data, search: state.posts.searchArray };
 };
 
 export default connect(mapStateToProps, actions)(HomePage);

@@ -279,11 +279,17 @@ button {
 .search-icon {
   margin-top: 10px;
   margin-left: -35px;
+  background-color: white;
+  border:0;
+  outline: none;
 }
 
 .search-input:focus {
   outline: none;
-  /* border: 3px solid grey; */
+}
+
+.search-input:active {
+  outline: none;
 }
 
 .comments-title{

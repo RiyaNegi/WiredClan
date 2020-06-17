@@ -59,7 +59,7 @@ class Header extends PureComponent {
     return (
       <span>
         <nav className="navbar navbar-toggleable-md navbar-light my-navbar">
-          <Link to="/" className="navbar-brand">
+          <Link to={{ pathname: "/HomePage", state: { search: "" } }} className="navbar-brand">
             CodeJimmy...
           </Link>
           <ul className="navbar-nav">{this.renderLinks()}</ul>

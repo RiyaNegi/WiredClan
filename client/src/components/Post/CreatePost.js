@@ -87,7 +87,10 @@ class CreatePost extends Component {
                             <fieldset className="create-title-div">
                                 <Field className="post-create-title" type="text" name="postTitle"
                                     placeholder="Enter Post Title here.."
-                                    component="input" />
+                                    component="input"
+                                    onKeyPress={e => {
+                                        if (e.key === 'Enter') e.preventDefault();
+                                    }} />
                             </fieldset>
                             <Editor
                                 editorState={this.state.postEditorState}

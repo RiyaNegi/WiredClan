@@ -13,7 +13,8 @@ import {
   FETCH_USER,
   CREATE_POST,
   UPDATE_POST,
-  DELETE_POST
+  DELETE_POST,
+  FETCH_SEARCH
 } from "./types";
 
 
@@ -77,11 +78,27 @@ export const fetchPosts = () => {
   return dispatch => {
     setTimeout(function () {
       axios
-        .get(`${ROOT_URL}/api/posts`)
+        .get(`${ROOT_URL}/api/posts?page=1`)
         .then(response => {
           console.log(response)
           dispatch({
             type: FETCH_POSTS,
+            payload: response.data
+          });
+        });
+    }, 0)
+  }
+};
+
+export const fetchSearch = text => {
+  return dispatch => {
+    setTimeout(function () {
+      axios
+        .get(`${ROOT_URL}/api/posts?page=1&search=${text}`)
+        .then(response => {
+          console.log(response)
+          dispatch({
+            type: FETCH_SEARCH,
             payload: response.data
           });
         });
@@ -96,7 +113,6 @@ export const fetchPostDetails = (id) => {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       } : {})
       .then(response => {
-        debugger;
         dispatch({
           type: FETCH_POST_DETAILS,
           payload: response.data
