@@ -8,7 +8,7 @@ import History from "../../history.js";
 import { Modal, Button, Badge } from "react-bootstrap";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
-
+import * as authActions from "../../actions/authActions";
 import Loader from "react-loader-spinner";
 
 class PostsList extends React.Component {
@@ -162,55 +162,55 @@ class PostsList extends React.Component {
                       </div>
 
                       {this.props.user &&
-                      this.props.account.id === this.props.user.id ? (
-                        <div className="feature-but-div">
-                          <Link
-                            className="com-links edit-link"
-                            to={{
-                              pathname: `/posts/${post.id}/edit`,
-                              state: { edit: true },
-                            }}
-                          >
-                            {/* <button
+                        this.props.account.id === this.props.user.id ? (
+                          <div className="feature-but-div">
+                            <Link
+                              className="com-links edit-link"
+                              to={{
+                                pathname: `/posts/${post.id}/edit`,
+                                state: { edit: true },
+                              }}
+                            >
+                              {/* <button
                             className=" post-item-buttons edit-button"
                             // onClick={this.handleEditPost(post.id)}
                           > */}
-                            <FontAwesomeIcon
-                              icon={faPen}
-                              size="1x"
-                              color="gray"
-                            />{" "}
-                            Edit
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                size="1x"
+                                color="gray"
+                              />{" "}
+                              Edit
                             {/* </button> */}
-                          </Link>
-                          <button
-                            className="post-item-buttons delete-link"
-                            onClick={this.handleShowModal}
-                          >
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              size="1x"
-                              color="gray"
-                            />
-                            Delete
-                          </button>
-                          {draft ? (
-                            <Link
-                              className="com-links"
-                              to={`/previewPost/${post.id}`}
-                            >
-                              <button className="post-item-buttons preview-button">
-                                <FontAwesomeIcon
-                                  icon={faEye}
-                                  size="1x"
-                                  color="gray"
-                                />{" "}
-                                Preview
-                              </button>
                             </Link>
-                          ) : null}
-                        </div>
-                      ) : null}
+                            <button
+                              className="post-item-buttons delete-link"
+                              onClick={this.handleShowModal}
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                size="1x"
+                                color="gray"
+                              />
+                              Delete
+                          </button>
+                            {draft ? (
+                              <Link
+                                className="com-links"
+                                to={`/previewPost/${post.id}`}
+                              >
+                                <button className="post-item-buttons preview-button">
+                                  <FontAwesomeIcon
+                                    icon={faEye}
+                                    size="1x"
+                                    color="gray"
+                                  />{" "}
+                                  Preview
+                              </button>
+                              </Link>
+                            ) : null}
+                          </div>
+                        ) : null}
                     </div>
                   </div>
                 </div>
@@ -218,10 +218,10 @@ class PostsList extends React.Component {
             );
           })
         ) : (
-          <div className="loader">
-            <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
-          </div>
-        )}
+            <div className="loader">
+              <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+            </div>
+          )}
       </div>
     );
   }
@@ -233,4 +233,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...postActions })(PostsList);
+export default connect(mapStateToProps, { ...postActions, ...authActions })(PostsList);

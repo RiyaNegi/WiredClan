@@ -10,6 +10,7 @@ import postDetails from "../components/Post/postDetails";
 import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
+import pageNotFound from "../components/pageNotFound"
 
 const Routes = () => {
   return (
@@ -25,6 +26,7 @@ const Routes = () => {
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/Users/:id" component={Profile} />
+        <Route component={pageNotFound} />
       </Switch>
     </App>
   );

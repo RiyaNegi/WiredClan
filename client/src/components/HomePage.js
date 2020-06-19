@@ -4,6 +4,7 @@ import * as actions from "../actions";
 import * as postActions from "../actions/postActions";
 import * as leaderboardActions from "../actions/leaderboardActions";
 
+import * as authActions from "../actions/authActions";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -61,7 +62,7 @@ class HomePage extends PureComponent {
           <div className="mt-4">
             <Button variant="primary col-12 new-post-button p-0">
               <Link className="no-decoration" to={"/CreatePost"}>
-                <div className="p-2 py-2 no-decoration">📝 New Post</div>
+                <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
               </Link>
             </Button>
           </div>
@@ -80,8 +81,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  ...actions,
-  ...postActions,
-  ...leaderboardActions,
-})(HomePage);
+export default connect(mapStateToProps, { ...actions, ...postActions, ...authActions, ...leaderboardActions })(
+  HomePage
+);

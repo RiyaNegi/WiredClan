@@ -79,6 +79,17 @@
   color: white !important;
 }
 
+.oops-text{
+  font-weight: 900;
+  font-size:60px;
+  color: rgb(175, 175, 175)
+}
+.back-home-btn{
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
 /* .new-post-button {
 
 } */

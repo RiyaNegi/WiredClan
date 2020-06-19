@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-
+import * as authActions from "../../actions/authActions";
 class Signout extends PureComponent {
 
     componentWillMount() {
@@ -15,4 +15,4 @@ class Signout extends PureComponent {
     }
 }
 
-export default connect(null, actions)(Signout);
+export default connect(null, authActions)(Signout);

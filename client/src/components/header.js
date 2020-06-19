@@ -20,7 +20,7 @@ class Header extends PureComponent {
     return (
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">
-          <label
+          {/* <label
             style={{
               border: "2px solid black",
               fontSize: 20,
@@ -42,8 +42,8 @@ class Header extends PureComponent {
             }}
           >
             J
-          </label>
-          {/* <img src={logo} style={{ width: 120, height: 17 }} alt="userIcon" /> */}
+          </label> */}
+          <img src={logo} style={{ width: 120, height: 17 }} alt="userIcon" />
         </a>
         <button
           class="navbar-toggler"
@@ -93,19 +93,19 @@ class Header extends PureComponent {
               </li>
             </ul>
           ) : (
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/">
-                  Sign Up
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">
+                    Sign Up
                 </a>
-              </li>
-              <li class="nav-item">
-                <Link className="nav-link" to="/signin">
-                  Sign In
+                </li>
+                <li class="nav-item">
+                  <Link className="nav-link" to="/signin">
+                    Sign In
                 </Link>
-              </li>
-            </ul>
-          )}
+                </li>
+              </ul>
+            )}
         </div>
       </nav>
     );

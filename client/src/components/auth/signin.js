@@ -1,7 +1,7 @@
 /* eslint-disable react-app/react/jsx-no-undef */
 import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
-import * as actions from "../../actions";
+import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import "./auth.css";
 import croodSignin from "./Signin.png";
@@ -24,8 +24,9 @@ class Signin extends PureComponent {
     }
   }
 
-  responseGoogle(response) {
-    console.log("FOROM GOOOOGLE", response);
+  responseGoogle = (response) => {
+    this.props.googleLogin(response.Rt.Bu, response.accessToken)
+    console.log("FOROM GOOOOGLE", response, "email:", response.Rt.Bu, "token", response.accessToken);
   }
 
   render() {
@@ -68,7 +69,6 @@ class Signin extends PureComponent {
               onFailure={this.responseGoogle}
               cookiePolicy={"single_host_origin"}
             />
-            ,
           </div>
         </form>
         <div className="signin-image">
@@ -89,4 +89,4 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: "signin",
-})(connect(mapStateToProps, actions)(Signin));
+})(connect(mapStateToProps, authActions)(Signin));

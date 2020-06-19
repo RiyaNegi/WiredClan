@@ -8,7 +8,7 @@ import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Modal, Button, Tabs, Tab, Badge } from "react-bootstrap";
 import PostsList from "../Post/PostsList";
-
+import * as authActions from "../../actions/authActions";
 import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 
@@ -142,6 +142,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...actions, ...postActions })(
+export default connect(mapStateToProps, { ...actions, ...postActions, ...authActions })(
   Profile
 );

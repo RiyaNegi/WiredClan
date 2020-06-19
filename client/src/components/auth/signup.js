@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
-import * as actions from "../../actions";
+import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import croodSignup from "./Signup.png";
 import croodArea from "./area.png";
@@ -163,4 +163,4 @@ const mapStateToProps = state => {
 export default reduxForm({
   form: "signin",
   validate
-})(connect(mapStateToProps, actions)(Signup));
+})(connect(mapStateToProps, authActions)(Signup));
