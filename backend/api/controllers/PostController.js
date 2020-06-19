@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
+const Tag = require('../models/Tag');
 const Sequelize = require('sequelize');
 
 const PostController = () => {
@@ -8,7 +9,7 @@ const PostController = () => {
     try {
       const result = await Post.findAll({
         where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ' '}%` } },
-        include: [Comment, User],
+        include: [Comment, User, Tag],
         limit: 20,
         offset: (parseInt(req.query.page, 10) - 1) || 0 * 20,
       });
@@ -41,6 +42,9 @@ const PostController = () => {
             model: User,
             attributes: ['userName', 'imageUrl', 'firstName', 'lastName',
               'college', 'year', 'department', 'id'],
+          },
+          {
+            model: Tag,
           },
           {
             model: Comment,
@@ -85,7 +89,9 @@ const PostController = () => {
   const create = async (req, res) => {
     try {
       const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
-      const post = await Post.create({ ...req.body, userId: user.id });
+      const post = await Post.create({
+        title: req.body.title, description: req.body.description, tagId: req.body.tagId, userId: user.id,
+      });
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
       console.log(err);
@@ -97,7 +103,7 @@ const PostController = () => {
     try {
       const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
       const post = await Post.findOne({ where: { id: req.params.id, userId: user.id } });
-      await post.update(req.body);
+      await post.update({ title: req.body.title, description: req.body.description, tagId: req.body.tagId });
 
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {

@@ -7,7 +7,14 @@ import { EditorState, convertToRaw } from "draft-js";
 import Loader from "react-loader-spinner";
 import ControlledEditor from "./controlledEditor";
 import { Link } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 class CreatePost extends Component {
   constructor(props) {
@@ -74,31 +81,14 @@ class CreatePost extends Component {
       <div className="mt-3">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="d-flex flex-row justify-content-between align-items-center">
-            <label className="m-0 d-flex align-self-center">
-              <Dropdown>
-                <Dropdown.Toggle
-                  variant="light"
-                  className="d-flex"
-                  style={{ width: "200px" }}
-                  id="dropdown-post-form"
-                >
-                  <div className="col-12 p-0">Python</div>
-                </Dropdown.Toggle>
+            <Select
+              className="basic-single col-3"
+              classNamePrefix="select"
+              isSearchable={false}
+              name="postTag"
+              options={options}
+            />
 
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={this.tagChange}>C/C++</Dropdown.Item>
-                  <Dropdown.Item onClick={this.tagChange}>
-                    Android
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={this.tagChange}>
-                    JavaScript
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={this.tagChange}>
-                    ML/Data Science
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </label>
             <div className="">
               <div className="d-flex flex-row">
                 <button
@@ -135,7 +125,7 @@ class CreatePost extends Component {
           </div>
 
           <div className="mt-2">
-            <fieldset className="">
+            <fieldset>
               <Field
                 className="col-12 post-title-input"
                 type="text"

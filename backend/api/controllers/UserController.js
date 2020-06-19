@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Tag = require('../models/Tag');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
 const Sequelize = require('sequelize');
@@ -45,15 +46,14 @@ const UserController = () => {
             email: body.email,
             password: body.password,
             viaGoogle: true,
+            registeredViaRegisterViaGoogle: true,
           });
           const token = authService().issue({ id: newUser.id });
-          return res.status(200).json({ token, user: newUser });
+          return res.status(200).json({ token, user: newUser, newUser: true });
         }
 
         const token = authService().issue({ id: user.id });
         return res.status(200).json({ token, user });
-
-
       } catch (err) {
         console.log(err);
         return res.status(400).json({ msg: 'The email is already registered.' });
@@ -98,7 +98,7 @@ const UserController = () => {
   const googleLogin = async (req, res) => {
     const { email, accessToken } = req.body;
     try {
-      const googleVerified = await Google.verifyLogin({ accessToken, email });
+      const { googleVerified, email, firstName, lastName } = await Google.verifyLogin({ accessToken, email });
       const password = 'random_password';
       if (googleVerified) {
         const user = await User
@@ -109,7 +109,16 @@ const UserController = () => {
           });
 
         if (!user) {
-          return res.status(400).json({ msg: 'Bad Request: User not found' });
+          const newUser = await User.create({
+            email,
+            password,
+            firstName,
+            lastName,
+            viaGoogle: true,
+            registeredViaLoginViaGoogle: true,
+          });
+          const token = authService().issue({ id: newUser.id });
+          return res.status(200).json({ token, user: newUser, newUser: true });
         }
         const token = authService().issue({ id: user.id });
 
@@ -140,7 +149,10 @@ const UserController = () => {
         where: {
           id: req.params.id,
         },
-        include: [Post],
+        include: [{
+          model: Post,
+          include: [Tag],
+        }],
       });
       user = user.get({ plain: true });
       if (req.token && user.id === req.token.id) {
@@ -153,6 +165,25 @@ const UserController = () => {
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
+
+  const getAll = async (req, res) => {
+    try {
+      const result = await User.findAll({
+        limit: 5,
+        order: [
+          ['karma', 'DESC'],
+        ],
+      });
+      return res.status(200).json({
+        page: 1,
+        result,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
 
   const edit = async (req, res) => {
     try {
@@ -194,6 +225,7 @@ const UserController = () => {
     googleLogin,
     validate,
     get,
+    getAll,
     edit,
     account,
   };

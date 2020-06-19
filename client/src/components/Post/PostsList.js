@@ -5,7 +5,7 @@ import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import History from "../../history.js";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Badge } from "react-bootstrap";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 
@@ -91,7 +91,7 @@ class PostsList extends React.Component {
                   </Modal.Footer>
                 </Modal>
 
-                <div className="d-flex flex-row py-3 pr-2">
+                <div className="d-flex flex-row py-4 pr-3">
                   <div className="col-1 mt-2 p-0">
                     <Link className="upvote d-flex flex-column align-items-center h-100">
                       <FontAwesomeIcon
@@ -100,7 +100,7 @@ class PostsList extends React.Component {
                         size="1x"
                         color="gray"
                       />
-                      4
+                      {post.karma}
                       <FontAwesomeIcon
                         icon={faHearts}
                         className="red-heart"
@@ -117,7 +117,7 @@ class PostsList extends React.Component {
                         state: { edit: false, draft: false },
                       }}
                     >
-                      <div>{post.title}</div>
+                      <span style={{ fontSize: "17px" }}>{post.title}</span>
                     </Link>
                     <div className="d-flex flex-row text-l-gray mt-1">
                       <a
@@ -140,13 +140,22 @@ class PostsList extends React.Component {
                           />
                           <span className="username ml-2 ">
                             {this.props.user
-                              ? this.props.user.userName
-                              : post.user.userName}
+                              ? this.props.user.firstName +
+                                " " +
+                                this.props.user.lastName
+                              : post.user.firstName + " " + post.user.lastName}
                           </span>
                         </div>
                       </a>
 
                       <div className="font-weight-light">
+                        <span className="mx-1">|</span>
+                        <Badge
+                          className="badge-light ignore-link"
+                          style={{ backgroundColor: "#e9e9e9" }}
+                        >
+                          {post.tag.text}
+                        </Badge>
                         <span className="mx-1">|</span>
                         {post.commentsCount}
                         {post.commentsCount === 1 ? " comment" : " comments"}

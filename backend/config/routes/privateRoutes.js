@@ -4,8 +4,12 @@ const privateRoutes = {
   'PATCH /account': 'AccountController.update',
 
   // User routes
+  'GET /users': 'UserController.getAll',
   'GET /users/:id': 'UserController.get',
   'PATCH /users/:id': 'UserController.edit',
+
+  // User routes
+  'GET /tags/': 'TagController.getAll',
 
   // Posts routes
   'GET /posts': 'PostController.getAll',

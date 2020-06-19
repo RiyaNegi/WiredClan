@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as postActions from "../actions/postActions";
+import * as leaderboardActions from "../actions/leaderboardActions";
 
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +28,7 @@ class HomePage extends PureComponent {
 
   componentWillMount() {
     this.props.fetchPosts();
+    this.props.fetchTopContributors();
   }
 
   onChange = (e) => {
@@ -55,7 +57,7 @@ class HomePage extends PureComponent {
       <div className="mt-md-5 d-flex row justify-content-between">
         <PostsList className="col-md-7" posts={this.props.posts} />
         <div className="col-md-5 col-lg-4">
-          <Leaderboard />
+          <Leaderboard topContributors={this.props.topContributors} />
           <div className="mt-4">
             <Button variant="primary col-12 new-post-button p-0">
               <Link className="no-decoration" to={"/CreatePost"}>
@@ -74,9 +76,12 @@ const mapStateToProps = (state) => {
     posts: state.posts.posts,
     account: state.auth.data,
     search: state.posts.searchArray,
+    topContributors: state.leaderboard.topContributors,
   };
 };
 
-export default connect(mapStateToProps, { ...actions, ...postActions })(
-  HomePage
-);
+export default connect(mapStateToProps, {
+  ...actions,
+  ...postActions,
+  ...leaderboardActions,
+})(HomePage);

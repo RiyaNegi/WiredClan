@@ -3,6 +3,7 @@ import { reducer as authReducer } from "./auth";
 import { reducer as postReducer } from "./posts";
 import { reducer as formReducer } from "redux-form";
 import { reducer as postDetailsReducer } from "./postDetails";
+import { reducer as leaderboardReducer } from "./leaderboard";
 import { reducer as profileDetailsReducer } from "./profileDetails";
 import { reducer as createPostReducer } from "./createPost";
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   posts: postReducer,
   postDetails: postDetailsReducer,
+  leaderboard: leaderboardReducer,
   userDetails: profileDetailsReducer,
   createPost: createPostReducer,
 });

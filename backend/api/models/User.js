@@ -43,7 +43,21 @@ const User = sequelize.define('user', {
   year: {
     type: Sequelize.INTEGER,
   },
+  badges: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+  },
+  karma: {
+    type: Sequelize.INTEGER,
+  },
   viaGoogle: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  registeredViaLoginViaGoogle: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  registeredViaRegisterViaGoogle: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },

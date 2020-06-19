@@ -15,6 +15,10 @@ const Post = sequelize.define('post', {
     type: Sequelize.BOOLEAN,
     defaultValue: true,
   },
+  karma: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
   created: {
     type: Sequelize.VIRTUAL,
     get() {

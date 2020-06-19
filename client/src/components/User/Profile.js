@@ -85,12 +85,16 @@ class Profile extends Component {
               size="1x"
               color="gray"
             />
-            <div className="ml-2 text-muted font-weight-bold">23 karma</div>
+            <div className="ml-2 text-muted font-weight-bold">
+              {this.props.user.karma} karma
+            </div>
           </div>
         </div>
-        <Badge pill variant="secondary" className="d-flex mt-2">
-          Python Expert
-        </Badge>
+        {this.props.user.badges && this.props.user.badges.length > 0 && (
+          <Badge pill variant="secondary" className="d-flex mt-2">
+            {this.props.user.badges[0]}
+          </Badge>
+        )}
       </div>
     );
   }

@@ -83,7 +83,7 @@ class Header extends PureComponent {
                   class="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="/">
+                  <a class="dropdown-item" href={`users/${this.props.user.id}`}>
                     Profile
                   </a>
                   <a class="dropdown-item" href="/signout">

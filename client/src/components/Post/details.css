@@ -61,13 +61,3 @@
   border-bottom: 1px solid gray !important;
   outline: none;
 }
-
-#dropdown-post-form::after {
-  display: flex;
-  align-self: center;
-  margin-left: -5px;
-}
-
-#dropdown-post-form > div {
-  text-align: start;
-}
