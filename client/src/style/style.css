@@ -1,4 +1,89 @@
-.container {
+/* @media (min-width: 700px) {
+  .container {
+    max-width: 700px;
+  }
+} */
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1100px;
+  }
+}
+
+.no-decoration {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.box-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  padding: 10px 20px;
+  border-radius: 0.25rem;
+}
+
+.username:hover {
+  color: black !important;
+  text-decoration: none;
+}
+
+.text-l-gray {
+  color: #5b5b5b !important;
+}
+
+.text-d-gray {
+  color: #3a3a3a !important;
+}
+
+.upvote {
+  text-decoration: none !important;
+  color: #3a3a3a !important;
+}
+
+.upvote:hover {
+  text-decoration: none !important;
+}
+
+.red-heart {
+  margin-top: -40px;
+  z-index: -1;
+}
+
+.upvote:hover .red-heart {
+  color: #ffcecc;
+  z-index: 1;
+}
+
+.upvote:hover .white-heart {
+  color: white;
+  z-index: -1;
+}
+
+.post-box:hover {
+  background-color: #f6faff;
+  cursor: pointer;
+}
+
+.new-post-button {
+  border: 1px solid #5047ff;
+  color: black;
+  background-color: white;
+}
+
+.new-post-button:hover {
+  background-color: #4a41ff;
+}
+
+.new-post-button:hover div {
+  color: white !important;
+}
+
+/* .new-post-button {
+
+} */
+
+/* .container {
   min-height: 100%;
 }
 
@@ -590,4 +675,4 @@ position: fixed;
 
 .draft-button{
   padding: 7px 12px;
-}
+} */

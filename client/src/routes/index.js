@@ -6,11 +6,10 @@ import Signin from "../components/auth/signin";
 import Signout from "../components/auth/signout";
 import Signup from "../components/auth/signup";
 import HomePage from "../components/HomePage";
-import postDetails from "../components/postDetails";
-import Profile from "../components/Profile";
+import postDetails from "../components/Post/postDetails";
+import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
-
 
 const Routes = () => {
   return (

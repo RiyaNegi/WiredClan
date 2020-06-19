@@ -1,0 +1,73 @@
+.post-tag-button:hover {
+  background-color: #f1f1f1 !important;
+  border: none !important;
+}
+
+.post-tag-button {
+  background-color: #f1f1f1 !important;
+  border: none !important;
+}
+
+.details-red-heart {
+  margin-top: -32px !important;
+}
+
+.rdw-option-wrapper {
+  background-color: white;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 3px !important;
+  height: 25px !important;
+  width: 25px !important;
+  margin-right: 10px !important;
+}
+
+.rdw-option-wrapper:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.rdw-option-active {
+  background-color: rgb(199, 199, 199) !important;
+}
+
+.rdw-editor-wrapper {
+  border: none !important;
+}
+
+.rdw-dropdown-wrapper {
+  box-shadow: none !important;
+}
+
+.post-display span {
+  display: block;
+  word-wrap: break-word;
+}
+
+.post-display img {
+  justify-self: center;
+}
+
+.post-title-input {
+  font-size: 40px;
+  border: none !important;
+}
+
+.post-title-input:hover {
+  border: none !important;
+}
+
+.post-title-input:focus {
+  border: none !important;
+  border-bottom: 1px solid gray !important;
+  outline: none;
+}
+
+#dropdown-post-form::after {
+  display: flex;
+  align-self: center;
+  margin-left: -5px;
+}
+
+#dropdown-post-form > div {
+  text-align: start;
+}

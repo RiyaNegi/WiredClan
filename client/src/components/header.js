@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import logo from "./logo.png";
 class Header extends PureComponent {
   state = {
     active: false,
@@ -10,69 +10,109 @@ class Header extends PureComponent {
   handleClick = this.handleClick.bind(this);
 
   handleClick() {
-    console.log("state: ", this.state.active)
+    console.log("state: ", this.state.active);
     this.setState({
-      active: !this.state.active
+      active: !this.state.active,
     });
-  }
-  renderLinks() {
-    if (this.props.authenticated) {
-      console.log("header called", this.props.user.id)
-      return (
-        <li className="nav-item">
-          <a className="nav-link" href={`/Users/${this.props.user.id}`}>
-            <button className="navbar-userbox" onClick={this.handleClick}>
-              <div className="nav-icon">
-                <img
-                  src={this.props.user.imageUrl}
-                  style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
-                  alt="userIcon"
-                />
-              </div>
-              <div className="nav-username nav-text">{this.props.user.userName}</div>
-            </button>
-          </a>
-          <Link className="nav-link" to="/signout">
-            <span className='nav-text'>Sign Out</span>
-          </Link>
-        </li>
-      );
-    } else {
-      return [
-        <span>
-          <li className="nav-item" key="signin">
-            <Link className="nav-link nav-links nav-text" to="/signin">
-              Sign In
-          </Link>
-          </li>
-          <li className="nav-item" key="signup">
-            <Link className="nav-link nav-links nav-text" to="/signup">
-              Sign Up
-          </Link>
-          </li>
-        </span>
-      ];
-    }
   }
 
   render() {
     return (
-      <span>
-        <nav className="navbar navbar-toggleable-md navbar-light my-navbar">
-          <Link to={{ pathname: "/HomePage", state: { search: "" } }} className="navbar-brand">
-            CodeJimmy...
-          </Link>
-          <ul className="navbar-nav">{this.renderLinks()}</ul>
-        </nav>
-        {/* <div className="nav-profile-card">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">
+          <label
+            style={{
+              border: "2px solid black",
+              fontSize: 20,
+              // textDecoration: "underline",
+              width: 20,
+              textAlign: "center",
+            }}
+          >
+            C
+          </label>
+          <label
+            style={{
+              border: "2px solid black",
+              fontSize: 20,
+              // textDecoration: "underline",
+              backgroundColor: "black",
+              color: "white",
+              width: 20,
+            }}
+          >
+            J
+          </label>
+          {/* <img src={logo} style={{ width: 120, height: 17 }} alt="userIcon" /> */}
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        </div> */}
-      </span>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+
+          {this.props.authenticated ? (
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  XYZ
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="/"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  My Account
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="/">
+                    Profile
+                  </a>
+                  <a class="dropdown-item" href="/signout">
+                    Logout
+                  </a>
+                </div>
+              </li>
+            </ul>
+          ) : (
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  Sign Up
+                </a>
+              </li>
+              <li class="nav-item">
+                <Link className="nav-link" to="/signin">
+                  Sign In
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
+      </nav>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { authenticated: state.auth.authenticated, user: state.auth.data };
 };
 

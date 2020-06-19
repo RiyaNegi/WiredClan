@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import * as postActions from "../actions/postActions";
+
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,155 +10,73 @@ import {
   faComments,
   faBookmark,
   faSearch,
-  faSearchDollar
+  faSearchDollar,
 } from "@fortawesome/free-solid-svg-icons";
-import Loader from 'react-loader-spinner'
-
+import Loader from "react-loader-spinner";
+import PostsList from "./Post/PostsList";
+import Leaderboard from "./Post/Leaderboard";
+import { Button } from "react-bootstrap";
 
 class HomePage extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      search: ''
-    }
+      search: "",
+    };
   }
+
   componentWillMount() {
     this.props.fetchPosts();
-  }
-  renderPosts() {
-    return this.props.posts.map(post => {
-      return (
-        <div key={post.id} className="post">
-          <a
-            href={`/Users/${post.userId}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <div className="user">
-              <div className="usericon">
-                <img
-                  src={post.user.imageUrl}
-                  style={{ width: 28, height: 28, borderRadius: 28 / 2 }}
-                  alt="usericon"
-                />
-              </div>
-              <div className="date-div">
-                <span className="username username-main">{post.user.userName}</span>
-                <span className="post-date">
-                  {" "}
-                  Posted on{" "}
-                  {
-                    ["4th July", "22nd May", "15th Nov"][
-                    Math.floor(Math.random() * 3)
-                    ]
-                  }{" "}
-                </span>
-              </div>
-            </div>
-          </a>
-          <Link className="com-links" to={{ pathname: `/postDetails/${post.id}`, state: { edit: false, draft: false } }}
-          >
-            <div className="card-title">{post.title}</div>
-            <div className="comments-box">
-              <div className="post-comments">
-                <div>
-                  {post.commentsCount}{" "}
-                  {post.commentsCount === 1 ? "Comment" : "Comments"}
-                </div>
-                {/* <div className="user-prof-det">
-                  <label className="user-prof-details-name com-branch">
-                    {this.props.user.department}
-                  </label>
-                </div> */}
-              </div>
-            </div>
-          </Link>
-        </div >
-      );
-    });
   }
 
   onChange = (e) => {
     [e.target.name] = e.target.value;
-  }
+  };
   handleSearch = (e) => {
     if (this.state.search) {
-      this.setState({ search: e.target.value })
-      this.props.fetchSearch(this.state.search)
-      this.setState({ search: '' })
+      this.setState({ search: e.target.value });
+      this.props.fetchSearch(this.state.search);
+      this.setState({ search: "" });
       this.props.fetchPosts();
-      console.log("serach :", this.state.search)
+      console.log("serach :", this.state.search);
     }
-
-  }
-  renderSearch() {
-    console.log("rendderserach :", this.state.search)
-    return (
-      <div className="search-box">
-        {this.props.account ? (
-          <Link className="com-links" to={`/CreatePost`} >
-            <button type="button" className="btn btn-light site-button post-button">
-              + New Post
-          </button>
-          </Link>
-        )
-          : (<button type="button" className="btn btn-light site-button post-button">
-            <Link className="com-links" to="/signin"> + New Post</Link>
-          </button>)
-        }
-        <span className="search-bar">
-          <input type="text" className="search-input" name="search" onKeyPress={event => {
-            if (event.key === "Enter") {
-              this.setState({ search: event.target.value })
-              this.props.fetchSearch(event.target.value);
-            }
-          }} onChange={this.onChange} />
-          <button className="search-icon" onClick={this.handleSearch}>
-            <FontAwesomeIcon
-              icon={faSearch}
-              size="1x"
-              style={{ fontSize: "1.5em" }}
-              color="gray"
-            />
-          </button>
-        </span>
-        <button className=" dropdown btn btn-secondary dropdown-toggle site-button dept-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ALL
-          </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item filter-text" href="#">Computer</a>
-          <a className="dropdown-item filter-text " href="#">IT</a>
-          <a className="dropdown-item filter-text" href="#">ENTC</a>
-        </div>
-      </div >
-
-    );
-  }
+  };
 
   render() {
-
     if (!this.props.posts) {
       return (
         <div className="loader">
-          <Loader
-            type="ThreeDots"
-            color="#ffe31a"
-            height={100}
-            width={100}
-          />
-        </div >)
+          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        </div>
+      );
     }
 
     return (
-      <div className="col-md-9">
-        {this.renderSearch()}
-        {this.renderPosts()}
+      <div className="mt-md-5 d-flex row justify-content-between">
+        <PostsList className="col-md-7" posts={this.props.posts} />
+        <div className="col-md-5 col-lg-4">
+          <Leaderboard />
+          <div className="mt-4">
+            <Button variant="primary col-12 new-post-button p-0">
+              <Link className="no-decoration" to={"/CreatePost"}>
+                <div className="p-2 py-2 no-decoration">📝 New Post</div>
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return { posts: state.posts.homePage, account: state.auth.data, search: state.posts.searchArray };
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts.posts,
+    account: state.auth.data,
+    search: state.posts.searchArray,
+  };
 };
 
-export default connect(mapStateToProps, actions)(HomePage);
+export default connect(mapStateToProps, { ...actions, ...postActions })(
+  HomePage
+);

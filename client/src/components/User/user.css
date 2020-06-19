@@ -1,0 +1,24 @@
+.nav-tabs {
+  border: none !important;
+}
+
+.user-tab-nav {
+  text-decoration: none !important;
+  border: none !important;
+}
+
+.nav-tabs > a {
+  background-color: transparent;
+  color: gray;
+  border: 0 !important;
+}
+
+.nav-tabs > a.active {
+  background-color: transparent !important;
+  border: 0 !important;
+  border-bottom: 2px solid #5850ec !important;
+}
+
+.profile-box {
+  background-color: #ffefdc;
+}
