@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 const User = require('../models/User');
 const Post = require('../models/Post');
-const Cdn = require('../models/Cdn');
-const Account = require('../models/Account');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
 const Sequelize = require('sequelize');
+const Google = require('../services/google.service');
 
 const UserController = () => {
   const register = async (req, res) => {
@@ -18,6 +17,43 @@ const UserController = () => {
         });
         const token = authService().issue({ id: user.id });
         return res.status(200).json({ token, user });
+      } catch (err) {
+        console.log(err);
+        return res.status(400).json({ msg: 'The email is already registered.' });
+      }
+    }
+
+    return res.status(400).json({ msg: 'Passwords don\'t match' });
+  };
+
+  const googleRegister = async (req, res) => {
+    const { body } = req;
+    body.password = 'random_password';
+    body.confirmPassword = 'random_password';
+    const googleVerified = await Google.verifyLogin({ accessToken: body.accessToken, email: body.email });
+    if (googleVerified) {
+      try {
+        const user = await User
+          .findOne({
+            where: {
+              email: body.email,
+            },
+          });
+
+        if (!user) {
+          const newUser = await User.create({
+            email: body.email,
+            password: body.password,
+            viaGoogle: true,
+          });
+          const token = authService().issue({ id: newUser.id });
+          return res.status(200).json({ token, user: newUser });
+        }
+
+        const token = authService().issue({ id: user.id });
+        return res.status(200).json({ token, user });
+
+
       } catch (err) {
         console.log(err);
         return res.status(400).json({ msg: 'The email is already registered.' });
@@ -59,6 +95,33 @@ const UserController = () => {
     return res.status(400).json({ msg: 'Bad Request: Email or password is wrong' });
   };
 
+  const googleLogin = async (req, res) => {
+    const { email, accessToken } = req.body;
+    try {
+      const googleVerified = await Google.verifyLogin({ accessToken, email });
+      const password = 'random_password';
+      if (googleVerified) {
+        const user = await User
+          .findOne({
+            where: {
+              email,
+            },
+          });
+
+        if (!user) {
+          return res.status(400).json({ msg: 'Bad Request: User not found' });
+        }
+        const token = authService().issue({ id: user.id });
+
+        return res.status(200).json({ token, user });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+    return res.status(400).json({ msg: 'Bad Request: Email or password is wrong' });
+  };
+
   const validate = (req, res) => {
     const { token } = req.body;
 
@@ -91,6 +154,28 @@ const UserController = () => {
     }
   };
 
+  const edit = async (req, res) => {
+    try {
+      let user = await User.findOne({
+        where: {
+          id: req.token.id,
+        },
+      });
+      user = await user.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        department: req.body.department,
+        year: req.body.year,
+        college: req.body.college,
+      });
+      user = user.get({ plain: true });
+      return res.status(200).json(user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
   const account = async (req, res) => {
     try {
       const users = await User.findOne({ where: { id: req.token.id }, include: [Post] });
@@ -104,9 +189,12 @@ const UserController = () => {
 
   return {
     register,
+    googleRegister,
     login,
+    googleLogin,
     validate,
     get,
+    edit,
     account,
   };
 };

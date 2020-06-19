@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 const User = require('../models/User');
 const Post = require('../models/Post');
-const Cdn = require('../models/Cdn');
-const Account = require('../models/Account');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
 
@@ -90,6 +88,7 @@ const AccountController = () => {
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
+
 
   return {
     register,

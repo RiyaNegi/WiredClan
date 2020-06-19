@@ -132,7 +132,8 @@ const PostController = () => {
           },
         },
       });
-      await comment.update(req.body);
+
+      await comment.update({ text: req.body.text });
 
       return res.status(200).json(comment);
     } catch (err) {

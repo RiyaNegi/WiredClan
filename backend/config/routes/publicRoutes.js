@@ -1,9 +1,9 @@
 const publicRoutes = {
-  // 'POST /user': 'UserController.register',
-  'POST /register': 'UserController.register', // alias for POST /user
+  'POST /register': 'UserController.register',
+  'POST /googleRegister': 'UserController.googleRegister',
   'POST /login': 'UserController.login',
+  'POST /googleLogin': 'UserController.googleLogin',
   'POST /validate': 'UserController.validate',
-  'GET /cdn/:cdnName/settings': 'CdnController.settings',
 };
 
 module.exports = publicRoutes;

@@ -43,6 +43,10 @@ const User = sequelize.define('user', {
   year: {
     type: Sequelize.INTEGER,
   },
+  viaGoogle: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 }, { hooks, tableName });
 
 // eslint-disable-next-line

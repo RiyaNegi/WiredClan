@@ -38,6 +38,17 @@ const seed = async () => {
       email: 'raj@gmail.com',
       password: 'password',
     },
+    // {
+    //   userName: 'theOG',
+    //   firstName: 'OG RAJ',
+    //   lastName: 'YES',
+    //   department: 'Computer',
+    //   college: 'I2IT',
+    //   year: 2,
+    //   imageUrl: 'https://api.adorable.io/avatars/80/theog.png',
+    //   email: 'thecodersblock@gmail.com',
+    //   password: 'random_password',
+    // },
   ], { individualHooks: true, include: { model: Post } })
     .then(async (users) => {
       await Post.bulkCreate([
