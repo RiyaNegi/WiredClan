@@ -13,10 +13,7 @@ module.exports = class Google {
         access_token: accessToken,
       },
     })
-      .then((response) => {
-        console.log("THE TRUTH IS", response.data.email === email);
-        return (response.data.email === email);
-      })
+      .then((response) => (response.data.email === email))
       .catch((error) => {
         console.log(error);
       });

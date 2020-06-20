@@ -22,7 +22,7 @@ class Profile extends Component {
 
   componentWillMount() {
     let id = parseInt(this.props.match.params.id);
-    if (id === this.props.account.id) {
+    if (this.props.account && id === this.props.account.id) {
       this.props.fetchUser(this.props.match.params.id, true);
     } else {
       this.props.fetchUser(this.props.match.params.id, false);
@@ -74,7 +74,7 @@ class Profile extends Component {
           style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
           alt="userIcon"
         />
-        <label className="mt-3 font-weight-bold">
+        <label className="mt-3 font-weight-bold text-center">
           {this.props.user.firstName} {this.props.user.lastName}
         </label>
         <div>
@@ -95,6 +95,17 @@ class Profile extends Component {
             {this.props.user.badges[0]}
           </Badge>
         )}
+        <div className="text-muted font-weight-bold text-center">
+          {this.props.user.college}
+        </div>
+        {this.props.user.year && (
+          <div className="text-muted font-weight-bold">
+            Year {this.props.user.year}
+          </div>
+        )}
+        <div className="text-muted font-weight-bold">
+          <a href={`/users/${this.props.user.id}/form`}>edit</a>
+        </div>
       </div>
     );
   }
@@ -109,9 +120,9 @@ class Profile extends Component {
     }
 
     return (
-      <div className="mt-4 d-flex flex-row">
-        <div className="col-3">{this.renderUserCard()}</div>
-        <div className="col-9">
+      <div className="mt-4 row">
+        <div className="col-12 col-md-3">{this.renderUserCard()}</div>
+        <div className="col-12 col-md-9">
           <React.Fragment>
             <Tabs defaultActiveKey="user-posts" id="user-tab">
               <Tab eventKey="user-posts" title="Posts">
@@ -142,6 +153,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...actions, ...postActions, ...authActions })(
-  Profile
-);
+export default connect(mapStateToProps, {
+  ...actions,
+  ...postActions,
+  ...authActions,
+})(Profile);

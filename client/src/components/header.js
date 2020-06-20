@@ -64,21 +64,18 @@ class Header extends PureComponent {
             <ul class="navbar-nav">
               <li className="row mr-2">
                 <li class="nav-item">
-                  <a class="nav-link" href="/">
+                  <a class="nav-link" href={`/users/${this.props.user.id}`}>
                     <img
                       src={this.props.user.imageUrl}
                       style={{
                         width: 20,
                         height: 20,
                         borderRadius: 20 / 2,
+                        marginRight: 5,
                       }}
                       alt="usericon"
                     />
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/">
-                    {this.props.user.userName}
+                    {this.props.user.firstName} {this.props.user.lastName}
                   </a>
                 </li>
               </li>
@@ -98,7 +95,10 @@ class Header extends PureComponent {
                   class="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a class="dropdown-item" href={`users/${this.props.user.id}`}>
+                  <a
+                    class="dropdown-item"
+                    href={`/users/${this.props.user.id}`}
+                  >
                     Profile
                   </a>
                   <a class="dropdown-item" href="/signout">
@@ -108,19 +108,19 @@ class Header extends PureComponent {
               </li>
             </ul>
           ) : (
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="/">
-                    Sign Up
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  Sign Up
                 </a>
-                </li>
-                <li class="nav-item">
-                  <Link className="nav-link" to="/signin">
-                    Sign In
+              </li>
+              <li class="nav-item">
+                <Link className="nav-link" to="/signin">
+                  Sign In
                 </Link>
-                </li>
-              </ul>
-            )}
+              </li>
+            </ul>
+          )}
         </div>
       </nav>
     );

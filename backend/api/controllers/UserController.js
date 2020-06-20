@@ -96,9 +96,11 @@ const UserController = () => {
   };
 
   const googleLogin = async (req, res) => {
-    const { email, accessToken } = req.body;
+    const {
+      email, accessToken, firstName, lastName,
+    } = req.body;
     try {
-      const { googleVerified, email, firstName, lastName } = await Google.verifyLogin({ accessToken, email });
+      const googleVerified = await Google.verifyLogin({ accessToken, email });
       const password = 'random_password';
       if (googleVerified) {
         const user = await User
@@ -116,6 +118,7 @@ const UserController = () => {
             lastName,
             viaGoogle: true,
             registeredViaLoginViaGoogle: true,
+            imageUrl: `https://api.adorable.io/avatars/80/${firstName}${lastName}.png`,
           });
           const token = authService().issue({ id: newUser.id });
           return res.status(200).json({ token, user: newUser, newUser: true });
@@ -192,6 +195,11 @@ const UserController = () => {
           id: req.token.id,
         },
       });
+
+      if (req.body.year === '') {
+        req.body.year = null;
+      }
+
       user = await user.update({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
