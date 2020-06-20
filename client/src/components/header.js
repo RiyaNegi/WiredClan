@@ -62,12 +62,27 @@ class Header extends PureComponent {
 
           {this.props.authenticated ? (
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/">
-                  XYZ
-                </a>
+              <li className="row mr-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">
+                    <img
+                      src={this.props.user.imageUrl}
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 20 / 2,
+                      }}
+                      alt="usericon"
+                    />
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">
+                    {this.props.user.userName}
+                  </a>
+                </li>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown ">
                 <a
                   class="nav-link dropdown-toggle"
                   href="/"

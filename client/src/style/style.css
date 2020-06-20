@@ -51,12 +51,12 @@
 }
 
 .upvote:hover .red-heart {
-  color: #ffcecc;
+  color: #f52020;
   z-index: 1;
 }
 
 .upvote:hover .white-heart {
-  color: white;
+  color: #fb1008;
   z-index: -1;
 }
 
@@ -89,6 +89,14 @@
   border: 1px solid black;
   border-radius: 3px;
 }
+
+/* .create-post-but{
+  border:1px solid rgb(255, 255, 74)
+}
+.create-post-but:hover{
+  background-color: rgb(255, 255, 74);
+  color: black
+} */
 
 /* .new-post-button {
 

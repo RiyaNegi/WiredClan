@@ -9,10 +9,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,
-  faComments,
-  faBookmark,
-  faSearch,
-  faSearchDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";

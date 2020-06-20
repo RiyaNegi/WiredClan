@@ -5,7 +5,6 @@ const Comment = require('../models/Comment');
 const moment = require('moment');
 
 const seed = async () => {
-
   await Tag.bulkCreate([
     {
       text: 'Python',
