@@ -10,6 +10,7 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import * as authActions from "../../actions/authActions";
 import Loader from "react-loader-spinner";
+import slugify from "slugify";
 
 class PostsList extends React.Component {
   state = {
@@ -26,7 +27,7 @@ class PostsList extends React.Component {
 
   handleEditPost(postId) {
     return (e) => {
-      this.props.fetchPostDetails(postId);
+      this.props.fetchPost(postId);
     };
   }
 
@@ -61,7 +62,7 @@ class PostsList extends React.Component {
                     return;
                   }
 
-                  History.push(`/postDetails/${post.id}`);
+                  History.push(`/${slugify(post.title)}/${post.id}`);
                 })(History)}
               >
                 <Modal
@@ -92,7 +93,7 @@ class PostsList extends React.Component {
                 </Modal>
 
                 <div className="d-flex flex-row py-4 pr-3">
-                  <div className="col-1 mt-2 p-0">
+                  <div className=" col-2 col-md-1 mt-2 p-0">
                     <Link className="upvote d-flex flex-column align-items-center h-100">
                       <FontAwesomeIcon
                         className="white-heart"
@@ -113,43 +114,41 @@ class PostsList extends React.Component {
                     <Link
                       className="font-weight-bold no-decoration text-dark"
                       to={{
-                        pathname: `/postDetails/${post.id}`,
+                        pathname: `/${slugify(post.title)}/${post.id}`,
                         state: { edit: false, draft: false },
                       }}
                     >
                       <span style={{ fontSize: "17px" }}>{post.title}</span>
                     </Link>
-                    <div className="d-flex flex-row text-l-gray mt-1">
+                    <div className="text-l-gray mt-1">
                       <a
                         className="text-l-gray username"
                         href={`/Users/${post.userId}`}
                       >
-                        <div>
-                          <img
-                            src={
-                              this.props.user
-                                ? this.props.user.imageUrl
-                                : post.user.imageUrl
-                            }
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 20 / 2,
-                            }}
-                            alt="usericon"
-                          />
-                          <span className="username ml-2 ">
-                            {this.props.user
-                              ? this.props.user.firstName +
-                              " " +
-                              this.props.user.lastName
-                              : post.user.firstName + " " + post.user.lastName}
-                          </span>
-                        </div>
+                        <img
+                          src={
+                            this.props.user
+                              ? this.props.user.imageUrl
+                              : post.user.imageUrl
+                          }
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 20 / 2,
+                          }}
+                          alt="usericon"
+                        />
+                        <span className="username ml-2 ">
+                          {this.props.user
+                            ? this.props.user.firstName +
+                            " " +
+                            this.props.user.lastName
+                            : post.user.firstName + " " + post.user.lastName}
+                        </span>
                       </a>
-
-                      <div className="font-weight-light">
-                        <span className="mx-1">|</span>
+                      <div className="hidden-sm-up"></div>
+                      <span className="font-weight-light">
+                        <span className="mx-1 hidden-sm-down">|</span>
                         <Badge
                           className="badge-light ignore-link"
                           style={{ backgroundColor: "#e9e9e9" }}
@@ -159,9 +158,10 @@ class PostsList extends React.Component {
                         <span className="mx-1">|</span>
                         {post.commentsCount}
                         {post.commentsCount === 1 ? " comment" : " comments"}
-                      </div>
+                      </span>
 
                       {this.props.user &&
+                        this.props.account &&
                         this.props.account.id === this.props.user.id ? (
                           <div className="feature-but-div">
                             <Link
@@ -233,4 +233,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { ...postActions, ...authActions })(PostsList);
+export default connect(mapStateToProps, { ...postActions, ...authActions })(
+  PostsList
+);

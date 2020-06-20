@@ -5,12 +5,13 @@ import RequireAuth from "../components/auth/require_auth";
 import Signin from "../components/auth/signin";
 import Signout from "../components/auth/signout";
 import Signup from "../components/auth/signup";
+import UserForm from "../components/User/form";
 import HomePage from "../components/HomePage";
 import postDetails from "../components/Post/postDetails";
 import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
-import pageNotFound from "../components/pageNotFound"
+import pageNotFound from "../components/pageNotFound";
 
 const Routes = () => {
   return (
@@ -19,8 +20,9 @@ const Routes = () => {
         <Route exact path="/" component={HomePage} />
         <Route path="/signin" component={Signin} />
         <Route path="/signout" component={Signout} />
+        <Route path="/users/:id/form" component={UserForm} />
         <Route path="/signup" component={Signup} />
-        <Route path="/postdetails/:id" component={postDetails} />
+        <Route path="/:slug/:id" component={postDetails} />
         <Route path="/previewPost/:id" component={postDetails} />
         <Route path="/HomePage" component={HomePage} />
         <Route path="/CreatePost" component={CreatePost} />

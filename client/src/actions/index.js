@@ -1,4 +1,5 @@
 import axios from "axios";
+import slugify from "slugify";
 import History from "../history.js";
 import {
   FETCH_POST_DETAILS,
@@ -12,7 +13,6 @@ import {
 } from "./types";
 
 const ROOT_URL = "http://localhost:8000";
-
 
 export const fetchSearch = (text) => {
   return (dispatch) => {
@@ -30,17 +30,17 @@ export const fetchSearch = (text) => {
   };
 };
 
-export const fetchPostDetails = (id) => {
+export const fetchPost = (id) => {
   return (dispatch) => {
     axios
       .get(
         `${ROOT_URL}/api/posts/${id}`,
         localStorage.getItem("token")
           ? {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
           : {}
       )
       .then((response) => {
@@ -54,7 +54,6 @@ export const fetchPostDetails = (id) => {
       });
   };
 };
-
 
 export const postComment = (postId, text, parentId) => {
   return (dispatch, getState) => {
@@ -138,7 +137,7 @@ export const createPost = (title, published, description, tagId) => {
           type: CREATE_POST,
           payload: response.data,
         });
-        History.push(`/postDetails/${response.data.id}`);
+        History.push(`/${slugify(response.data.title)}/${response.data.id}`);
       })
       .catch((err) => {
         console.log("error:", err.response);
@@ -161,7 +160,7 @@ export const updatePost = (postId, title, published, description, tagId) => {
           type: UPDATE_POST,
           payload: response.data,
         });
-        History.push(`/postDetails/${response.data.id}`);
+        History.push(`/${slugify(response.data.title)}/${response.data.id}`);
       })
       .catch((err) => {
         console.log("error:", err.response);
