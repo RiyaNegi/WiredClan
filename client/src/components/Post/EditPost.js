@@ -7,14 +7,7 @@ import { EditorState, convertToRaw } from "draft-js";
 import Loader from "react-loader-spinner";
 import ControlledEditor from "./controlledEditor";
 import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
 import Select from "react-select";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 
 class CreatePost extends Component {
   constructor(props) {
@@ -31,6 +24,7 @@ class CreatePost extends Component {
         this.props.fetchPost(this.props.match.params.id, false);
       }
     }
+    this.props.fetchTags()
   }
 
   onChange = (editorState) => {
@@ -50,7 +44,8 @@ class CreatePost extends Component {
           postId,
           params["title"],
           false,
-          params["postEditor"]
+          params["postEditor"],
+          params["postTag"].id
         );
         this.setState({ editorState: EditorState.createEmpty() });
       } else if (name === "publish" && params["title"]) {
@@ -58,37 +53,48 @@ class CreatePost extends Component {
           postId,
           params["title"],
           true,
-          params["postEditor"]
+          params["postEditor"],
+          params["postTag"].id
         );
         this.setState({ editorState: EditorState.createEmpty() });
       }
     };
   };
+
   render() {
-    const { handleSubmit, submitting, pristine } = this.props;
+    const { handleSubmit } = this.props;
     let edit = this.props.location.state.edit
       ? this.props.location.state.edit
       : false;
-    if (!this.props.post) {
-      console.log("loaderrr");
+    if (!this.props.post || !this.props.tags) {
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
         </div>
       );
     }
+    let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
       <div className="mt-3">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="d-flex flex-row justify-content-between align-items-center">
-            <Select
-              className="basic-single col-3"
-              classNamePrefix="select"
-              isSearchable={false}
-              name="postTag"
-              options={options}
+          <div className="d-flex flex-row justify-content-between align-items-center " >
+            <Field
+              name='postTag'
+              options={tagsArrray}
+              component={(props) => (
+                <Select
+                  {...props}
+                  className="basic-single col-3 Select"
+                  classNamePrefix="select"
+                  isSearchable={false}
+                  value={props.input.value}
+                  onChange={(value) => props.input.onChange(value)}
+                  onBlur={() => props.input.onBlur(props.input.value)}
+                  options={props.options}
+                />
+              )}
+              multi
             />
-
             <div className="">
               <div className="d-flex flex-row">
                 <button
@@ -111,7 +117,6 @@ class CreatePost extends Component {
                     Preview
                   </button>
                 </Link>
-
                 <button
                   className="ml-2 btn btn-secondary"
                   action="submit"
@@ -123,7 +128,6 @@ class CreatePost extends Component {
               </div>
             </div>
           </div>
-
           <div className="mt-2">
             <fieldset>
               <Field
@@ -168,6 +172,7 @@ const mapStateToProps = (state) => {
     post: state.postDetails.details,
     description: state.postDetails.description,
     initialValues: populatePostValues(state, desc),
+    tags: state.postDetails.tags
   };
 };
 

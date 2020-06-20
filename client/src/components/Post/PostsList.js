@@ -141,8 +141,8 @@ class PostsList extends React.Component {
                         <span className="username ml-2 ">
                           {this.props.user
                             ? this.props.user.firstName +
-                              " " +
-                              this.props.user.lastName
+                            " " +
+                            this.props.user.lastName
                             : post.user.firstName + " " + post.user.lastName}
                         </span>
                       </a>
@@ -161,56 +161,56 @@ class PostsList extends React.Component {
                       </span>
 
                       {this.props.user &&
-                      this.props.account &&
-                      this.props.account.id === this.props.user.id ? (
-                        <div className="feature-but-div">
-                          <Link
-                            className="com-links edit-link"
-                            to={{
-                              pathname: `/posts/${post.id}/edit`,
-                              state: { edit: true },
-                            }}
-                          >
-                            {/* <button
+                        this.props.account &&
+                        this.props.account.id === this.props.user.id ? (
+                          <div className="feature-but-div">
+                            <Link
+                              className="com-links edit-link"
+                              to={{
+                                pathname: `/posts/${post.id}/edit`,
+                                state: { edit: true },
+                              }}
+                            >
+                              {/* <button
                             className=" post-item-buttons edit-button"
                             // onClick={this.handleEditPost(post.id)}
                           > */}
-                            <FontAwesomeIcon
-                              icon={faPen}
-                              size="1x"
-                              color="gray"
-                            />{" "}
-                            Edit
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                size="1x"
+                                color="gray"
+                              />{" "}
+                              Edit
                             {/* </button> */}
-                          </Link>
-                          <button
-                            className="post-item-buttons delete-link"
-                            onClick={this.handleShowModal}
-                          >
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              size="1x"
-                              color="gray"
-                            />
-                            Delete
-                          </button>
-                          {draft ? (
-                            <Link
-                              className="com-links"
-                              to={`/previewPost/${post.id}`}
-                            >
-                              <button className="post-item-buttons preview-button">
-                                <FontAwesomeIcon
-                                  icon={faEye}
-                                  size="1x"
-                                  color="gray"
-                                />{" "}
-                                Preview
-                              </button>
                             </Link>
-                          ) : null}
-                        </div>
-                      ) : null}
+                            <button
+                              className="post-item-buttons delete-link"
+                              onClick={this.handleShowModal}
+                            >
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                size="1x"
+                                color="gray"
+                              />
+                              Delete
+                          </button>
+                            {draft ? (
+                              <Link
+                                className="com-links"
+                                to={`/previewPost/${post.id}`}
+                              >
+                                <button className="post-item-buttons preview-button">
+                                  <FontAwesomeIcon
+                                    icon={faEye}
+                                    size="1x"
+                                    color="gray"
+                                  />{" "}
+                                  Preview
+                              </button>
+                              </Link>
+                            ) : null}
+                          </div>
+                        ) : null}
                     </div>
                   </div>
                 </div>
@@ -218,10 +218,10 @@ class PostsList extends React.Component {
             );
           })
         ) : (
-          <div className="loader">
-            <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
-          </div>
-        )}
+            <div className="loader">
+              <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+            </div>
+          )}
       </div>
     );
   }
@@ -229,7 +229,7 @@ class PostsList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    account: state.auth.data,
+    account: state.auth.data
   };
 };
 

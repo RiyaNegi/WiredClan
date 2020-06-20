@@ -61,3 +61,18 @@
   border-bottom: 1px solid gray !important;
   outline: none;
 }
+
+.Select {
+  width: 400px !important;
+  z-index: 10 !important;
+}
+
+.Select.is-open {
+z-index: 10 !important;
+}
+
+.Select-menu {
+  position: fixed !important;
+  width: 440px !important;
+  margin: 1px;
+}

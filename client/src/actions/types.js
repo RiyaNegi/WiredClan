@@ -14,4 +14,5 @@ export const DELETE_POST = "delete_post";
 export const FETCH_SEARCH = "fetch_search";
 export const FETCH_TOP_CONTRIBUTORS = "FETCH_TOP_CONTRIBUTORS";
 export const GOOGLE_LOGIN = "google_login";
+export const FETCH_TAGS = "fetch_tags"
 

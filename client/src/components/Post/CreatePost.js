@@ -7,6 +7,10 @@ import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Loader from "react-loader-spinner";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+
+
 
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
@@ -36,6 +40,10 @@ class CreatePost extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.fetchTags()
+  }
+
   onChangePost = (postEditorState) => this.setState({ postEditorState });
 
   handleChange = (e) => {
@@ -45,24 +53,59 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
-      if (name === "submit" && params["postTitle"]) {
+      debugger;
+      if (!params["postTag"] || !params["postTitle"]) {
+        console.log("notify was called")
+        this.notify()
+      }
+      else if (name === "submit" && params["postTitle"] && params["postTag"].id) {
         let convertedData = draftToHtml(
           convertToRaw(this.state.postEditorState.getCurrentContent())
         );
-        this.props.createPost(params["postTitle"], true, convertedData);
+        this.props.createPost(params["postTitle"], true, convertedData, params["postTag"].id);
         this.setState({ postEditorState: EditorState.createEmpty() });
-      } else if (name === "save" && params["postTitle"]) {
+        return
+      }
+      else if (name === "save" && params["postTitle"] && params["postTag"].id) {
         let convertedData = draftToHtml(
           convertToRaw(this.state.postEditorState.getCurrentContent())
         );
-        this.props.createPost(params["postTitle"], false, convertedData);
+        this.props.createPost(params["postTitle"], false, convertedData, params["postTag"].id);
         this.setState({ postEditorState: EditorState.createEmpty() });
+        return
+      }
+      else {
+        console.log("notify was ccalled")
+        this.notify()
+        return <div><ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover
+        /></div>
       }
     };
   };
+
+  notify = () =>
+    toast.error('⚠️ TAG and Title required', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
-    if (!this.state.postEditorState) {
+    if (!this.state.postEditorState || !this.props.tags) {
       console.log("loaderrr");
       return (
         <div className="loader">
@@ -70,13 +113,32 @@ class CreatePost extends Component {
         </div>
       );
     }
+    let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
       <div className="mt-4">
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <div className="d-flex flex-row justify-content-between">
-            <label className="m-0 d-flex align-self-center">
+            {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
-            </label>
+            </label> */}
+            <Field
+              name='postTag'
+              options={tagsArrray}
+              component={(props) => (
+                <Select
+                  {...props}
+                  className="basic-single col-3 Select"
+                  classNamePrefix="select"
+                  placeholder="Select Tag.."
+                  isSearchable={false}
+                  value={props.input.value}
+                  onChange={(value) => props.input.onChange(value)}
+                  onBlur={() => props.input.onBlur(props.input.value)}
+                  options={props.options}
+                />
+              )}
+              multi
+            />
             <div className="">
               <div className="d-flex flex-row">
                 <button
@@ -84,7 +146,7 @@ class CreatePost extends Component {
                   action="submit"
                   name="save"
                   disabled={submitting || pristine}
-                  onClick={handleSubmit(this.handleFormSubmit("save"))}
+                  onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
                 >
                   Save As Draft
                 </button>
@@ -97,6 +159,17 @@ class CreatePost extends Component {
                 >
                   Submit Post
                 </button>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss={false}
+                  draggable={false}
+                  pauseOnHover
+                />
               </div>
             </div>
           </div>
@@ -175,6 +248,7 @@ class CreatePost extends Component {
 const mapStateToProps = (state) => {
   return {
     account: state.auth.data,
+    tags: state.postDetails.tags
   };
 };
 

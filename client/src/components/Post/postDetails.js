@@ -87,9 +87,8 @@ class PostDetails extends Component {
             type="button"
             class="btn btn-light post-tag-button text-l-gray align-self-center"
           >
-            Python
+            {this.props.post.tag.text}
           </button>
-
           <div>
             <Link className="upvote d-flex flex-row no-decoration">
               <div>
