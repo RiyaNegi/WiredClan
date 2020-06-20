@@ -1,4 +1,4 @@
-import { FETCH_POST_DETAILS } from "../actions/types";
+import { FETCH_POST_DETAILS, FETCH_TAGS } from "../actions/types";
 import { POST_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
@@ -55,6 +55,11 @@ export const reducer = (state = {}, action) => {
         newDelState.comments.splice(arrIndex, 1);
       }
       return newDelState;
+    case FETCH_TAGS:
+      let tagsArray = action.payload.map(i => ({ id: i.id, text: i.text }))
+      return {
+        ...state, tags: tagsArray,
+      };
     default:
       return state;
   }

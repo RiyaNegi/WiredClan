@@ -8,6 +8,7 @@ import {
   CREATE_POST,
   UPDATE_POST,
   FETCH_SEARCH,
+  FETCH_TAGS
 } from "./types";
 
 const ROOT_URL = "http://localhost:8000";
@@ -145,12 +146,12 @@ export const createPost = (title, published, description) => {
   };
 };
 
-export const updatePost = (postId, title, published, description) => {
+export const updatePost = (postId, title, published, description, tagId) => {
   return (dispatch) => {
     axios
       .post(
         `${ROOT_URL}/api/posts/${postId}`,
-        { postId, title, published, description },
+        { postId, title, published, description, tagId },
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         }
@@ -166,4 +167,18 @@ export const updatePost = (postId, title, published, description) => {
         console.log("error:", err.response);
       });
   };
+};
+
+export const fetchTags = () => {
+  return (dispatch) => {
+    axios
+      .get(`${ROOT_URL}/api/tags`)
+      .then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: FETCH_TAGS,
+          payload: response.data,
+        });
+      });
+  }
 };
