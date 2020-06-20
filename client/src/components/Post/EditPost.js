@@ -26,9 +26,9 @@ class CreatePost extends Component {
   componentWillMount() {
     if (this.props.match.params.id) {
       if (this.props.account.id) {
-        this.props.fetchPostDetails(this.props.match.params.id, true);
+        this.props.fetchPost(this.props.match.params.id, true);
       } else {
-        this.props.fetchPostDetails(this.props.match.params.id, false);
+        this.props.fetchPost(this.props.match.params.id, false);
       }
     }
   }

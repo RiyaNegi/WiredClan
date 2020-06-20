@@ -40,9 +40,9 @@ class Profile extends Component {
     return (e) => {
       let id = parseInt(this.props.match.params.id);
       if (id === this.props.account.id) {
-        this.props.fetchPostDetails(postId, true);
+        this.props.fetchPost(postId, true);
       } else {
-        this.props.fetchPostDetails(postId, false);
+        this.props.fetchPost(postId, false);
       }
     };
   }

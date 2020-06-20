@@ -22,7 +22,7 @@ const Routes = () => {
         <Route path="/signout" component={Signout} />
         <Route path="/users/:id/form" component={UserForm} />
         <Route path="/signup" component={Signup} />
-        <Route path="/postdetails/:id" component={postDetails} />
+        <Route path="/:slug/:id" component={postDetails} />
         <Route path="/previewPost/:id" component={postDetails} />
         <Route path="/HomePage" component={HomePage} />
         <Route path="/CreatePost" component={CreatePost} />

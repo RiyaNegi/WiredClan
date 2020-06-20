@@ -13,7 +13,7 @@ import "./details.css";
 
 class PostDetails extends Component {
   componentWillMount() {
-    this.props.fetchPostDetails(this.props.match.params.id);
+    this.props.fetchPost(this.props.match.params.id);
   }
   convertDataFromJSONToHTML = (object) => {
     const html = object;

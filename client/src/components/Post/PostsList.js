@@ -10,6 +10,7 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import * as authActions from "../../actions/authActions";
 import Loader from "react-loader-spinner";
+import slugify from "slugify";
 
 class PostsList extends React.Component {
   state = {
@@ -26,7 +27,7 @@ class PostsList extends React.Component {
 
   handleEditPost(postId) {
     return (e) => {
-      this.props.fetchPostDetails(postId);
+      this.props.fetchPost(postId);
     };
   }
 
@@ -61,7 +62,7 @@ class PostsList extends React.Component {
                     return;
                   }
 
-                  History.push(`/postDetails/${post.id}`);
+                  History.push(`/${slugify(post.title)}/${post.id}`);
                 })(History)}
               >
                 <Modal
@@ -113,7 +114,7 @@ class PostsList extends React.Component {
                     <Link
                       className="font-weight-bold no-decoration text-dark"
                       to={{
-                        pathname: `/postDetails/${post.id}`,
+                        pathname: `/${slugify(post.title)}/${post.id}`,
                         state: { edit: false, draft: false },
                       }}
                     >
