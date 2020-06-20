@@ -89,7 +89,6 @@ class PostDetails extends Component {
           >
             {this.props.post.tag.text}
           </button>
-
           <div>
             <Link className="upvote d-flex flex-row no-decoration">
               <div>

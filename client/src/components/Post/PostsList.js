@@ -141,8 +141,8 @@ class PostsList extends React.Component {
                           <span className="username ml-2 ">
                             {this.props.user
                               ? this.props.user.firstName +
-                                " " +
-                                this.props.user.lastName
+                              " " +
+                              this.props.user.lastName
                               : post.user.firstName + " " + post.user.lastName}
                           </span>
                         </div>
@@ -229,7 +229,7 @@ class PostsList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    account: state.auth.data,
+    account: state.auth.data
   };
 };
 

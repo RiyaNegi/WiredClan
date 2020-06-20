@@ -123,12 +123,12 @@ export const deleteComment = (postId, commentId, parentId) => {
   };
 };
 
-export const createPost = (title, published, description) => {
+export const createPost = (title, published, description, tagId) => {
   return (dispatch) => {
     axios
       .post(
         `${ROOT_URL}/api/posts`,
-        { title, published, description },
+        { title, published, description, tagId },
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         }
