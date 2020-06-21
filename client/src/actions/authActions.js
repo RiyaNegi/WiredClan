@@ -107,16 +107,12 @@ export const updateUser = (
         }
       )
       .then((response) => {
+        dispatch({
+          type: FETCH_ACCOUNT,
+          payload: response.data,
+        });
+        localStorage.setItem("profileData", JSON.stringify(response.data));
         History.push(redirect);
-        // dispatch({
-        //   type: FETCH_USER,
-        //   payload: response.data,
-        // });
-        // dispatch({
-        //   type: FETCH_POSTS,
-        //   posts: response.data.posts,
-        //   drafts: response.data.drafts,
-        // });
       });
   };
 };

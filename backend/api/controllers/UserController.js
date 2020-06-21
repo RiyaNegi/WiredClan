@@ -74,7 +74,6 @@ const UserController = () => {
               email,
             },
           });
-
         if (!user) {
           return res.status(400).json({ msg: 'Bad Request: User not found' });
         }

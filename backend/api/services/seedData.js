@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Tag = require('../models/Tag');
 const Comment = require('../models/Comment');
+const Like = require('../models/Like');
 const moment = require('moment');
 
 const seed = async () => {
@@ -81,18 +82,18 @@ const seed = async () => {
       email: 'riya@gmail.com',
       password: 'password',
     },
-    // {
-    //   userName: 'theOG',
-    //   firstName: 'OG RAJ',
-    //   lastName: 'YES',
-    //   department: 'Computer',
-    //   college: 'I2IT',
-    //   karma: 324,
-    //   year: 2,
-    //   imageUrl: 'https://api.adorable.io/avatars/80/theog.png',
-    //   email: 'thecodersblock@gmail.com',
-    //   password: 'random_password',
-    // },
+    {
+      userName: 'theOG',
+      firstName: 'OG RAJ',
+      lastName: 'YES',
+      department: 'Computer',
+      college: 'I2IT',
+      karma: 324,
+      year: 2,
+      imageUrl: 'https://api.adorable.io/avatars/80/theog.png',
+      email: 'thecodersblock@gmail.com',
+      password: 'thecodersblock@gmail.com',
+    },
   ], { individualHooks: true, include: { model: Post } })
     .then(async (users) => {
       await Post.bulkCreate([
@@ -160,6 +161,41 @@ const seed = async () => {
 
         },
       ]).then(async (posts) => {
+        await Like.bulkCreate([
+          {
+            userId: users[2].id,
+            postId: posts[6].id,
+          },
+          {
+            userId: users[1].id,
+            postId: posts[6].id,
+          },
+          {
+            userId: users[2].id,
+            postId: posts[1].id,
+          },
+          {
+            userId: users[1].id,
+            postId: posts[2].id,
+          },
+          {
+            userId: users[2].id,
+            postId: posts[3].id,
+          },
+          {
+            userId: users[1].id,
+            postId: posts[4].id,
+          },
+          {
+            userId: users[2].id,
+            postId: posts[5].id,
+          },
+          {
+            userId: users[3].id,
+            postId: posts[1].id,
+          },
+        ]);
+
         await Comment.bulkCreate([
           {
             text: 'Nice',

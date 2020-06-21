@@ -21,6 +21,10 @@ const privateRoutes = {
   'POST /posts/:postId/comments/:id': 'PostController.editComment',
   'DELETE /posts/:postId/comments/:id': 'PostController.deleteComment',
 
+  // Likes routes
+  'POST /likes': 'LikeController.create',
+
+
 };
 
 module.exports = privateRoutes;

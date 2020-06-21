@@ -103,9 +103,11 @@ class Profile extends Component {
             Year {this.props.user.year}
           </div>
         )}
-        <div className="text-muted font-weight-bold">
-          <a href={`/users/${this.props.user.id}/form`}>edit</a>
-        </div>
+        {this.props.account && this.props.user.id === this.props.account.id && (
+          <div className="text-muted font-weight-bold">
+            <a href={`/users/${this.props.user.id}/form`}>edit</a>
+          </div>
+        )}
       </div>
     );
   }

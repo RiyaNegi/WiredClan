@@ -4,6 +4,8 @@ const sequelize = require('../../config/database');
 
 const Comment = require('./Comment');
 
+// const Like = require('./Like');
+
 const Post = sequelize.define('post', {
   title: {
     type: Sequelize.STRING,

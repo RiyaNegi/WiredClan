@@ -5,9 +5,10 @@ const sequelize = require('../../config/database');
 
 const Post = require('./Post');
 const Comment = require('./Comment');
+// const Like = require('./Like');
 
 const hooks = {
-  beforeSave(user) {
+  beforeCreate(user) {
     user.password = bcryptService().password(user); // eslint-disable-line no-param-reassign
   },
 };
@@ -48,6 +49,7 @@ const User = sequelize.define('user', {
   },
   karma: {
     type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
   viaGoogle: {
     type: Sequelize.BOOLEAN,
@@ -76,5 +78,7 @@ User.hasMany(Post);
 Post.belongsTo(User);
 User.hasMany(Comment);
 Comment.belongsTo(User);
+// User.belongsToMany(Post, { through: Like });
+
 
 module.exports = User;
