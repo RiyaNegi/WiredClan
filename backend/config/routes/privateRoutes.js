@@ -23,6 +23,7 @@ const privateRoutes = {
 
   // Likes routes
   'POST /likes': 'LikeController.create',
+  'DELETE /likes': 'LikeController.destroy',
 
 
 };

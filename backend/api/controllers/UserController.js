@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Like = require('../models/Like');
 const Tag = require('../models/Tag');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
 const Sequelize = require('sequelize');
 const Google = require('../services/google.service');
+const sequelize = require('../../config/database');
 
 const UserController = () => {
   const register = async (req, res) => {
@@ -154,13 +156,15 @@ const UserController = () => {
         include: [{
           model: Post,
           include: [Tag],
-        }],
+        }, { model: Like }],
       });
       user = user.get({ plain: true });
       if (req.token && user.id === req.token.id) {
         user.drafts = user.posts.filter((post) => !(post.published));
       }
       user.posts = user.posts.filter((post) => post.published);
+      user.likesCount = user.likes.length;
+      delete user.likes;
       return res.status(200).json(user);
     } catch (err) {
       console.log(err);
@@ -170,12 +174,15 @@ const UserController = () => {
 
   const getAll = async (req, res) => {
     try {
-      const result = await User.findAll({
-        limit: 5,
-        order: [
-          ['karma', 'DESC'],
-        ],
-      });
+      const [result, metadata] = await sequelize.query(`
+        select users."id", users."firstName", users."lastName", users."badges", COUNT(users."id") AS likesCount
+            from users
+              inner join likes 
+                on likes."userId" = users."id"
+            group by users."id"
+            ORDER BY COUNT(users."id") DESC
+            LIMIT 5; `);
+
       return res.status(200).json({
         page: 1,
         result,
