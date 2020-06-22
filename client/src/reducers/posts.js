@@ -1,4 +1,4 @@
-import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST } from "../actions/types";
+import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -23,7 +23,29 @@ export const reducer = (state = {}, action) => {
         newDelStateDrafts.splice(arrDraftIndex, 1);
       }
       return { ...state, posts: newDelStatePost, drafts: newDelStateDrafts };
+    case CREATE_LIKE:
+      let newLikeState = JSON.parse(JSON.stringify(state));
+      var arrIndex = newLikeState.posts.findIndex(
+        (i) => i.id === action.postId
+      );
+      let arr = state.posts[arrIndex];
+      arr.likesCount += 1;
+      arr.likedByCurrentUser = true;
+      newLikeState.posts.splice(arrIndex, 1, arr);
+      return newLikeState;
+    case DELETE_LIKE:
+      newLikeState = JSON.parse(JSON.stringify(state));
+      arrIndex = newLikeState.posts.findIndex(
+        (i) => i.id === action.postId
+      );
+      arr = state.posts[arrIndex];
+      arr.likesCount -= 1;
+      arr.likedByCurrentUser = false;
+      newLikeState.posts.splice(arrIndex, 1, arr);
+      return newLikeState;
     default:
       return state;
   }
 };
+
+

@@ -76,3 +76,17 @@ z-index: 10 !important;
   width: 440px !important;
   margin: 1px;
 }
+
+.like-button{
+  background-color: transparent;
+  text-align: center;
+  border:none;
+  outline: 0;
+}
+
+.like-button:hover{
+  outline: 0;
+}
+.like-button:focus{
+  outline: 0;
+}
