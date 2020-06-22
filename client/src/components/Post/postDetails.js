@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
+import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import PostDetailLikes from "./postDetailLike";
 import { Badge } from "react-bootstrap";
 import "./details.css";
 
@@ -51,6 +52,13 @@ class PostDetails extends Component {
 
     return cleanHtml(html);
   };
+
+  handleLike(postId) {
+    return (e) => {
+      this.props.createLike(postId);
+    };
+  }
+
   renderPostDetails() {
     let post = this.props.post;
     return (
@@ -90,27 +98,10 @@ class PostDetails extends Component {
             {this.props.post.tag.text}
           </button>
           <div>
-            <Link className="upvote d-flex flex-row no-decoration">
-              <div>
-                <div className="d-flex flex-column align-items-center h-100">
-                  <FontAwesomeIcon
-                    className="white-heart"
-                    icon={faHeartr}
-                    size="2x"
-                    color="gray"
-                  />
-                  <FontAwesomeIcon
-                    icon={faHearts}
-                    className="red-heart details-red-heart"
-                    size="2x"
-                    color="white"
-                  />
-                </div>
+            <PostDetailLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
+            <div className="ml-2 mt-1 text-muted font-weight-bold">
+              {post.likesCount} karma
               </div>
-              <div className="ml-2 mt-1 text-muted font-weight-bold">
-                {this.props.comments.length} karma
-              </div>
-            </Link>
           </div>
         </div>
       </div>
@@ -142,4 +133,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, actions)(PostDetails);
+export default connect(mapStateToProps, { ...actions, ...postActions })(PostDetails);
