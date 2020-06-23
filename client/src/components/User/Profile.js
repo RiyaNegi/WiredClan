@@ -86,7 +86,7 @@ class Profile extends Component {
               color="gray"
             />
             <div className="ml-2 text-muted font-weight-bold">
-              {this.props.user.karma} karma
+              {this.props.user.likesCount} karma
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { FETCH_POST_DETAILS, FETCH_TAGS } from "../actions/types";
-import { POST_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from "../actions/types";
+import { POST_COMMENT, UPDATE_COMMENT, DELETE_COMMENT, CREATE_POST_LIKE, DELETE_POST_LIKE } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -60,6 +60,17 @@ export const reducer = (state = {}, action) => {
       return {
         ...state, tags: tagsArray,
       };
+    case CREATE_POST_LIKE:
+      debugger;
+      let newLikeDetails = JSON.parse(JSON.stringify(state));
+      newLikeDetails.details.likesCount += 1;
+      newLikeDetails.details.likedByCurrentUser = true;
+      return { ...state, details: newLikeDetails.details };
+    case DELETE_POST_LIKE:
+      newLikeDetails = JSON.parse(JSON.stringify(state));
+      newLikeDetails.details.likesCount -= 1;
+      newLikeDetails.details.likedByCurrentUser = false;
+      return { ...state, details: newLikeDetails.details };
     default:
       return state;
   }

@@ -14,5 +14,10 @@ export const DELETE_POST = "delete_post";
 export const FETCH_SEARCH = "fetch_search";
 export const FETCH_TOP_CONTRIBUTORS = "FETCH_TOP_CONTRIBUTORS";
 export const GOOGLE_LOGIN = "google_login";
-export const FETCH_TAGS = "fetch_tags"
+export const FETCH_TAGS = "fetch_tags";
+export const CREATE_LIKE = "create_like";
+export const DELETE_LIKE = "delete_like";
+export const CREATE_POST_LIKE = "create_post_like";
+export const DELETE_POST_LIKE = "delete_post_like";
+
 

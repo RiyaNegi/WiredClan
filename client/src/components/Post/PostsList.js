@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import * as authActions from "../../actions/authActions";
 import Loader from "react-loader-spinner";
 import slugify from "slugify";
+import PostLikes from "./likes";
 
 class PostsList extends React.Component {
   state = {
@@ -28,6 +29,12 @@ class PostsList extends React.Component {
   handleEditPost(postId) {
     return (e) => {
       this.props.fetchPost(postId);
+    };
+  }
+
+  handleLike(postId) {
+    return (e) => {
+      this.props.createLike(postId);
     };
   }
 
@@ -57,7 +64,10 @@ class PostsList extends React.Component {
                     intersect(
                       [...e.target.classList],
                       ["username", "edit-link", "delete-link", "ignore-link"]
-                    ).length > 0
+                    ).length > 0 || (e.target === "path" && intersect(
+                      [...e.target.innerHTML],
+                      ["username", "edit-link", "delete-link", "ignore-link"]
+                    ).length > 0)
                   ) {
                     return;
                   }
@@ -91,25 +101,8 @@ class PostsList extends React.Component {
                     </Button>
                   </Modal.Footer>
                 </Modal>
-
-                <div className="d-flex flex-row py-4 pr-3">
-                  <div className=" col-2 col-md-1 mt-2 p-0">
-                    <Link className="upvote d-flex flex-column align-items-center h-100">
-                      <FontAwesomeIcon
-                        className="white-heart"
-                        icon={faHeartr}
-                        size="1x"
-                        color="gray"
-                      />
-                      {post.karma}
-                      <FontAwesomeIcon
-                        icon={faHearts}
-                        className="red-heart"
-                        size="1x"
-                        color="white"
-                      />
-                    </Link>
-                  </div>
+                <div className="ignore-link d-flex flex-row py-4 pr-3">
+                  <PostLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
                   <div>
                     <Link
                       className="font-weight-bold no-decoration text-dark"
@@ -159,7 +152,6 @@ class PostsList extends React.Component {
                         {post.commentsCount}
                         {post.commentsCount === 1 ? " comment" : " comments"}
                       </span>
-
                       {this.props.user &&
                         this.props.account &&
                         this.props.account.id === this.props.user.id ? (
@@ -222,7 +214,7 @@ class PostsList extends React.Component {
               <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
             </div>
           )}
-      </div>
+      </div >
     );
   }
 }

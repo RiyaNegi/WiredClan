@@ -37,10 +37,10 @@ export const fetchPost = (id) => {
         `${ROOT_URL}/api/posts/${id}`,
         localStorage.getItem("token")
           ? {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
           : {}
       )
       .then((response) => {
