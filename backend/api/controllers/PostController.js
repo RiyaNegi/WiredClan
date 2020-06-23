@@ -104,7 +104,11 @@ const PostController = () => {
     try {
       const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
       const post = await Post.create({
-        title: req.body.title, description: req.body.description, tagId: req.body.tagId, userId: user.id,
+        title: req.body.title,
+        published: req.body.published,
+        description: req.body.description,
+        tagId: req.body.tagId,
+        userId: user.id,
       });
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
@@ -117,7 +121,12 @@ const PostController = () => {
     try {
       const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
       const post = await Post.findOne({ where: { id: req.params.id, userId: user.id } });
-      await post.update({ title: req.body.title, description: req.body.description, tagId: req.body.tagId });
+      await post.update({
+        title: req.body.title,
+        published: req.body.published,
+        description: req.body.description,
+        tagId: req.body.tagId,
+      });
 
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
