@@ -56,6 +56,7 @@ class Profile extends Component {
 
   renderPosts(posts, { draft } = { draft: false }) {
     return (
+
       <PostsList
         posts={posts}
         draft={draft}
@@ -67,48 +68,61 @@ class Profile extends Component {
 
   renderUserCard() {
     return (
-      <div className="box-shadow d-flex flex-column align-items-center profile-box p-3">
-        <img
-          className=""
-          src={this.props.user.imageUrl}
-          style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
-          alt="userIcon"
-        />
-        <label className="mt-3 font-weight-bold text-center">
-          {this.props.user.firstName} {this.props.user.lastName}
-        </label>
-        <div>
-          <div className="d-flex flex-row align-items-center">
-            <FontAwesomeIcon
-              className="white-heart"
-              icon={faHeartr}
-              size="1x"
-              color="gray"
-            />
-            <div className="ml-2 text-muted font-weight-bold">
-              {this.props.user.likesCount} karma
+      <React.Fragment>
+        <div className="box-shadow d-flex flex-column align-items-center profile-box p-3">
+          <img
+            className=""
+            src={this.props.user.imageUrl}
+            style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
+            alt="userIcon"
+          />
+          <label className="mt-3 font-weight-bold text-center">
+            {this.props.user.firstName} {this.props.user.lastName}
+          </label>
+          <div>
+            <div className="d-flex flex-row align-items-center">
+              <FontAwesomeIcon
+                className="white-heart"
+                icon={faHeartr}
+                size="1x"
+                color="gray"
+              />
+              <div className="ml-2 text-muted font-weight-bold">
+                {this.props.user.likesCount} karma
+            </div>
             </div>
           </div>
-        </div>
-        {this.props.user.badges && this.props.user.badges.length > 0 && (
-          <Badge pill variant="secondary" className="d-flex mt-2">
-            {this.props.user.badges[0]}
-          </Badge>
-        )}
-        <div className="text-muted font-weight-bold text-center">
-          {this.props.user.college}
-        </div>
-        {this.props.user.year && (
-          <div className="text-muted font-weight-bold">
-            Year {this.props.user.year}
+          {this.props.user.badges && this.props.user.badges.length > 0 && (
+            <Badge pill variant="secondary" className="d-flex mt-2">
+              {this.props.user.badges[0]}
+            </Badge>
+          )}
+          <div className="text-muted font-weight-bold text-center">
+            {this.props.user.college}
           </div>
-        )}
-        {this.props.account && this.props.user.id === this.props.account.id && (
-          <div className="text-muted font-weight-bold">
-            <a href={`/users/${this.props.user.id}/form`}>edit</a>
-          </div>
-        )}
-      </div>
+          {this.props.user.year && (
+            <div className="text-muted font-weight-bold">
+              Year {this.props.user.year}
+            </div>
+          )}
+          {this.props.account && this.props.user.id === this.props.account.id && (
+            <div className="text-muted font-weight-bold">
+              <a href={`/users/${this.props.user.id}/form`}>edit</a>
+            </div>
+          )}
+        </div>
+        {this.props.account &&
+          this.props.account.id === this.props.user.id && (
+            <div className="mt-4">
+              <Button variant="primary col-12 new-post-button p-0">
+                <Link className="no-decoration" to={"/CreatePost"}>
+                  <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
+                </Link>
+              </Button>
+            </div>
+          )}
+
+      </React.Fragment>
     );
   }
 
@@ -127,17 +141,41 @@ class Profile extends Component {
         <div className="col-12 col-md-9">
           <React.Fragment>
             <Tabs defaultActiveKey="user-posts" id="user-tab">
-              <Tab eventKey="user-posts" title="Posts">
-                <div className="mt-3">{this.renderPosts(this.props.posts)}</div>
-              </Tab>
-              {this.props.account &&
-                this.props.account.id === this.props.user.id && (
+              {(this.props.account &&
+                this.props.account.id === this.props.user.id && this.props.posts.length === 0) ? (
+                  <Tab eventKey="user-posts" title="Posts">
+                    <div className="mt-3">
+                      <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
+                      <label className="d-flex flex-column text-center text-muted">No Posts created<br /> Get started and create awesome posts!</label>
+                    </div>
+                  </Tab>
+                ) : (this.props.posts.length === 0) ?
+                  (
+                    <Tab eventKey="user-posts" title="Posts">
+                      <div className="mt-3">
+                        <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
+                        <label className="d-flex flex-column text-center text-muted">No Posts created</label>
+                      </div>
+                    </Tab>
+                  ) : (this.props.posts.length > 0) && (
+                    <Tab eventKey="user-posts" title="Posts">
+                      <div className="mt-3">{this.renderPosts(this.props.posts)}</div>
+                    </Tab>
+                  )}
+              {(this.props.account &&
+                this.props.account.id === this.props.user.id && this.props.drafts.length > 0) ? (
                   <Tab eventKey="user-drafts" title="Drafts">
                     <div className="mt-3">
                       {this.renderPosts(this.props.drafts, { draft: true })}
                     </div>
                   </Tab>
-                )}
+                ) : (this.props.account &&
+                  this.props.account.id === this.props.user.id && this.props.drafts.length === 0) && (<Tab eventKey="user-drafts" title="Drafts">
+                    <div className="mt-3">
+                      <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
+                      <label className="d-flex flex-column text-center text-muted">No Drafts created<br /> Get started and save your ongoing work here!</label>
+                    </div>
+                  </Tab>)}
             </Tabs>
           </React.Fragment>
         </div>

@@ -116,7 +116,7 @@ class CreatePost extends Component {
     let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
       <div className="mt-4">
-        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+        <form >
           <div className="d-flex flex-row justify-content-between">
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST

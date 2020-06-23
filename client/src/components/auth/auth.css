@@ -7,9 +7,11 @@
 .signin-back{
     background-color: white;
 }
-
+.hr {height:1px; border:none; color:#000; background-color:#000;}
 .sign-box{
-    border : 1px solid rgb(0, 0, 0);
+    border : 1px solid rgb(231, 229, 229);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius: 5px;
     padding:30px;
     width: 600px;
@@ -20,26 +22,18 @@
     z-index: 1;
 }
 .signup-box{
-    border : 1px solid rgb(0, 0, 0);
+    flex-direction: column;
+    border : 1px solid rgb(231, 229, 229);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius: 5px;
     padding:30px;
-    width: 600px;
+    width: 550px;
     margin: 0 auto;
-    margin-top: -250px;
-    background-color: white;
-    position: relative;
-    z-index: 1;
 }
 .sign-text{
     color:black;
     font-weight: 800;
-
-}
-.yellow-bg {
-    height: 600px;
-    margin-top: -300px;
-    background-color: rgba(255, 227, 27, 0.95);
-    
 }
 
 .signuptext-danger{
@@ -80,3 +74,26 @@
     color: black;
     margin-top: -120px;
 }
+
+.Select-signup {
+    width: 230px !important;
+    z-index: 10 !important;
+  }
+  
+  .Select-signup.is-open {
+  z-index: 10 !important;
+  }
+  
+  .Select-signup-menu {
+    position: fixed !important;
+    width: 440px !important;
+    margin: 1px;
+  }
+
+  .signup-field:hover{
+      border: 1px solid rgb(117, 117, 117);
+  }
+  
+  .select__control:hover{
+    border: 1px solid rgb(117, 117, 117) !important;
+  }
