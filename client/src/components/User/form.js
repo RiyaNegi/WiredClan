@@ -185,7 +185,6 @@ const validate = (values) => {
 const mapStateToProps = (state) => {
   let year = state.auth.data.year;
   let yearLabel = yearArrray.filter(i => i.value === year)
-  debugger;
   yearLabel = yearLabel.length > 0 ? yearLabel[0].label : null
   return {
     errorMessage: state.auth.error,

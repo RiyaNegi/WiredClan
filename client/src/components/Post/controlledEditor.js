@@ -11,7 +11,7 @@ function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "https://api.imgur.com/3/image");
-    xhr.setRequestHeader("Authorization", "Client-ID XXXXX");
+    xhr.setRequestHeader("Authorization", "Client-ID a7b451dcec71d8f");
     const data = new FormData();
     data.append("image", file);
     xhr.send(data);
@@ -33,61 +33,62 @@ const WysiwygEditor = ({
   editorState,
   onEditorStateChange,
 }) => (
-  <div className="WysiwygEditor">
-    {editorState && (
-      <Editor
-        editorState={editorState}
-        wrapperClassName="demo-wrapper"
-        editorClassName="editor"
-        onEditorStateChange={onEditorStateChange}
-        wrapperStyle={{ border: "1px solid gray", marginBottom: "20px" }}
-        editorStyle={{ height: "100%", padding: "10px" }}
-        stripPastedStyles={true}
-        placeholder="Unleash the writer in you..."
-        toolbar={{
-          options: [
-            "inline",
-            "fontSize",
-            "image",
-            "emoji",
-            "list",
-            "link",
-            "history",
-          ],
-          fontSize: {
-            options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36],
-            className: undefined,
-            component: undefined,
-            dropdownClassName: undefined,
-          },
-          inline: {
+    <div className="WysiwygEditor">
+      {editorState && (
+        <Editor
+          editorState={editorState}
+          wrapperClassName="demo-wrapper"
+          editorClassName="editor"
+          onEditorStateChange={onEditorStateChange}
+          wrapperStyle={{ border: "1px solid gray", marginBottom: "20px" }}
+          editorStyle={{ height: "100%", padding: "10px" }}
+          stripPastedStyles={true}
+          placeholder="Unleash the writer in you..."
+          toolbar={{
             options: [
-              "bold",
-              "italic",
-              "underline",
-              "strikethrough",
-              "monospace",
+              "inline",
+              "fontSize",
+              "image",
+              "emoji",
+              "list",
+              "link",
+              "history",
             ],
-            bold: { className: "bordered-option-classname" },
-            italic: { className: "bordered-option-classname" },
-            underline: { className: "bordered-option-classname" },
-            strikethrough: { className: "bordered-option-classname" },
-            code: { className: "bordered-option-classname" },
-          },
-          image: {
-            uploadCallback: uploadImageCallBack,
-            alt: { present: true, mandatory: true },
-            defaultSize: {
-              height: "300",
-              width: "300",
+            fontSize: {
+              options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36],
+              className: undefined,
+              component: undefined,
+              dropdownClassName: undefined,
             },
-          },
-        }}
-      />
-    )}
-    {touched && error && <FormFeedback>{error}</FormFeedback>}
-  </div>
-);
+            inline: {
+              options: [
+                "bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "monospace",
+              ],
+              bold: { className: "bordered-option-classname" },
+              italic: { className: "bordered-option-classname" },
+              underline: { className: "bordered-option-classname" },
+              strikethrough: { className: "bordered-option-classname" },
+              code: { className: "bordered-option-classname" },
+            },
+            image: {
+              previewImage: true,
+              uploadCallback: uploadImageCallBack,
+              alt: { present: false },
+              defaultSize: {
+                height: "350",
+                width: "350",
+              },
+            },
+          }}
+        />
+      )}
+      {touched && error && <FormFeedback>{error}</FormFeedback>}
+    </div>
+  );
 
 export default compose(
   withState("editorState", "setEditorState", EditorState.createEmpty()),

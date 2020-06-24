@@ -91,6 +91,31 @@
 }
 
 
+.post-item-buttons{
+  background-color: transparent;
+  border:none;
+  color: gray;
+  outline:none;
+  font-weight: 600;
+  font-size:14px;
+  margin: 0px 5px!important;
+  width:70px;
+  padding-bottom: 0px;
+}
+.post-item-buttons:hover{
+
+  outline:none;
+  background-color: rgb(230, 230, 230);
+}
+.post-item-buttons:focus {outline:0;}
+
+.delete-button{
+  width:80px;
+}
+
+.preview-button{
+  width : 90px;
+} 
 
 /* .create-post-but{
   border:1px solid rgb(255, 255, 74)

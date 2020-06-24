@@ -21,13 +21,13 @@ class App extends Component {
       <div class="container">
         <Header />
         {this.props.location.pathname === "/signin" ||
-        this.props.location.pathname === "/signup" ? (
-          <div className=" signin-container container">
-            {this.props.children}
-          </div>
-        ) : (
-          <div className="container">{this.props.children}</div>
-        )}
+          this.props.location.pathname === "/signup" ? (
+            <div className=" signin-container container">
+              {this.props.children}
+            </div>
+          ) : (
+            <div className="container">{this.props.children}</div>
+          )}
       </div>
     );
   }

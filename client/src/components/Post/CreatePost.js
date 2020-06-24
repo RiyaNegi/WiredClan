@@ -16,7 +16,7 @@ function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "https://api.imgur.com/3/image");
-    xhr.setRequestHeader("Authorization", "Client-ID XXXXX");
+    xhr.setRequestHeader("Authorization", "Client-ID a7b451dcec71d8f");
     const data = new FormData();
     data.append("image", file);
     xhr.send(data);
@@ -37,7 +37,9 @@ class CreatePost extends Component {
     super(props);
     this.state = {
       postEditorState: EditorState.createEmpty(),
+      loginNotify: false
     };
+
   }
 
   componentWillMount() {
@@ -53,10 +55,14 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
-      debugger;
-      if (!params["postTag"] || !params["postTitle"]) {
+      if (!this.props.account) {
+        this.notifyLogin();
+        return
+      }
+      if ((!params["postTag"] || !params["postTitle"]) && this.props.account) {
         console.log("notify was called")
         this.notify()
+        return
       }
       else if (name === "submit" && params["postTitle"] && params["postTag"].id) {
         let convertedData = draftToHtml(
@@ -75,7 +81,6 @@ class CreatePost extends Component {
         return
       }
       else {
-        console.log("notify was ccalled")
         this.notify()
         return <div><ToastContainer
           position="top-right"
@@ -103,6 +108,17 @@ class CreatePost extends Component {
       progress: undefined,
     });
 
+  notifyLogin = () =>
+    toast.warning('❗ SIGN IN to create post', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
     if (!this.state.postEditorState || !this.props.tags) {
@@ -112,6 +128,10 @@ class CreatePost extends Component {
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
         </div>
       );
+    }
+    if (!this.props.account && !this.state.loginNotify) {
+      this.notifyLogin();
+      this.setState({ loginNotify: true })
     }
     let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
@@ -229,11 +249,12 @@ class CreatePost extends Component {
                   code: { className: "bordered-option-classname" },
                 },
                 image: {
+                  previewImage: true,
                   uploadCallback: uploadImageCallBack,
-                  alt: { present: true, mandatory: true },
+                  alt: { present: false },
                   defaultSize: {
-                    height: "300",
-                    width: "300",
+                    height: "350",
+                    width: "350",
                   },
                 },
               }}

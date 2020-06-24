@@ -9,6 +9,7 @@ export const reducer = (state = {}, action) => {
         details: { ...action.payload, comments: null },
         comments: action.payload.comments,
         description: action.payload.description,
+        postUser: action.payload.userId
       };
     case POST_COMMENT:
       let newState = JSON.parse(JSON.stringify(state));
@@ -61,7 +62,6 @@ export const reducer = (state = {}, action) => {
         ...state, tags: tagsArray,
       };
     case CREATE_POST_LIKE:
-      debugger;
       let newLikeDetails = JSON.parse(JSON.stringify(state));
       newLikeDetails.details.likesCount += 1;
       newLikeDetails.details.likedByCurrentUser = true;

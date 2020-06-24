@@ -14,6 +14,8 @@ import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+
 
 class HomePage extends PureComponent {
   constructor(props) {
@@ -41,6 +43,25 @@ class HomePage extends PureComponent {
     }
   };
 
+  notifypost = () => {
+    if (!this.props.account && !this.state.loginNotify) {
+      this.notifyLogin();
+    }
+  };
+
+
+  notifyLogin = () =>
+    toast.warning('❗ SIGN IN to create post', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
+
+
   render() {
     if (!this.props.posts) {
       return (
@@ -56,10 +77,12 @@ class HomePage extends PureComponent {
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />
           <div className="mt-4">
-            <Button variant="primary col-12 new-post-button p-0">
-              <Link className="no-decoration" to={"/CreatePost"}>
+            <Button variant="primary col-12 new-post-button p-0" onClick={this.notifypost}>
+              {this.props.account ? (<Link className="no-decoration" to={"/CreatePost"} >
                 <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
-              </Link>
+              </Link>)
+                : <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
+              }
             </Button>
           </div>
         </div>

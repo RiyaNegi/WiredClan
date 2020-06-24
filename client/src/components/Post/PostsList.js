@@ -54,11 +54,12 @@ class PostsList extends React.Component {
             return (
               <div
                 key={post.id}
-                className="box-shadow mb-3 p-0 post-box"
-                onClick={((History) => (e) => {
+                className={"box-shadow mb-3 p-0 post-box"}
+                onClick={((History, draft) => (e) => {
                   const intersect = (a, b) => {
                     return a.filter(Set.prototype.has, new Set(b));
                   };
+                  debugger;
                   // DO NOT forget to include class name here if making anything clickable.
                   if (
                     intersect(
@@ -71,9 +72,12 @@ class PostsList extends React.Component {
                   ) {
                     return;
                   }
-
+                  if (draft) {
+                    History.push(`/posts/${post.id}/edit`);
+                    return
+                  }
                   History.push(`/${slugify(post.title)}/${post.id}`);
-                })(History)}
+                })(History, draft)}
               >
                 <Modal
                   className="modal-background"
@@ -113,7 +117,7 @@ class PostsList extends React.Component {
                     >
                       <span style={{ fontSize: "17px" }}>{post.title}</span>
                     </Link>
-                    <div className="text-l-gray mt-1">
+                    <div className="text-l-gray mt-1 row">
                       <a
                         className="text-l-gray username"
                         href={`/Users/${post.userId}`}
@@ -155,28 +159,27 @@ class PostsList extends React.Component {
                       {this.props.user &&
                         this.props.account &&
                         this.props.account.id === this.props.user.id ? (
-                          <div className="feature-but-div">
+                          <div className=" ignore-link feature-but-div">
                             <Link
-                              className="com-links edit-link"
+                              className="ignore-link com-links edit-link"
                               to={{
                                 pathname: `/posts/${post.id}/edit`,
                                 state: { edit: true },
                               }}
                             >
-                              {/* <button
-                            className=" post-item-buttons edit-button"
-                            // onClick={this.handleEditPost(post.id)}
-                          > */}
-                              <FontAwesomeIcon
-                                icon={faPen}
-                                size="1x"
-                                color="gray"
-                              />{" "}
-                              Edit
-                            {/* </button> */}
+                              <button
+                                className=" ignore-link post-item-buttons edit-button"
+                              >
+                                <FontAwesomeIcon
+                                  icon={faPen}
+                                  size="1x"
+                                  color="gray"
+                                />{" "}
+                                Edit
+                            </button>
                             </Link>
                             <button
-                              className="post-item-buttons delete-link"
+                              className="ignore-link post-item-buttons delete-link"
                               onClick={this.handleShowModal}
                             >
                               <FontAwesomeIcon

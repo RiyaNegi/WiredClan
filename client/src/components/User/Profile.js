@@ -56,7 +56,6 @@ class Profile extends Component {
 
   renderPosts(posts, { draft } = { draft: false }) {
     return (
-
       <PostsList
         posts={posts}
         draft={draft}
