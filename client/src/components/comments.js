@@ -80,28 +80,28 @@ class Comments extends Component {
       <div className="user com-user">
         {this.state.showModalArray.filter((ci) => ci.id === comment.id)
           .length && this.props.account ? (
-          <Modal
-            className="modal-background"
-            show={true}
-            onHide={this.handleCloseModal(comment.id)}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Delete Comment</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Delete this comment permanently?</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleCloseModal}>
-                Close
+            <Modal
+              className="modal-background"
+              show={true}
+              onHide={this.handleCloseModal(comment.id)}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Delete Comment</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Delete this comment permanently?</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={this.handleCloseModal}>
+                  Close
               </Button>
-              <Button
-                variant="primary"
-                onClick={this.handleDeleteClick(comment.id, comment.parentId)}
-              >
-                Delete
+                <Button
+                  variant="primary"
+                  onClick={this.handleDeleteClick(comment.id, comment.parentId)}
+                >
+                  Delete
               </Button>
-            </Modal.Footer>
-          </Modal>
-        ) : null}
+              </Modal.Footer>
+            </Modal>
+          ) : null}
 
         <div className="comment-space">
           <div className="comment-row-sec">
@@ -180,7 +180,7 @@ class Comments extends Component {
       return (
         <div key={comment.id}>
           {this.state.editClicked.filter((ci) => ci.id === comment.id).length &&
-          this.props.account
+            this.props.account
             ? this.UserReply(comment.id, comment.id, true, false)
             : this.renderComment(comment)}
           {this.state.replyClicked.filter((ci) => ci.id === comment.id)
@@ -198,7 +198,6 @@ class Comments extends Component {
   handleFormSubmit = (parentId, replyId) => {
     return (params) => {
       if (params["replyComment" + replyId]) {
-        console.log("11111");
         if (!parentId) {
           this.props.postComment(
             this.props.postId,
@@ -216,7 +215,6 @@ class Comments extends Component {
         this.setState({ replyClicked: [], editClicked: [] });
         return;
       } else if (params["comment" + replyId]) {
-        console.log("22222");
         if (!parentId) {
           this.props.postComment(
             this.props.postId,
@@ -234,7 +232,6 @@ class Comments extends Component {
         this.setState({ replyClicked: [], editClicked: [] });
         return;
       } else if (params["editComment" + replyId]) {
-        console.log("3333");
         this.props.updateComment(
           this.props.postId,
           params["editComment" + replyId],
@@ -279,8 +276,8 @@ class Comments extends Component {
         onSubmit={
           edit
             ? handleSubmit(
-                this.handleFormSubmit(parentId, replyId, edit).bind(this)
-              )
+              this.handleFormSubmit(parentId, replyId, edit).bind(this)
+            )
             : handleSubmit(this.handleFormSubmit(parentId, replyId).bind(this))
         }
       >
@@ -305,8 +302,8 @@ class Comments extends Component {
                     reply
                       ? "replyComment" + replyId
                       : edit
-                      ? "editComment" + replyId
-                      : "comment" + replyId
+                        ? "editComment" + replyId
+                        : "comment" + replyId
                   }
                 />
               </fieldset>
@@ -352,29 +349,29 @@ class Comments extends Component {
         {this.props.account ? (
           this.UserReply()
         ) : (
-          <div className="comment-box-spec">
-            <div className="signin-box-com">
-              <div className="signin-box-text">
-                {" "}
-                Log in or Sign up to comment
+            <div className="comment-box-spec">
+              <div className="signin-box-com">
+                <div className="signin-box-text">
+                  {" "}
+                  Log in or Sign up to comment
               </div>
-              <div className="space-bet-com">
-                <div className="signin-but-com site-button dept-button">
-                  <Link className="com-links" to="/signin">
-                    {" "}
-                    LOG IN
+                <div className="space-bet-com">
+                  <div className="signin-but-com site-button dept-button">
+                    <Link className="com-links" to="/signin">
+                      {" "}
+                      LOG IN
                   </Link>
-                </div>
-                <div className="signup-but-com site-button post-button">
-                  <Link className="com-links" to="/signup">
-                    {" "}
-                    SIGN UP
+                  </div>
+                  <div className="signup-but-com site-button post-button">
+                    <Link className="com-links" to="/signup">
+                      {" "}
+                      SIGN UP
                   </Link>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
         <ul>{this.renderComments()}</ul>
       </div>
     );

@@ -63,9 +63,9 @@ class CreatePost extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    let edit = this.props.location.state.edit
-      ? this.props.location.state.edit
-      : false;
+    // let edit = this.props.location.state.edit
+    //   ? this.props.location.state.edit
+    //   : false;
     if (!this.props.post || !this.props.tags) {
       return (
         <div className="loader">
@@ -101,7 +101,7 @@ class CreatePost extends Component {
                   className="ml-2 btn btn-light site-button post-button"
                   action="submit"
                   name="publish"
-                  onClick={handleSubmit(this.handleFormSubmit("publish", edit))}
+                  onClick={handleSubmit(this.handleFormSubmit("publish"))}
                 >
                   Publish Draft
                 </button>
@@ -121,7 +121,7 @@ class CreatePost extends Component {
                   className="ml-2 btn btn-secondary"
                   action="submit"
                   name="save"
-                  onClick={handleSubmit(this.handleFormSubmit("save", edit))}
+                  onClick={handleSubmit(this.handleFormSubmit("save"))}
                 >
                   Save Draft
                 </button>
@@ -157,6 +157,10 @@ const populatePostValues = (state, desc) => {
       ...info,
       ...{ title: state.postDetails.details.title },
       postEditor: desc,
+      postTag: {
+        label: state.postDetails.details.tag.text,
+        value: state.postDetails.details.tagId
+      }
     };
     return info;
   } else return;

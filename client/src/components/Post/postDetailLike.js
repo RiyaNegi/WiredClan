@@ -1,6 +1,8 @@
 import React from 'react';
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+
 
 class PostDetailLikes extends React.Component {
 
@@ -16,7 +18,10 @@ class PostDetailLikes extends React.Component {
 
     updateLikes = (id) => {
         return () => {
-            if (!this.state.updated && !this.props.likedByCurrentUser) {
+            if (!this.props.account) {
+                this.notify()
+            }
+            else if (!this.state.updated && !this.props.likedByCurrentUser) {
                 this.props.createPostLike(this.props.postId);
                 this.setState((prevState, props) => {
                     return {
@@ -39,12 +44,34 @@ class PostDetailLikes extends React.Component {
 
     }
 
+
+    notify = () =>
+        toast.warning('❗ SIGN UP to like', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+        });
+
     render() {
         return (
             <div>
                 <button id={this.state.id} className="ignore-link" onClick={this.updateLikes(this.state.id)}>Like</button>
                 <p>{this.state.likes}</p>
-                {this.props.likedByCurrentUser && (<p>liked</p>)}
+                <div><ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable={false}
+                    pauseOnHover
+                /></div>
             </div>
         );
     }

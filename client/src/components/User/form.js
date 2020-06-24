@@ -3,6 +3,14 @@ import { Field, reduxForm } from "redux-form";
 import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Select from "react-select";
+import Loader from "react-loader-spinner";
+
+
+const yearArrray = [{ value: 1, label: 'First' },
+{ value: 2, label: 'Second' },
+{ value: 3, label: 'Third' },
+{ value: 4, label: 'Fourth' }]
 
 class UserForm extends PureComponent {
   componentWillMount() {
@@ -10,6 +18,7 @@ class UserForm extends PureComponent {
   }
 
   handleFormSubmit = (userId, redirectHomeAfterSubmit) => (formProps) => {
+    formProps = { ...formProps, year: formProps.year.value }
     this.props.updateUser(
       { ...formProps, id: userId },
       redirectHomeAfterSubmit ? "/" : undefined
@@ -36,12 +45,19 @@ class UserForm extends PureComponent {
     }
   }
 
+
   render() {
     const { handleSubmit, submitting } = this.props;
+    if (!this.props.user) {
+      return (
+        <div className="loader">
+          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        </div>
+      );
+    }
 
     return (
       <div className="signin-back">
-        <div className="yellow-bg"></div>
         <form
           onSubmit={handleSubmit(
             this.handleFormSubmit(
@@ -52,72 +68,84 @@ class UserForm extends PureComponent {
             )
           )}
         >
-          <Link to="/">
-            <label className="bg-text">codejimmy...</label>{" "}
-          </Link>
-          <div className="signup-box">
-            <div className="signup-row">
-              <fieldset className="form-group signup-field">
+          <div className="d-flex mt-5  flex-column signup-box">
+            <div className="d-flex justify-content-center" >
+              <img
+                src={this.props.user.imageUrl}
+                style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
+                alt="userIcon"
+              />
+            </div>
+            <div className="d-flex mt-5">
+              <fieldset className="form-group">
                 <label className="sign-text">First Name</label>
                 <Field
-                  className="form-control"
+                  className="form-control signup-field"
                   type="text"
                   name="firstName"
                   component="input"
                 />
               </fieldset>
-
-              <fieldset className="form-group signup-field signup-el">
+              <fieldset className="form-group signup-el">
                 <label className="sign-text">Last Name</label>
                 <Field
-                  className="form-control"
+                  className="form-control signup-field"
                   type="text"
                   name="lastName"
                   component="input"
                 />
               </fieldset>
             </div>
-            <div className="signup-row">
-              <fieldset className="form-group signup-field">
-                <label className="sign-text">Year</label>
+            <div className="d-flex mt-2">
+              <fieldset className="form-group">
+                <label className="sign-text">Batch Year</label>
                 <Field
-                  className="form-control"
-                  type="text"
                   name="year"
-                  component="input"
+                  options={yearArrray}
+                  component={(props) => (
+                    <Select
+                      {...props}
+                      className="basic-single col-14 Select-signup "
+                      classNamePrefix="select"
+                      placeholder="Select Year.."
+                      isSearchable={false}
+                      value={props.input.value}
+                      onChange={(value) => props.input.onChange(value)}
+                      onBlur={() => props.input.onBlur(props.input.value)}
+                      options={props.options}
+                    />
+                  )}
+                  multi
                 />
               </fieldset>
-              <fieldset className="form-group signup-field signup-el">
+              <fieldset className="form-group signup-el">
                 <label className="sign-text">College</label>
                 <Field
-                  className="form-control"
+                  className="form-control signup-field"
                   type="text"
                   name="college"
                   component="input"
                 />
               </fieldset>
             </div>
-
             {this.renderError()}
-            <button
-              type="submit"
-              className="btn site-button"
-              disabled={submitting}
-            >
-              Save
+            <div className="d-flex mt-2 justify-content-between">
+              <button
+                type="submit"
+                className="btn site-button"
+                disabled={submitting}
+              >
+                Save
             </button>
-            <div style={{ marginLeft: 11, marginTop: 8 }}>
-              <Link to="/homepage">Skip</Link>
+              <div >
+                <Link to="/homepage">
+                  <button className="btn site-button mr-4">Skip</button>
+                </Link>
+              </div>
             </div>
           </div>
         </form>
-        <div className="signup-image">
-          <img style={{ width: 380, height: 270 }} alt="userIcon" />
-        </div>
-        <div className="signup-image-area">
-          <img style={{ width: 380, height: 270 }} alt="userIcon" />
-        </div>
-      </div>
+      </div >
     );
   }
 }
@@ -155,16 +183,23 @@ const validate = (values) => {
 };
 
 const mapStateToProps = (state) => {
+  let year = state.auth.data.year;
+  let yearLabel = yearArrray.filter(i => i.value === year)
+  yearLabel = yearLabel.length > 0 ? yearLabel[0].label : null
   return {
     errorMessage: state.auth.error,
     initialValues: state.auth.data
       ? {
-          firstName: state.auth.data.firstName,
-          lastName: state.auth.data.lastName,
-          year: state.auth.data.year,
-          college: state.auth.data.college,
-        }
+        firstName: state.auth.data.firstName,
+        lastName: state.auth.data.lastName,
+        year: {
+          label: yearLabel,
+          value: year,
+        },
+        college: state.auth.data.college,
+      }
       : {},
+    user: state.auth.data
   };
 };
 
