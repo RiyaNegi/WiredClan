@@ -54,22 +54,9 @@ class PostsList extends React.Component {
             return (
               <div
                 key={post.id}
-                className={"box-shadow mb-3 p-0 post-box"}
+                className={"post-link box-shadow mb-3 p-0 post-box"}
                 onClick={((History, draft) => (e) => {
-                  const intersect = (a, b) => {
-                    return a.filter(Set.prototype.has, new Set(b));
-                  };
-                  debugger;
-                  // DO NOT forget to include class name here if making anything clickable.
-                  if (
-                    intersect(
-                      [...e.target.classList],
-                      ["username", "edit-link", "delete-link", "ignore-link"]
-                    ).length > 0 || (e.target === "path" && intersect(
-                      [...e.target.innerHTML],
-                      ["username", "edit-link", "delete-link", "ignore-link"]
-                    ).length > 0)
-                  ) {
+                  if ([...e.target.classList].includes("post-link") === false) {
                     return;
                   }
                   if (draft) {
@@ -90,7 +77,7 @@ class PostsList extends React.Component {
                   <Modal.Body>Delete this post permanently?</Modal.Body>
                   <Modal.Footer>
                     <Button
-                      className="ignore-link"
+                      className=""
                       variant="secondary"
                       onClick={this.handleCloseModal}
                     >
@@ -98,26 +85,26 @@ class PostsList extends React.Component {
                     </Button>
                     <Button
                       variant="primary"
-                      className="ignore-link"
+                      className=""
                       onClick={this.handleDeleteClick(post.id)}
                     >
                       Delete
                     </Button>
                   </Modal.Footer>
                 </Modal>
-                <div className="ignore-link d-flex flex-row py-4 pr-3">
+                <div className="post-link d-flex flex-row py-4 pr-3">
                   <PostLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
-                  <div>
+                  <div className="post-link">
                     <Link
-                      className="font-weight-bold no-decoration text-dark"
+                      className=" font-weight-bold no-decoration text-dark"
                       to={{
                         pathname: `/${slugify(post.title)}/${post.id}`,
                         state: { edit: false, draft: false },
                       }}
                     >
                       <span style={{ fontSize: "17px" }}>{post.title}</span>
-                    </Link>
-                    <div className="text-l-gray mt-1 row">
+                    </Link><br />
+                    <span className="text-l-gray">
                       <a
                         className="text-l-gray username"
                         href={`/Users/${post.userId}`}
@@ -144,10 +131,10 @@ class PostsList extends React.Component {
                         </span>
                       </a>
                       <div className="hidden-sm-up"></div>
-                      <span className="font-weight-light">
+                      <span className="font-weight-light post-link">
                         <span className="mx-1 hidden-sm-down">|</span>
                         <Badge
-                          className="badge-light ignore-link"
+                          className="post-link badge-light "
                           style={{ backgroundColor: "#e9e9e9" }}
                         >
                           {post.tag.text}
@@ -159,16 +146,16 @@ class PostsList extends React.Component {
                       {this.props.user &&
                         this.props.account &&
                         this.props.account.id === this.props.user.id ? (
-                          <div className=" ignore-link feature-but-div">
+                          <span className="feature-but-div">
                             <Link
-                              className="ignore-link com-links edit-link"
+                              className=" com-links edit-link"
                               to={{
                                 pathname: `/posts/${post.id}/edit`,
                                 state: { edit: true },
                               }}
                             >
                               <button
-                                className=" ignore-link post-item-buttons edit-button"
+                                className="  post-item-buttons edit-button"
                               >
                                 <FontAwesomeIcon
                                   icon={faPen}
@@ -179,7 +166,7 @@ class PostsList extends React.Component {
                             </button>
                             </Link>
                             <button
-                              className="ignore-link post-item-buttons delete-link"
+                              className=" post-item-buttons delete-link"
                               onClick={this.handleShowModal}
                             >
                               <FontAwesomeIcon
@@ -204,9 +191,9 @@ class PostsList extends React.Component {
                               </button>
                               </Link>
                             ) : null}
-                          </div>
+                          </span>
                         ) : null}
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>

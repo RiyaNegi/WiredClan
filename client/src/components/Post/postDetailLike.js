@@ -3,6 +3,9 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 
+import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class PostDetailLikes extends React.Component {
 
@@ -59,8 +62,28 @@ class PostDetailLikes extends React.Component {
     render() {
         return (
             <div>
-                <button id={this.state.id} className="ignore-link" onClick={this.updateLikes(this.state.id)}>Like</button>
-                <p>{this.state.likes}</p>
+                {/* <button id={this.state.id} onClick={this.updateLikes(this.state.id)}>Like</button>
+                <p>{this.state.likes}</p> */}
+
+                <button className="pt-2 upvote d-flex flex-row align-items-center h-100 like-button" onClick={this.updateLikes(this.state.id)}>
+                    <div className="d-flex flex-column">
+                        <FontAwesomeIcon
+                            className=" white-heart-post"
+                            icon={faHeartr}
+                            size="2x"
+                            color={this.props.likedByCurrentUser ? "#ec59dd" : "gray"}
+                        />
+
+                        <FontAwesomeIcon
+                            icon={faHearts}
+                            className="red-heart-post"
+                            size="2x"
+                            color="white"
+                        />
+                    </div>
+                    <span className="text-muted ml-2 mt-2 font-weight-bold"> {this.state.likes} likes</span>
+                </button>
+
                 <div><ToastContainer
                     position="top-right"
                     autoClose={3000}

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 const Like = require('../models/Like');
 const Tag = require('../models/Tag');
 const authService = require('../services/auth.service');
@@ -155,14 +156,36 @@ const UserController = () => {
         },
         include: [{
           model: Post,
-          include: [Tag],
+          include: [Comment, Tag, Like],
         }, { model: Like }],
       });
       user = user.get({ plain: true });
+
       if (req.token && user.id === req.token.id) {
-        user.drafts = user.posts.filter((post) => !(post.published));
+        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => {
+          // console.log(i, 'is iiii')
+          // const x = i.get({ plain: true });
+          return {
+            ...x,
+            commentsCount: x.comments.length,
+            comments: undefined,
+            likesCount: x.likes.length,
+            likedByCurrentUser: !!req.token && !!x.likes.find((like) => like.userId === req.token.id),
+            likes: undefined,
+          };
+        });
       }
-      user.posts = user.posts.filter((post) => post.published);
+      user.posts = user.posts.filter((post) => post.published).map((x) => {
+        // const x = i.get({ plain: true });
+        return {
+          ...x,
+          commentsCount: x.comments.length,
+          comments: undefined,
+          likesCount: x.likes.length,
+          likedByCurrentUser: !!req.token && !!x.likes.find((like) => like.userId === req.token.id),
+          likes: undefined,
+        };
+      });
       user.likesCount = user.likes.length;
       delete user.likes;
       return res.status(200).json(user);
@@ -175,7 +198,7 @@ const UserController = () => {
   const getAll = async (req, res) => {
     try {
       const [result, metadata] = await sequelize.query(`
-        select users."id", users."firstName", users."lastName", users."badges", COUNT(users."id") AS likesCount
+        select users."id", users."firstName", users."lastName", users."badges", COUNT(users."id") AS "likesCount"
             from users
               inner join likes 
                 on likes."userId" = users."id"

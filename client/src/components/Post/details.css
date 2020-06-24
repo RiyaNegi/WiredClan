@@ -77,11 +77,12 @@ z-index: 10 !important;
   margin: 1px;
 }
 
-.like-button{
+.like-button {
   background-color: transparent;
   text-align: center;
   border:none;
   outline: 0;
+  height: 100%;
 }
 
 .like-button:hover{
@@ -89,4 +90,19 @@ z-index: 10 !important;
 }
 .like-button:focus{
   outline: 0;
+}
+
+.red-heart-post {
+  margin-top: -34px;
+  z-index: -1;
+}
+
+.upvote:hover .red-heart-post {
+  color: #ec59dd;
+  z-index: 1;
+}
+
+.upvote:hover .white-heart-post {
+  color: #ec59dd;
+  z-index: -1;
 }

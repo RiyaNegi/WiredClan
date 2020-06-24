@@ -187,7 +187,6 @@ class PostDetails extends Component {
           <Modal.Body>Delete this post permanently?</Modal.Body>
           <Modal.Footer>
             <Button
-              className="ignore-link"
               variant="secondary"
               onClick={this.handleCloseModal}
             >
@@ -195,7 +194,6 @@ class PostDetails extends Component {
   </Button>
             <Button
               variant="primary"
-              className="ignore-link"
               onClick={this.handleDeleteClick(this.props.post.id)}
             >
               Delete
