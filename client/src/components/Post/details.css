@@ -98,11 +98,11 @@ z-index: 10 !important;
 }
 
 .upvote:hover .red-heart-post {
-  color: #ec59dd;
+  color: #cc2e36;
   z-index: 1;
 }
 
 .upvote:hover .white-heart-post {
-  color: #ec59dd;
+  color: #cc2e36;
   z-index: -1;
 }

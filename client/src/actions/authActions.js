@@ -9,6 +9,8 @@ import {
   FETCH_POSTS,
 } from "./types";
 
+import { handleError } from "./handleError";
+
 const ROOT_URL = "http://localhost:8000";
 
 export const signinUser = ({ email, password }) => {
@@ -71,10 +73,10 @@ export const fetchUser = (id, draft) => {
         `${ROOT_URL}/api/users/${id}`,
         draft
           ? {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
           : {}
       )
       .then((response) => {
@@ -87,6 +89,9 @@ export const fetchUser = (id, draft) => {
           posts: response.data.posts,
           drafts: response.data.drafts,
         });
+      })
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -113,6 +118,9 @@ export const updateUser = (
         });
         localStorage.setItem("profileData", JSON.stringify(response.data));
         History.push(redirect);
+      })
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -160,7 +168,7 @@ export const fetchAccount = (id, redirect = false) => {
         }
       })
       .catch((error) => {
-        console.log("Account error:", error);
+        handleError(error);
       });
   };
 };

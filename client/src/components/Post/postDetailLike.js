@@ -71,7 +71,7 @@ class PostDetailLikes extends React.Component {
                             className=" white-heart-post"
                             icon={faHeartr}
                             size="2x"
-                            color={this.props.likedByCurrentUser ? "#ec59dd" : "gray"}
+                            color={this.props.likedByCurrentUser ? "#cc2e36" : "gray"}
                         />
 
                         <FontAwesomeIcon

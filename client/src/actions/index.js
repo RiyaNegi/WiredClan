@@ -1,6 +1,7 @@
 import axios from "axios";
 import slugify from "slugify";
 import History from "../history.js";
+import { handleError } from "./handleError";
 import {
   FETCH_POST_DETAILS,
   POST_COMMENT,
@@ -49,8 +50,8 @@ export const fetchPost = (id) => {
           payload: response.data,
         });
       })
-      .catch((err) => {
-        console.log("error:", err.response || err);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -73,8 +74,8 @@ export const postComment = (postId, text, parentId) => {
           payload: response.data,
         });
       })
-      .catch((err) => {
-        console.log("error:", err.response);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -96,8 +97,8 @@ export const updateComment = (postId, text, commentId) => {
           payload: response.data,
         });
       })
-      .catch((err) => {
-        console.log("error:", err.response || err);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -116,8 +117,8 @@ export const deleteComment = (postId, commentId, parentId) => {
           parentId,
         });
       })
-      .catch((err) => {
-        console.log("error:", err.response || err);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -139,8 +140,8 @@ export const createPost = (title, published, description, tagId) => {
         });
         History.push(`/${slugify(response.data.title)}/${response.data.id}`);
       })
-      .catch((err) => {
-        console.log("error:", err.response);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };
@@ -162,8 +163,8 @@ export const updatePost = (postId, title, published, description, tagId) => {
         });
         History.push(`/${slugify(response.data.title)}/${response.data.id}`);
       })
-      .catch((err) => {
-        console.log("error:", err.response);
+      .catch((error) => {
+        handleError(error);
       });
   };
 };

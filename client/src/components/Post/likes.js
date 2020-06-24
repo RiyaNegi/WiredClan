@@ -68,7 +68,7 @@ class PostLikes extends React.Component {
             className=" white-heart"
             icon={faHeartr}
             size="1x"
-            color={this.props.likedByCurrentUser ? "#ec59dd" : "gray"}
+            color={this.props.likedByCurrentUser ? "#cc2e36" : "gray"}
           />
           <span className="text-muted "> {this.state.likes}</span>
           <FontAwesomeIcon

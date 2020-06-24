@@ -51,12 +51,12 @@
 }
 
 .upvote:hover .red-heart {
-  color: #ec59dd;
+  color: #cc2e36;
   z-index: 1;
 }
 
 .upvote:hover .white-heart {
-  color: #ec59dd;
+  color: #cc2e36;
   z-index: -1;
 }
 
