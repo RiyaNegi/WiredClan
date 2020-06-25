@@ -3,8 +3,9 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 
-import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
+
+import { faFire as faHearts } from "@fortawesome/free-solid-svg-icons";
+import { faFire as faHeartr } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class PostDetailLikes extends React.Component {
@@ -73,7 +74,7 @@ class PostDetailLikes extends React.Component {
                             className=" white-heart-post"
                             icon={faHeartr}
                             size="2x"
-                            color={this.props.likedByCurrentUser ? "#cc2e36" : "gray"}
+                            color={this.props.likedByCurrentUser ? "#eb6c4c" : "gray"}
                         />
 
                         <FontAwesomeIcon

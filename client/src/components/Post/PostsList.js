@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import History from "../../history.js";
