@@ -21,8 +21,8 @@ const Leaderboard = ({ className, style, topContributors }) => {
         ) : (
             topContributors.map((user) => (
               <div className="mt-1 font-weight-bold leaderboard-row">
-                <Link
-                  to={`users/${user.id}`}
+                <a
+                  href={`/Users/${user.id}`}
                   className="d-flex flex-row no-decoration py-2"
                 >
                   <span className="col-9 d-flex flex-row pr-0">
@@ -43,7 +43,7 @@ const Leaderboard = ({ className, style, topContributors }) => {
                   <span className="col-3 pl-0 font-weight-bold d-flex text-muted justify-content-end">
                     {user.likesCount} 🔥
                 </span>
-                </Link>
+                </a>
               </div>
             ))
           )}

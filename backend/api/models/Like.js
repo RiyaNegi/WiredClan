@@ -1,11 +1,17 @@
-// const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
 const sequelize = require('../../config/database');
+const randomId = require('./randomId');
 
 const Post = require('./Post');
 const User = require('./User');
 
 const Like = sequelize.define('like', {
+  id: {
+    type: Sequelize.STRING,
+    defaultValue: randomId(),
+    primaryKey: true,
+  },
   // UserId: {
   //   type: Sequelize.INTEGER,
   //   references: {

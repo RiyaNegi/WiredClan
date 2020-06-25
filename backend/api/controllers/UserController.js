@@ -56,11 +56,15 @@ const UserController = () => {
           });
           const token = authService().issue({ id: newUser.id });
           req.session.userId = newUser.id;
+          req.session.cookie.originalMaxAge = 31556952000;
+
           return res.status(200).json({ token, user: newUser, newUser: true });
         }
 
         const token = authService().issue({ id: user.id });
         req.session.userId = user.id;
+        req.session.cookie.originalMaxAge = 31556952000;
+
         return res.status(200).json({ token, user });
       } catch (err) {
         console.log(err);
@@ -132,10 +136,14 @@ const UserController = () => {
           });
           const token = authService().issue({ id: newUser.id });
           req.session.userId = user.id;
+          req.session.cookie.originalMaxAge = 31556952000;
+
           return res.status(200).json({ token, user: newUser, newUser: true });
         }
         const token = authService().issue({ id: user.id });
         req.session.userId = user.id;
+        req.session.cookie.originalMaxAge = 31556952000;
+
 
         return res.status(200).json({ token, user });
       }
@@ -160,7 +168,6 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
-      console.log(typeof req.session.userId, 'oooooh')
       let user = await User.findOne({
         where: {
           id: req.params.id,

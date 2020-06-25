@@ -6,7 +6,7 @@ const Like = require('../models/Like');
 const moment = require('moment');
 
 const seed = async () => {
-  await Tag.bulkCreate([
+  const tags = await Tag.bulkCreate([
     {
       text: 'Python',
     },
@@ -100,7 +100,7 @@ const seed = async () => {
         {
           userId: users[0].id,
           karma: 18,
-          tagId: 3,
+          tagId: tags[3].id,
           title: "I've Been Making a Video Series about Building a 16-bit Virtual Machine.",
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(7, 'h'),
@@ -108,7 +108,7 @@ const seed = async () => {
         {
           userId: users[1].id,
           karma: 4,
-          tagId: 3,
+          tagId: tags[3].id,
           title: 'Generators in Rust, C++20, Go, and More',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(10, 'h'),
@@ -117,7 +117,7 @@ const seed = async () => {
         {
           userId: users[2].id,
           karma: 11,
-          tagId: 4,
+          tagId: tags[4].id,
           title: "The Colorful Game of Life - a variant of Conway's Game of Life",
           published: false,
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
@@ -127,7 +127,7 @@ const seed = async () => {
         {
           userId: users[2].id,
           karma: 10,
-          tagId: 2,
+          tagId: tags[2].id,
           title: 'Feel-O-Meter (visualize the dominant emotions in your Spotify playlists based on lyrics)',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(17, 'd'),
@@ -136,7 +136,7 @@ const seed = async () => {
         {
           userId: users[1].id,
           karma: 3,
-          tagId: 1,
+          tagId: tags[1].id,
           title: 'What a typical 100% Serverless Architecture looks like in AWS!',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(17, 'd'),
@@ -145,7 +145,7 @@ const seed = async () => {
         {
           userId: users[2].id,
           karma: 0,
-          tagId: 2,
+          tagId: tags[2].id,
           title: 'One',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(27, 'd'),
@@ -154,7 +154,7 @@ const seed = async () => {
         {
           userId: users[0].id,
           karma: 1,
-          tagId: 2,
+          tagId: tags[2].id,
           title: 'I built an open-source personal assistant powered by an artificial neural network in Go',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(2, 'm'),
