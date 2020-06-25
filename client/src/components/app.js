@@ -4,9 +4,17 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import History from "../history.js";
+import Cookies from 'universal-cookie';
 
 class App extends Component {
   componentWillMount() {
+    const cookies = new Cookies();
+
+    // Cookie expired.
+    if (this.props.authenticated && !cookies.get('connect.sid')) {
+      History.push('/signout');
+    }
+
     if (
       this.props.authenticated &&
       (this.props.location.pathname === "/signin" ||

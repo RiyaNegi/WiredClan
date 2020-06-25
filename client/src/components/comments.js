@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../actions";
+import * as postActions from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -403,4 +404,4 @@ const CommentsWithForm = reduxForm({
   enableReinitialize: true,
 })(Comments);
 
-export default connect(mapStateToProps, actions)(CommentsWithForm);
+export default connect(mapStateToProps, { ...actions, ...postActions })(CommentsWithForm);

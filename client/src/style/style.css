@@ -66,13 +66,15 @@
 }
 
 .new-post-button {
-  border: 1px solid #5047ff;
-  color: black;
+  border: 1px solid #1dbefded;
+  color: #21aae0e1;
   background-color: white;
+  font-weight:700;
 }
 
 .new-post-button:hover {
-  background-color: #4a41ff;
+  background-color: #1dbefded;
+  border: 1px solid #1dbefded;
 }
 
 .new-post-button:hover div {
@@ -216,6 +218,10 @@
 .com-links:hover {
   color: inherit;
   text-decoration: none !important;  
+}
+
+.site-button{
+  background-color: rgb(39, 248, 238)
 }
 
 /* .create-post-but{

@@ -6,7 +6,7 @@ const express = require('express');
 const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
-const cors = require('cors');
+// const cors = require('cors');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
@@ -27,20 +27,60 @@ require('dotenv').config();
  * express application
  */
 const app = express();
+
+
+const Promise = require('bluebird');
+const session = Promise.promisifyAll(require('express-session'));
+const redis = require('redis');
+
+const RedisStore = require('connect-redis')(session);
+
+const redisClient = redis.createClient();
+
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'do not tell anybody',
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  unset: 'destroy',
+  cookie: {
+    secure: false,
+    maxAge: 50000,
+    httpOnly: false,
+  },
+}));
+
+
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-console.log(path.join(__dirname, 'access.log'));
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }));
 
 const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
-console.log(mappedOpenRoutes, 'wwwwww');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
 
 // allow cross origin requests
 // configure to only allow requests from certain origins
-app.use(cors());
+// app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Headers, authorization, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+  );
+  // eslint-disable-next-line eqeqeq
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
+});
+
 
 // secure express app
 app.use(helmet({
@@ -52,9 +92,6 @@ app.use(helmet({
 // parsing the request bodys
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// secure your private routes with jwt authentication middleware
-app.all('/api/*', (req, res, next) => auth(req, res, next));
 
 // fill routes for express application
 app.use('/auth', mappedOpenRoutes);

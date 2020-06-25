@@ -70,7 +70,7 @@ const AccountController = () => {
 
   const update = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.token.id } });
+      const user = await User.findOne({ where: { id: req.session.userId } });
       const result = await user.update(req.body);
       return res.status(200).json({ result });
     } catch (err) {
@@ -81,7 +81,7 @@ const AccountController = () => {
 
   const get = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.token.id }, include: [Post] });
+      const user = await User.findOne({ where: { id: req.session.userId }, include: [Post] });
       return res.status(200).json({ user });
     } catch (err) {
       console.log(err);

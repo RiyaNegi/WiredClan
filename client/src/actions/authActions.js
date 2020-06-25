@@ -1,5 +1,5 @@
-import axios from "axios";
 import History from "../history.js";
+import request from "./request.js";
 import {
   AUTH_USER,
   UNAUTH_USER,
@@ -16,8 +16,8 @@ const ROOT_URL = "http://localhost:8000";
 export const signinUser = ({ email, password }) => {
   return (dispatch) => {
     // submit email/password to the server
-    axios
-      .post(`${ROOT_URL}/auth/login`, { email, password })
+    request
+      .post(`/auth/login`, { email, password })
       .then((response) => {
         // if request is good...
         // - save the jwt token
@@ -37,8 +37,8 @@ export const signinUser = ({ email, password }) => {
 export const signupUser = ({ email, password, FirstName, LastName, college, year }) => {
   return (dispatch) => {
     // submit email/password to the server
-    axios
-      .post(`${ROOT_URL}/auth/register`, { email, password, FirstName, LastName, college, year })
+    request
+      .post(`/auth/register`, { email, password, FirstName, LastName, college, year })
       .then((response) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
@@ -58,26 +58,28 @@ export const authError = (error) => {
 };
 
 export const signoutUser = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("profileData");
-  History.push("/HomePage");
-  return {
-    type: UNAUTH_USER,
+
+  return (dispatch) => {
+
+    request
+      .post(`/api/logout`)
+      .then((response) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("profileData");
+        History.push("/HomePage");
+        dispatch({
+          type: UNAUTH_USER,
+        });
+      })
   };
+
 };
 
 export const fetchUser = (id, draft) => {
   return (dispatch) => {
-    axios
+    request
       .get(
-        `${ROOT_URL}/api/users/${id}`,
-        draft
-          ? {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-          : {}
+        `/api/users/${id}`
       )
       .then((response) => {
         dispatch({
@@ -101,15 +103,10 @@ export const updateUser = (
   redirect = `/users/${id}`
 ) => {
   return (dispatch) => {
-    axios
+    request
       .patch(
-        `${ROOT_URL}/api/users/${id}`,
+        `/api/users/${id}`,
         { id, firstName, lastName, year, college },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
       )
       .then((response) => {
         dispatch({
@@ -127,8 +124,8 @@ export const updateUser = (
 
 export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
   return (dispatch) => {
-    axios
-      .post(`${ROOT_URL}/auth/googleLogin`, {
+    request
+      .post(`/auth/googleLogin`, {
         email,
         accessToken,
         firstName,
@@ -144,12 +141,11 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
   };
 };
 
+// TODO: Remove.
 export const fetchAccount = (id, redirect = false) => {
   return (dispatch) => {
-    axios
-      .get(`${ROOT_URL}/api/users/${id}`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      })
+    request
+      .get(`/api/users/${id}`)
       .then((response) => {
         dispatch({
           type: FETCH_ACCOUNT,

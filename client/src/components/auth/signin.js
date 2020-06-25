@@ -86,7 +86,7 @@ class Signin extends PureComponent {
                       style={{ width: 35, height: 35, borderRadius: 50, marginTop: '2px' }}
                       alt="userIcon"
                     />
-                    <label className=" mt-2 ml-2">  Login with Google</label></button>
+                    <label className=" mt-2 ml-2">  Sign in with Google</label></button>
                 )}
                 buttonText="Login"
                 onSuccess={this.responseGoogle}

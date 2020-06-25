@@ -20,6 +20,9 @@ const UserController = () => {
           password: body.password,
         });
         const token = authService().issue({ id: user.id });
+        req.session.userId = user.id;
+
+        req.session.cookie.originalMaxAge = 31556952000;
         return res.status(200).json({ token, user });
       } catch (err) {
         console.log(err);
@@ -52,10 +55,12 @@ const UserController = () => {
             registeredViaRegisterViaGoogle: true,
           });
           const token = authService().issue({ id: newUser.id });
+          req.session.userId = newUser.id;
           return res.status(200).json({ token, user: newUser, newUser: true });
         }
 
         const token = authService().issue({ id: user.id });
+        req.session.userId = user.id;
         return res.status(200).json({ token, user });
       } catch (err) {
         console.log(err);
@@ -83,6 +88,9 @@ const UserController = () => {
 
         if (bcryptService().comparePassword(password, user.password)) {
           const token = authService().issue({ id: user.id });
+          req.session.userId = user.id;
+          req.session.cookie.originalMaxAge = 31556952000;
+          console.log(req.session);
 
           return res.status(200).json({ token, user });
         }
@@ -123,9 +131,11 @@ const UserController = () => {
             imageUrl: `https://api.adorable.io/avatars/80/${firstName}${lastName}.png`,
           });
           const token = authService().issue({ id: newUser.id });
+          req.session.userId = user.id;
           return res.status(200).json({ token, user: newUser, newUser: true });
         }
         const token = authService().issue({ id: user.id });
+        req.session.userId = user.id;
 
         return res.status(200).json({ token, user });
       }
@@ -150,6 +160,7 @@ const UserController = () => {
 
   const get = async (req, res) => {
     try {
+      console.log(typeof req.session.userId, 'oooooh')
       let user = await User.findOne({
         where: {
           id: req.params.id,
@@ -161,31 +172,24 @@ const UserController = () => {
       });
       user = user.get({ plain: true });
 
-      if (req.token && user.id === req.token.id) {
-        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => {
-          // console.log(i, 'is iiii')
-          // const x = i.get({ plain: true });
-          return {
-            ...x,
-            commentsCount: x.comments.length,
-            comments: undefined,
-            likesCount: x.likes.length,
-            likedByCurrentUser: !!req.token && !!x.likes.find((like) => like.userId === req.token.id),
-            likes: undefined,
-          };
-        });
-      }
-      user.posts = user.posts.filter((post) => post.published).map((x) => {
-        // const x = i.get({ plain: true });
-        return {
+      if (req.session.userId && user.id === req.session.userId) {
+        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => ({
           ...x,
           commentsCount: x.comments.length,
           comments: undefined,
           likesCount: x.likes.length,
-          likedByCurrentUser: !!req.token && !!x.likes.find((like) => like.userId === req.token.id),
+          likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
           likes: undefined,
-        };
-      });
+        }));
+      }
+      user.posts = user.posts.filter((post) => post.published).map((x) => ({
+        ...x,
+        commentsCount: x.comments.length,
+        comments: undefined,
+        likesCount: x.likes.length,
+        likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
+        likes: undefined,
+      }));
       user.likesCount = user.likes.length;
       delete user.likes;
       return res.status(200).json(user);
@@ -221,7 +225,7 @@ const UserController = () => {
     try {
       let user = await User.findOne({
         where: {
-          id: req.token.id,
+          id: req.session.userId,
         },
       });
 
@@ -246,9 +250,19 @@ const UserController = () => {
 
   const account = async (req, res) => {
     try {
-      const users = await User.findOne({ where: { id: req.token.id }, include: [Post] });
+      const users = await User.findOne({ where: { id: req.session.userId }, include: [Post] });
 
       return res.status(200).json({ users });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
+  const logout = async (req, res) => {
+    try {
+      await req.session.destroyAsync();
+      return res.status(200).json({ sucess: true });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -265,6 +279,7 @@ const UserController = () => {
     getAll,
     edit,
     account,
+    logout,
   };
 };
 

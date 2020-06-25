@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import humaaans from "./humaaans.png";
 import { Link } from "react-router-dom";
 import Select from "react-select";
+import googleIcon from "./googleIcon.png";
+import { GoogleLogin } from "react-google-login";
+
 
 const yearArrray = [{ value: 1, label: 'First' },
 { value: 2, label: 'Second' },
@@ -121,6 +124,25 @@ class Signup extends PureComponent {
           <button type="submit" className="btn site-button" disabled={submitting}>
             Sign Up
         </button>
+          <div className="google-login-div">
+            <GoogleLogin
+              clientId="967814823791-iohjqrepre2s3pbo5eds8ods6fce086c.apps.googleusercontent.com"
+              render={renderProps => (
+                <button className="d-flex justify-content-center mt-2 pr-2 google-login" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                  <img
+                    className="float-left googleIcon-img"
+                    src={googleIcon}
+                    style={{ width: 35, height: 35, borderRadius: 50, marginTop: '2px' }}
+                    alt="userIcon"
+                  />
+                  <label className=" mt-2 ml-2"> Sign up with Google</label></button>
+              )}
+              buttonText="Login"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
+          </div>
           <div style={{ marginLeft: 11, marginTop: 8 }}>
             Already have an account? Click here to <Link to="/signin">Sign in</Link>
           </div>
