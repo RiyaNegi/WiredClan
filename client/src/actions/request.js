@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { SERVER_URL, SERVER_PORT } from '../config'
 
 const request = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: `${SERVER_URL}:${SERVER_PORT}`,
   withCredentials: true,
 });
 

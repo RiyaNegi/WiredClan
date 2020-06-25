@@ -21,13 +21,22 @@ do
         git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
 
         # Navigate to where my master code lives. 
-        # cd /root/jimmy-master
+        cd /root/jimmy-master
 
         # # Install dependencies in production mode.
-        # cd client
-        # npm install --production
-        # cd ../backend
-        # npm install --production
+        cd client
+        rm src/config.js
+        echo 'const SERVER_URL = "http://68.183.90.12";
+        const SERVER_PORT = "8000";
+        export { SERVER_URL, SERVER_PORT };' > src/config.js
+        echo "Installing FE dependencies..."
+        npm install
+        echo "Building FE..."
+        npm build
+
+        cd ../backend
+        echo "Installing BE dependencies..."
+        npm install
     else 
         echo "Not master branch. Skipping."
     fi

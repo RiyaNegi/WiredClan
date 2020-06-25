@@ -2,8 +2,6 @@ import request from "./request";
 import History from "../history.js";
 import { FETCH_TOP_CONTRIBUTORS } from "./types";
 
-const ROOT_URL = "http://localhost:8000";
-
 export const fetchTopContributors = () => {
   return (dispatch) => {
     request
