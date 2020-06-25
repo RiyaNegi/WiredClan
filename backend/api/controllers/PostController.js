@@ -9,11 +9,15 @@ const PostController = () => {
   const getAll = async (req, res) => {
     try {
       const result = await Post.findAll({
-        where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ' '}%` } },
+        where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ''}%` } },
+        order: [
+          ['createdAt', 'DESC'],
+        ],
         include: [Comment, User, Tag, Like],
         limit: 20,
         offset: (parseInt(req.query.page, 10) - 1) || 0 * 20,
       });
+
       return res.status(200).json({
         page: 1,
         result: result.map((i) => {
@@ -23,7 +27,7 @@ const PostController = () => {
             commentsCount: x.comments.length,
             comments: undefined,
             likesCount: x.likes.length,
-            likedByCurrentUser: !!req.token && !!x.likes.find((like) => like.userId === req.token.id),
+            likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
             likes: undefined,
           };
         }),
@@ -42,7 +46,7 @@ const PostController = () => {
             id: req.params.id, published: true,
           },
           {
-            id: req.params.id, published: false, userId: req.token ? req.token.id : -1,
+            id: req.params.id, published: false, userId: req.session.userId ? req.session.userId : -1,
           },
         ),
         include: [
@@ -80,7 +84,7 @@ const PostController = () => {
           },
         ],
       })).toJSON();
-      result.likedByCurrentUser = !!req.token && !!result.likes.find((like) => like.userId === req.token.id);
+      result.likedByCurrentUser = !!req.session.userId && !!result.likes.find((like) => like.userId === req.session.userId);
       result.likesCount = result.likes.length;
       delete result.likes;
       return res.status(200).json(result);
@@ -92,7 +96,7 @@ const PostController = () => {
 
   const destroy = async (req, res) => {
     try {
-      const result = await Post.destroy({ where: { id: req.params.id, userId: req.token.id } });
+      const result = await Post.destroy({ where: { id: req.params.id, userId: req.session.userId } });
       return res.status(200).json({ status: !!result });
     } catch (err) {
       console.log(err);
@@ -102,7 +106,7 @@ const PostController = () => {
 
   const create = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const post = await Post.create({
         title: req.body.title,
         published: req.body.published,
@@ -119,7 +123,7 @@ const PostController = () => {
 
   const edit = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const post = await Post.findOne({ where: { id: req.params.id, userId: user.id } });
       await post.update({
         title: req.body.title,
@@ -137,7 +141,7 @@ const PostController = () => {
 
   const createComment = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const comment = await Comment.create({ ...req.body, userId: user.id, postId: req.params.postId });
       return res.status(200).json(comment);
     } catch (err) {
@@ -148,7 +152,7 @@ const PostController = () => {
 
   const editComment = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const comment = await Comment.findOne({
         where: { id: req.params.id, userId: user.id },
         include: {
@@ -173,7 +177,7 @@ const PostController = () => {
 
   const deleteComment = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.token.id } })).toJSON();
+      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const result = await Comment.destroy({ where: { id: req.params.id, userId: user.id } });
       return res.status(200).json({ status: !!result });
     } catch (err) {

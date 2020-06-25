@@ -6,7 +6,6 @@ module.exports = class Google {
     this.lastName = lastName;
   }
 
-
   static verifyLogin({ accessToken, email }) {
     return axios.get('https://www.googleapis.com/oauth2/v1/tokeninfo', {
       params: {

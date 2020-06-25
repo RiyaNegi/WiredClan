@@ -5,7 +5,7 @@ const Like = require('../models/Like');
 const LikeController = () => {
   const create = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.token.id } });
+      const user = await User.findOne({ where: { id: req.session.userId } });
       let like = await Like.findOne({ where: { postId: req.body.postId, userId: user.id } });
       if (!like) {
         like = await Like.create({ userId: user.id, postId: req.body.postId });
@@ -19,7 +19,7 @@ const LikeController = () => {
 
   const destroy = async (req, res) => {
     try {
-      const user = await User.findOne({ where: { id: req.token.id } });
+      const user = await User.findOne({ where: { id: req.session.userId } });
       const result = await Like.destroy({ where: { postId: req.body.postId, userId: user.id } });
       return res.status(200).json({ status: !!result });
     } catch (err) {

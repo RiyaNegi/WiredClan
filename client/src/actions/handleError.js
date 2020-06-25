@@ -1,11 +1,11 @@
 import History from "../history.js";
 
 export const handleError = (error) => {
+  debugger;
   if (
     error.response &&
-    error.response.data.err &&
-    ["TokenExpiredError", "JsonWebTokenError"].includes(
-      error.response.data.err.name
+    ["TokenExpiredError", "JsonWebTokenError", "ExpiredCookie"].includes(
+      error.response.data.error
     )
   ) {
     History.push("/signout");

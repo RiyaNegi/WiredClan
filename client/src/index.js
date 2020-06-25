@@ -38,11 +38,11 @@ const store = createStore(
 );
 //
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 const profileData = JSON.parse(localStorage.getItem("profileData"));
 // if we have a token, consiger the user to be signed in
 // And set profile details in navbar.
-if (token) {
+if (profileData) {
   // we need to update application state
 
   store.dispatch({ type: AUTH_USER });

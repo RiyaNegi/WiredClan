@@ -1,18 +1,55 @@
-import axios from "axios";
 import slugify from "slugify";
 import History from "../history.js";
 import { handleError } from "./handleError";
+import request from "./request";
 
-import { DELETE_POST, FETCH_POSTS, CREATE_LIKE, DELETE_LIKE, CREATE_POST_LIKE, DELETE_POST_LIKE, } from "./types";
+import {
+  CREATE_POST, DELETE_POST, FETCH_POSTS, FETCH_POST_DETAILS, UPDATE_POST, CREATE_LIKE, DELETE_LIKE,
+  CREATE_POST_LIKE, DELETE_POST_LIKE,
+} from "./types";
 
-const ROOT_URL = "http://localhost:8000";
+export const createPost = (title, published, description, tagId) => {
+  return (dispatch) => {
+    request
+      .post(
+        `/api/posts`,
+        { title, published, description, tagId },
+      )
+      .then((response) => {
+        dispatch({
+          type: CREATE_POST,
+          payload: response.data,
+        });
+        History.push(`/${slugify(response.data.title)}/${response.data.id}`);
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+};
+
+export const fetchPost = (id) => {
+  return (dispatch) => {
+    request
+      .get(
+        `/api/posts/${id}`
+      )
+      .then((response) => {
+        dispatch({
+          type: FETCH_POST_DETAILS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+};
 
 export const deletePost = (postId) => {
   return (dispatch) => {
-    axios
-      .delete(`${ROOT_URL}/api/posts/${postId}`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      })
+    request
+      .delete(`/api/posts/${postId}`)
       .then((response) => {
         dispatch({
           type: DELETE_POST,
@@ -27,13 +64,7 @@ export const deletePost = (postId) => {
 
 export const fetchPosts = () => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/posts?page=1`, localStorage.getItem("token")
-      ? {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-      : {})
+    request.get(`/api/posts?page=1`)
       .then((response) => {
         dispatch({
           type: FETCH_POSTS,
@@ -48,14 +79,7 @@ export const fetchPosts = () => {
 
 export const createLike = (postId) => {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/api/likes`, { postId },
-      localStorage.getItem("token") ?
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-        : {})
+    request.post(`/api/likes`, { postId })
       .then((response) => {
         dispatch({
           type: CREATE_LIKE,
@@ -69,12 +93,30 @@ export const createLike = (postId) => {
   };
 };
 
+export const updatePost = (postId, title, published, description, tagId) => {
+  return (dispatch) => {
+    request
+      .post(
+        `/api/posts/${postId}`,
+        { postId, title, published, description, tagId }
+      )
+      .then((response) => {
+        dispatch({
+          type: UPDATE_POST,
+          payload: response.data,
+        });
+        History.push(`/${slugify(response.data.title)}/${response.data.id}`);
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+};
+
 export const deleteLike = (postId) => {
   return (dispatch) => {
-    console.log("token :", localStorage.getItem("token"))
-    axios.delete(`${ROOT_URL}/api/likes`, {
+    request.delete(`/api/likes`, {
       data: { postId },
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
     })
       .then((response) => {
         dispatch({
@@ -90,14 +132,7 @@ export const deleteLike = (postId) => {
 
 export const createPostLike = (postId) => {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/api/likes`, { postId },
-      localStorage.getItem("token") ?
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-        : {})
+    request.post(`/api/likes`, { postId })
       .then((response) => {
         dispatch({
           type: CREATE_POST_LIKE,
@@ -112,10 +147,8 @@ export const createPostLike = (postId) => {
 
 export const deletePostLike = (postId) => {
   return (dispatch) => {
-    console.log("token :", localStorage.getItem("token"))
-    axios.delete(`${ROOT_URL}/api/likes`, {
+    request.delete(`/api/likes`, {
       data: { postId },
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
     })
       .then((response) => {
         dispatch({

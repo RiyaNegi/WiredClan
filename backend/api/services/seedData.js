@@ -146,7 +146,7 @@ const seed = async () => {
           userId: users[2].id,
           karma: 0,
           tagId: 2,
-          title: 'One-pass Compiler Primer',
+          title: 'One',
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(27, 'd'),
 

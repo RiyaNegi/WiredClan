@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../actions";
+import * as postActions from "../../actions/postActions";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Loader from "react-loader-spinner";
@@ -277,4 +278,4 @@ const CreateFormPost = reduxForm({
   form: "createPost",
 })(CreatePost);
 
-export default connect(mapStateToProps, actions)(CreateFormPost);
+export default connect(mapStateToProps, { ...actions, ...postActions })(CreateFormPost);

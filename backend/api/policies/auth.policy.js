@@ -3,8 +3,10 @@ const JWTService = require('../services/auth.service');
 // usually: "Authorization: Bearer [token]" or "token: [token]"
 module.exports = (req, res, next) => {
   let tokenToVerify;
-
-  if (req.header('Authorization')) {
+  debugger;
+  console.log(req.header, req.session.userId);
+  return next();
+  if (req.session.userId) {
     const parts = req.header('Authorization').split(' ');
 
     if (parts.length === 2) {
@@ -19,9 +21,6 @@ module.exports = (req, res, next) => {
     } else {
       return res.status(401).json({ msg: 'Format for Authorization: Bearer [token]' });
     }
-  } else if (req.body.token) {
-    tokenToVerify = req.body.token;
-    delete req.query.token;
   } else if (['/api/posts', '/api/users'].filter((whitelist) => req.path.startsWith(whitelist))
     && req.method === 'GET') {
     return next();
