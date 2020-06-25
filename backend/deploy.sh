@@ -37,6 +37,7 @@ do
         cd ../backend
         echo "Installing BE dependencies..."
         npm install
+        echo "Done."
     else 
         echo "Not master branch. Skipping."
     fi
