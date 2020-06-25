@@ -117,6 +117,107 @@
   width : 90px;
 } 
 
+.comment-card{
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 4px;
+  background-color: rgb(248, 248, 248);
+  padding:25px;
+}
+
+.post-comment{
+  width: 100%;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid gray;
+  text-decoration: none;
+  background-color: transparent;
+}
+.post-comment:focus {
+  outline:none;
+  border-bottom: 2px solid black;
+}
+
+.com-box{
+  width: 100%;
+}
+
+.post-reply-but{
+  background-color: transparent;
+  border:1px solid rgb(0, 0, 0);
+  border-radius:4px;
+  color:black;
+  margin-left: 5px !important;
+}
+
+.cancel-btn{
+  margin-left: 15px;
+  background-color: transparent;
+  border:1px solid rgb(0, 0, 0);
+  border-radius:4px;
+  color:black;
+  margin-left: 12px !important;
+}
+.card-text{
+  font-size: 18px;
+  color:rgb(42, 42, 42)
+}
+
+.reply-box{
+  border-left: 1px solid rgb(201, 201, 201);
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+}
+
+.edit-post-button{
+  background-color: transparent;
+  border:none;
+  color: gray;
+  outline:none;
+  font-weight: 600;
+  font-size:16px;
+  padding:5px;
+}
+
+.edit-post-button:hover{
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  padding:5px;
+}
+
+.edit-post-button:focus{
+  outline:none;
+}
+
+
+.signin-box-com{
+  border:1px solid rgb(151, 151, 151);
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  display: flex;
+  color: gray;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.signin-box-text{
+  font-size: 18px;
+  margin-top:2px;
+}
+
+.com-links{
+  color: inherit;
+  text-decoration: none !important;  
+}
+.com-links:hover {
+  color: inherit;
+  text-decoration: none !important;  
+}
+
 /* .create-post-but{
   border:1px solid rgb(255, 255, 74)
 }
@@ -244,10 +345,6 @@ flex-direction: row;
   border-radius:0;
 }
 
-.comment-edit{
-  margin-top: 4px;
-}
-
 .newedit{
   margin-left:0px;
 }
@@ -290,13 +387,7 @@ flex-direction: row;
   font-size: 16px;
   color: grey;
 }
-.username {
-  margin-top: 1px;
-  display: flex;
-  font-size: 16px;
-  font-weight: 400;
-  color: grey;
-}
+
 .username-main{
 padding-left: 6px;
 }
@@ -437,11 +528,7 @@ button {
   flex-direction: column;
   margin-top: 4px;
 }
-.reply-box{
-  margin-left:48px;
-  border-left: 1px solid rgb(201, 201, 201);
-  padding-top: 4px;
-}
+
 
 .reply-items{
   margin-left:10px;
@@ -454,9 +541,6 @@ button {
   min-width:500px;
 }
 
-.prof-row-item{
-  display: flex;
-}
 
 .details {
   display:flex;
@@ -464,22 +548,9 @@ button {
   margin-bottom: 2px !important;
 }
 
-.post-comment{
-  width: 100%;
-  margin: 8px 0;
-  border: none;
-  border-bottom: 1px solid gray;
-  text-decoration: none;
-}
-.post-comment:focus {
-  outline:none;
-  border-bottom: 2px solid black;
-}
 
-.com-box{
-  margin-left: 18px;
-  width: 100%;
-}
+
+
 .text-reply{
   display: flex;
   flex-direction: column;
@@ -621,25 +692,6 @@ position: fixed;
   margin-top: -12px;
 }
 
-.signin-box-com{
-  border:1px solid rgb(151, 151, 151);
-  padding: 15px 20px;
-  border-radius: 5px;
-  font-weight: 600;
-  display: flex;
-  color: gray;
-  width: 100%;
-  justify-content: space-between;
-}
-.comment-box-spec{
-  padding-left: 40px;
-  margin-bottom: 20px;
-  display: flex;
-  width: 100%;
-}
-.space-bet-com{
-  display: flex;
-}
 
 .signup-but-com{
   padding:5px 8px;
@@ -661,19 +713,9 @@ position: fixed;
   color:white !important;
 }
 
-.signin-box-text{
-  font-size: 18px;
-  margin-top:2px;
-}
 
-.com-links{
-  color: inherit;
-  text-decoration: none !important;  
-}
-.com-links:hover {
-  color: inherit;
-  text-decoration: none !important;  
-}
+
+
 
 .demo-editor {
   height: 275px !important;

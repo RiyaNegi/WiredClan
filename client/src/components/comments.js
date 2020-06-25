@@ -61,7 +61,7 @@ class Comments extends Component {
   renderReplies = (comment, parentId) => {
     return comment.replyComments.map((replyComment) => {
       return (
-        <div className="reply-box" key={replyComment.id}>
+        <div className="reply-box mt-3 ml-5" key={replyComment.id}>
           {this.state.editClicked.filter((ci) => ci.id === replyComment.id)
             .length && this.props.account
             ? this.UserReply(parentId, replyComment.id, true, false)
@@ -103,46 +103,45 @@ class Comments extends Component {
             </Modal>
           ) : null}
 
-        <div className="comment-space">
-          <div className="comment-row-sec">
-            <a
-              href={`/Users/${comment.user.id}`}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <div className="usericon">
-                <img
-                  src={comment.user.imageUrl}
-                  style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
-                  alt="userIcon"
-                />
-              </div>
-            </a>
-            <div className="text-reply">
-              <div className="comment-text">
-                <div className="date-div">
-                  <a
-                    href={`/Users/${comment.user.id}`}
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <span className="username">{comment.user.userName}</span>
-                  </a>
-                </div>
-                <div className="card-text">{comment.text}</div>
-              </div>
-              <button
-                className="reply-button reply-sec"
-                onClick={this.handleClick(comment.id)}
+        <div className="d-flex flex-row col-12 mt-3 justify-content-between">
+          <div>
+            <div className="card-text">{comment.text}</div>
+            <div className="d-flex mt-1">
+              <a
+                href={`/Users/${comment.user.id}`}
+                style={{ textDecoration: "none", color: "black" }}
               >
-                <FontAwesomeIcon icon={faReply} size="1x" color="gray" /> Reply
+                <div className="usericon">
+                  <img
+                    src={comment.user.imageUrl}
+                    style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
+                    alt="userIcon"
+                  />
+                </div>
+              </a>
+              <a
+                href={`/Users/${comment.user.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <span className="username ml-2">{comment.user.firstName} {comment.user.lastName}</span>
+              </a>
+              {/* <label className="mx-2" style={{ color: "rgb(83, 83, 83)" }}>|</label> */}
+              <div className="">
+                <button
+                  className="post-item-buttons"
+                  onClick={this.handleClick(comment.id)}
+                >
+                  <FontAwesomeIcon icon={faReply} size="1x" color="gray" /> Reply
               </button>
+              </div>
             </div>
           </div>
-          <div className="comment-edit">
+          <div className="d-flex flex-end mt-2">
             {this.props.account && comment.userId === this.props.account.id ? (
               <div className="dropdown">
                 <button
                   type="button"
-                  className="btn btn-secondary  edit-comment-but"
+                  className="edit-post-button px-2"
                   data-toggle="dropdown"
                   aria-haspopup="false"
                   aria-expanded="false"
@@ -260,7 +259,7 @@ class Comments extends Component {
 
   notify = () =>
     toast.dark("🚀  Comment Posted!", {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: false,
@@ -281,9 +280,9 @@ class Comments extends Component {
             : handleSubmit(this.handleFormSubmit(parentId, replyId).bind(this))
         }
       >
-        <div className={"post-reply-sec" + edit ? "newedit" : ""}>
+        <div className="mt-3 ml-3 ">
           <div className="profile-items">
-            <div className="prof-row-item">
+            <div className="d-flex">
               <div className="profile-icon">
                 <img
                   src={this.props.account.imageUrl}
@@ -291,7 +290,7 @@ class Comments extends Component {
                   alt="userIcon"
                 />
               </div>
-              <fieldset className="com-box">
+              <fieldset className="com-box ml-3">
                 <Field
                   className="post-comment"
                   type="text"
@@ -308,9 +307,9 @@ class Comments extends Component {
                 />
               </fieldset>
             </div>
-            <div className="post-reply-but">
+            <div className="d-flex ml-2 mt-1 float-right">
               <button
-                className="site-button post-button post-reply "
+                className="site-button post-button post-reply-but px-3 "
                 action="submit"
                 disabled={submitting || pristine}
               >
@@ -345,34 +344,31 @@ class Comments extends Component {
       return <div>woah! No comments here..</div>;
     }
     return (
-      <div className="mt-5">
-        {this.props.account ? (
-          this.UserReply()
-        ) : (
-            <div className="comment-box-spec">
-              <div className="signin-box-com">
-                <div className="signin-box-text">
+      <div className="col-10 col-md-12 mt-5 comment-card pr-5">
+        <label className="signin-heading text-muted">Comments</label>
+        {(!this.props.account) ? (<div className="d-flex col-12 mt-2">
+          <div className="signin-box-com">
+            <div className="">
+              {" "}
+              Sign in or Sign up to comment
+      </div>
+            <div className="d-flex">
+              <div className="mr-3">
+                <Link className="com-links" to="/signin">
                   {" "}
-                  Log in or Sign up to comment
+                  SIGN IN
+          </Link>
               </div>
-                <div className="space-bet-com">
-                  <div className="signin-but-com site-button dept-button">
-                    <Link className="com-links" to="/signin">
-                      {" "}
-                      LOG IN
-                  </Link>
-                  </div>
-                  <div className="signup-but-com site-button post-button">
-                    <Link className="com-links" to="/signup">
-                      {" "}
-                      SIGN UP
-                  </Link>
-                  </div>
-                </div>
+              <div className="">
+                <Link className="com-links" to="/signup">
+                  {" "}
+                  SIGN UP
+          </Link>
               </div>
             </div>
-          )}
-        <ul>{this.renderComments()}</ul>
+          </div>
+        </div>) : <ul className="p-0">{this.UserReply()}</ul>}
+        <ul className="p-0 mt-4">{this.renderComments()}</ul>
       </div>
     );
   }
@@ -398,6 +394,7 @@ const mapStateToProps = (state) => {
   return {
     account: state.auth.data,
     initialValues: populateCommentValues(state),
+    comments: state.postDetails.comments
   };
 };
 

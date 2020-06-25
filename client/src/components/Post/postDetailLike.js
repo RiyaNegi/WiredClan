@@ -14,15 +14,17 @@ class PostDetailLikes extends React.Component {
         this.state = {
             likes: this.props.likesCount,
             updated: false,
-            id: this.props.postId
+            id: this.props.postId,
+            loginNotify: false
         };
 
     }
 
     updateLikes = (id) => {
         return () => {
-            if (!this.props.account) {
-                this.notify()
+            if (!this.props.account && !this.state.loginNotify) {
+                this.notify();
+                this.setState({ loginNotify: true })
             }
             else if (!this.state.updated && !this.props.likedByCurrentUser) {
                 this.props.createPostLike(this.props.postId);
@@ -49,7 +51,7 @@ class PostDetailLikes extends React.Component {
 
 
     notify = () =>
-        toast.warning('❗ SIGN UP to like', {
+        toast.warning('❗ Sign in to like', {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: true,

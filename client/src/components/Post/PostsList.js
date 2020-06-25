@@ -155,7 +155,7 @@ class PostsList extends React.Component {
                               }}
                             >
                               <button
-                                className="  post-item-buttons edit-button"
+                                className="post-item-buttons edit-button"
                               >
                                 <FontAwesomeIcon
                                   icon={faPen}

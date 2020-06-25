@@ -34,15 +34,15 @@ export const signinUser = ({ email, password }) => {
   };
 };
 
-export const signupUser = ({ email, password }) => {
+export const signupUser = ({ email, password, FirstName, LastName, college, year }) => {
   return (dispatch) => {
     // submit email/password to the server
     axios
-      .post(`${ROOT_URL}/signup`, { email, password })
+      .post(`${ROOT_URL}/auth/register`, { email, password, FirstName, LastName, college, year })
       .then((response) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
-        History.push("/posts");
+        History.push("/");
       })
       .catch((err) => {
         dispatch(authError(err.response.data.error));

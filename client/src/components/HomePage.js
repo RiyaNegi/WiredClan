@@ -22,6 +22,7 @@ class HomePage extends PureComponent {
     super(props);
     this.state = {
       search: "",
+      loginNotify: false
     };
   }
 
@@ -46,12 +47,13 @@ class HomePage extends PureComponent {
   notifypost = () => {
     if (!this.props.account && !this.state.loginNotify) {
       this.notifyLogin();
+      this.setState({ loginNotify: true })
     }
   };
 
 
   notifyLogin = () =>
-    toast.warning('❗ SIGN IN to create post', {
+    toast.warning('❗ Sign in to create post', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,

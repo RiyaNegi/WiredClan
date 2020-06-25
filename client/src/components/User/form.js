@@ -118,7 +118,7 @@ class UserForm extends PureComponent {
                   multi
                 />
               </fieldset>
-              <fieldset className="form-group signup-el">
+              <fieldset className="form-group signup-college-el">
                 <label className="sign-text">College</label>
                 <Field
                   className="form-control signup-field"
