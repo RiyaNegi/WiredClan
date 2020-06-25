@@ -10,7 +10,8 @@ import { Modal, Button, Tabs, Tab, Badge } from "react-bootstrap";
 import PostsList from "../Post/PostsList";
 import * as authActions from "../../actions/authActions";
 import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
+import { faFire as faHeartr } from "@fortawesome/free-solid-svg-icons";
+
 
 import "./user.css";
 
@@ -87,7 +88,7 @@ class Profile extends Component {
                 color="gray"
               />
               <div className="ml-2 text-muted font-weight-bold">
-                {this.props.user.likesCount} karma
+                {this.props.user.likesCount} likes
             </div>
             </div>
           </div>

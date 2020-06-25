@@ -4,8 +4,11 @@ import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
+
+import { faFire as faHearts } from "@fortawesome/free-solid-svg-icons";
+import { faFire as faHeartr } from "@fortawesome/free-solid-svg-icons";
+// import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
+// import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class PostLikes extends React.Component {
 
@@ -68,7 +71,7 @@ class PostLikes extends React.Component {
             className=" white-heart"
             icon={faHeartr}
             size="1x"
-            color={this.props.likedByCurrentUser ? "#cc2e36" : "gray"}
+            color={this.props.likedByCurrentUser ? "#eb6c4c" : "gray"}
           />
           <span className="text-muted "> {this.state.likes}</span>
           <FontAwesomeIcon
