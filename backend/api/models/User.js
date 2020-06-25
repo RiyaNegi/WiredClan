@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const bcryptService = require('../services/bcrypt.service');
+const randomId = require('./randomId');
 
 const sequelize = require('../../config/database');
 
@@ -16,6 +17,11 @@ const hooks = {
 const tableName = 'users';
 
 const User = sequelize.define('user', {
+  id: {
+    type: Sequelize.STRING,
+    defaultValue: randomId(),
+    primaryKey: true,
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,

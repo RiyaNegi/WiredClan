@@ -1,12 +1,18 @@
 const Sequelize = require('sequelize');
 const moment = require('moment');
 const sequelize = require('../../config/database');
+const randomId = require('./randomId');
 
 const Comment = require('./Comment');
 
 // const Like = require('./Like');
 
 const Post = sequelize.define('post', {
+  id: {
+    type: Sequelize.STRING,
+    defaultValue: randomId(),
+    primaryKey: true,
+  },
   title: {
     type: Sequelize.STRING,
   },
