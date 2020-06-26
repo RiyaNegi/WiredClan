@@ -3,8 +3,6 @@ const JWTService = require('../services/auth.service');
 // usually: "Authorization: Bearer [token]" or "token: [token]"
 module.exports = (req, res, next) => {
   let tokenToVerify;
-  debugger;
-  console.log(req.header, req.session.userId);
   return next();
   if (req.session.userId) {
     const parts = req.header('Authorization').split(' ');

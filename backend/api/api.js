@@ -102,10 +102,6 @@ app.use(bodyParser.json());
 app.use('/auth', mappedOpenRoutes);
 app.use('/api', mappedAuthRoutes);
 
-app.get('/debug-sentry', function mainHandler(req, res) {
-  throw new Error('My first Sentry error!');
-});
-
 app.use(Sentry.Handlers.errorHandler());
 
 server.listen(config.port, () => {
