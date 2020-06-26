@@ -1,44 +1,65 @@
-#!/bin/bash
+ #!/bin/bash
 
-# Location of our bare repository.
-GIT_DIR="/root/jimmy"
+cd /root/jimmy-master
+# # Install dependencies in production mode.
+cd client
+rm src/config.js
+echo 'const SERVER_URL = "http://nerdmonks.com";
+const SERVER_PORT = "8000";
+export { SERVER_URL, SERVER_PORT };' > src/config.js
+echo "Installing FE dependencies..."
+npm install
+echo "Building FE..."
+npm build
 
-# Where we want to copy our code.
-TARGET="/root/jimmy-master"
+cd ../backend
+echo "Installing BE dependencies..."
+npm install
+echo "Done."
 
-while read oldrev newrev ref
-do
+# # Location of our bare repository.
+# GIT_DIR="/root/jimmy"
 
-    # Neat trick to get the branch name of the reference just pushed:
-    BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
+# # Where we want to copy our code.
+# TARGET="/root/jimmy-master"
 
-    if [[ $BRANCH == "master" ]];
-    then
-        # Send a nice message to the machine pushing to this remote repository.
-        echo "Push received! Deploying branch: ${BRANCH}..."
+# while read oldrev newrev ref
+# do
 
-        # "Deploy" the branch we just pushed to a specific directory.
-        git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
+#     # Neat trick to get the branch name of the reference just pushed:
+#     BRANCH=$(git rev-parse --symbolic --abbrev-ref $ref)
 
-        # Navigate to where my master code lives. 
-        cd /root/jimmy-master
+#     if [[ $BRANCH == "master" ]];
+#     then
+#         # Send a nice message to the machine pushing to this remote repository.
+#         echo "Push received! Deploying branch: ${BRANCH}..."
 
-        # # Install dependencies in production mode.
-        cd client
-        rm src/config.js
-        echo 'const SERVER_URL = "http://68.183.90.12";
-        const SERVER_PORT = "8000";
-        export { SERVER_URL, SERVER_PORT };' > src/config.js
-        echo "Installing FE dependencies..."
-        npm install
-        echo "Building FE..."
-        npm build
+#         # "Deploy" the branch we just pushed to a specific directory.
+#         git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
 
-        cd ../backend
-        echo "Installing BE dependencies..."
-        npm install
-        echo "Done."
-    else 
-        echo "Not master branch. Skipping."
-    fi
-done
+#         # Navigate to where my master code lives. 
+#         cd /root/jimmy-master
+#         echo "Running deploy.sh..."
+#         chmod 755 deploy.sh
+#         ./deploy.sh
+
+#         # cd /root/jimmy-master
+#         # # # Install dependencies in production mode.
+#         # cd client
+#         # rm src/config.js
+#         # echo 'const SERVER_URL = "http://nerdmonks.com";
+#         # const SERVER_PORT = "8000";
+#         # export { SERVER_URL, SERVER_PORT };' > src/config.js
+#         # echo "Installing FE dependencies..."
+#         # npm install
+#         # echo "Building FE..."
+#         # npm build
+
+#         # cd ../backend
+#         # echo "Installing BE dependencies..."
+#         # npm install
+#         # echo "Done."
+#     else 
+#         echo "Not master branch. Skipping."
+#     fi
+# done
