@@ -48,9 +48,6 @@ class Signin extends PureComponent {
       <React.Fragment>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 sign-box">
-            {/* <span className="d-flex mt-3 justify-content-center">
-              <img src={logo} style={{ width: 170, height: 22 }} alt="userIcon" />
-            </span> */}
             <label className="mt-3 d-flex justify-content-center signin-heading">Sign in to your account</label>
             <fieldset className="mt-4 form-group sign-text">
               <label>Email:</label>
@@ -71,11 +68,11 @@ class Signin extends PureComponent {
               />
             </fieldset>
             {this.renderError()}
-            <button action="submit" className="btn site-button">
+            <button action="submit" className="col-6 sign-btn mt-3">
               Sign in
             </button>
 
-            <div className="google-login-div">
+            <div className="d-flex justify-content-center mt-3">
               <GoogleLogin
                 clientId="967814823791-iohjqrepre2s3pbo5eds8ods6fce086c.apps.googleusercontent.com"
                 render={renderProps => (
@@ -96,7 +93,7 @@ class Signin extends PureComponent {
             </div>
             <div className="d-flex justify-content-center" style={{ marginLeft: 11, marginTop: 8 }}>
               Don't have an account? Click here to {" "}
-              <Link to="/signup">{" "} Sign up</Link>
+              <Link className="ml-1" to="/signup">{" "} Sign up</Link>
             </div>
           </div>
         </form>

@@ -164,15 +164,14 @@ class PostsList extends React.Component {
                             </button>
                             </Link>
                             <button
-                              className=" post-item-buttons delete-link"
+                              className=" post-item-buttons delete-button"
                               onClick={this.handleShowModal}
                             >
                               <FontAwesomeIcon
                                 icon={faTrash}
                                 size="1x"
                                 color="gray"
-                              />
-                              Delete
+                              />{" "} Delete
                           </button>
                             {draft ? (
                               <Link

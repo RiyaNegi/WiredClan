@@ -62,7 +62,7 @@ class Comments extends Component {
   renderReplies = (comment, parentId) => {
     return comment.replyComments.map((replyComment) => {
       return (
-        <div className="reply-box mt-3 ml-5" key={replyComment.id}>
+        <div className="reply-box ml-4 ml-md-5" key={replyComment.id}>
           {this.state.editClicked.filter((ci) => ci.id === replyComment.id)
             .length && this.props.account
             ? this.UserReply(parentId, replyComment.id, true, false)
@@ -104,8 +104,8 @@ class Comments extends Component {
             </Modal>
           ) : null}
 
-        <div className="d-flex flex-row col-12 mt-3 justify-content-between">
-          <div>
+        <div className="d-flex flex-row col-12 mt-4 justify-content-between p-0 px-md-3">
+          <div className="pl-2 pl-md-0">
             <div className="card-text">{comment.text}</div>
             <div className="d-flex mt-1">
               <a
@@ -281,7 +281,7 @@ class Comments extends Component {
             : handleSubmit(this.handleFormSubmit(parentId, replyId).bind(this))
         }
       >
-        <div className="mt-3 ml-3 ">
+        <div className={edit || reply ? "ml-md-3 mt-2" : "ml-md-3"}>
           <div className="profile-items">
             <div className="d-flex">
               <div className="profile-icon">
@@ -310,7 +310,7 @@ class Comments extends Component {
             </div>
             <div className="d-flex ml-2 mt-1 float-right">
               <button
-                className="site-button post-button post-reply-but px-3 "
+                className="post-comment-btn px-3"
                 action="submit"
                 disabled={submitting || pristine}
               >
@@ -328,7 +328,7 @@ class Comments extends Component {
                 pauseOnHover={false}
               />
               <button
-                className=" site-button dept-button cancel-btn "
+                className="draft-post-btn  ml-3 "
                 action="cancel"
                 onClick={this.handleCancel(replyId)}
               >
@@ -345,8 +345,8 @@ class Comments extends Component {
       return <div>woah! No comments here..</div>;
     }
     return (
-      <div className="col-10 col-md-12 mt-5 comment-card pr-5">
-        <label className="signin-heading text-muted">Comments</label>
+      <div className="d-flex flex-column col-12 col-md-10 mt-5 comment-card pl-md-3 pr-md-5 p-sm-0">
+        <label className="signin-heading text-muted p-md-4 p-2">Comments</label>
         {(!this.props.account) ? (<div className="d-flex col-12 mt-2">
           <div className="signin-box-com">
             <div className="">
@@ -356,20 +356,23 @@ class Comments extends Component {
             <div className="d-flex">
               <div className="mr-3">
                 <Link className="com-links" to="/signin">
-                  {" "}
-                  SIGN IN
-          </Link>
+                  <button className="post-comment-btn">
+                    {" "} SIGN IN</button>
+
+                </Link>
               </div>
               <div className="">
                 <Link className="com-links" to="/signup">
-                  {" "}
-                  SIGN UP
-          </Link>
+                  <button className="draft-post-btn">
+                    {" "} SIGN UP
+                </button>
+
+                </Link>
               </div>
             </div>
           </div>
         </div>) : <ul className="p-0">{this.UserReply()}</ul>}
-        <ul className="p-0 mt-4">{this.renderComments()}</ul>
+        <ul className="p-0">{this.renderComments()}</ul>
       </div>
     );
   }

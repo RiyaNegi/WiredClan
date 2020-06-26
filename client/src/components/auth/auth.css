@@ -5,10 +5,9 @@
 }
 
 .signin-heading{
-    font-weight: 800;
     font-size: 30px;
-    font-family: 'Quicksand', sans-serif;
-}
+    font-family: 'Frank Ruhl Libre', serif;  
+  }
 .hr {height:1px; border:none; color:#000; background-color:#000;}
 .sign-box{
     flex-direction: column;
@@ -54,6 +53,26 @@
     margin-left: 30px;
 }
 
+
+.sign-btn {
+      background-color: #202020;
+    border: 1px solid #202020;
+    color: white;
+    font-weight:700;
+    border-radius:5px;
+    padding:8px;
+    margin: 0 auto;
+  }
+  
+  .sign-btn:hover {
+    border: 1px solid #202020;
+    color: #202020;
+    background-color: white;
+
+  }
+  .sign-btn:hover {
+    outline:0;
+  }
 .signin-image{
     /* margin-left:-150px !important;
     margin-top: -320px;
@@ -81,7 +100,6 @@
 }
 
 .Select-signup {
-    width: 230px ;
     z-index: 10 !important;
   }
   
@@ -101,11 +119,6 @@
   
   .select__control:hover{
     border: 1px solid rgb(117, 117, 117) !important;
-  }
-
-  .google-login-div{
-      display: flex;
-      justify-content: center;
   }
 
   .google-login{

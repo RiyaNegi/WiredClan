@@ -32,11 +32,11 @@ export const signinUser = ({ email, password }) => {
   };
 };
 
-export const signupUser = ({ email, password, FirstName, LastName, college, year }) => {
+export const signupUser = ({ email, password, FirstName, LastName, college, year, confirmPassword }) => {
   return (dispatch) => {
     // submit email/password to the server
     request
-      .post(`/auth/register`, { email, password, FirstName, LastName, college, year })
+      .post(`/auth/register`, { email, password, FirstName, LastName, college, year, confirmPassword })
       .then((response) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);

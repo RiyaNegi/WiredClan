@@ -68,7 +68,7 @@ class UserForm extends PureComponent {
             )
           )}
         >
-          <div className="d-flex mt-5  flex-column signup-box">
+          <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 sign-box">
             <div className="d-flex justify-content-center" >
               <img
                 src={this.props.user.imageUrl}
@@ -96,52 +96,50 @@ class UserForm extends PureComponent {
                 />
               </fieldset>
             </div>
-            <div className="d-flex mt-2">
-              <fieldset className="form-group">
-                <label className="sign-text">Batch Year</label>
-                <Field
-                  name="year"
-                  options={yearArrray}
-                  component={(props) => (
-                    <Select
-                      {...props}
-                      className="basic-single col-14 Select-signup "
-                      classNamePrefix="select"
-                      placeholder="Select Year.."
-                      isSearchable={false}
-                      value={props.input.value}
-                      onChange={(value) => props.input.onChange(value)}
-                      onBlur={() => props.input.onBlur(props.input.value)}
-                      options={props.options}
-                    />
-                  )}
-                  multi
-                />
-              </fieldset>
-              <fieldset className="form-group signup-college-el">
-                <label className="sign-text">College</label>
-                <Field
-                  className="form-control signup-field"
-                  type="text"
-                  name="college"
-                  component="input"
-                />
-              </fieldset>
-            </div>
+            <fieldset className="form-group">
+              <label className="sign-text">Batch Year</label>
+              <Field
+                name="year"
+                options={yearArrray}
+                component={(props) => (
+                  <Select
+                    {...props}
+                    className="basic-single col-12 p-0 Select-signup "
+                    classNamePrefix="select"
+                    placeholder="Select Year.."
+                    isSearchable={false}
+                    value={props.input.value}
+                    onChange={(value) => props.input.onChange(value)}
+                    onBlur={() => props.input.onBlur(props.input.value)}
+                    options={props.options}
+                  />
+                )}
+                multi
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <label className="sign-text">College</label>
+              <Field
+                className="form-control signup-field"
+                type="text"
+                name="college"
+                component="input"
+              />
+            </fieldset>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
+              <Link to="/homepage">
+                <button className=" px-4 sign-btn ">
+                  Skip
+                  </button>
+              </Link>
               <button
                 type="submit"
-                className="btn site-button"
+                className="m-0 px-4 sign-btn"
                 disabled={submitting}
               >
                 Save
-            </button>
-              <div >
-                <Link to="/homepage">
-                  <button className="btn site-button mr-4">Skip</button>
-                </Link>
-              </div>
+              </button>
             </div>
           </div>
         </form>
