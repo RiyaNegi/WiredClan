@@ -25,20 +25,17 @@ class Signin extends PureComponent {
   }
 
   responseGoogle = (response) => {
+    console.log(
+      "FOROM GOOOOGLE",
+      response,
+    );
     this.props.googleLogin({
       accessToken: response.accessToken,
       email: response.profileObj.email,
       firstName: response.profileObj.givenName,
       lastName: response.profileObj.familyName,
     });
-    console.log(
-      "FOROM GOOOOGLE",
-      response,
-      "email:",
-      response.profileObj.email,
-      "token",
-      response.accessToken
-    );
+
   };
 
   render() {
