@@ -10,7 +10,7 @@ export { SERVER_URL, SERVER_PORT };' > src/config.js
 echo "Installing FE dependencies..."
 npm install
 echo "Building FE..."
-npm build
+npm run build
 
 cd ../backend
 echo "Installing BE dependencies..."
