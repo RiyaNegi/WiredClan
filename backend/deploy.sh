@@ -38,7 +38,7 @@ echo "Done."
 #         git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
 
 #         # Navigate to where my master code lives. 
-#         cd /root/jimmy-master
+#         cd /root/jimmy-master/backend
 #         echo "Running deploy.sh..."
 #         chmod 755 deploy.sh
 #         ./deploy.sh
