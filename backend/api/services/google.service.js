@@ -1,4 +1,5 @@
 const axios = require('axios');
+const logger = require('../../logger');
 
 module.exports = class Google {
   constructor(firstName, lastName) {
@@ -13,8 +14,8 @@ module.exports = class Google {
       },
     })
       .then((response) => (response.data.email === email))
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        logger.error(err);
       });
   }
 };
