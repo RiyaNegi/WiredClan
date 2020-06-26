@@ -4,7 +4,7 @@ cd /root/jimmy-master
 # # Install dependencies in production mode.
 cd client
 rm src/config.js
-echo 'const SERVER_URL = "http://68.183.90.12";
+echo 'const SERVER_URL = "http://nerdmonks.com";
 const SERVER_PORT = "8000";
 export { SERVER_URL, SERVER_PORT };' > src/config.js
 echo "Installing FE dependencies..."
@@ -15,6 +15,8 @@ npm build
 cd ../backend
 echo "Installing BE dependencies..."
 npm install
+echo "Restarting both apps..."
+pm2 restart all
 echo "Done."
 
 # # Location of our bare repository.
