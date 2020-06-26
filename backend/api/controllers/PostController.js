@@ -1,10 +1,10 @@
-const logger = require('../../logger');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const Tag = require('../models/Tag');
 const Like = require('../models/Like');
 const Sequelize = require('sequelize');
+const logger = require('../../logger');
 
 const PostController = () => {
   const getAll = async (req, res) => {
@@ -41,8 +41,6 @@ const PostController = () => {
 
   const get = async (req, res) => {
     try {
-      const x = result.likedByCurrentUser.result.likedByCurrentUser;
-
       const result = (await Post.findOne({
         where: Sequelize.or(
           {
@@ -102,7 +100,7 @@ const PostController = () => {
       const result = await Post.destroy({ where: { id: req.params.id, userId: req.session.userId } });
       return res.status(200).json({ status: !!result });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -119,7 +117,7 @@ const PostController = () => {
       });
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -137,7 +135,7 @@ const PostController = () => {
 
       return res.status(200).json({ ...post.get({ plain: true }), user });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -148,7 +146,7 @@ const PostController = () => {
       const comment = await Comment.create({ ...req.body, userId: user.id, postId: req.params.postId });
       return res.status(200).json(comment);
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -173,7 +171,7 @@ const PostController = () => {
 
       return res.status(200).json(comment);
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -184,7 +182,7 @@ const PostController = () => {
       const result = await Comment.destroy({ where: { id: req.params.id, userId: user.id } });
       return res.status(200).json({ status: !!result });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };

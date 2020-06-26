@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
+const logger = require('../../logger');
 
 const AccountController = () => {
   const register = async (req, res) => {
@@ -16,7 +17,7 @@ const AccountController = () => {
         const token = authService().issue({ id: user.id });
         return res.status(200).json({ token, user });
       } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(400).json({ msg: 'The email is already registered.' });
       }
     }
@@ -48,7 +49,7 @@ const AccountController = () => {
 
         return res.status(401).json({ msg: 'Unauthorized' });
       } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(500).json({ msg: 'Internal server error' });
       }
     }
@@ -74,7 +75,7 @@ const AccountController = () => {
       const result = await user.update(req.body);
       return res.status(200).json({ result });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -84,7 +85,7 @@ const AccountController = () => {
       const user = await User.findOne({ where: { id: req.session.userId }, include: [Post] });
       return res.status(200).json({ user });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };

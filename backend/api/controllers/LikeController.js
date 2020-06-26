@@ -1,6 +1,7 @@
 
 const User = require('../models/User');
 const Like = require('../models/Like');
+const logger = require('../../logger');
 
 const LikeController = () => {
   const create = async (req, res) => {
@@ -12,7 +13,7 @@ const LikeController = () => {
       }
       return res.status(200).json({ success: !!like });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -23,7 +24,7 @@ const LikeController = () => {
       const result = await Like.destroy({ where: { postId: req.body.postId, userId: user.id } });
       return res.status(200).json({ status: !!result });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };

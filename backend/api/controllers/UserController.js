@@ -9,6 +9,7 @@ const bcryptService = require('../services/bcrypt.service');
 const Sequelize = require('sequelize');
 const Google = require('../services/google.service');
 const sequelize = require('../../config/database');
+const logger = require('../../logger');
 
 const UserController = () => {
   const register = async (req, res) => {
@@ -25,7 +26,7 @@ const UserController = () => {
         req.session.cookie.originalMaxAge = 31556952000;
         return res.status(200).json({ token, user });
       } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(400).json({ msg: 'The email is already registered.' });
       }
     }
@@ -67,7 +68,7 @@ const UserController = () => {
 
         return res.status(200).json({ token, user });
       } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(400).json({ msg: 'The email is already registered.' });
       }
     }
@@ -100,7 +101,7 @@ const UserController = () => {
 
         return res.status(401).json({ msg: 'Unauthorized' });
       } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(500).json({ msg: 'Internal server error' });
       }
     }
@@ -147,7 +148,7 @@ const UserController = () => {
         return res.status(200).json({ token, user });
       }
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
     return res.status(400).json({ msg: 'Bad Request: Email or password is wrong' });
@@ -200,7 +201,7 @@ const UserController = () => {
       delete user.likes;
       return res.status(200).json(user);
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -221,7 +222,7 @@ const UserController = () => {
         result,
       });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -249,7 +250,7 @@ const UserController = () => {
       user = user.get({ plain: true });
       return res.status(200).json(user);
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -260,7 +261,7 @@ const UserController = () => {
 
       return res.status(200).json({ users });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -270,7 +271,7 @@ const UserController = () => {
       await req.session.destroyAsync();
       return res.status(200).json({ sucess: true });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
