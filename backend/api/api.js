@@ -8,10 +8,9 @@ const http = require('http');
 const mapRoutes = require('express-routes-mapper');
 // const cors = require('cors');
 const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 const Sentry = require('@sentry/node');
-
 
 /**
  * server configuration
@@ -24,15 +23,13 @@ const dbService = require('./services/db.service');
 const environment = process.env.NODE_ENV;
 require('dotenv').config();
 
-/**
- * express application
- */
 const app = express();
-Sentry.init({ dsn: 'https://8a0b81953b134fb3ad1daeaa83af56a5@o412718.ingest.sentry.io/5291989' });
 
-// The request handler must be the first middleware on the app
-app.use(Sentry.Handlers.requestHandler());
-
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({ dsn: 'https://8a0b81953b134fb3ad1daeaa83af56a5@o412718.ingest.sentry.io/5291989' });
+  // The request handler must be the first middleware on the app
+  app.use(Sentry.Handlers.requestHandler());
+}
 
 const Promise = require('bluebird');
 const session = Promise.promisifyAll(require('express-session'));
@@ -56,10 +53,19 @@ app.use(session({
   },
 }));
 
+const logger = require('../logger');
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-// setup the logger
-app.use(morgan('combined', { stream: accessLogStream }));
+logger.stream = {
+  write(message) {
+    logger.info(message);
+  },
+};
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined', { stream: logger.stream }));
+} else {
+  app.use(morgan('dev', { stream: logger.stream }));
+}
 
 const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
@@ -102,7 +108,9 @@ app.use(bodyParser.json());
 app.use('/auth', mappedOpenRoutes);
 app.use('/api', mappedAuthRoutes);
 
-app.use(Sentry.Handlers.errorHandler());
+if (process.env.NODE_ENV === 'production') {
+  app.use(Sentry.Handlers.errorHandler());
+}
 
 server.listen(config.port, () => {
   if (environment !== 'production' &&

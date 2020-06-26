@@ -31,6 +31,7 @@
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.7.2",
     "body-parser": "^1.18.2",
+    "chalk": "^4.1.0",
     "connect-redis": "^4.0.4",
     "core-js": "^2.6.9",
     "cors": "^2.8.5",
@@ -50,7 +51,9 @@
     "request": "^2.88.2",
     "sequelize": "^5.0.0",
     "sequelize-cli": "^5.5.1",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
   },
   "devDependencies": {
     "cross-env": "^5.1.4",

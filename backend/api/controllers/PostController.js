@@ -1,3 +1,4 @@
+const logger = require('../../logger');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
@@ -33,13 +34,15 @@ const PostController = () => {
         }),
       });
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
 
   const get = async (req, res) => {
     try {
+      const x = result.likedByCurrentUser.result.likedByCurrentUser;
+
       const result = (await Post.findOne({
         where: Sequelize.or(
           {
@@ -89,7 +92,7 @@ const PostController = () => {
       delete result.likes;
       return res.status(200).json(result);
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
