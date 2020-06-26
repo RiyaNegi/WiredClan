@@ -10,6 +10,7 @@ const mapRoutes = require('express-routes-mapper');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
+const Sentry = require('@sentry/node');
 
 
 /**
@@ -27,6 +28,10 @@ require('dotenv').config();
  * express application
  */
 const app = express();
+Sentry.init({ dsn: 'https://8a0b81953b134fb3ad1daeaa83af56a5@o412718.ingest.sentry.io/5291989' });
+
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
 
 
 const Promise = require('bluebird');
@@ -96,6 +101,8 @@ app.use(bodyParser.json());
 // fill routes for express application
 app.use('/auth', mappedOpenRoutes);
 app.use('/api', mappedAuthRoutes);
+
+app.use(Sentry.Handlers.errorHandler());
 
 server.listen(config.port, () => {
   if (environment !== 'production' &&

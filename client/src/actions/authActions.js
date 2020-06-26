@@ -11,8 +11,6 @@ import {
 
 import { handleError } from "./handleError";
 
-const ROOT_URL = "http://localhost:8000";
-
 export const signinUser = ({ email, password }) => {
   return (dispatch) => {
     // submit email/password to the server

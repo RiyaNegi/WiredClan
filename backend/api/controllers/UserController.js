@@ -94,7 +94,6 @@ const UserController = () => {
           const token = authService().issue({ id: user.id });
           req.session.userId = user.id;
           req.session.cookie.originalMaxAge = 31556952000;
-          console.log(req.session);
 
           return res.status(200).json({ token, user });
         }

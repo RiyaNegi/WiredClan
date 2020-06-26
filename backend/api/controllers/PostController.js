@@ -46,7 +46,7 @@ const PostController = () => {
             id: req.params.id, published: true,
           },
           {
-            id: req.params.id, published: false, userId: req.session.userId ? req.session.userId : -1,
+            id: req.params.id, published: false, userId: req.session.userId ? req.session.userId : '',
           },
         ),
         include: [

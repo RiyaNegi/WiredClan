@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@sentry/node": "^5.18.0",
     "axios": "^0.19.2",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.7.2",
