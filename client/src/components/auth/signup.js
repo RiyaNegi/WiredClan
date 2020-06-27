@@ -103,7 +103,7 @@ class Signup extends PureComponent {
                     isSearchable={false}
                     value={props.input.value}
                     onChange={(value) => props.input.onChange(value)}
-                    onBlur={() => props.input.onBlur(props.input.value)}
+                    onBlur={event => event.preventDefault()}
                     options={props.options}
                   />
                 )}

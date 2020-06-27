@@ -68,7 +68,8 @@ class PostLikes extends React.Component {
   render() {
     return (
       <div className="">
-        <button className="px-3 pt-2 upvote d-flex flex-column align-items-center h-100 like-button" onClick={this.updateLikes(this.state.id)}>
+        <button className="px-3 pt-2 upvote d-flex flex-column align-items-center h-100 like-button"
+          onClick={this.updateLikes(this.state.id)}>
           <FontAwesomeIcon
             className=" white-heart"
             icon={faHeartr}
