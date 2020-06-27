@@ -108,10 +108,6 @@ app.use(bodyParser.json());
 app.use('/auth', mappedOpenRoutes);
 app.use('/api', mappedAuthRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(Sentry.Handlers.errorHandler());
-}
-
 server.listen(config.port, () => {
   if (environment !== 'production' &&
     environment !== 'development' &&
