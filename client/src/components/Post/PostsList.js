@@ -105,7 +105,7 @@ class PostsList extends React.Component {
                     <span className="text-l-gray">
                       <a
                         className="text-l-gray username"
-                        href={`/Users/${post.userId}`}
+                        href={`/users/${post.userId}`}
                       >
                         <img
                           src={

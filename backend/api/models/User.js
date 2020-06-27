@@ -69,7 +69,13 @@ const User = sequelize.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-}, { hooks, tableName });
+}, {
+  hooks,
+  tableName,
+  defaultScope: {
+    attributes: { exclude: ['password', 'email', 'viaGoogle', 'registeredViaLoginViaGoogle'] },
+  },
+});
 
 // eslint-disable-next-line
 User.prototype.toJSON = function () {

@@ -18,7 +18,7 @@ class Header extends PureComponent {
 
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="d-flex flex-row navbar navbar-expand-lg navbar-light px-0">
         <a class="navbar-brand" href="/">
           {/* <label
             style={{
@@ -43,7 +43,7 @@ class Header extends PureComponent {
           >
             J
           </label> */}
-          <img src={logo} style={{ width: 120, height: 17 }} alt="userIcon" />
+          <img src={logo} style={{ width: 122, height: 16 }} alt="userIcon" />
         </a>
         <button
           class="navbar-toggler"
@@ -62,7 +62,7 @@ class Header extends PureComponent {
 
           {this.props.authenticated ? (
             <ul class="navbar-nav">
-              <li className="row mr-2">
+              <li className="">
                 <li class="nav-item">
                   <a class="nav-link" href={`/users/${this.props.user.id}`}>
                     <img

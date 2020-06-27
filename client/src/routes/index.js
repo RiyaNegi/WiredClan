@@ -26,7 +26,7 @@ const Routes = () => {
         <Route path="/HomePage" component={HomePage} />
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />
-        <Route path="/Users/:id" component={Profile} />
+        <Route path="/users/:id" component={Profile} />
         <Route path="/:slug/:id" component={postDetails} />
 
         <Route component={pageNotFound} />

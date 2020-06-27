@@ -14,11 +14,17 @@ const logger = require('../../logger');
 const UserController = () => {
   const register = async (req, res) => {
     const { body } = req;
+    body.confirmPassword = body.password;
     if (body.password === body.confirmPassword) {
       try {
         const user = await User.create({
           email: body.email,
           password: body.password,
+          firstName: body.firstName,
+          lastName: body.lastName,
+          year: body.year,
+          college: body.college,
+          imageUrl: `https://api.adorable.io/avatars/80/${body.firstName}${body.lastName}.png`,
         });
         const token = authService().issue({ id: user.id });
         req.session.userId = user.id;
