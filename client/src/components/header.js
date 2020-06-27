@@ -108,19 +108,19 @@ class Header extends PureComponent {
               </li>
             </ul>
           ) : (
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/">
-                  Sign Up
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup">
+                    Sign Up
                 </a>
-              </li>
-              <li class="nav-item">
-                <Link className="nav-link" to="/signin">
-                  Sign In
+                </li>
+                <li class="nav-item">
+                  <Link className="nav-link" to="/signin">
+                    Sign In
                 </Link>
-              </li>
-            </ul>
-          )}
+                </li>
+              </ul>
+            )}
         </div>
       </nav>
     );

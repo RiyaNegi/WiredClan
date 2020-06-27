@@ -114,9 +114,9 @@ class Profile extends Component {
         {this.props.account &&
           this.props.account.id === this.props.user.id && (
             <div className="mt-4">
-              <Button variant="primary col-12 new-post-button p-0">
-                <Link className="no-decoration" to={"/CreatePost"}>
-                  <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
+              <Button variant=" col-12 new-post-button p-0">
+                <Link className="com-links" to={"/CreatePost"}>
+                  <div className=" p-2 py-2 com-links">📝 New Post</div>
                 </Link>
               </Button>
             </div>

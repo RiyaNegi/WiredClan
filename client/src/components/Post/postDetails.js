@@ -88,28 +88,24 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div key={post.id}>
+      <div className="col-12 col-md-11" key={post.id}>
+        <label className="signin-heading"><h2>{post.title}</h2></label>
         <div>
-          <div>
-            <h3> {post.title} </h3>
-          </div>
-          <div>
-            <a href={`/Users/${post.userId}`} className="no-decoration">
-              <span className="text-muted"> Posted by </span>{" "}
-              <span className="font-weight-bold">
-                {" "}
-                <img
-                  src={post.user.imageUrl}
-                  style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
-                  alt="userIcon"
-                  className="mr-1"
-                />
-                {post.user.userName}
-              </span>
-            </a>
-          </div>
+          <a href={`/Users/${post.userId}`} className="no-decoration">
+            <span className="text-muted" > Posted by </span>{" "}
+            <span className="font-weight-bold" >
+              {" "}
+              <img
+                src={post.user.imageUrl}
+                style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
+                alt="userIcon"
+                className="mr-1"
+              />
+              {post.user.firstName} {post.user.lastName}
+            </span>
+          </a>
         </div>
-        <div className="mt-3 post-display">
+        <div className="mt-3 post-display" style={{ fontSize: 18 }}>
           <div
             dangerouslySetInnerHTML={{
               __html: this.convertDataFromJSONToHTML(post.description),
@@ -118,7 +114,7 @@ class PostDetails extends Component {
         </div>
         <div className="mt-2 d-flex flex-row justify-content-between">
           <PostDetailLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
-          <div className="d-flex">
+          <div className="d-flex mr-md-5">
             <button
               type="button"
               class="btn btn-light post-tag-button text-l-gray align-self-center"
@@ -146,15 +142,14 @@ class PostDetails extends Component {
                   </button>
                 </Link>
                 <button
-                  className="post-item-buttons delete-link"
+                  className="post-item-buttons delete-button"
                   onClick={this.handleShowModal}
                 >
                   <FontAwesomeIcon
                     icon={faTrash}
                     size="1x"
                     color="gray"
-                  />
-                  Delete
+                  />{" "} Delete
                   </button>
               </div>
             )}
@@ -173,7 +168,7 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="col-md-8 mt-md-4 p-0">
+      <div className="col-12 col-md-11 mt-md-4 p-0">
         {this.renderPostDetails()}
         <Comments comments={this.props.comments} postId={this.props.post.id} />
         <Modal

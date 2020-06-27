@@ -38,7 +38,7 @@ class CreatePost extends Component {
   };
 
   handleFormSubmit = (name) => {
-    let postId = parseInt(this.props.match.params.id);
+    let postId = this.props.post.id;
     return (params) => {
       if (name === "save" && params["title"]) {
         this.props.updatePost(
@@ -64,9 +64,6 @@ class CreatePost extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    // let edit = this.props.location.state.edit
-    //   ? this.props.location.state.edit
-    //   : false;
     if (!this.props.post || !this.props.tags) {
       return (
         <div className="loader">
@@ -99,7 +96,7 @@ class CreatePost extends Component {
             <div className="">
               <div className="d-flex flex-row">
                 <button
-                  className="ml-2 btn btn-light site-button post-button"
+                  className="ml-2 sign-btn "
                   action="submit"
                   name="publish"
                   onClick={handleSubmit(this.handleFormSubmit("publish"))}
@@ -111,7 +108,7 @@ class CreatePost extends Component {
                   to={`/previewPost/${this.props.post.id}`}
                 >
                   <button
-                    className="btn btn-secondary site-button dept-button draft-button"
+                    className="draft-post-btn p-2"
                     action="submit"
                     name="save"
                   >
@@ -119,7 +116,7 @@ class CreatePost extends Component {
                   </button>
                 </Link>
                 <button
-                  className="ml-2 btn btn-secondary"
+                  className="ml-2 draft-post-btn"
                   action="submit"
                   name="save"
                   onClick={handleSubmit(this.handleFormSubmit("save"))}

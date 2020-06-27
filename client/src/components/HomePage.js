@@ -22,6 +22,7 @@ class HomePage extends PureComponent {
     super(props);
     this.state = {
       search: "",
+      loginNotify: false
     };
   }
 
@@ -46,12 +47,13 @@ class HomePage extends PureComponent {
   notifypost = () => {
     if (!this.props.account && !this.state.loginNotify) {
       this.notifyLogin();
+      this.setState({ loginNotify: true })
     }
   };
 
 
   notifyLogin = () =>
-    toast.warning('❗ SIGN IN to create post', {
+    toast.warning('❗ Sign in to create post', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,
@@ -77,11 +79,11 @@ class HomePage extends PureComponent {
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />
           <div className="mt-4">
-            <Button variant="primary col-12 new-post-button p-0" onClick={this.notifypost}>
-              {this.props.account ? (<Link className="no-decoration" to={"/CreatePost"} >
-                <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
+            <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
+              {this.props.account ? (<Link className="com-links" to={"/CreatePost"} >
+                <div className="p-2 py-2 com-links">📝 New Post</div>
               </Link>)
-                : <div className="p-2 py-2 no-decoration create-post-but">📝 New Post</div>
+                : <div className="p-2 py-2 com-links">📝 New Post</div>
               }
             </Button>
           </div>

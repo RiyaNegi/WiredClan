@@ -61,7 +61,6 @@ class CreatePost extends Component {
         return
       }
       if ((!params["postTag"] || !params["postTitle"]) && this.props.account) {
-        console.log("notify was called")
         this.notify()
         return
       }
@@ -134,7 +133,7 @@ class CreatePost extends Component {
       this.notifyLogin();
       this.setState({ loginNotify: true })
     }
-    let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
+    let tagsArray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
       <div className="mt-4">
         <form >
@@ -144,7 +143,7 @@ class CreatePost extends Component {
             </label> */}
             <Field
               name='postTag'
-              options={tagsArrray}
+              options={tagsArray}
               component={(props) => (
                 <Select
                   {...props}
@@ -163,7 +162,7 @@ class CreatePost extends Component {
             <div className="">
               <div className="d-flex flex-row">
                 <button
-                  className="ml-3 btn btn-secondary"
+                  className="draft-post-btn"
                   action="submit"
                   name="save"
                   disabled={submitting || pristine}
@@ -172,7 +171,7 @@ class CreatePost extends Component {
                   Save As Draft
                 </button>
                 <button
-                  className="ml-3 btn btn-light site-button post-button"
+                  className="ml-3 sign-btn"
                   action="submit"
                   name="submit"
                   disabled={submitting || pristine}
@@ -202,6 +201,7 @@ class CreatePost extends Component {
                 placeholder="Title"
                 name="postTitle"
                 component="input"
+                row="1"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") e.preventDefault();
                 }}
