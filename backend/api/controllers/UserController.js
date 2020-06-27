@@ -135,7 +135,7 @@ const UserController = () => {
             imageUrl: `https://api.adorable.io/avatars/80/${firstName}${lastName}.png`,
           });
           const token = authService().issue({ id: newUser.id });
-          req.session.userId = user.id;
+          req.session.userId = newUser.id;
           req.session.cookie.originalMaxAge = 31556952000;
 
           return res.status(200).json({ token, user: newUser, newUser: true });
