@@ -16,6 +16,7 @@ cd ../backend
 echo "Installing BE dependencies..."
 npm install
 echo "Restarting both apps..."
+sequelize db:migrate
 pm2 restart all
 echo "Done."
 

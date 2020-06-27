@@ -1,7 +1,11 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface, _Sequelize) => {
+    queryInterface.sequelize.query(`
+    ALTER TABLE posts
+    ADD COLUMN blah text;    
+    `);
     /**
      * Add altering commands here.
      *
@@ -10,7 +14,7 @@ module.exports = {
      */
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     /**
      * Add reverting commands here.
      *

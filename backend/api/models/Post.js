@@ -13,6 +13,9 @@ const Post = sequelize.define('post', {
     defaultValue: randomId(),
     primaryKey: true,
   },
+  blah: {
+    type: Sequelize.STRING,
+  },
   title: {
     type: Sequelize.STRING,
   },
