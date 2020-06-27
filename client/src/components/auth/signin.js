@@ -4,10 +4,8 @@ import { Field, reduxForm } from "redux-form";
 import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import "./auth.css";
-import humaaans from "./humaaans.png";
 import googleIcon from "./googleIcon.png";
 import { Link } from "react-router-dom";
-import Loader from "react-loader-spinner";
 import { GoogleLogin } from "react-google-login";
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {

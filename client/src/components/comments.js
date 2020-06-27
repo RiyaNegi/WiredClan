@@ -363,7 +363,7 @@ class Comments extends Component {
               </div>
               <div className="">
                 <Link className="com-links" to="/signup">
-                  <button className="draft-post-btn">
+                  <button className="draft-post-btn p-1">
                     {" "} SIGN UP
                 </button>
 
