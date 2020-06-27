@@ -98,7 +98,7 @@ class Signup extends PureComponent {
                   <Select
                     {...props}
                     className="basic-single p-0 Select-signup "
-                    classNamePrefix="select"
+                    classNamePrefix="needsclick "
                     placeholder="Select Year.."
                     isSearchable={false}
                     value={props.input.value}

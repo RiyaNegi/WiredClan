@@ -83,7 +83,7 @@ class CreatePost extends Component {
                 <Select
                   {...props}
                   className="basic-single col-3 Select"
-                  classNamePrefix="select"
+                  classNamePrefix="needsclick "
                   isSearchable={false}
                   value={props.input.value}
                   onChange={(value) => props.input.onChange(value)}
