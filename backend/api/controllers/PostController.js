@@ -9,7 +9,7 @@ const logger = require('../../logger');
 const PostController = () => {
   const getAll = async (req, res) => {
     try {
-      trying on proudction
+      tryingOnProudction
       const result = await Post.findAll({
         where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ''}%` } },
         order: [
