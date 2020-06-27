@@ -22,7 +22,7 @@ const Leaderboard = ({ className, style, topContributors }) => {
             topContributors.map((user) => (
               <div className="mt-1 font-weight-bold leaderboard-row">
                 <a
-                  href={`/Users/${user.id}`}
+                  href={`/users/${user.id}`}
                   className="d-flex flex-row no-decoration py-2"
                 >
                   <span className="col-9 d-flex flex-row pr-0">

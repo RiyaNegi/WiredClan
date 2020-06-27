@@ -91,7 +91,7 @@ class PostDetails extends Component {
       <div className="col-12 col-md-11" key={post.id}>
         <label className="signin-heading"><h2>{post.title}</h2></label>
         <div>
-          <a href={`/Users/${post.userId}`} className="no-decoration">
+          <a href={`/users/${post.userId}`} className="no-decoration">
             <span className="text-muted" > Posted by </span>{" "}
             <span className="font-weight-bold" >
               {" "}

@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div class="container">
+        <div class="container main-container">
           <Header />
           {this.props.location.pathname === "/signin" ||
             this.props.location.pathname === "/signup" ? (
@@ -37,13 +37,11 @@ class App extends Component {
             ) : (
               <div className="container p-0">{this.props.children}</div>
             )}
+          <footer class="page-footer">
+            <p className="footer-text pt-5 pb-4">Designed & made with ❤ in India </p>
+          </footer>
         </div>
-        <footer class="page-footer">
-          <hr />
-          <div class="footer-copyright text-center py-2 text-muted">
-            <p className="mr-5">Designed and made with ❤️ in India </p>
-          </div>
-        </footer>
+
       </React.Fragment>
     );
   }

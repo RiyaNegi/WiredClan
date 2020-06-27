@@ -109,7 +109,7 @@ class Comments extends Component {
             <div className="card-text">{comment.text}</div>
             <div className="d-flex mt-1">
               <a
-                href={`/Users/${comment.user.id}`}
+                href={`/users/${comment.user.id}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <div className="usericon">
@@ -121,7 +121,7 @@ class Comments extends Component {
                 </div>
               </a>
               <a
-                href={`/Users/${comment.user.id}`}
+                href={`/users/${comment.user.id}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <span className="username ml-2">{comment.user.firstName} {comment.user.lastName}</span>

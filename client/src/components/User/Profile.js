@@ -145,7 +145,7 @@ class Profile extends Component {
                   <Tab eventKey="user-posts" title="Posts">
                     <div className="mt-3">
                       <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
-                      <label className="d-flex flex-column text-center text-muted">No Posts created<br /> Get started and create awesome posts!</label>
+                      <label className="d-flex flex-column text-center text-muted">No posts created<br /> Get started and create awesome posts!</label>
                     </div>
                   </Tab>
                 ) : (this.props.posts.length === 0) ?
@@ -153,7 +153,7 @@ class Profile extends Component {
                     <Tab eventKey="user-posts" title="Posts">
                       <div className="mt-3">
                         <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
-                        <label className="d-flex flex-column text-center text-muted">No Posts created</label>
+                        <label className="d-flex flex-column text-center text-muted">No posts created</label>
                       </div>
                     </Tab>
                   ) : (this.props.posts.length > 0) && (
@@ -172,7 +172,7 @@ class Profile extends Component {
                   this.props.account.id === this.props.user.id && this.props.drafts.length === 0) && (<Tab eventKey="user-drafts" title="Drafts">
                     <div className="mt-3">
                       <label className="d-flex flex-column text-center text-muted mt-3"><h3>📝</h3></label>
-                      <label className="d-flex flex-column text-center text-muted">No Drafts created<br /> Get started and save your ongoing work here!</label>
+                      <label className="d-flex flex-column text-center text-muted">No drafts created<br /> Get started and save your ongoing work here!</label>
                     </div>
                   </Tab>)}
             </Tabs>

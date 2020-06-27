@@ -71,7 +71,7 @@ class Signup extends PureComponent {
             <fieldset className="form-group">
               <Field
                 className="form-control signup-field"
-                name="FirstName"
+                name="firstName"
                 label="First Name"
                 component={this.renderField}
                 type="text"
@@ -80,7 +80,7 @@ class Signup extends PureComponent {
             <fieldset className="form-group signup-el">
               <Field
                 className="form-control signup-field"
-                name="Last Name"
+                name="lastName"
                 label="Last Name"
                 component={this.renderField}
                 type="text"
@@ -175,8 +175,8 @@ const validate = values => {
     errors.password = "Please enter password";
   }
 
-  if (!values.FirstName) {
-    errors.FirstName = "Please enter First Name";
+  if (!values.firstName) {
+    errors.firstName = "Please enter First Name";
   }
   return errors;
 };

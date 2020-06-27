@@ -128,7 +128,7 @@ class UserForm extends PureComponent {
             </fieldset>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
-              <Link to="/homepage">
+              <Link to="/">
                 <button className=" px-4 sign-btn ">
                   Skip
                   </button>
@@ -165,8 +165,8 @@ const validate = (values) => {
     errors.Username = "Please enter Username";
   }
 
-  if (!values.FirstName) {
-    errors.FirstName = "Please enter First Name";
+  if (!values.firstName) {
+    errors.firstName = "Please enter First Name";
   }
 
   if (!values.Year) {

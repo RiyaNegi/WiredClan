@@ -22,24 +22,24 @@ export const signinUser = ({ email, password }) => {
         localStorage.setItem("token", response.data.token);
         // - redirect to the route '/posts'
         fetchAccount(response.data.user.id, true)(dispatch);
-        History.push("/HomePage");
+        History.push("/");
       })
       .catch(() => {
         // if request is bad...
         // - show an error to the user
-        dispatch(authError("Bad Login Info"));
+        dispatch(authError("Something went wrong."));
       });
   };
 };
 
-export const signupUser = ({ email, password, FirstName, LastName, college, year, confirmPassword }) => {
+export const signupUser = ({ email, password, firstName, lastName, college, year, confirmPassword }) => {
   return (dispatch) => {
     // submit email/password to the server
     request
-      .post(`/auth/register`, { email, password, FirstName, LastName, college, year, confirmPassword })
+      .post(`/auth/register`, { email, password, firstName, lastName, college, year: year.value, confirmPassword })
       .then((response) => {
-        dispatch({ type: AUTH_USER });
         localStorage.setItem("token", response.data.token);
+        fetchAccount(response.data.user.id, true)(dispatch);
         History.push("/");
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ export const signoutUser = () => {
       .then((response) => {
         localStorage.removeItem("token");
         localStorage.removeItem("profileData");
-        History.push("/HomePage");
+        History.push("/");
         dispatch({
           type: UNAUTH_USER,
         });
@@ -140,7 +140,7 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
         fetchAccount(response.data.user.id, true)(dispatch);
       })
       .catch(() => {
-        dispatch(authError("Bad Login Info"));
+        dispatch(authError("Something went wrong."));
       });
   };
 };
@@ -163,7 +163,7 @@ export const fetchAccount = (id, redirect = false) => {
               redirectHomeAfterSubmit: true,
             });
           } else {
-            History.push("/HomePage");
+            History.push("/");
           }
         }
       })
