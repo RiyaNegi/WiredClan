@@ -17,6 +17,7 @@ node --version
 sudo npm install pm2 -g
 sudo npm install serve -g
 sudo npm install sequelize-cli -g
+curl -sL https://sentry.io/get-cli/ | bash
 
 pm2 start npm --name "frontend" -- run production
 
@@ -26,3 +27,9 @@ npm install
 pm2 start npm --name "backend" -- serve -s build  -p 80
 OR 
 pm2 start npm --name "backend" -- "serve -s build -p 80"
+
+
+
+FOR FOREST ADMIN:
+npm install -g lumber-cli@latest -s
+lumber generate "CodeJimmy" --connection-url "postgres://postgres:postgres@nerdmonks.com:5432/jimmy_db" --ssl "false" --schema "public" --application-host "localhost" --application-port "3310" --email "thecodersblock@gmail.com" --token "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImRhdGEiOnsidHlwZSI6InVzZXJzIiwiaWQiOiIzNzU0MSIsImF0dHJpYnV0ZXMiOnsiZmlyc3RfbmFtZSI6IlJhaiIsImxhc3RfbmFtZSI6Ik5lZ2kiLCJlbWFpbCI6InRoZWNvZGVyc2Jsb2NrQGdtYWlsLmNvbSJ9fX0sImlhdCI6MTU5MzIxOTM3NSwiZXhwIjoxNTkzMzkyMTc1LCJhdWQiOiJGT1JFU1RfVVNFUlMiLCJpc3MiOiJGT1JFU1RfQVVUSEVOVElDQVRJT05fU1lTVEVNIn0.Z6wPEGw8hCNymHIsxJD8jach1U3sArktlz4UtYJUMZs"

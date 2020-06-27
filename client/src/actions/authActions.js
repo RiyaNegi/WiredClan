@@ -122,6 +122,12 @@ export const updateUser = (
 
 export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
   return (dispatch) => {
+    console.log("Sending request as:", {
+      email,
+      accessToken,
+      firstName,
+      lastName,
+    });
     request
       .post(`/auth/googleLogin`, {
         email,
