@@ -4,7 +4,6 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Modal, Button, Tabs, Tab, Badge } from "react-bootstrap";
 import PostsList from "../Post/PostsList";

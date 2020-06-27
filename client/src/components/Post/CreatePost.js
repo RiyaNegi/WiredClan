@@ -137,60 +137,59 @@ class CreatePost extends Component {
     return (
       <div className="mt-4">
         <form >
-          <div className="d-flex flex-row justify-content-between">
+          <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
             </label> */}
-            <Field
-              name='postTag'
-              options={tagsArray}
-              component={(props) => (
-                <Select
-                  {...props}
-                  className="basic-single col-3 Select"
-                  classNamePrefix="needsclick "
-                  placeholder="Select Tag.."
-                  isSearchable={false}
-                  value={props.input.value}
-                  onChange={(value) => props.input.onChange(value)}
-                  onBlur={event => event.preventDefault()}
-                  options={props.options}
-                />
-              )}
-              multi
-            />
-            <div className="">
-              <div className="d-flex flex-row">
-                <button
-                  className="draft-post-btn"
-                  action="submit"
-                  name="save"
-                  disabled={submitting || pristine}
-                  onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
-                >
-                  Save As Draft
+            <div className="col-md-5 mt-2 col-10">
+              <Field
+                name='postTag'
+                options={tagsArray}
+                component={(props) => (
+                  <Select
+                    {...props}
+                    className="basic-single col-11 col-md-8 ml-2 p-0 Select"
+                    classNamePrefix="needsclick "
+                    placeholder="Select Tag.."
+                    isSearchable={false}
+                    value={props.input.value}
+                    onChange={(value) => props.input.onChange(value)}
+                    onBlur={event => event.preventDefault()}
+                    options={props.options}
+                  />
+                )}
+              />
+            </div>
+            <div className="d-flex flex-row ml-4 ">
+              <button
+                className="draft-post-btn"
+                action="submit"
+                name="save"
+                disabled={submitting || pristine}
+                onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
+              >
+                Save As Draft
                 </button>
-                <button
-                  className="ml-3 sign-btn"
-                  action="submit"
-                  name="submit"
-                  disabled={submitting || pristine}
-                  onClick={handleSubmit(this.handleFormSubmit("submit"))}
-                >
-                  Submit Post
+              <button
+                className="ml-2 sign-btn"
+                action="submit"
+                name="submit"
+                disabled={submitting || pristine}
+                onClick={handleSubmit(this.handleFormSubmit("submit"))}
+              >
+                Submit Post
                 </button>
-                <ToastContainer
-                  position="top-right"
-                  autoClose={3000}
-                  hideProgressBar
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss={false}
-                  draggable={false}
-                  pauseOnHover
-                />
-              </div>
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+              />
             </div>
           </div>
           <div className="mt-3">

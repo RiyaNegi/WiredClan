@@ -9,7 +9,17 @@ import Loader from "react-loader-spinner";
 import ControlledEditor from "./controlledEditor";
 import { Link } from "react-router-dom";
 import Select from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 
+function renderTooltip(props) {
+  return (
+    <Tooltip id="button-tooltip" {...props}>
+      Preview
+    </Tooltip>
+  );
+}
 class CreatePost extends Component {
   constructor(props) {
     super(props);
@@ -75,55 +85,63 @@ class CreatePost extends Component {
     return (
       <div className="mt-3">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="d-flex flex-row justify-content-between align-items-center " >
-            <Field
-              name='postTag'
-              options={tagsArrray}
-              component={(props) => (
-                <Select
-                  {...props}
-                  className="basic-single col-3 Select"
-                  classNamePrefix="needsclick "
-                  isSearchable={false}
-                  value={props.input.value}
-                  onChange={(value) => props.input.onChange(value)}
-                  onBlur={event => event.preventDefault()}
-                  options={props.options}
-                />
-              )}
-              multi
-            />
-            <div className="">
-              <div className="d-flex flex-row">
-                <button
-                  className="ml-2 sign-btn "
-                  action="submit"
-                  name="publish"
-                  onClick={handleSubmit(this.handleFormSubmit("publish"))}
-                >
-                  Publish Draft
-                </button>
-                <Link
-                  className="com-links ml-2 "
-                  to={`/previewPost/${this.props.post.id}`}
+          <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
+            <div className="col-md-5 mt-2 col-10">
+              <Field
+                name='postTag'
+                options={tagsArrray}
+                component={(props) => (
+                  <Select
+                    {...props}
+                    className="basic-single col-10 col-md-8 ml-2 p-0 Select"
+                    classNamePrefix="needsclick "
+                    isSearchable={false}
+                    value={props.input.value}
+                    onChange={(value) => props.input.onChange(value)}
+                    onBlur={event => event.preventDefault()}
+                    options={props.options}
+                  />
+                )}
+                multi
+              />
+            </div>
+            <div className="d-flex flex-row ml-4 ">
+              <Link
+                className="com-links "
+                to={`/previewPost/${this.props.post.id}`}
+              >
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 100, hide: 100 }}
+                  overlay={renderTooltip}
                 >
                   <button
-                    className="draft-post-btn p-2"
+                    className="icon-btn"
                     action="submit"
                     name="save"
-                  >
-                    Preview
-                  </button>
-                </Link>
-                <button
-                  className="ml-2 draft-post-btn"
-                  action="submit"
-                  name="save"
-                  onClick={handleSubmit(this.handleFormSubmit("save"))}
-                >
-                  Save Draft
+                  ><FontAwesomeIcon
+                      icon={faEye}
+                      size="1x"
+                      color="black"
+                    /></button>
+                </OverlayTrigger>
+              </Link>
+              <button
+                className="ml-2 draft-post-btn"
+                action="submit"
+                name="save"
+                onClick={handleSubmit(this.handleFormSubmit("save"))}
+              >
+                Save
                 </button>
-              </div>
+              <button
+                className="ml-2 sign-btn "
+                action="submit"
+                name="publish"
+                onClick={handleSubmit(this.handleFormSubmit("publish"))}
+              >
+                Publish
+                </button>
             </div>
           </div>
           <div className="mt-2">
