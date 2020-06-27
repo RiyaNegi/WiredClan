@@ -5,14 +5,12 @@ import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
-import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
-import { faPen, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PostDetailLikes from "./postDetailLike";
 import "./details.css";
 import * as authActions from "../../actions/authActions";
-import { Modal, Button, Badge } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import History from "../../history.js";
 
 
@@ -168,7 +166,7 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="col-12 col-md-11 mt-md-4 p-0">
+      <div className="col-12 col-md-11 mt-md-4 mt-2 p-0">
         {this.renderPostDetails()}
         <Comments comments={this.props.comments} postId={this.props.post.id} />
         <Modal

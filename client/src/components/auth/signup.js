@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
 import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
-import humaaans from "./humaaans.png";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import googleIcon from "./googleIcon.png";

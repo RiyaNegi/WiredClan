@@ -31,11 +31,11 @@ class App extends Component {
           <Header />
           {this.props.location.pathname === "/signin" ||
             this.props.location.pathname === "/signup" ? (
-              <div className=" signin-container container mt-md-0 mt-2">
+              <div className=" signin-container container mt-md-0 mt-3">
                 {this.props.children}
               </div>
             ) : (
-              <div className="container p-0 mt-md-0 mt-2">{this.props.children}</div>
+              <div className="container p-0 mt-md-0 mt-3">{this.props.children}</div>
             )}
           <footer class="page-footer">
             <p className="footer-text pt-5 pb-4">Designed & made with ❤ in India </p>
