@@ -58,21 +58,21 @@ class Signup extends PureComponent {
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 signup-box">
           <label className=" d-flex justify-content-center signin-heading">Sign up to create account</label>
-          <fieldset className="form-group">
+          <fieldset className="form-group mt-md-4">
             <Field
               className="form-control signup-field"
-              name="Email"
-              label="Email"
+              name="email"
+              label="Email*"
               component={this.renderField}
               type="text"
             />
           </fieldset>
-          <div className="d-flex mt-1">
+          <div className="d-flex">
             <fieldset className="form-group">
               <Field
                 className="form-control signup-field"
                 name="firstName"
-                label="First Name"
+                label="First Name*"
                 component={this.renderField}
                 type="text"
               />
@@ -124,7 +124,7 @@ class Signup extends PureComponent {
             <Field
               className="form-control signup-field"
               name="password"
-              label="Password"
+              label="Password*"
               component={this.renderField}
               type="password"
             />
