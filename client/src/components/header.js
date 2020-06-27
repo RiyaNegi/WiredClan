@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import logo from "./logo.png";
+import logo from "./logoOld.png";
 class Header extends PureComponent {
   state = {
     active: false,
@@ -43,7 +43,7 @@ class Header extends PureComponent {
           >
             J
           </label> */}
-          <img src={logo} style={{ width: 122, height: 16 }} alt="userIcon" />
+          <img src={logo} style={{ width: 152, height: 20 }} alt="userIcon" />
         </a>
         <button
           class="navbar-toggler"

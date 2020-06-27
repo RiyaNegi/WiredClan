@@ -9,7 +9,6 @@ import googleIcon from "./googleIcon.png";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { GoogleLogin } from "react-google-login";
-import logo from "../logo.png";
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {
     this.props.signinUser({ email, password });
