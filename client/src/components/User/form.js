@@ -105,7 +105,7 @@ class UserForm extends PureComponent {
                   <Select
                     {...props}
                     className="basic-single col-12 p-0 Select-signup "
-                    classNamePrefix="select"
+                    classNamePrefix="needsclick "
                     placeholder="Select Year.."
                     isSearchable={false}
                     value={props.input.value}

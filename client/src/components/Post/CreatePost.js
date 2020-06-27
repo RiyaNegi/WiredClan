@@ -148,7 +148,7 @@ class CreatePost extends Component {
                 <Select
                   {...props}
                   className="basic-single col-3 Select"
-                  classNamePrefix="select"
+                  classNamePrefix="needsclick "
                   placeholder="Select Tag.."
                   isSearchable={false}
                   value={props.input.value}
