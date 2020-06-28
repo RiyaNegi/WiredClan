@@ -19,7 +19,7 @@ sudo npm install serve -g
 sudo npm install sequelize-cli -g
 curl -sL https://sentry.io/get-cli/ | bash
 
-pm2 start npm --name "frontend" -- run production
+pm2 start npm --name "codejimmy" -- run production
 
 cd ~/cdn-backend
 npm install

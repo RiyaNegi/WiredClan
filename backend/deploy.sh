@@ -5,7 +5,7 @@ cd /root/jimmy-master
 cd client
 rm src/config.js
 echo 'const SERVER_URL = "http://nerdmonks.com";
-const SERVER_PORT = "8000";
+const SERVER_PORT = "80";
 export { SERVER_URL, SERVER_PORT };' > src/config.js
 echo "Installing FE dependencies..."
 npm install
@@ -17,7 +17,7 @@ echo "Installing BE dependencies..."
 npm install
 echo "Restarting both apps..."
 sequelize db:migrate
-pm2 restart all
+pm2 restart codejimmy
 echo "Done."
 
 # # Location of our bare repository.
