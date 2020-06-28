@@ -6,6 +6,8 @@ const express = require('express');
 const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
+const compression = require('compression');
+
 // const cors = require('cors');
 const morgan = require('morgan');
 // const fs = require('fs');
@@ -76,6 +78,8 @@ const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
+
+app.use(compression());
 
 // allow cross origin requests
 // configure to only allow requests from certain origins
