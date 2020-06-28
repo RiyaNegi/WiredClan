@@ -63,6 +63,8 @@ logger.stream = {
   },
 };
 
+app.use(compression());
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../client', 'build')));
   app.get('/', (req, res) => {
@@ -78,8 +80,6 @@ const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
-
-app.use(compression());
 
 // allow cross origin requests
 // configure to only allow requests from certain origins
