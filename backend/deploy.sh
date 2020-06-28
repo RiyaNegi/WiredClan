@@ -5,7 +5,7 @@ cd /root/jimmy-master
 cd client
 rm src/config.js
 echo 'const SERVER_URL = "https://nerdmonks.com";
-const SERVER_PORT = "80";
+const SERVER_PORT = "443";
 export { SERVER_URL, SERVER_PORT };' > src/config.js
 echo "Installing FE dependencies..."
 npm install
