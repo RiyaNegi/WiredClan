@@ -9,7 +9,7 @@ const mapRoutes = require('express-routes-mapper');
 // const cors = require('cors');
 const morgan = require('morgan');
 // const fs = require('fs');
-// const path = require('path');
+const path = require('path');
 const Sentry = require('@sentry/node');
 
 /**
@@ -62,6 +62,11 @@ logger.stream = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../client', 'build')));
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client', 'build', 'index.html'));
+  });
+
   app.use(morgan('combined', { stream: logger.stream }));
 } else {
   app.use(morgan('dev', { stream: logger.stream }));
