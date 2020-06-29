@@ -2,7 +2,7 @@
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const path = require('path');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+// test
 // module.exports = {
 //   entry: './src/index.js',
 //   output: {
