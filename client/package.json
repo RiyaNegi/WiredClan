@@ -3,27 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
-    "@babel/preset-react": "^7.10.1",
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-regular-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/react-fontawesome": "^0.1.10",
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-regular-svg-icons": "^5.13.1",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "autosize": "^4.0.2",
     "axios": "^0.19.2",
-    "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.0",
-    "css-loader": "^3.6.0",
     "draft-js": "^0.11.5",
     "draft-js-export-html": "^1.4.1",
     "draftjs-to-html": "^0.9.1",
     "eslint": "^5.16.0",
     "eslint-plugin-react-app": "^6.2.2",
-    "file-loader": "^6.0.0",
-    "history": "^4.6.3",
-    "html-loader": "^1.1.0",
-    "html-webpack-plugin": "^4.3.0",
+    "history": "^4.10.1",
     "jquery": "^3.5.1",
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
@@ -37,25 +29,36 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "1.0.17",
+    "react-scripts": "^3.4.1",
     "react-select": "^3.1.0",
-    "react-toastify": "^6.0.5",
+    "react-toastify": "^6.0.6",
     "react-widgets": "^4.5.0",
-    "reactstrap": "^8.4.1",
+    "reactstrap": "^8.5.1",
     "recompose": "^0.30.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "slugify": "^1.4.0",
-    "universal-cookie": "^4.0.3",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "slugify": "^1.4.4",
+    "universal-cookie": "^4.0.3"
   },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

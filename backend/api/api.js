@@ -11,7 +11,7 @@ const compression = require('compression');
 // const cors = require('cors');
 const morgan = require('morgan');
 // const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 const Sentry = require('@sentry/node');
 
 /**
@@ -66,10 +66,10 @@ logger.stream = {
 app.use(compression());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../client', 'dist')));
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../client', 'dist', 'index.html'));
-  });
+  // app.use(express.static(path.join(__dirname, '../../client', 'dist')));
+  // app.get('/', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../../client', 'dist', 'index.html'));
+  // });
 
   app.use(morgan('combined', { stream: logger.stream }));
 } else {

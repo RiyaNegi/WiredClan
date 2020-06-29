@@ -1,4 +1,3 @@
-/* eslint-disable react-app/react/jsx-no-undef */
 import React, { PureComponent } from "react";
 import { Field, reduxForm } from "redux-form";
 import * as authActions from "../../actions/authActions";
