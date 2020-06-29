@@ -4,6 +4,7 @@
     "prestart": "npm run drop-sqlite-db || true",
     "start": "npm run nodemon",
     "poststart": "npm run create-sqlite-db",
+    "reseed": "sequelize db:drop; sequelize db:create;psql -d jimmy_db < jimmy_db_dev.sql; sequelize db:migrate; npm run start",
     "dev": "cross-env NODE_ENV=development node ./api/api.js",
     "nodemon": "nodemon --exec npm run dev",
     "debug": "NODE_ENV=development nodemon --inspect ./api/api.js",
