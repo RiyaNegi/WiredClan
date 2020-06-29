@@ -6,11 +6,12 @@ import * as postActions from "../../actions/postActions";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from "draft-js";
 import Loader from "react-loader-spinner";
-import ControlledEditor from "./controlledEditor";
+import { Editor } from '@tinymce/tinymce-react';
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import History from "../../history.js";
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 
 function renderTooltip(props) {
@@ -24,7 +25,6 @@ class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty(),
     };
   }
   componentWillMount() {
@@ -38,15 +38,6 @@ class CreatePost extends Component {
     this.props.fetchTags()
   }
 
-  onChange = (editorState) => {
-    this.setState({ editorState });
-  };
-
-  handleChange = (e) => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
@@ -59,6 +50,7 @@ class CreatePost extends Component {
           params["postTag"].id
         );
         this.setState({ editorState: EditorState.createEmpty() });
+        History.push(`/users/${this.props.account.id}`);
       } else if (name === "publish" && params["title"]) {
         this.props.updatePost(
           postId,
@@ -74,7 +66,7 @@ class CreatePost extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    if (!this.props.post || !this.props.tags) {
+    if (!this.props.post || !this.props.tags || !Editor) {
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
@@ -106,26 +98,25 @@ class CreatePost extends Component {
               />
             </div>
             <div className="d-flex flex-row ml-4 ">
-              <Link
-                className="com-links "
-                to={`/previewPost/${this.props.post.id}`}
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 100, hide: 100 }}
+                overlay={renderTooltip}
               >
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 100, hide: 100 }}
-                  overlay={renderTooltip}
-                >
-                  <button
-                    className="icon-btn"
-                    action="submit"
-                    name="save"
-                  ><FontAwesomeIcon
+                <button
+                  className="icon-btn"
+                  action="submit"
+                  name="save"
+                >              <Link
+                  className="com-links "
+                  to={`/previewPost/${this.props.post.id}`}
+                ><FontAwesomeIcon
                       icon={faEye}
                       size="1x"
                       color="black"
-                    /></button>
-                </OverlayTrigger>
-              </Link>
+                    />              </Link>
+                </button>
+              </OverlayTrigger>
               <button
                 className="ml-2 draft-post-btn"
                 action="submit"
@@ -154,12 +145,75 @@ class CreatePost extends Component {
                 component="input"
               />
             </fieldset>
-            <Field
-              name="postEditor"
-              component={ControlledEditor}
-              editorContent={this.props.editorContent}
-            />
+            <fieldset className="">
+              <Field
+                className="col-md-12 col-6"
+                name="postEditor"
+                component={(editorProps) => (
+                  <Editor
+                    initialValue={editorProps.input.value}
+                    apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
+                    onEditorChange={(content) => {
+                      editorProps.input.onChange(content);
+                    }}
+                    init={{
+                      selector: 'textarea',
+                      plugins: 'preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                      imagetools_cors_hosts: ['picsum.photos'],
+                      menubar: false,
+                      block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+                      toolbar: 'undo redo | bold italic underline strikethrough | alignleft alignjustify | outdent indent |  numlist bullist | backcolor removeformat| emoticons | insertfile image media link anchor codesample  | fullscreen  preview ',
+                      toolbar_sticky: true,
+                      autosave_ask_before_unload: true,
+                      autosave_interval: "30s",
+                      autosave_prefix: "{path}{query}-{id}-",
+                      autosave_restore_when_empty: false,
+                      autosave_retention: "2m",
+                      image_advtab: true,
+                      content_css: '//www.tiny.cloud/css/codepen.min.css',
+                      link_list: [
+                        { title: 'My page 1', value: 'http://www.tinymce.com' },
+                        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                      ],
+                      image_list: [
+                        { title: 'My page 1', value: 'http://www.tinymce.com' },
+                        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                      ],
+                      image_class_list: [
+                        { title: 'None', value: '' },
+                        { title: 'Some class', value: 'class-name' }
+                      ],
+                      importcss_append: true,
+                      file_picker_callback: function (callback, value, meta) {
+                        /* Provide file and text for the link dialog */
+                        if (meta.filetype === 'file') {
+                          callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+                        }
+
+                        /* Provide image and alt text for the image dialog */
+                        if (meta.filetype === 'image') {
+                          callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+                        }
+
+                        /* Provide alternative source and posted for the media dialog */
+                        if (meta.filetype === 'media') {
+                          callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+                        }
+                      },
+                      height: '400',
+                      image_caption: true,
+                      quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                      noneditable_noneditable_class: "mceNonEditable",
+                      toolbar_mode: 'sliding',
+                      branding: false,
+                      contextmenu: "link image imagetools table"
+                    }}
+                  // onBlur={(event, value) => { props.input.onChange(event.target.getContent()) }}
+                  />)}
+              />
+            </fieldset>
           </div>
+
         </form>
       </div>
     );
@@ -184,8 +238,6 @@ const populatePostValues = (state, desc) => {
 
 const mapStateToProps = (state) => {
   let desc = state.postDetails.description
-    ? state.postDetails.description
-    : convertToRaw(EditorState.createEmpty().getCurrentContent());
   return {
     account: state.auth.data,
     editorContent: desc,

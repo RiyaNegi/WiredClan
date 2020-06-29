@@ -132,3 +132,8 @@ z-index: 10 !important;
   border:none;
   padding:10px 13px;
 }
+
+.modal-backdrop
+{
+    opacity:0.2 !important;
+}

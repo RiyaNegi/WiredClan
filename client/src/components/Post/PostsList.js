@@ -13,16 +13,34 @@ import PostLikes from "./likes";
 
 class PostsList extends React.Component {
   state = {
-    showModal: false,
+    showModalArray: []
   };
 
-  handleShowModal = () => {
-    this.setState({ showModal: true });
+  handleShowModal = (postId) => {
+    return () => {
+      var newStateArray = this.state.showModalArray.slice();
+      newStateArray.push({ id: postId });
+      this.setState({ showModalArray: newStateArray });
+    };
   };
 
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
+  handleCloseModal = (postId) => {
+    debugger;
+    return () => {
+      let filteredModalArray = this.state.showModalArray.filter(
+        (i) => i.id !== postId
+      );
+      this.setState({ showModalArray: filteredModalArray });
+    };
   };
+
+  handleDeleteClick = (postId) => {
+    return (e) => {
+      this.props.deletePost(postId);
+      this.handleCloseModal(postId)
+    };
+  };
+
 
   handleEditPost(postId) {
     return (e) => {
@@ -35,13 +53,6 @@ class PostsList extends React.Component {
       this.props.createLike(postId);
     };
   }
-
-  handleDeleteClick = (postId) => {
-    return (e) => {
-      this.props.deletePost(postId);
-      this.handleCloseModal();
-    };
-  };
 
   render() {
     const { className, style, draft } = this.props;
@@ -64,10 +75,10 @@ class PostsList extends React.Component {
                   History.push(`/${slugify(post.title)}/${post.id}`);
                 })(History, draft)}
               >
-                <Modal
+                {this.state.showModalArray.filter((i) => i.id === post.id).length && this.props.account ? (<Modal
                   className="modal-background"
-                  show={this.state.showModal}
-                  onHide={this.handleCloseModal}
+                  show={true}
+                  onHide={this.handleCloseModal(post.id)}
                 >
                   <Modal.Header closeButton>
                     <Modal.Title>Delete Post</Modal.Title>
@@ -75,21 +86,20 @@ class PostsList extends React.Component {
                   <Modal.Body>Delete this post permanently?</Modal.Body>
                   <Modal.Footer>
                     <Button
-                      className=""
                       variant="secondary"
-                      onClick={this.handleCloseModal}
+                      onClick={this.handleCloseModal(post.id)}
                     >
                       Close
-                    </Button>
+              </Button>
                     <Button
                       variant="primary"
-                      className=""
                       onClick={this.handleDeleteClick(post.id)}
                     >
                       Delete
-                    </Button>
+              </Button>
                   </Modal.Footer>
-                </Modal>
+                </Modal>)
+                  : null}
                 <div className="post-link d-flex flex-row py-4 pr-3">
                   <PostLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
                   <div className="post-link">
@@ -165,7 +175,7 @@ class PostsList extends React.Component {
                             </Link>
                             <button
                               className=" post-item-buttons delete-button"
-                              onClick={this.handleShowModal}
+                              onClick={this.handleShowModal(post.id)}
                             >
                               <FontAwesomeIcon
                                 icon={faTrash}

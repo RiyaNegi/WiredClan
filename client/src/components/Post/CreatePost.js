@@ -3,41 +3,16 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import { Editor } from "react-draft-wysiwyg";
-import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Loader from "react-loader-spinner";
-import { EditorState, convertToRaw } from "draft-js";
-import draftToHtml from "draftjs-to-html";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
-
-
-
-function uploadImageCallBack(file) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api.imgur.com/3/image");
-    xhr.setRequestHeader("Authorization", "Client-ID a7b451dcec71d8f");
-    const data = new FormData();
-    data.append("image", file);
-    xhr.send(data);
-    xhr.addEventListener("load", () => {
-      const response = JSON.parse(xhr.responseText);
-      resolve(response);
-    });
-    xhr.addEventListener("error", () => {
-      const error = JSON.parse(xhr.responseText);
-      console.log("Image upload error:", error);
-      reject(error);
-    });
-  });
-}
+// import TinyMCE from "./tiny"
+import { Editor } from '@tinymce/tinymce-react';
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postEditorState: EditorState.createEmpty(),
       loginNotify: false
     };
 
@@ -47,38 +22,27 @@ class CreatePost extends Component {
     this.props.fetchTags()
   }
 
-  onChangePost = (postEditorState) => this.setState({ postEditorState });
-
-  handleChange = (e) => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  // handleChange = (e) => {
+  //   e.preventDefault();
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
 
   handleFormSubmit = (name) => {
     return (params) => {
+      debugger;
       if (!this.props.account) {
         this.notifyLogin();
         return
       }
-      if ((!params["postTag"] || !params["postTitle"]) && this.props.account) {
+      else if ((!params["postTag"] || !params["postTitle"])) {
         this.notify()
         return
       }
       else if (name === "submit" && params["postTitle"] && params["postTag"].id) {
-        let convertedData = draftToHtml(
-          convertToRaw(this.state.postEditorState.getCurrentContent())
-        );
-        this.props.createPost(params["postTitle"], true, convertedData, params["postTag"].id);
-        this.setState({ postEditorState: EditorState.createEmpty() });
-        return
+        this.props.createPost(params["postTitle"], true, params["createPostEditor"], params["postTag"].id); return
       }
       else if (name === "save" && params["postTitle"] && params["postTag"].id) {
-        let convertedData = draftToHtml(
-          convertToRaw(this.state.postEditorState.getCurrentContent())
-        );
-        this.props.createPost(params["postTitle"], false, convertedData, params["postTag"].id);
-        this.setState({ postEditorState: EditorState.createEmpty() });
-        return
+        this.props.createPost(params["postTitle"], false, params["createPostEditor"], params["postTag"].id); return
       }
       else {
         this.notify()
@@ -119,9 +83,10 @@ class CreatePost extends Component {
       progress: undefined,
     });
 
+
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
-    if (!this.state.postEditorState || !this.props.tags) {
+    if (!this.props.tags || !Editor) {
       console.log("loaderrr");
       return (
         <div className="loader">
@@ -145,17 +110,17 @@ class CreatePost extends Component {
               <Field
                 name='postTag'
                 options={tagsArray}
-                component={(props) => (
+                component={(selectProps) => (
                   <Select
-                    {...props}
+                    {...selectProps}
                     className="basic-single col-11 col-md-8 ml-2 p-0 Select"
                     classNamePrefix="needsclick "
                     placeholder="Select Tag.."
                     isSearchable={false}
-                    value={props.input.value}
-                    onChange={(value) => props.input.onChange(value)}
+                    value={selectProps.input.value}
+                    onChange={(value) => selectProps.input.onChange(value)}
                     onBlur={event => event.preventDefault()}
-                    options={props.options}
+                    options={selectProps.options}
                   />
                 )}
               />
@@ -206,59 +171,73 @@ class CreatePost extends Component {
                 }}
               />
             </fieldset>
-            <Editor
-              editorState={this.state.postEditorState}
-              wrapperClassName="demo-wrapper"
-              editorClassName="demo-editor"
-              onEditorStateChange={this.onChangePost}
-              wrapperStyle={{
-                border: "1px solid gray",
-                marginBottom: "20px",
-              }}
-              editorStyle={{ height: "100%", padding: "10px" }}
-              stripPastedStyles={true}
-              placeholder="Time to write something great"
-              toolbar={{
-                options: [
-                  "inline",
-                  "fontSize",
-                  "image",
-                  "emoji",
-                  "list",
-                  "link",
-                  "history",
-                ],
-                fontSize: {
-                  options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36],
-                  className: undefined,
-                  component: undefined,
-                  dropdownClassName: undefined,
-                },
-                inline: {
-                  options: [
-                    "bold",
-                    "italic",
-                    "underline",
-                    "strikethrough",
-                    "monospace",
-                  ],
-                  bold: { className: "bordered-option-classname" },
-                  italic: { className: "bordered-option-classname" },
-                  underline: { className: "bordered-option-classname" },
-                  strikethrough: { className: "bordered-option-classname" },
-                  code: { className: "bordered-option-classname" },
-                },
-                image: {
-                  previewImage: true,
-                  uploadCallback: uploadImageCallBack,
-                  alt: { present: false },
-                  defaultSize: {
-                    height: "350",
-                    width: "350",
-                  },
-                },
-              }}
-            />
+            <fieldset className="">
+              <Field
+                className="col-md-12 col-6"
+                name="createPostEditor"
+                component={(editorProps) => (
+                  <Editor
+                    initialValue={editorProps.input.value}
+                    apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
+                    onEditorChange={(content) => {
+                      editorProps.input.onChange(content);
+                    }}
+                    init={{
+                      selector: 'textarea',
+                      plugins: 'preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                      imagetools_cors_hosts: ['picsum.photos'],
+                      menubar: false,
+                      block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+                      toolbar: 'undo redo | bold italic underline strikethrough | alignleft alignjustify | outdent indent |  numlist bullist | backcolor removeformat| emoticons | insertfile image media link anchor codesample  | fullscreen  preview ',
+                      toolbar_sticky: true,
+                      autosave_ask_before_unload: true,
+                      autosave_interval: "30s",
+                      autosave_prefix: "{path}{query}-{id}-",
+                      autosave_restore_when_empty: false,
+                      autosave_retention: "2m",
+                      image_advtab: true,
+                      content_css: '//www.tiny.cloud/css/codepen.min.css',
+                      link_list: [
+                        { title: 'My page 1', value: 'http://www.tinymce.com' },
+                        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                      ],
+                      image_list: [
+                        { title: 'My page 1', value: 'http://www.tinymce.com' },
+                        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                      ],
+                      image_class_list: [
+                        { title: 'None', value: '' },
+                        { title: 'Some class', value: 'class-name' }
+                      ],
+                      importcss_append: true,
+                      file_picker_callback: function (callback, value, meta) {
+                        /* Provide file and text for the link dialog */
+                        if (meta.filetype === 'file') {
+                          callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+                        }
+
+                        /* Provide image and alt text for the image dialog */
+                        if (meta.filetype === 'image') {
+                          callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+                        }
+
+                        /* Provide alternative source and posted for the media dialog */
+                        if (meta.filetype === 'media') {
+                          callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+                        }
+                      },
+                      height: '400',
+                      image_caption: true,
+                      quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                      noneditable_noneditable_class: "mceNonEditable",
+                      toolbar_mode: 'sliding',
+                      branding: false,
+                      contextmenu: "link image imagetools table"
+                    }}
+                  // onBlur={(event, value) => { props.input.onChange(event.target.getContent()) }}
+                  />)}
+              />
+            </fieldset>
           </div>
         </form>
       </div>

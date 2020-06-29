@@ -7,6 +7,7 @@ export const reducer = (state = {}, action) => {
     case FETCH_SEARCH:
       return { ...state, posts: action.posts, drafts: action.drafts };
     case DELETE_POST:
+      debugger;
       let newDelStatePost = JSON.parse(JSON.stringify(state.posts));
       let arrPostIndex = newDelStatePost.findIndex(
         (i) => i.id === action.postId
@@ -18,7 +19,6 @@ export const reducer = (state = {}, action) => {
       let arrDraftIndex = newDelStateDrafts.findIndex(
         (i) => i.id === action.postId
       );
-      newDelStateDrafts.splice(arrDraftIndex, 1);
       if (arrDraftIndex >= 0) {
         newDelStateDrafts.splice(arrDraftIndex, 1);
       }

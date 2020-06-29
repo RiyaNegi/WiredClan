@@ -52,20 +52,20 @@ class PostDetails extends Component {
       // <p><br/><p> && <p></p>
       var slicer;
       while (
-        newText.slice(0, 20) === "<p></p>" ||
+        newText.slice(0, 20) === "<p>&nbsp;</p>" ||
         newText.slice(0, 11) === "<p><br></p>"
       ) {
-        if (newText.slice(0, 20) === "<p></p>") slicer = 7;
+        if (newText.slice(0, 20) === "<p>&nbsp;</p>") slicer = 13;
         else slicer = 11;
         newText = newText.substring(slicer, newText.length);
       }
 
       // Clean empty paragraphs after the content
       while (
-        newText.slice(-7) === "<p></p>" ||
+        newText.slice(-13) === "<p>&nbsp;</p>" ||
         newText.slice(-11) === "<p><br></p>"
       ) {
-        if (newText.slice(-7) === "<p></p>") slicer = 7;
+        if (newText.slice(-13) === "<p>&nbsp;</p>") slicer = 13;
         else slicer = 11;
         newText = newText.substring(0, newText.length - slicer);
       }

@@ -91,7 +91,7 @@ class Comments extends Component {
               </Modal.Header>
               <Modal.Body>Delete this comment permanently?</Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleCloseModal}>
+                <Button variant="secondary" onClick={this.handleCloseModal(comment.id)}>
                   Close
               </Button>
                 <Button
@@ -103,7 +103,6 @@ class Comments extends Component {
               </Modal.Footer>
             </Modal>
           ) : null}
-
         <div className="d-flex flex-row col-12 mt-4 justify-content-between p-0 px-md-3">
           <div className="pl-2 pl-md-0">
             <div className="card-text">{comment.text}</div>

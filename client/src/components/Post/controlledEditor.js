@@ -48,12 +48,20 @@ const WysiwygEditor = ({
             options: [
               "inline",
               "fontSize",
+              "blockType",
               "image",
               "emoji",
               "list",
               "link",
-              "history",
+              "history"
             ],
+            blockType: {
+              inDropdown: true,
+              options: ['Normal', 'Blockquote', 'Code'],
+              className: undefined,
+              component: undefined,
+              dropdownClassName: undefined,
+            },
             fontSize: {
               options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36],
               className: undefined,
@@ -90,32 +98,36 @@ const WysiwygEditor = ({
     </div>
   );
 
+
+// export default WysiwygEditor;
+
 export default compose(
-  withState("editorState", "setEditorState", EditorState.createEmpty()),
-  withPropsOnChange(
-    ["input"],
-    ({ input: { value }, meta: { dirty }, setEditorState }) => {
-      if (dirty) {
-        return;
-      }
-      if (!value) {
-        return;
-      }
-      const contentBlock = htmlToDraft(value);
-      const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks
-      );
-      const editorState = EditorState.createWithContent(contentState);
-      setEditorState(editorState);
-    }
-  ),
-  withHandlers({
-    onEditorStateChange: ({ input: { onChange }, setEditorState }) => (
-      editorState
-    ) => {
-      setEditorState(editorState);
-      const html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-      onChange(html);
-    },
-  })
+  // withState("editorState", "setEditorState", EditorState.createEmpty()),
+  // withPropsOnChange(
+  //   ["input"],
+  //   ({ input: { value }, meta: { dirty }, setEditorState }) => {
+  //     if (dirty) {
+  //       return;
+  //     }
+  //     if (!value) {
+  //       return;
+  //     }
+  //     debugger;
+  //     const contentBlock = htmlToDraft(value);
+  //     const contentState = ContentState.createFromBlockArray(
+  //       contentBlock.contentBlocks
+  //     );
+  //     const editorState = EditorState.createWithContent(contentState);
+  //     setEditorState(editorState);
+  //   }
+  // ),
+  // withHandlers({
+  //   onEditorStateChange: ({ input: { onChange }, setEditorState }) => (
+  //     editorState
+  //   ) => {
+  //     setEditorState(editorState);
+  //     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  //     onChange(html);
+  //   },
+  // })
 )(WysiwygEditor);
