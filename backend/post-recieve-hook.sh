@@ -26,6 +26,6 @@ do
         chmod 755 deploy.sh
         ./deploy.sh
     else 
-        echo "Not master branch. Skipping."
+        echo "Not the master branch. Skipping."
     fi
 done
