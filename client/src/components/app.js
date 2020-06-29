@@ -35,10 +35,10 @@ class App extends Component {
                 {this.props.children}
               </div>
             ) : (
-              <div className="container p-0 mt-md-0 mt-3">{this.props.children}</div>
+              <div className="container p-0 mt-md-0 mt-1">{this.props.children}</div>
             )}
           <footer class="page-footer">
-            <p className="footer-text pt-5 pb-4">Designed & made with ❤ in India </p>
+            <p className="footer-text pt-5 pb-4">Designed & made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
           </footer>
         </div>
 

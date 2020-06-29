@@ -74,7 +74,7 @@ class HomePage extends PureComponent {
     }
 
     return (
-      <div className="mt-md-5 d-flex row justify-content-between">
+      <div className="mt-md-3 d-flex row justify-content-between">
         <PostsList className="col-md-7" posts={this.props.posts} />
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />

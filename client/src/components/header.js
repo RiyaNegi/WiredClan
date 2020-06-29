@@ -43,7 +43,7 @@ class Header extends PureComponent {
           >
             J
           </label> */}
-          <img src={logo} style={{ width: 152, height: 20 }} alt="userIcon" />
+          <img src={logo} style={{ width: 130, height: 17 }} alt="userIcon" />
         </a>
         <button
           class="navbar-toggler"
