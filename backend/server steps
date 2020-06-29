@@ -8,6 +8,9 @@
 
 sudo apt update
 sudo apt install -y postgresql postgresql-contrib
+sudo apt install postgresql-client-11 # for backups.
+# pg_dump -d jimmy_db -n public -f jimmy_db.sql
+
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE cdn_db;"
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
@@ -19,14 +22,14 @@ sudo npm install serve -g
 sudo npm install sequelize-cli -g
 curl -sL https://sentry.io/get-cli/ | bash
 
-pm2 start npm --name "frontend" -- run production
+pm2 start npm --name "codejimmy" -- run production
 
 cd ~/cdn-backend
 npm install
 
-pm2 start npm --name "backend" -- serve -s build  -p 80
+pm2 start npm --name "backend" -- run production
 OR 
-pm2 start npm --name "backend" -- "serve -s build -p 80"
+pm2 serve . 5000 --name "frontend" # RUN THIS FROM client/build/
 
 
 

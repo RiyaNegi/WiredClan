@@ -6,6 +6,8 @@ const express = require('express');
 const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
+const compression = require('compression');
+
 // const cors = require('cors');
 const morgan = require('morgan');
 // const fs = require('fs');
@@ -61,7 +63,14 @@ logger.stream = {
   },
 };
 
+app.use(compression());
+
 if (process.env.NODE_ENV === 'production') {
+  // app.use(express.static(path.join(__dirname, '../../client', 'dist')));
+  // app.get('/', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../../client', 'dist', 'index.html'));
+  // });
+
   app.use(morgan('combined', { stream: logger.stream }));
 } else {
   app.use(morgan('dev', { stream: logger.stream }));
