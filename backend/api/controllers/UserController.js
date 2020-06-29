@@ -84,7 +84,6 @@ const UserController = () => {
 
   const login = async (req, res) => {
     const { email, password } = req.body;
-
     if (email && password) {
       try {
         const user = await User
@@ -97,7 +96,8 @@ const UserController = () => {
           return res.status(400).json({ msg: 'Bad Request: User not found' });
         }
 
-        if (bcryptService().comparePassword(password, user.password)) {
+        const userPassword = await User.unscoped().findOne({ where: { email } });
+        if (bcryptService().comparePassword(password, userPassword.password)) {
           const token = authService().issue({ id: user.id });
           req.session.userId = user.id;
           req.session.cookie.originalMaxAge = 31556952000;

@@ -114,7 +114,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // fill routes for express application
-app.use('/auth', mappedOpenRoutes);
+app.use('/api/auth', mappedOpenRoutes);
 app.use('/api', mappedAuthRoutes);
 
 server.listen(config.port, () => {

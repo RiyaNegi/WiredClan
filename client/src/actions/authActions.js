@@ -15,7 +15,7 @@ export const signinUser = ({ email, password }) => {
   return (dispatch) => {
     // submit email/password to the server
     request
-      .post(`/auth/login`, { email, password })
+      .post(`/api/auth/login`, { email, password })
       .then((response) => {
         // if request is good...
         // - save the jwt token
@@ -36,7 +36,7 @@ export const signupUser = ({ email, password, firstName, lastName, college, year
   return (dispatch) => {
     // submit email/password to the server
     request
-      .post(`/auth/register`, { email, password, firstName, lastName, college, year: year.value, confirmPassword })
+      .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year.value, confirmPassword })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         fetchAccount(response.data.user.id, true)(dispatch);
@@ -129,7 +129,7 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
       lastName,
     });
     request
-      .post(`/auth/googleLogin`, {
+      .post(`/api/auth/googleLogin`, {
         email,
         accessToken,
         firstName,
