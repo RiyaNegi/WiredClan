@@ -106,7 +106,7 @@ class PostsList extends React.Component {
                     <Link
                       className=" font-weight-bold no-decoration text-dark"
                       to={{
-                        pathname: `/${slugify(post.title)}/${post.id}`,
+                        pathname: draft ? `/posts/${post.id}/edit` : `/${slugify(post.title)}/${post.id}`,
                         state: { edit: false, draft: false },
                       }}
                     >

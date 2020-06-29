@@ -3,6 +3,7 @@ import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE } from
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:
+      debugger;
       return { ...state, posts: action.posts, drafts: action.drafts };
     case FETCH_SEARCH:
       return { ...state, posts: action.posts, drafts: action.drafts };

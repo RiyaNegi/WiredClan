@@ -126,7 +126,7 @@ class Profile extends Component {
   }
 
   render() {
-    if (!this.props.user || !this.props.posts) {
+    if (!this.props.user || !this.props.posts || !this.props.drafts) {
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
@@ -139,7 +139,7 @@ class Profile extends Component {
         <div className="col-12 col-md-3">{this.renderUserCard()}</div>
         <div className="col-12 col-md-9">
           <React.Fragment>
-            <Tabs defaultActiveKey="user-posts" id="user-tab">
+            <Tabs defaultActiveKey={this.props.location.state && this.props.location.state.draft ? "user-drafts" : "user-posts"} id="user-tab">
               {(this.props.account &&
                 this.props.account.id === this.props.user.id && this.props.posts.length === 0) ? (
                   <Tab eventKey="user-posts" title="Posts">
