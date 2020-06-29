@@ -11,13 +11,14 @@ echo "Installing FE dependencies..."
 npm install
 echo "Building FE..."
 npm run build
+pm2 restart app.config.json
 
 cd ../backend
 echo "Installing BE dependencies..."
 npm install
 echo "Restarting both apps..."
 sequelize db:migrate
-pm2 restart codejimmy
+pm2 restart backend
 echo "Done."
 
 # # Location of our bare repository.

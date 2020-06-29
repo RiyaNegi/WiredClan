@@ -24,9 +24,9 @@ pm2 start npm --name "codejimmy" -- run production
 cd ~/cdn-backend
 npm install
 
-pm2 start npm --name "backend" -- serve -s build  -p 80
+pm2 start npm --name "backend" -- run production
 OR 
-pm2 start npm --name "backend" -- "serve -s build -p 80"
+pm2 serve . 5000 --name "frontend" # RUN THIS FROM client/build/
 
 
 
