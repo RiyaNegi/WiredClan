@@ -11,13 +11,15 @@ echo "Installing FE dependencies..."
 npm install
 echo "Building FE..."
 npm run build
+echo "Restarting FE"
 pm2 restart app.config.json
 
 cd ../backend
 echo "Installing BE dependencies..."
 npm install
-echo "Restarting both apps..."
+echo "Running migrations..."
 sequelize db:migrate
+echo "Restarting BE"
 pm2 restart backend
 echo "Done."
 
