@@ -7,7 +7,6 @@ export const reducer = (state = {}, action) => {
     case FETCH_SEARCH:
       return { ...state, posts: action.posts, drafts: action.drafts };
     case DELETE_POST:
-      debugger;
       let newDelStatePost = JSON.parse(JSON.stringify(state.posts));
       let arrPostIndex = newDelStatePost.findIndex(
         (i) => i.id === action.postId

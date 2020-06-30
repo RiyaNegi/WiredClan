@@ -21,6 +21,9 @@ export const createPost = (title, published, description, tagId) => {
           payload: response.data,
         });
         History.push(`/${slugify(response.data.title)}/${response.data.id}`);
+        var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
+          : { pathname: `/users/${response.data.user.id}`, state: { draft: true } }
+        History.push(redirectUrl);
       })
       .catch((error) => {
         handleError(error);
@@ -105,7 +108,9 @@ export const updatePost = (postId, title, published, description, tagId) => {
           type: UPDATE_POST,
           payload: response.data,
         });
-        History.push(`/${slugify(response.data.title)}/${response.data.id}`);
+        var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
+          : { pathname: `/users/${response.data.user.id}`, state: { draft: true } }
+        History.push(redirectUrl);
       })
       .catch((error) => {
         handleError(error);

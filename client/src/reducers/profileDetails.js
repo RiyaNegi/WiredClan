@@ -1,4 +1,4 @@
-import { FETCH_USER, DELETE_POST } from "../actions/types";
+import { FETCH_USER } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {

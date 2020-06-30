@@ -110,13 +110,27 @@
 
 .oops-text{
   font-weight: 900;
-  font-size:60px;
-  color: rgb(175, 175, 175)
+  font-size:40px;
+  font-family: 'Frank Ruhl Libre', serif;  
+  color: rgb(20, 20, 20)
 }
-.back-home-btn{
+.back-home-btn {
+  border: 1px solid #222222;
+  color: #222222;
   background-color: white;
-  border: 1px solid black;
-  border-radius: 3px;
+  font-weight:700;
+  border-radius:5px;
+  padding:0px 10px;
+}
+
+.back-home-btn:hover {
+  background-color: #222222;
+  border: 1px solid #222222;
+  color: white
+}
+
+.back-home-btn:focus {
+  outline:0;
 }
 
 
