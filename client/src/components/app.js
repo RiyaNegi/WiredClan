@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div class="container main-container">
+        <div className="container main-container">
           <Header />
           {this.props.location.pathname === "/signin" ||
             this.props.location.pathname === "/signup" ? (
@@ -37,7 +37,7 @@ class App extends Component {
             ) : (
               <div className="container p-0 mt-md-0 mt-1">{this.props.children}</div>
             )}
-          <footer class="page-footer">
+          <footer className="page-footer">
             <p className="footer-text pt-5 pb-4">Made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
           </footer>
         </div>

@@ -3,13 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as postActions from "../actions/postActions";
 import * as leaderboardActions from "../actions/leaderboardActions";
-
 import * as authActions from "../actions/authActions";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
 import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
@@ -40,12 +35,11 @@ class HomePage extends PureComponent {
       this.props.fetchSearch(this.state.search);
       this.setState({ search: "" });
       this.props.fetchPosts();
-      console.log("serach :", this.state.search);
     }
   };
 
   notifypost = () => {
-    if (!this.props.account && !this.state.loginNotify) {
+    if (!this.props.authenticated && !this.state.loginNotify) {
       this.notifyLogin();
       this.setState({ loginNotify: true })
     }
@@ -75,12 +69,23 @@ class HomePage extends PureComponent {
 
     return (
       <div className="mt-md-3 d-flex row justify-content-between">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover={false}
+        />
         <PostsList className="col-md-7" posts={this.props.posts} />
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />
           <div className="mt-4">
             <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
-              {this.props.account ? (<Link className="com-links" to={"/CreatePost"} >
+              {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >
                 <div className="p-2 py-2 com-links">📝 New Post</div>
               </Link>)
                 : <div className="p-2 py-2 com-links">📝 New Post</div>
@@ -97,6 +102,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     account: state.auth.data,
+    authenticated: state.auth.authenticated,
     search: state.posts.searchArray,
     topContributors: state.leaderboard.topContributors,
   };

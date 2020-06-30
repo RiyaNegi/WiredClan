@@ -1,5 +1,6 @@
 {
-    "extends": [
-        "plugin:react-app/recommended"
-    ]
+    "extends": "react-app",
+    "rules": {
+        "jsx-a11y/accessible-emoji": 0
+    }
 }

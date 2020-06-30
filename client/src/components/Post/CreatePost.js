@@ -29,19 +29,18 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
-      debugger;
       if (!this.props.account) {
         this.notifyLogin();
         return
       }
-      else if ((!params["postTag"] || !params["postTitle"])) {
+      else if ((!params["postTag"] || !params["postTitle"] || !params["createPostEditor"])) {
         this.notify()
         return
       }
-      else if (name === "submit" && params["postTitle"] && params["postTag"].id) {
+      else if (name === "submit" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
         this.props.createPost(params["postTitle"], true, params["createPostEditor"], params["postTag"].id); return
       }
-      else if (name === "save" && params["postTitle"] && params["postTag"].id) {
+      else if (name === "save" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
         this.props.createPost(params["postTitle"], false, params["createPostEditor"], params["postTag"].id); return
       }
       else {
@@ -62,7 +61,7 @@ class CreatePost extends Component {
   };
 
   notify = () =>
-    toast.error('⚠️ TAG and Title required', {
+    toast.error('⚠️ All fields are required', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,
@@ -87,7 +86,6 @@ class CreatePost extends Component {
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
     if (!this.props.tags || !Editor) {
-      console.log("loaderrr");
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
