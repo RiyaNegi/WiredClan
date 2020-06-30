@@ -3,13 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import * as postActions from "../actions/postActions";
 import * as leaderboardActions from "../actions/leaderboardActions";
-
 import * as authActions from "../actions/authActions";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
 import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
@@ -40,7 +35,6 @@ class HomePage extends PureComponent {
       this.props.fetchSearch(this.state.search);
       this.setState({ search: "" });
       this.props.fetchPosts();
-      console.log("serach :", this.state.search);
     }
   };
 
@@ -75,6 +69,17 @@ class HomePage extends PureComponent {
 
     return (
       <div className="mt-md-3 d-flex row justify-content-between">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover={false}
+        />
         <PostsList className="col-md-7" posts={this.props.posts} />
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />

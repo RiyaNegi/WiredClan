@@ -1,5 +1,4 @@
 import request from "./request";
-import History from "../history.js";
 import { FETCH_TOP_CONTRIBUTORS } from "./types";
 
 export const fetchTopContributors = () => {

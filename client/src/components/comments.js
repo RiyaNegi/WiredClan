@@ -175,7 +175,6 @@ class Comments extends Component {
 
   renderComments() {
     return this.props.comments.map((comment) => {
-      console.log("called it render coms");
       return (
         <div key={comment.id}>
           {this.state.editClicked.filter((ci) => ci.id === comment.id).length &&

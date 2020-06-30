@@ -115,7 +115,7 @@ class PostDetails extends Component {
           <div className="d-flex mr-md-5">
             <button
               type="button"
-              class="btn btn-light post-tag-button text-l-gray align-self-center"
+              className="btn btn-light post-tag-button text-l-gray align-self-center"
             >
               {this.props.post.tag.text}
             </button>

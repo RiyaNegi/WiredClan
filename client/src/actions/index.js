@@ -1,15 +1,9 @@
 import request from "./request";
-import slugify from "slugify";
-import History from "../history.js";
 import { handleError } from "./handleError";
 import {
-  FETCH_POST_DETAILS,
   POST_COMMENT,
   UPDATE_COMMENT,
   DELETE_COMMENT,
-  CREATE_POST,
-  UPDATE_POST,
-  FETCH_SEARCH,
   FETCH_TAGS
 } from "./types";
 
@@ -56,7 +50,6 @@ export const updateComment = (postId, text, commentId) => {
 
 export const deleteComment = (postId, commentId, parentId) => {
   return (dispatch) => {
-    console.log("delete action called", commentId);
     request
       .delete(`/api/posts/${postId}/comments/${commentId}`)
       .then((response) => {
@@ -77,7 +70,6 @@ export const fetchTags = () => {
     request
       .get(`/api/tags`)
       .then((response) => {
-        console.log(response.data);
         dispatch({
           type: FETCH_TAGS,
           payload: response.data,

@@ -166,6 +166,7 @@ const validate = values => {
 
   if (!values.email) {
     errors.email = "Please enter email address";
+    // eslint-disable-next-line no-useless-escape
   } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email)) {
     errors.email = "Invalid email address";
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import "./leaderboard.css";
@@ -20,7 +19,9 @@ const Leaderboard = ({ className, style, topContributors }) => {
           </div>
         ) : (
             topContributors.map((user) => (
-              <div className="mt-1 font-weight-bold leaderboard-row">
+              <div className="mt-1 font-weight-bold leaderboard-row"
+                key={user.id}
+              >
                 <a
                   href={`/users/${user.id}`}
                   className="d-flex flex-row no-decoration py-2"

@@ -14,7 +14,6 @@ class PostLikes extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("NOW PROPS ARE: ", props);
     this.state = {
       likes: this.props.likesCount,
       updated: false,
