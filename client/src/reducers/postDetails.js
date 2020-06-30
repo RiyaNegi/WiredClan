@@ -62,12 +62,13 @@ export const reducer = (state = {}, action) => {
         ...state, tags: tagsArray,
       };
     case CREATE_POST_LIKE:
-      let newLikeDetails = JSON.parse(JSON.stringify(state));
+      var newLikeDetails = JSON.parse(JSON.stringify(state));
       newLikeDetails.details.likesCount += 1;
       newLikeDetails.details.likedByCurrentUser = true;
       return { ...state, details: newLikeDetails.details };
     case DELETE_POST_LIKE:
-      newLikeDetails = JSON.parse(JSON.stringify(state));
+      // eslint-disable-next-line no-redeclare
+      var newLikeDetails = JSON.parse(JSON.stringify(state));
       newLikeDetails.details.likesCount -= 1;
       newLikeDetails.details.likedByCurrentUser = false;
       return { ...state, details: newLikeDetails.details };

@@ -23,7 +23,7 @@ export const reducer = (state = {}, action) => {
       }
       return { ...state, posts: newDelStatePost, drafts: newDelStateDrafts };
     case CREATE_LIKE:
-      let newLikeState = JSON.parse(JSON.stringify(state));
+      var newLikeState = JSON.parse(JSON.stringify(state));
       var arrIndex = newLikeState.posts.findIndex(
         (i) => i.id === action.postId
       );
@@ -33,7 +33,8 @@ export const reducer = (state = {}, action) => {
       newLikeState.posts.splice(arrIndex, 1, arr);
       return newLikeState;
     case DELETE_LIKE:
-      newLikeState = JSON.parse(JSON.stringify(state));
+      // eslint-disable-next-line no-redeclare
+      var newLikeState = JSON.parse(JSON.stringify(state));
       arrIndex = newLikeState.posts.findIndex(
         (i) => i.id === action.postId
       );
