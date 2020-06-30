@@ -37,7 +37,8 @@ npm install
 
 pm2 start npm --name "backend" -- run production
 OR 
-pm2 serve . 5000 --name "frontend" # RUN THIS FROM client/build/
+pm2 serve build --name "frontend" 
+
 
 
 
