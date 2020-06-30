@@ -175,35 +175,44 @@ const UserController = () => {
   const get = async (req, res) => {
     try {
       let user = await User.findOne({
-        where: {
+        where: Sequelize.or({
           id: req.params.id,
-        },
+        }, {
+          email: req.params.id,
+        }),
         include: [{
           model: Post,
           include: [Comment, Tag, Like],
         }, { model: Like }],
       });
       user = user.get({ plain: true });
+      let likesCount = 0;
 
       if (req.session.userId && user.id === req.session.userId) {
-        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => ({
+        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => {
+          likesCount += x.likes.length;
+          return {
+            ...x,
+            commentsCount: x.comments.length,
+            comments: undefined,
+            likesCount: x.likes.length,
+            likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
+            likes: undefined,
+          };
+        });
+      }
+      user.posts = user.posts.filter((post) => post.published).map((x) => {
+        likesCount += x.likes.length;
+        return {
           ...x,
           commentsCount: x.comments.length,
           comments: undefined,
           likesCount: x.likes.length,
           likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
           likes: undefined,
-        }));
-      }
-      user.posts = user.posts.filter((post) => post.published).map((x) => ({
-        ...x,
-        commentsCount: x.comments.length,
-        comments: undefined,
-        likesCount: x.likes.length,
-        likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
-        likes: undefined,
-      }));
-      user.likesCount = user.likes.length;
+        };
+      });
+      user.likesCount = likesCount;
       delete user.likes;
       return res.status(200).json(user);
     } catch (err) {
