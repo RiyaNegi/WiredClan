@@ -55,7 +55,6 @@ class PostsList extends React.Component {
 
   render() {
     const { className, style, draft } = this.props;
-    console.log("THIS IS USER", this.props.user);
     return (
       <div className={className} style={style}>
         {this.props.posts ? (

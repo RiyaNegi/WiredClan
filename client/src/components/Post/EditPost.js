@@ -9,8 +9,7 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import History from "../../history.js";
-import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 
 

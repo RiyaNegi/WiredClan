@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import App from "../components/app";
-import RequireAuth from "../components/auth/require_auth";
 import Signin from "../components/auth/signin";
 import Signout from "../components/auth/signout";
 import Signup from "../components/auth/signup";
@@ -12,7 +11,6 @@ import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
 import pageNotFound from "../components/pageNotFound";
-import tiny from "../components//Post/tiny";
 
 const Routes = () => {
   return (
@@ -29,7 +27,6 @@ const Routes = () => {
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
         <Route path="/:slug/:id" component={postDetails} />
-        <Route path="/tiny" component={tiny} />
         <Route component={pageNotFound} />
       </Switch>
     </App>

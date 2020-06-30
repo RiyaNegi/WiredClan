@@ -86,7 +86,6 @@ class CreatePost extends Component {
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
     if (!this.props.tags || !Editor) {
-      console.log("loaderrr");
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
