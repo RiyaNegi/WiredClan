@@ -30,4 +30,4 @@ do
     fi
 done
 
-# rm -rf jimmy; mkdir jimmy; cd jimmy; git init --bare; cd ..; cp post-receive jimmy/hooks
+# rm -rf jimmy; mkdir jimmy; cd jimmy; git init --bare; cd ..; cp post-receive jimmy/hooks;
