@@ -26,6 +26,8 @@ do
         chmod 755 deploy.sh
         ./deploy.sh
     else 
-        echo "Not master branch. Skipping."
+        echo "Not the master branch. Skipping."
     fi
 done
+
+# rm -rf jimmy; mkdir jimmy; cd jimmy; git init --bare; cd ..; cp post-receive jimmy/hooks;

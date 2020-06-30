@@ -18,7 +18,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import "./style/style.css";
 
-import registerServiceWorker from "./registerServiceWorker";
+import { unregister } from "./registerServiceWorker";
 
 /*
 // UNCOMMENT IT FOR PRODUCTION
@@ -61,4 +61,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-registerServiceWorker();
+unregister();
