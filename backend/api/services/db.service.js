@@ -1,5 +1,5 @@
 const database = require('../../config/database');
-const seedData = require('./seedData');
+// const seedData = require('./seedData');
 
 const dbService = (environment, migrate) => {
   const authenticateDB = () => database.authenticate();

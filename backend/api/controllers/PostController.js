@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
+const PostService = require('../services/PostService');
 const Comment = require('../models/Comment');
 const Tag = require('../models/Tag');
 const Like = require('../models/Like');
@@ -107,15 +108,8 @@ const PostController = () => {
 
   const create = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
-      const post = await Post.create({
-        title: req.body.title,
-        published: req.body.published,
-        description: req.body.description,
-        tagId: req.body.tagId,
-        userId: user.id,
-      });
-      return res.status(200).json({ ...post.get({ plain: true }), user });
+      const post = await PostService.create({ ...req.body, userId: req.session.userId });
+      return res.status(200).json({ ...post });
     } catch (err) {
       logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });

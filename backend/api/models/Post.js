@@ -5,8 +5,6 @@ const randomId = require('./randomId');
 
 const Comment = require('./Comment');
 
-// const Like = require('./Like');
-
 const Post = sequelize.define('post', {
   id: {
     type: Sequelize.STRING,
