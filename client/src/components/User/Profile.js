@@ -126,7 +126,7 @@ class Profile extends Component {
   }
 
   render() {
-    if (!this.props.user || !this.props.posts || !this.props.drafts) {
+    if (!this.props.user || !this.props.posts || (this.props.account ? (this.props.account.id === this.props.user.id ? !this.props.drafts : null) : null)) {
       return (
         <div className="loader">
           <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />

@@ -41,7 +41,6 @@ class EditPost extends Component {
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
-      debugger;
       if (!params["postTag"] || !params["title"] || !params["postEditor"]) {
         this.notify()
         return

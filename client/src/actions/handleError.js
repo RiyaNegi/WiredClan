@@ -1,7 +1,6 @@
 import History from "../history.js";
 
 export const handleError = (error) => {
-  debugger;
   if (
     error.response &&
     ["TokenExpiredError", "JsonWebTokenError", "ExpiredCookie"].includes(

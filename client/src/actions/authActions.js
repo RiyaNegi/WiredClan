@@ -32,11 +32,10 @@ export const signinUser = ({ email, password }) => {
   };
 };
 
-export const signupUser = ({ email, password, firstName, lastName, college, year, confirmPassword }) => {
+export const signupUser = ({ email, password, firstName, lastName, college, year }, confirmPassword) => {
   return (dispatch) => {
-    // submit email/password to the server
     request
-      .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year.value, confirmPassword })
+      .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year ? year.value : undefined, confirmPassword })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         fetchAccount(response.data.user.id, true)(dispatch);
@@ -64,6 +63,7 @@ export const signoutUser = () => {
       .then((response) => {
         localStorage.removeItem("token");
         localStorage.removeItem("profileData");
+        localStorage.removeItem("auth");
         History.push("/");
         dispatch({
           type: UNAUTH_USER,

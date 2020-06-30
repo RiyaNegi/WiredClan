@@ -16,7 +16,6 @@ export const createPost = (title, published, description, tagId) => {
         { title, published, description, tagId },
       )
       .then((response) => {
-        debugger;
         dispatch({
           type: CREATE_POST,
           payload: response.data,

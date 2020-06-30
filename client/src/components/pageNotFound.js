@@ -6,21 +6,21 @@ import { Link } from "react-router-dom";
 class pageNotFound extends Component {
     render() {
         return (
-            <React.Fragment>
-                <div className="d-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon icon={faExclamationCircle} size="9x" color="gray" />
+            <div className="col-12">
+                <div className="d-flex align-items-center mt-5 justify-content-center">
+                    <FontAwesomeIcon icon={faExclamationCircle} size="6x" color="black" />
                 </div>
-                <div className="d-flex align-items-center justify-content-center font-weight-bold oops-text">
-                    OOPS! Page not found
+                <div className="d-flex align-items-center mt-3 justify-content-center oops-text">
+                    OOPS! This page doesn't exist
                 </div>
                 <div className="d-flex align-items-center justify-content-center  mt-5">
                     <Link to="/">
-                        <button className=" btn btn-warning back-home-btn">
+                        <button className="back-home-btn p-2">
                             Back to HomePage
                 </button>
                     </Link>
                 </div>
-            </React.Fragment >
+            </div >
         )
     }
 }

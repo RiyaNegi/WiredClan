@@ -45,7 +45,7 @@ class HomePage extends PureComponent {
   };
 
   notifypost = () => {
-    if (!this.props.account && !this.state.loginNotify) {
+    if (!this.props.authenticated && !this.state.loginNotify) {
       this.notifyLogin();
       this.setState({ loginNotify: true })
     }
@@ -80,7 +80,7 @@ class HomePage extends PureComponent {
           <Leaderboard topContributors={this.props.topContributors} />
           <div className="mt-4">
             <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
-              {this.props.account ? (<Link className="com-links" to={"/CreatePost"} >
+              {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >
                 <div className="p-2 py-2 com-links">📝 New Post</div>
               </Link>)
                 : <div className="p-2 py-2 com-links">📝 New Post</div>
@@ -97,6 +97,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     account: state.auth.data,
+    authenticated: state.auth.authenticated,
     search: state.posts.searchArray,
     topContributors: state.leaderboard.topContributors,
   };

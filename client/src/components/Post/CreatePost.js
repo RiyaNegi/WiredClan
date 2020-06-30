@@ -29,7 +29,6 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
-      debugger;
       if (!this.props.account) {
         this.notifyLogin();
         return
