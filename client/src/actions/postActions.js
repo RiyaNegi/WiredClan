@@ -109,7 +109,7 @@ export const updatePost = (postId, title, published, description, tagId) => {
           payload: response.data,
         });
         var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
-          : { pathname: `/users/${response.data.user.id}`, state: { draft: true } }
+          : { pathname: `/users/${response.data.userId}`, state: { draft: true } }
         History.push(redirectUrl);
       })
       .catch((error) => {

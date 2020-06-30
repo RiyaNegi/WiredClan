@@ -42,54 +42,8 @@ const PostController = () => {
 
   const get = async (req, res) => {
     try {
-      const result = (await Post.findOne({
-        where: Sequelize.or(
-          {
-            id: req.params.id, published: true,
-          },
-          {
-            id: req.params.id, published: false, userId: req.session.userId ? req.session.userId : '',
-          },
-        ),
-        include: [
-          {
-            model: User,
-            attributes: ['userName', 'imageUrl', 'firstName', 'lastName',
-              'college', 'year', 'department', 'id'],
-          },
-          {
-            model: Tag,
-          },
-          {
-            model: Like,
-          },
-          {
-            model: Comment,
-            where: { parentId: null },
-            required: false,
-            include: [
-              {
-                model: User,
-                attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
-                  'year', 'department', 'id'],
-              },
-              {
-                model: Comment,
-                as: 'replyComments',
-                include: {
-                  model: User,
-                  attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
-                    'year', 'department', 'id'],
-                },
-              },
-            ],
-          },
-        ],
-      })).toJSON();
-      result.likedByCurrentUser = !!req.session.userId && !!result.likes.find((like) => like.userId === req.session.userId);
-      result.likesCount = result.likes.length;
-      delete result.likes;
-      return res.status(200).json(result);
+      const post = await PostService.get({ id: req.params.id, userId: req.session.userId });
+      return res.status(200).json(post);
     } catch (err) {
       logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -98,7 +52,7 @@ const PostController = () => {
 
   const destroy = async (req, res) => {
     try {
-      const result = await Post.destroy({ where: { id: req.params.id, userId: req.session.userId } });
+      const result = PostService.destroy({ id: req.params.id, userId: req.session.id });
       return res.status(200).json({ status: !!result });
     } catch (err) {
       logger.error(err);
@@ -108,7 +62,7 @@ const PostController = () => {
 
   const create = async (req, res) => {
     try {
-      const post = await PostService.create({ ...req.body, userId: req.session.userId });
+      const post = await PostService.createPostAndTeammates({ ...req.body, userId: req.session.userId });
       return res.status(200).json({ ...post });
     } catch (err) {
       logger.error(err);
@@ -118,16 +72,8 @@ const PostController = () => {
 
   const edit = async (req, res) => {
     try {
-      const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
-      const post = await Post.findOne({ where: { id: req.params.id, userId: user.id } });
-      await post.update({
-        title: req.body.title,
-        published: req.body.published,
-        description: req.body.description,
-        tagId: req.body.tagId,
-      });
-
-      return res.status(200).json({ ...post.get({ plain: true }), user });
+      const post = await PostService.update({ ...req.body, id: req.params.id, userId: req.session.userId });
+      return res.status(200).json({ ...post });
     } catch (err) {
       logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
