@@ -65,7 +65,10 @@ async function get({ id, userId }) {
 async function createPostAndTeammates({
   title, published, description, tagId, teammateIds, userId,
 }) {
-  if (teammateIds.includes(userId) === false) {
+  if (!teammateIds) {
+    // eslint-disable-next-line no-param-reassign
+    teammateIds = [userId];
+  } else if (!teammateIds.includes(userId)) {
     teammateIds.unshift(userId);
   }
   // eslint-disable-next-line no-param-reassign
