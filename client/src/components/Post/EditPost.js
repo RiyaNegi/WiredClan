@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import Loader from "react-loader-spinner";
 import { Editor } from '@tinymce/tinymce-react';
+import { ToastContainer, toast } from "react-toastify";
+import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import renderMembers from "./renderMembers";
+
+
+
 
 
 function renderTooltip(props) {
@@ -24,6 +29,7 @@ class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: false
     };
   }
   componentWillMount() {
@@ -37,6 +43,14 @@ class EditPost extends Component {
     this.props.fetchTags()
   }
 
+  handleShowModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
@@ -45,12 +59,14 @@ class EditPost extends Component {
         return
       }
       else if (name === "save" && params["title"] && params["postTag"].value && params["postEditor"]) {
+        var teammates = params["members"] && params["members"].map(i => i.id)
         this.props.updatePost(
           postId,
           params["title"],
           false,
           params["postEditor"],
           params["postTag"].value,
+          teammates,
         );
         return
       } else if (name === "publish" && params["title"] && params["postTag"].value && params["postEditor"]) {
@@ -59,7 +75,8 @@ class EditPost extends Component {
           params["title"],
           true,
           params["postEditor"],
-          params["postTag"].value
+          params["postTag"].value,
+          teammates,
         );
         return
       }
@@ -152,14 +169,14 @@ class EditPost extends Component {
       <div className="mt-3">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
-            <div className="col-md-5 mt-2 col-10">
+            <div className="col-10 col-md-6 mt-2 row">
               <Field
                 name='postTag'
                 options={tagsArrray}
                 component={(props) => (
                   <Select
                     {...props}
-                    className="basic-single col-10 col-md-8 ml-2 p-0 Select"
+                    className="basic-single col-12 col-md-5 ml-2 p-0 Select-tag"
                     classNamePrefix="needsclick "
                     isSearchable={false}
                     value={props.input.value}
@@ -170,6 +187,34 @@ class EditPost extends Component {
                 )}
                 multi
               />
+              <div className="col-4 d-flex align-self-center">
+                <button
+                  className="team-modal-button"
+                  type="button"
+                  onClick={this.handleShowModal}
+                >Add Teammates
+                </button>
+                <Modal
+                  className="modal-background"
+                  show={this.state.showModal}
+                  onHide={this.handleCloseModal}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Manage Teammates</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className="p-6">
+                    <FieldArray name="members" component={renderMembers} props={{ editPost: true }} />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={this.handleCloseModal}
+                    >
+                      Close
+                  </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
             </div>
             <div className="d-flex flex-row ml-4 ">
               <OverlayTrigger
@@ -249,6 +294,8 @@ class EditPost extends Component {
 
 const populatePostValues = (state, desc) => {
   if (state.postDetails.details) {
+    var memberArray = state.postDetails.details.teammates.map(a =>
+      ({ id: a.user.id, firstName: a.user.firstName, lastName: a.user.lastName, imageUrl: a.user.imageUrl }))
     var info = {};
     info = {
       ...info,
@@ -257,11 +304,13 @@ const populatePostValues = (state, desc) => {
       postTag: {
         label: state.postDetails.details.tag.text,
         value: state.postDetails.details.tagId
-      }
+      },
+      members: memberArray
     };
     return info;
-  } else return;
-};
+  }
+  else return;
+}
 
 const mapStateToProps = (state) => {
   let desc = state.postDetails.description

@@ -113,7 +113,7 @@ z-index: 10 !important;
   background-color: transparent;
   font-weight:700;
   border-radius:5px;
-  padding:0px 10px;
+  /* padding:0px 6px; */
 }
 
 .draft-post-btn:hover {
@@ -141,14 +141,13 @@ z-index: 10 !important;
 .team-modal-button{
   background-color: white;
   outline: 0;
-  border:1px solid black;
-  border-radius: 4px;
-  width:140px;
+  border:none;
+  width:220px;
+  font-weight: 800;
 }
 .team-modal-button:hover{
-  background-color: black;
-  color:white;
-  outline: 0;
+  text-decoration: underline
+
 }
 .team-modal-button:focus{
   outline:0;
@@ -176,4 +175,20 @@ z-index: 10 !important;
 }
 .search-user-input:focus{
   outline:0;
+}
+
+.Select-tag {
+  z-index: 10 !important;
+  width:200px !important;
+  max-width: 100% !important;
+}
+
+.Select-tag.is-open {
+z-index: 10 !important;
+}
+
+.Select-tag-menu {
+  position: fixed !important;
+  width: 440px !important;
+  margin: 1px;
 }

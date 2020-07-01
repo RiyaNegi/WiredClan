@@ -1,7 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
@@ -43,7 +41,7 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
-      // debugger;
+      var teammateIds = params["members"] && params["members"].map(i => i.id)
       if (!this.props.account) {
         this.notifyLogin();
         return
@@ -53,10 +51,14 @@ class CreatePost extends Component {
         return
       }
       else if (name === "submit" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], true, params["createPostEditor"], params["postTag"].id); return
+        this.props.createPost(params["postTitle"], true, params["createPostEditor"],
+          params["postTag"].id, teammateIds);
+        return
       }
       else if (name === "save" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], false, params["createPostEditor"], params["postTag"].id); return
+        this.props.createPost(params["postTitle"], false,
+          params["createPostEditor"], params["postTag"].id, teammateIds);
+        return
       }
       else {
         this.notify()
@@ -119,7 +121,7 @@ class CreatePost extends Component {
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
             </label> */}
-            <div className="col-md-7 mt-2 col-10 row">
+            <div className="col-10 col-md-6 mt-2 row">
               <fieldset>
                 <Field
                   name='postTag'
@@ -127,7 +129,7 @@ class CreatePost extends Component {
                   component={(selectProps) => (
                     <Select
                       {...selectProps}
-                      className="basic-single col-11 col-md-7 ml-2 p-0 Select"
+                      className="basic-single col-12 col-md-5 ml-2 p-0 Select-tag"
                       classNamePrefix="needsclick "
                       placeholder="Select Tag.."
                       isSearchable={false}
@@ -139,9 +141,9 @@ class CreatePost extends Component {
                   )}
                 />
               </fieldset>
-              <div className="col-2">
+              <div className="col-4 d-flex align-self-center">
                 <button
-                  className="team-modal-button p-2"
+                  className=" team-modal-button"
                   type="button"
                   onClick={this.handleShowModal}
                 >Add Teammates
@@ -152,7 +154,7 @@ class CreatePost extends Component {
                   onHide={this.handleCloseModal}
                 >
                   <Modal.Header closeButton>
-                    <Modal.Title>Add Teammates</Modal.Title>
+                    <Modal.Title>Manage Teammates</Modal.Title>
                   </Modal.Header>
                   <Modal.Body className="p-6">
                     <FieldArray name="members" component={renderMembers} />
@@ -164,12 +166,6 @@ class CreatePost extends Component {
                     >
                       Close
                   </Button>
-                    <Button
-                      variant="primary"
-                      onClick={this.handleDeleteClick}
-                    >
-                      Delete
-                   </Button>
                   </Modal.Footer>
                 </Modal>
               </div>

@@ -137,7 +137,7 @@ class PostsList extends React.Component {
                             : post.user.firstName + " " + post.user.lastName}
                         </span>
                       </a>
-                      <div className="hidden-sm-up"></div>
+                      <div className="d-md-none"></div>
                       <span className="font-weight-light post-link">
                         <span className="mx-1 hidden-sm-down">|</span>
                         <Badge

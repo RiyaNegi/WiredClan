@@ -5,15 +5,16 @@ import request from "./request";
 
 import {
   CREATE_POST, DELETE_POST, FETCH_POSTS, FETCH_POST_DETAILS, UPDATE_POST, CREATE_LIKE, DELETE_LIKE,
-  CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER
+  CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER, ADD_TEAMMATE, REMOVE_TEAMMATE
 } from "./types";
 
-export const createPost = (title, published, description, tagId) => {
+export const createPost = (title, published, description, tagId, teammateIds) => {
   return (dispatch) => {
+    debugger;
     request
       .post(
         `/api/posts`,
-        { title, published, description, tagId },
+        { title, published, description, tagId, teammateIds },
       )
       .then((response) => {
         dispatch({
@@ -179,5 +180,27 @@ export const deletePostLike = (postId) => {
       .catch((error) => {
         handleError(error);
       });;
+  };
+};
+
+export const addTeammate = (postId, userId) => {
+  return () => {
+    request.post(`/api/teammates`, { postId, userId })
+      .catch((error) => {
+        handleError(error);
+      });;
+
+  };
+};
+
+export const removeTeammate = (postId, userId) => {
+  return () => {
+    request.delete(`/api/teammates`, {
+      data: { postId, userId },
+    })
+      .catch((error) => {
+        handleError(error);
+      });;
+
   };
 };
