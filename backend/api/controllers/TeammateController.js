@@ -9,7 +9,7 @@ const TeammateController = () => {
     try {
       const post = await Post.findOne({ where: { id: req.body.postId }, include: [Teammate] });
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
-        return null;
+        throw new Error('Unauthorized access in teammates API');
       }
 
       let teammate = await Teammate.findOne({ where: { postId: req.body.postId, userId: req.body.userId } });
@@ -27,7 +27,7 @@ const TeammateController = () => {
     try {
       const post = await Post.findOne({ where: { id: req.body.postId }, include: [Teammate] });
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
-        return null;
+        throw new Error('Unauthorized access in teammates API');
       }
 
       const result = await Teammate.destroy({ where: { postId: req.body.postId, userId: req.body.userId } });
