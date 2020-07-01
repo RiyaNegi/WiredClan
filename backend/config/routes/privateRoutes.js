@@ -24,7 +24,9 @@ const privateRoutes = {
   'POST /likes': 'LikeController.create',
   'DELETE /likes': 'LikeController.destroy',
 
-
+  // Teammates routes
+  'POST /teammates': 'TeammateController.create',
+  'DELETE /teammates': 'TeammateController.destroy',
 };
 
 module.exports = privateRoutes;

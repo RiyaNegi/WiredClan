@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
+const Teammate = require('../models/Teammate');
 const Tag = require('../models/Tag');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
@@ -180,16 +181,21 @@ const UserController = () => {
         }, {
           email: req.params.id,
         }),
-        include: [{
-          model: Post,
-          include: [Comment, Tag, Like],
-        }, { model: Like }],
+        include: [Teammate, Like],
       });
       user = user.get({ plain: true });
-      let likesCount = 0;
 
+      const postIds = user.teammates.map((teammate) => teammate.postId);
+      delete user.teammates;
+      let allPosts = await Post.findAll({
+        where: { id: postIds },
+        include: [Comment, Tag, Like],
+      });
+      allPosts = allPosts.map((post) => post.get({ plain: true }));
+
+      let likesCount = 0;
       if (req.session.userId && user.id === req.session.userId) {
-        user.drafts = user.posts.filter((post) => !(post.published)).map((x) => {
+        user.drafts = allPosts.filter((post) => !(post.published)).map((x) => {
           likesCount += x.likes.length;
           return {
             ...x,
@@ -201,7 +207,7 @@ const UserController = () => {
           };
         });
       }
-      user.posts = user.posts.filter((post) => post.published).map((x) => {
+      user.posts = allPosts.filter((post) => post.published).map((x) => {
         likesCount += x.likes.length;
         return {
           ...x,
