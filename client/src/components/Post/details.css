@@ -197,3 +197,7 @@ z-index: 10 !important;
 .tox-tinymce {
   border: 0px !important;
 }
+
+.tox-notifications-container {
+  visibility: hidden;
+}
