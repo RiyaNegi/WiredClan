@@ -1,4 +1,3 @@
-const Sequelize = require('sequelize');
 
 const Post = require('../models/Post');
 const Teammate = require('../models/Teammate');
@@ -8,15 +7,12 @@ const Tag = require('../models/Tag');
 const Like = require('../models/Like');
 
 async function get({ id, userId }) {
+  const teammate = await Teammate.findOne({ postId: id, userId });
+  if (!teammate) {
+    throw new Error(`Unauthorized access in GET post: id: ${id}, userId: ${userId}`);
+  }
   const post = (await Post.findOne({
-    where: Sequelize.or(
-      {
-        id, published: true,
-      },
-      {
-        id, published: false, userId: userId || '',
-      },
-    ),
+    where: { id },
     include: [
       {
         model: User,

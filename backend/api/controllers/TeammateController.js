@@ -1,5 +1,4 @@
 
-const User = require('../models/User');
 const Post = require('../models/Post');
 const Teammate = require('../models/Teammate');
 const logger = require('../../logger');
@@ -16,6 +15,7 @@ const TeammateController = () => {
       if (!teammate) {
         teammate = await Teammate.create({ userId: req.body.userId, postId: req.body.postId });
       }
+      teammate = teammate.get({ plain: true });
       return res.status(200).json({ ...teammate });
     } catch (err) {
       logger.error(err);
