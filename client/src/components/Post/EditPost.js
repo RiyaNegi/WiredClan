@@ -237,12 +237,12 @@ class EditPost extends Component {
                 </button>
               </OverlayTrigger>
               <button
-                className="ml-2 draft-post-btn"
+                className=" draft-post-btn"
                 action="submit"
                 name="save"
                 onClick={handleSubmit(this.handleFormSubmit("save"))}
               >
-                Save
+                Save Draft
                 </button>
               <button
                 className="ml-2 sign-btn "
