@@ -1,5 +1,4 @@
 
-const User = require('../models/User');
 const Post = require('../models/Post');
 const Teammate = require('../models/Teammate');
 const logger = require('../../logger');
@@ -16,6 +15,7 @@ const TeammateController = () => {
       if (!teammate) {
         teammate = await Teammate.create({ userId: req.body.userId, postId: req.body.postId });
       }
+      teammate = teammate.get({ plain: true });
       return res.status(200).json({ ...teammate });
     } catch (err) {
       logger.error(err);
@@ -28,6 +28,9 @@ const TeammateController = () => {
       const post = await Post.findOne({ where: { id: req.body.postId }, include: [Teammate] });
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
         throw new Error('Unauthorized access in teammates API');
+      }
+      if (req.session.userId === req.body.userId) {
+        return res.status(200).json({ status: 'Cannot remove owner' });
       }
 
       const result = await Teammate.destroy({ where: { postId: req.body.postId, userId: req.body.userId } });
