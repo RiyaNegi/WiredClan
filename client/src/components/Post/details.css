@@ -47,20 +47,6 @@
   justify-self: center;
 }
 
-.post-title-input {
-  font-size: 40px;
-  border: none !important;
-}
-
-.post-title-input:hover {
-  border: none !important;
-}
-
-.post-title-input:focus {
-  border: none !important;
-  border-bottom: 1px solid gray !important;
-  outline: none;
-}
 
 .Select {
   width: 400px !important;
@@ -191,4 +177,23 @@ z-index: 10 !important;
   position: fixed !important;
   width: 440px !important;
   margin: 1px;
+}
+.textarea-title {
+  width: 100%;
+  font-size: 34px;
+  border: none !important;
+}
+
+.textarea-title:hover {
+  border: none !important;
+}
+
+.textarea-title:focus {
+  border: none !important;
+  border-bottom: 1px solid gray !important;
+  outline: none;
+}
+
+.tox-tinymce {
+  border: 0px !important;
 }

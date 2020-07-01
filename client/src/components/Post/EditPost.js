@@ -100,7 +100,7 @@ class EditPost extends Component {
       onBlur={(event, value) => { field.input.onChange(event.target.getContent()) }}
       apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
       init={{
-        selector: 'textarea',
+        selector: 'post-editor',
         plugins: 'preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: false,
@@ -277,7 +277,7 @@ class EditPost extends Component {
             </fieldset>
             <fieldset className="">
               <Field
-                className="col-md-12 col-6"
+                className="col-md-12 col-6 post-editor"
                 name="postEditor"
                 component={this.renderTinyMCE}
               // component={(editorProps) => (
