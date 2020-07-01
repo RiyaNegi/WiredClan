@@ -99,7 +99,7 @@ z-index: 10 !important;
   background-color: transparent;
   font-weight:700;
   border-radius:5px;
-  padding:0px 10px;
+  /* padding:0px 6px; */
 }
 
 .draft-post-btn:hover {
@@ -124,6 +124,60 @@ z-index: 10 !important;
     opacity:0.2 !important;
 }
 
+.team-modal-button{
+  background-color: white;
+  outline: 0;
+  border:none;
+  width:220px;
+  font-weight: 800;
+}
+.team-modal-button:hover{
+  text-decoration: underline
+
+}
+.team-modal-button:focus{
+  outline:0;
+}
+
+.search-email-card{
+  border:1px solid rgb(211, 211, 211);
+  border-radius: 4px;
+}
+
+.add-user-button{
+  background-color: transparent;
+  font-size:18px;
+  border:none;
+}
+.add-user-button:focus{
+  outline:0;
+}
+
+.search-user-input{
+  background-color: transparent;
+  font-size:18px;
+  border:none;
+  width:100%
+}
+.search-user-input:focus{
+  outline:0;
+}
+
+.Select-tag {
+  z-index: 10 !important;
+  width:200px !important;
+  max-width: 100% !important;
+}
+
+.Select-tag.is-open {
+z-index: 10 !important;
+}
+
+.Select-tag-menu {
+  position: fixed !important;
+  width: 440px !important;
+  margin: 1px;
+}
 .textarea-title {
   width: 100%;
   font-size: 34px;

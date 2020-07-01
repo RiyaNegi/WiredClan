@@ -19,5 +19,9 @@ export const CREATE_LIKE = "create_like";
 export const DELETE_LIKE = "delete_like";
 export const CREATE_POST_LIKE = "create_post_like";
 export const DELETE_POST_LIKE = "delete_post_like";
+export const FETCH_EMAIL_USER = "fetch_email_user";
+export const ADD_TEAMMATE = "add_teammate";
+export const REMOVE_TEAMMATE = "remove_teammate";
+
 
 

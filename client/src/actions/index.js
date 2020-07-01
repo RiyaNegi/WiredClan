@@ -4,7 +4,8 @@ import {
   POST_COMMENT,
   UPDATE_COMMENT,
   DELETE_COMMENT,
-  FETCH_TAGS
+  FETCH_TAGS,
+  FETCH_SEARCH
 } from "./types";
 
 export const postComment = (postId, text, parentId) => {
@@ -78,18 +79,18 @@ export const fetchTags = () => {
   }
 };
 
-// export const fetchSearch = (text) => {
-//   return (dispatch) => {
-//     setTimeout(function () {
-//       request
-//         .get(`${ROOT_URL}/api/posts?page=1&search=${text}`)
-//         .then((response) => {
-//           console.log(response);
-//           dispatch({
-//             type: FETCH_SEARCH,
-//             payload: response.data,
-//           });
-//         });
-//     }, 0);
-//   };
-// };
+export const fetchSearch = (text) => {
+  return (dispatch) => {
+    setTimeout(function () {
+      request
+        .get(`api/posts?page=1&search=${text}`)
+        .then((response) => {
+          console.log(response);
+          dispatch({
+            type: FETCH_SEARCH,
+            payload: response.data,
+          });
+        });
+    }, 0);
+  };
+};

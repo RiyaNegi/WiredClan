@@ -1,25 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import Loader from "react-loader-spinner";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
-// import TinyMCE from "./tiny"
-import Editor from './Editor';
+import { Modal, Button } from "react-bootstrap";
+import { Editor } from '@tinymce/tinymce-react';
+import renderMembers from "./renderMembers";
 import TextareaAutosize from 'react-textarea-autosize';
-import AutosizeInput from 'react-input-autosize';
-
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: false,
       loginNotify: false
     };
 
   }
+
+  handleShowModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
 
   componentWillMount() {
     this.props.fetchTags()
@@ -32,6 +41,7 @@ class CreatePost extends Component {
 
   handleFormSubmit = (name) => {
     return (params) => {
+      var teammateIds = params["members"] && params["members"].map(i => i.id)
       if (!this.props.account) {
         this.notifyLogin();
         return
@@ -41,10 +51,14 @@ class CreatePost extends Component {
         return
       }
       else if (name === "submit" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], true, params["createPostEditor"], params["postTag"].id); return
+        this.props.createPost(params["postTitle"], true, params["createPostEditor"],
+          params["postTag"].id, teammateIds);
+        return
       }
       else if (name === "save" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], false, params["createPostEditor"], params["postTag"].id); return
+        this.props.createPost(params["postTitle"], false,
+          params["createPostEditor"], params["postTag"].id, teammateIds);
+        return
       }
       else {
         this.notify()
@@ -128,24 +142,54 @@ class CreatePost extends Component {
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
             </label> */}
-            <div className="col-md-5 mt-2 col-10">
-              <Field
-                name='postTag'
-                options={tagsArray}
-                component={(selectProps) => (
-                  <Select
-                    {...selectProps}
-                    className="basic-single col-11 col-md-8 ml-2 p-0 Select"
-                    classNamePrefix="needsclick "
-                    placeholder="Select Tag.."
-                    isSearchable={false}
-                    value={selectProps.input.value}
-                    onChange={(value) => selectProps.input.onChange(value)}
-                    onBlur={event => event.preventDefault()}
-                    options={selectProps.options}
-                  />
-                )}
-              />
+            <div className="col-10 col-md-6 mt-2 row">
+              <fieldset>
+                <Field
+                  name='postTag'
+                  options={tagsArray}
+                  component={(selectProps) => (
+                    <Select
+                      {...selectProps}
+                      className="basic-single col-12 col-md-5 ml-2 p-0 Select-tag"
+                      classNamePrefix="needsclick "
+                      placeholder="Select Tag.."
+                      isSearchable={false}
+                      value={selectProps.input.value}
+                      onChange={(value) => selectProps.input.onChange(value)}
+                      onBlur={event => event.preventDefault()}
+                      options={selectProps.options}
+                    />
+                  )}
+                />
+              </fieldset>
+              <div className="col-4 d-flex align-self-center">
+                <button
+                  className=" team-modal-button"
+                  type="button"
+                  onClick={this.handleShowModal}
+                >Add Teammates
+                </button>
+                <Modal
+                  className="modal-background"
+                  show={this.state.showModal}
+                  onHide={this.handleCloseModal}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Manage Teammates</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className="p-6">
+                    <FieldArray name="members" component={renderMembers} />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="secondary"
+                      onClick={this.handleCloseModal}
+                    >
+                      Close
+                  </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
             </div>
             <div className="d-flex flex-row ml-4 ">
               <button
@@ -207,7 +251,8 @@ class CreatePost extends Component {
 const mapStateToProps = (state) => {
   return {
     account: state.auth.data,
-    tags: state.postDetails.tags
+    tags: state.postDetails.tags,
+
   };
 };
 
