@@ -5,7 +5,7 @@ import request from "./request";
 
 import {
   CREATE_POST, DELETE_POST, FETCH_POSTS, FETCH_POST_DETAILS, UPDATE_POST, CREATE_LIKE, DELETE_LIKE,
-  CREATE_POST_LIKE, DELETE_POST_LIKE,
+  CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER
 } from "./types";
 
 export const createPost = (title, published, description, tagId) => {
@@ -79,6 +79,21 @@ export const fetchPosts = () => {
       });
   };
 };
+
+export const fetchEmailUser = (emailId) => {
+  return (dispatch) => {
+    request.get(`/api/users/${emailId}`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_EMAIL_USER,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+}
 
 export const createLike = (postId) => {
   return (dispatch) => {
