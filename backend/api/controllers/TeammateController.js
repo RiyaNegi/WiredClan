@@ -29,6 +29,9 @@ const TeammateController = () => {
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
         throw new Error('Unauthorized access in teammates API');
       }
+      if (req.session.userId === req.body.userId) {
+        return res.status(200).json({ status: 'Cannot remove owner' });
+      }
 
       const result = await Teammate.destroy({ where: { postId: req.body.postId, userId: req.body.userId } });
       return res.status(200).json({ status: !!result });
