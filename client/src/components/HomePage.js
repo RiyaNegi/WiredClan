@@ -40,23 +40,18 @@ class HomePage extends PureComponent {
 
   notifypost = () => {
     if (!this.props.authenticated && !this.state.loginNotify) {
-      this.notifyLogin();
+      toast.warning('❗ Sign in to create post', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      });
       this.setState({ loginNotify: true })
     }
   };
-
-
-  notifyLogin = () =>
-    toast.warning('❗ Sign in to create post', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-    });
-
 
   render() {
     if (!this.props.posts) {
@@ -68,7 +63,22 @@ class HomePage extends PureComponent {
     }
 
     return (
-      <div className="mt-md-3 d-flex row justify-content-between">
+      <React.Fragment>
+        <div className="mt-md-3 d-flex row justify-content-between">
+          <PostsList className="col-md-7" posts={this.props.posts} />
+          <div className="col-md-5 col-lg-4">
+            <Leaderboard topContributors={this.props.topContributors} />
+            <div className="mt-4">
+              <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
+                {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >
+                  <div className="p-2 py-2 com-links">📝 New Post</div>
+                </Link>)
+                  : <div className="p-2 py-2 com-links">📝 New Post</div>
+                }
+              </Button>
+            </div>
+          </div>
+        </div>
         <ToastContainer
           position="top-right"
           autoClose={2000}
@@ -80,20 +90,7 @@ class HomePage extends PureComponent {
           draggable={false}
           pauseOnHover={false}
         />
-        <PostsList className="col-md-7" posts={this.props.posts} />
-        <div className="col-md-5 col-lg-4">
-          <Leaderboard topContributors={this.props.topContributors} />
-          <div className="mt-4">
-            <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
-              {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >
-                <div className="p-2 py-2 com-links">📝 New Post</div>
-              </Link>)
-                : <div className="p-2 py-2 com-links">📝 New Post</div>
-              }
-            </Button>
-          </div>
-        </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

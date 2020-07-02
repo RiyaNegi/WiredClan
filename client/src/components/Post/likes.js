@@ -3,12 +3,8 @@ import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
 import { faFire as faHearts } from "@fortawesome/free-solid-svg-icons";
 import { faFire as faHeartr } from "@fortawesome/free-solid-svg-icons";
-// import { faHeart as faHearts } from "@fortawesome/free-solid-svg-icons";
-// import { faHeart as faHeartr } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class PostLikes extends React.Component {
 
@@ -18,16 +14,15 @@ class PostLikes extends React.Component {
       likes: this.props.likesCount,
       updated: false,
       id: this.props.postId,
-      loginNotify: false
+      likeLoginNotify: false
     };
-
   }
 
   updateLikes = (id) => {
     return () => {
-      if (!this.props.account && !this.state.loginNotify) {
+      if (!this.props.account && !this.state.likeLoginNotify) {
         this.notify();
-        this.setState({ loginNotify: true })
+        this.setState({ likeLoginNotify: true })
       }
       else if (this.props.account && !this.state.updated && !this.props.likedByCurrentUser) {
         this.props.createLike(this.props.postId);
@@ -83,18 +78,6 @@ class PostLikes extends React.Component {
             color="white"
           />
         </button>
-
-        <div><ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable={false}
-          pauseOnHover
-        /></div>
       </div>
     );
   }

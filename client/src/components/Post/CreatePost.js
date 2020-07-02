@@ -43,7 +43,7 @@ class CreatePost extends Component {
     return (params) => {
       var teammateIds = params["members"] && params["members"].map(i => i.id)
       if (!this.props.account) {
-        this.notifyLogin();
+        // this.notifyLogin();
         return
       }
       else if ((!params["postTag"] || !params["postTitle"] || !params["createPostEditor"])) {
@@ -52,12 +52,12 @@ class CreatePost extends Component {
       }
       else if (name === "submit" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
         this.props.createPost(params["postTitle"], true, params["createPostEditor"],
-          params["postTag"].id, teammateIds);
+          params["postTag"].id, teammateIds, this.props.account.id);
         return
       }
       else if (name === "save" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
         this.props.createPost(params["postTitle"], false,
-          params["createPostEditor"], params["postTag"].id, teammateIds);
+          params["createPostEditor"], params["postTag"].id, teammateIds, this.props.account.id);
         return
       }
       else {
@@ -88,16 +88,16 @@ class CreatePost extends Component {
       progress: undefined,
     });
 
-  notifyLogin = () =>
-    toast.warning('❗ SIGN IN to create post', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-    });
+  // notifyLogin = () =>
+  //   toast.warning('❗ SIGN IN to create post', {
+  //     position: "top-right",
+  //     autoClose: 3000,
+  //     hideProgressBar: true,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: false,
+  //     progress: undefined,
+  //   });
 
   renderTitle = (titleProps) => {
     return (
@@ -125,6 +125,7 @@ class CreatePost extends Component {
       }}
       init={{
         selector: '.rich-editor-field textarea',
+        content_css: '/editor.css?' + new Date().getTime(),
         plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: false,
@@ -138,7 +139,7 @@ class CreatePost extends Component {
         autosave_retention: "2m",
         fullpage_default_font_size: "16px",
         image_advtab: true,
-        content_css: '//www.tiny.cloud/css/codepen.min.css',
+        // content_css: '//www.tiny.cloud/css/codepen.min.css',
         link_list: [
           { title: 'My page 1', value: 'http://www.tinymce.com' },
           { title: 'My page 2', value: 'http://www.moxiecode.com' }
@@ -202,7 +203,7 @@ class CreatePost extends Component {
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
             </label> */}
-            <div className="col-10 col-md-6 mt-2 row">
+            <div className="col-10 col-md-9 mt-2 row">
               <fieldset>
                 <Field
                   name='postTag'
@@ -210,7 +211,7 @@ class CreatePost extends Component {
                   component={(selectProps) => (
                     <Select
                       {...selectProps}
-                      className="basic-single col-12 col-md-5 ml-2 p-0 Select-tag"
+                      className="basic-single col-10 col-md-6 ml-4 ml-md-2 p-0 mt-3 mt-md-0 Select-tag"
                       classNamePrefix="needsclick "
                       placeholder="Select Tag.."
                       isSearchable={false}
@@ -222,12 +223,12 @@ class CreatePost extends Component {
                   )}
                 />
               </fieldset>
-              <div className="col-4 d-flex align-self-center">
+              <div className="col-8 mt-3 mt-md-0 col-md-3 mr-4 d-flex align-self-center">
                 <button
-                  className=" team-modal-button"
+                  className="team-modal-button ml-2"
                   type="button"
                   onClick={this.handleShowModal}
-                >Add Teammates
+                >Manage Team
                 </button>
                 <Modal
                   className="modal-background"
@@ -294,7 +295,6 @@ class CreatePost extends Component {
               <Field
                 className="col-md-12 col-6 rich-editor"
                 name="createPostEditor"
-
                 component={this.renderRichEditor}
               />
             </fieldset>
