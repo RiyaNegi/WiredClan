@@ -286,7 +286,7 @@ class EditPost extends Component {
           <div className="mt-2">
             <fieldset>
               <Field
-                name="postTitle"
+                name="title"
                 component={this.renderTitle}
               />
             </fieldset>
