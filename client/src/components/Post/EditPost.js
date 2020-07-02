@@ -109,6 +109,7 @@ class EditPost extends Component {
   }
 
   renderRichEditor = (editorProps) => (
+    // Making a separate component out of this does not work. Not sure why.
     <Editor
       initialValue={editorProps.input.value}
       apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
