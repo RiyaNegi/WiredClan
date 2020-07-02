@@ -14,9 +14,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import renderMembers from "./renderMembers";
 
-
-
-
+import TextareaAutosize from 'react-textarea-autosize';
 
 function renderTooltip(props) {
   return (
@@ -94,17 +92,35 @@ class EditPost extends Component {
       progress: undefined,
     });
 
-  renderTinyMCE(field) {
-    return <Editor
-      initialValue={field.input.value !== '' ? field.input.value : null}
-      onBlur={(event, value) => { field.input.onChange(event.target.getContent()) }}
+  renderTitle = (titleProps) => {
+    return (
+      < TextareaAutosize
+        onChange={(e) => {
+          debugger;
+          titleProps.input.onChange(e.target.value);
+        }}
+        onBlur={titleProps.handleBlur}
+        value={titleProps.input.value}
+        className="textarea-title"
+        placeholder="Title"
+        ref={(tag) => (this.textarea = tag)}
+      />
+    )
+  }
+
+  renderRichEditor = (editorProps) => (
+    <Editor
+      initialValue={editorProps.input.value}
       apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
+      onEditorChange={(content) => {
+        editorProps.input.onChange(content);
+      }}
       init={{
-        selector: 'post-editor',
-        plugins: 'preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+        selector: '.rich-editor-field textarea',
+        plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: false,
-        block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+        block_formats: '3=h3',
         toolbar: 'undo redo | bold italic underline strikethrough | alignleft alignjustify | outdent indent |  numlist bullist | backcolor removeformat| emoticons | insertfile image media link anchor codesample  | fullscreen  preview ',
         toolbar_sticky: true,
         autosave_ask_before_unload: true,
@@ -112,6 +128,7 @@ class EditPost extends Component {
         autosave_prefix: "{path}{query}-{id}-",
         autosave_restore_when_empty: false,
         autosave_retention: "2m",
+        fullpage_default_font_size: "16px",
         image_advtab: true,
         content_css: '//www.tiny.cloud/css/codepen.min.css',
         link_list: [
@@ -143,9 +160,9 @@ class EditPost extends Component {
             callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
           }
         },
-        height: '400',
+        min_height: 430,
         image_caption: true,
-        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        quickbars_selection_toolbar: 'bold italic | quicklink h5 blockquote quickimage quicktable',
         noneditable_noneditable_class: "mceNonEditable",
         toolbar_mode: 'sliding',
         branding: false,
@@ -153,7 +170,7 @@ class EditPost extends Component {
       }}
     // onBlur={(event, value) => { props.input.onChange(event.target.getContent()) }}
     />
-  }
+  )
 
   render() {
     const { handleSubmit } = this.props;
@@ -268,20 +285,15 @@ class EditPost extends Component {
           <div className="mt-2">
             <fieldset>
               <Field
-                className="col-12 post-title-input"
-                type="text"
-                name="title"
-                placeholder="Title"
-                component="input"
+                name="postTitle"
+                component={this.renderTitle}
               />
             </fieldset>
-            <fieldset className="">
+            <fieldset className="rich-editor-field">
               <Field
-                className="col-md-12 col-6 post-editor"
+                className="col-md-12 col-6 rich-editor"
                 name="postEditor"
-                component={this.renderTinyMCE}
-              // component={(editorProps) => (
-              //  )}
+                component={this.renderRichEditor}
               />
             </fieldset>
           </div>

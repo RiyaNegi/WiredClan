@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import { Editor } from "@tinymce/tinymce-react";
 
 function App(editorProps) {
@@ -6,7 +7,6 @@ function App(editorProps) {
     <Editor
       initialValue={editorProps.input.value}
       apiKey='v3p2ek98ypo3oknpt4gt9bzbyxmvpb22a7rmkw2yo1wvwxpq'
-      cloudChannel='5-stable'
       onEditorChange={(content) => {
         editorProps.input.onChange(content);
       }}
