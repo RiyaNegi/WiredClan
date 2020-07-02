@@ -309,6 +309,15 @@ input:-webkit-autofill:active  {
   font-size: 16px;
 }
 
+.Toastify__toast-container--top-right {
+  top: 4em !important;
+}
+
+.mce-content-body p {
+  padding: 0;
+  margin: 2px 0 !important;
+}
+
 /* .create-post-but{
   border:1px solid rgb(255, 255, 74)
 }

@@ -6,6 +6,7 @@ import Signout from "../components/auth/signout";
 import Signup from "../components/auth/signup";
 import UserForm from "../components/User/form";
 import HomePage from "../components/HomePage";
+import test from "../components/test";
 import postDetails from "../components/Post/postDetails";
 import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
@@ -17,6 +18,7 @@ const Routes = () => {
     <App>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/test" component={test} />
         <Route path="/signin" component={Signin} />
         <Route path="/signout" component={Signout} />
         <Route path="/users/:id/form" component={UserForm} />
