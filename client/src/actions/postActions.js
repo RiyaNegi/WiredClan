@@ -5,10 +5,11 @@ import request from "./request";
 
 import {
   CREATE_POST, DELETE_POST, FETCH_POSTS, FETCH_POST_DETAILS, UPDATE_POST, CREATE_LIKE, DELETE_LIKE,
-  CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER, ADD_TEAMMATE, REMOVE_TEAMMATE
+  CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER, ADD_TEAMMATE, REMOVE_TEAMMATE,
+  REMOVE_SEARCHED_USER, REMOVE_ERROR_MESSAGE
 } from "./types";
 
-export const createPost = (title, published, description, tagId, teammateIds) => {
+export const createPost = (title, published, description, tagId, teammateIds, userId) => {
   return (dispatch) => {
     debugger;
     request
@@ -23,7 +24,7 @@ export const createPost = (title, published, description, tagId, teammateIds) =>
         });
         History.push(`/${slugify(response.data.title)}/${response.data.id}`);
         var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
-          : { pathname: `/users/${response.data.userId}`, state: { draft: true } }
+          : { pathname: `/users/${userId}`, state: { draft: true } }
         History.push(redirectUrl);
       })
       .catch((error) => {
@@ -81,6 +82,22 @@ export const fetchPosts = () => {
   };
 };
 
+export const removeSearchedUser = () => {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_SEARCHED_USER
+    })
+  }
+}
+
+export const removeErrorMessage = () => {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_ERROR_MESSAGE
+    })
+  }
+}
+
 export const fetchEmailUser = (emailId) => {
   return (dispatch) => {
     request.get(`/api/users/${emailId}`)
@@ -91,6 +108,11 @@ export const fetchEmailUser = (emailId) => {
         });
       })
       .catch((error) => {
+        dispatch({
+          type: FETCH_EMAIL_USER,
+          payload: "This user does not exist",
+          error
+        });
         handleError(error);
       });
   };
@@ -112,7 +134,7 @@ export const createLike = (postId) => {
   };
 };
 
-export const updatePost = (postId, title, published, description, tagId) => {
+export const updatePost = (postId, title, published, description, tagId, userId) => {
   return (dispatch) => {
     request
       .post(
@@ -125,7 +147,7 @@ export const updatePost = (postId, title, published, description, tagId) => {
           payload: response.data,
         });
         var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
-          : { pathname: `/users/${response.data.userId}`, state: { draft: true } }
+          : { pathname: `/users/${userId}`, state: { draft: true } }
         History.push(redirectUrl);
       })
       .catch((error) => {

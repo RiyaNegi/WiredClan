@@ -65,6 +65,7 @@ class EditPost extends Component {
           params["postEditor"],
           params["postTag"].value,
           teammates,
+          this.props.account.id
         );
         return
       } else if (name === "publish" && params["title"] && params["postTag"].value && params["postEditor"]) {
@@ -75,6 +76,7 @@ class EditPost extends Component {
           params["postEditor"],
           params["postTag"].value,
           teammates,
+          this.props.account.id
         );
         return
       }
@@ -187,30 +189,31 @@ class EditPost extends Component {
       <div className="mt-3">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
-            <div className="col-10 col-md-6 mt-2 row">
-              <Field
-                name='postTag'
-                options={tagsArrray}
-                component={(props) => (
-                  <Select
-                    {...props}
-                    className="basic-single col-12 col-md-5 ml-2 p-0 Select-tag"
-                    classNamePrefix="needsclick "
-                    isSearchable={false}
-                    value={props.input.value}
-                    onChange={(value) => props.input.onChange(value)}
-                    onBlur={event => event.preventDefault()}
-                    options={props.options}
-                  />
-                )}
-                multi
-              />
-              <div className="col-4 d-flex align-self-center">
+            <div className="col-10 col-md-9 mt-2 row">
+              <fieldset>
+                <Field
+                  name='postTag'
+                  options={tagsArrray}
+                  component={(props) => (
+                    <Select
+                      {...props}
+                      className="basic-single col-11 col-md-6 ml-4 ml-md-2 p-0 mt-3 mt-md-0 Select-tag"
+                      classNamePrefix="needsclick "
+                      isSearchable={false}
+                      value={props.input.value}
+                      onChange={(value) => props.input.onChange(value)}
+                      onBlur={event => event.preventDefault()}
+                      options={props.options}
+                    />
+                  )}
+                />
+              </fieldset>
+              <div className="col-8 mt-3 mt-md-0 col-md-3 mr-4 d-flex align-self-center">
                 <button
-                  className="team-modal-button"
+                  className="team-modal-button ml-2"
                   type="button"
                   onClick={this.handleShowModal}
-                >Add Teammates
+                >Manage Team
                 </button>
                 <Modal
                   className="modal-background"

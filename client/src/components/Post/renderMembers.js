@@ -8,8 +8,7 @@ import { connect } from "react-redux";
 
 class renderMembers extends Component {
   state = {
-    email: '',
-    removeSearchedUser: false
+    email: ''
   }
 
   onInputChange(email) {
@@ -17,24 +16,31 @@ class renderMembers extends Component {
   }
 
   handleSearchClick() {
+    this.props.removeSearchedUser();
+    this.props.removeErrorMessage();
     this.props.fetchEmailUser(this.state.email)
-    this.setState({ removeSearchedUser: false, showMessage: null })
+    if (this.props.errorMessage) {
+      this.setState({ email: '', showMessage: null })
+      return
+    }
+    this.setState({ email: '', showMessage: null })
   }
 
   handleAddClick(fields, { id, firstName, lastName, imageUrl }) {
     return () => {
       console.log("fieldarray :", fields.getAll())
       if (fields.getAll() && fields.getAll().filter((item) => item.id === id).length > 0) {
-        this.setState({ removeSearchedUser: true, showMessage: "This user is already added in your team" })
+        this.setState({ email: '', showMessage: "This user is already added in your team" })
         return
       }
       else {
-        fields.push({ id, firstName, lastName, imageUrl })
+        fields.push({ id, firstName, lastName, imageUrl });
         if (this.props.editPost) {
           this.props.addTeammate(this.props.post.id, id)
         }
       }
-      this.setState({ removeSearchedUser: true })
+      this.props.removeSearchedUser();
+      this.setState({ email: '', removeSearchedUser: true })
     }
   }
   handleRemoveClick(fields, index, id) {
@@ -74,9 +80,8 @@ class renderMembers extends Component {
           </button>
         </div>
         <div className="d-flex flex-column mt-3">
-
           {this.state.showMessage && <span style={{ color: "red" }}>{this.state.showMessage}</span>}
-          {this.props.searchedUser && !this.state.removeSearchedUser && (<span className="d-flex search-email-card p-3  mt-2 justify-content-between">
+          {(this.props.searchedUser) && (<span className="d-flex search-email-card p-3  mt-2 justify-content-between">
             <span className="font-weight-bold">Found this user:</span>{" "}
             <span>
               <img
@@ -94,8 +99,8 @@ class renderMembers extends Component {
                 color="gray"
               /></button>
           </span>)}
+          {this.props.errorMessage && (<span style={{ color: "red" }}>{this.props.errorMessage}</span>)}
         </div>
-
       </div>
       <div className="font-weight-bold mt-4">Teammates</div>
       {
@@ -135,7 +140,8 @@ class renderMembers extends Component {
 const mapStateToProps = (state) => {
   return {
     searchedUser: state.createPost.searchedUser,
-    post: state.postDetails.details
+    post: state.postDetails.details,
+    errorMessage: state.createPost.errorMessage
   };
 };
 
