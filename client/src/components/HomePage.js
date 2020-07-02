@@ -9,8 +9,7 @@ import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
-
+import { toast } from "react-toastify";
 
 class HomePage extends PureComponent {
   constructor(props) {
@@ -40,13 +39,15 @@ class HomePage extends PureComponent {
 
   notifypost = () => {
     if (!this.props.authenticated && !this.state.loginNotify) {
+      debugger;
       this.notifyLogin();
       this.setState({ loginNotify: true })
     }
   };
 
 
-  notifyLogin = () =>
+  notifyLogin = () => {
+    debugger;
     toast.warning('❗ Sign in to create post', {
       position: "top-right",
       autoClose: 3000,
@@ -56,7 +57,7 @@ class HomePage extends PureComponent {
       draggable: false,
       progress: undefined,
     });
-
+  }
 
   render() {
     if (!this.props.posts) {
@@ -69,7 +70,7 @@ class HomePage extends PureComponent {
 
     return (
       <div className="mt-md-3 d-flex row justify-content-between">
-        <ToastContainer
+        {/* <ToastContainer
           position="top-right"
           autoClose={2000}
           hideProgressBar
@@ -79,7 +80,7 @@ class HomePage extends PureComponent {
           pauseOnFocusLoss={false}
           draggable={false}
           pauseOnHover={false}
-        />
+        /> */}
         <PostsList className="col-md-7" posts={this.props.posts} />
         <div className="col-md-5 col-lg-4">
           <Leaderboard topContributors={this.props.topContributors} />
