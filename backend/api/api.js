@@ -126,5 +126,6 @@ server.listen(config.port, () => {
     console.error(`NODE_ENV is set to ${environment}, but only production and development are valid.`);
     process.exit(1);
   }
+  console.log(`Running on PORT:${config.port}`);
   return DB;
 });

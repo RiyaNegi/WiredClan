@@ -77,7 +77,8 @@ CREATE TABLE public.posts (
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     "userId" character varying(255),
-    "tagId" character varying(255)
+    "tagId" character varying(255),
+    "deletedAt" timestamp with time zone
 );
 
 
@@ -96,6 +97,21 @@ CREATE TABLE public.tags (
 
 
 ALTER TABLE public.tags OWNER TO postgres;
+
+--
+-- Name: teammates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.teammates (
+    id character varying(255) NOT NULL,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL,
+    "userId" character varying(255),
+    "postId" character varying(255)
+);
+
+
+ALTER TABLE public.teammates OWNER TO postgres;
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
@@ -130,6 +146,8 @@ ALTER TABLE public.users OWNER TO postgres;
 
 COPY public."SequelizeMeta" (name) FROM stdin;
 20200625180605-test.js
+20200630181839-createTeammate.js
+20200703185417-add-deleted-at.js
 \.
 
 
@@ -138,13 +156,13 @@ COPY public."SequelizeMeta" (name) FROM stdin;
 --
 
 COPY public.comments (id, text, "createdAt", "updatedAt", "parentId", "postId", "userId") FROM stdin;
-dQqruqDc6	Nice	2020-06-29 16:02:37.359+05:30	2020-06-29 16:19:37.359+05:30	\N	eSj7QK86g	DRt1tdYKq
-spPgr4LLG	This is my first post	2020-06-28 16:19:37.359+05:30	2020-06-29 16:19:37.359+05:30	\N	2z6RMG4sj	DRt1tdYKq
-wIanPYFkp	Very cool	2020-06-28 16:19:37.359+05:30	2020-06-29 16:19:37.359+05:30	\N	2z6RMG4sj	E9cFrkqrV
-VJ3A2xGvg	Very cool	2020-06-28 16:19:37.359+05:30	2020-06-29 16:19:37.359+05:30	\N	dVDE5jntE	E9cFrkqrV
-IIKjpY1ZB	Thank you!	2020-06-29 16:02:37.359+05:30	2020-06-29 16:19:37.359+05:30	dQqruqDc6	eSj7QK86g	E9cFrkqrV
-BE1MRTfFc	This is great. How did you do it?	2020-06-29 16:02:37.359+05:30	2020-06-29 16:19:37.359+05:30	spPgr4LLG	2z6RMG4sj	WK1CCqJGU
-5vBR11Qvf	By myself. And a lot of Horlicks. I am sponsored by them to be honest.	2020-06-29 16:02:37.359+05:30	2020-06-29 16:19:37.359+05:30	spPgr4LLG	2z6RMG4sj	DRt1tdYKq
+bu6m5EHy1	Nice	2020-07-04 01:42:33.097+05:30	2020-07-04 01:59:33.097+05:30	\N	RYEMVmbJx	m3TGjkjwc
+ApTUzKxsR	This is my first post	2020-07-03 01:59:33.097+05:30	2020-07-04 01:59:33.097+05:30	\N	BIhNsbI1V	m3TGjkjwc
+nxExnVHQG	Very cool	2020-07-03 01:59:33.097+05:30	2020-07-04 01:59:33.097+05:30	\N	BIhNsbI1V	NYZBMVHGV
+VRUr27imW	Very cool	2020-07-03 01:59:33.097+05:30	2020-07-04 01:59:33.097+05:30	\N	xF1cZWHpj	NYZBMVHGV
+ZTfM4GE9J	Thank you!	2020-07-04 01:42:33.097+05:30	2020-07-04 01:59:33.097+05:30	bu6m5EHy1	RYEMVmbJx	NYZBMVHGV
+DTwyzrvPn	This is great. How did you do it?	2020-07-04 01:42:33.097+05:30	2020-07-04 01:59:33.097+05:30	ApTUzKxsR	BIhNsbI1V	EB5xxfzNF
+pRXceRpvF	By myself. And a lot of Horlicks. I am sponsored by them to be honest.	2020-07-04 01:42:33.097+05:30	2020-07-04 01:59:33.097+05:30	ApTUzKxsR	BIhNsbI1V	m3TGjkjwc
 \.
 
 
@@ -153,14 +171,14 @@ BE1MRTfFc	This is great. How did you do it?	2020-06-29 16:02:37.359+05:30	2020-0
 --
 
 COPY public.likes (id, "createdAt", "updatedAt", "userId", "postId") FROM stdin;
-srw9HBUtN	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	WK1CCqJGU	q3Z9Ngzkf
-LjLvWCwr3	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	DRt1tdYKq	q3Z9Ngzkf
-Xd3YJyZ2S	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	WK1CCqJGU	2z6RMG4sj
-T23yv6nu1	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	DRt1tdYKq	dVDE5jntE
-ReZ2DwTDk	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	WK1CCqJGU	LsqISRV9c
-vrYqbBVvq	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	DRt1tdYKq	TSiIcYKFt
-QkHwLxMuU	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	WK1CCqJGU	kviwm6F1y
-GsaEfnZGN	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	L7HNJLHpm	2z6RMG4sj
+5ffBRyHsH	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	EB5xxfzNF	GzaWD7pdh
+f8VeuqrIR	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	m3TGjkjwc	GzaWD7pdh
+G9kYFtsMV	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	EB5xxfzNF	BIhNsbI1V
+yKxhIwRdE	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	m3TGjkjwc	xF1cZWHpj
+QsGmV54CR	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	EB5xxfzNF	jZP86yhpY
+3YSpbXfvQ	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	m3TGjkjwc	iTqvgXBvY
+aA8ztQ2Ic	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	EB5xxfzNF	VPdjkcN1d
+Anj5sjFpG	2020-07-04 01:59:33.092+05:30	2020-07-04 01:59:33.092+05:30	tBivRDqvZ	BIhNsbI1V
 \.
 
 
@@ -168,14 +186,15 @@ GsaEfnZGN	2020-06-29 16:19:37.353+05:30	2020-06-29 16:19:37.353+05:30	L7HNJLHpm	
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.posts (id, blah, title, description, published, karma, "createdAt", "updatedAt", "userId", "tagId") FROM stdin;
-eSj7QK86g	\N	I've Been Making a Video Series about Building a 16-bit Virtual Machine.	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	18	2020-06-29 09:19:37.347+05:30	2020-06-29 16:19:37.348+05:30	E9cFrkqrV	ejfGssvbJ
-2z6RMG4sj	\N	Generators in Rust, C++20, Go, and More	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	4	2020-06-29 06:19:37.347+05:30	2020-06-29 16:19:37.348+05:30	DRt1tdYKq	ejfGssvbJ
-dVDE5jntE	\N	The Colorful Game of Life - a variant of Conway's Game of Life	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	f	11	2020-06-22 16:19:37.347+05:30	2020-06-29 16:19:37.348+05:30	WK1CCqJGU	mATjSBKwv
-LsqISRV9c	\N	Feel-O-Meter (visualize the dominant emotions in your Spotify playlists based on lyrics)	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	10	2020-06-12 16:19:37.347+05:30	2020-06-29 16:19:37.348+05:30	WK1CCqJGU	zDG4S2uZL
-TSiIcYKFt	\N	What a typical 100% Serverless Architecture looks like in AWS!	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	3	2020-06-12 16:19:37.347+05:30	2020-06-29 16:19:37.348+05:30	DRt1tdYKq	TdEPcidQK
-kviwm6F1y	\N	One	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	0	2020-06-02 16:19:37.348+05:30	2020-06-29 16:19:37.348+05:30	WK1CCqJGU	zDG4S2uZL
-q3Z9Ngzkf	\N	I built an open-source personal assistant powered by an artificial neural network in Go	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	1	2020-06-29 16:17:37.348+05:30	2020-06-29 16:19:37.348+05:30	E9cFrkqrV	zDG4S2uZL
+COPY public.posts (id, blah, title, description, published, karma, "createdAt", "updatedAt", "userId", "tagId", "deletedAt") FROM stdin;
+RYEMVmbJx	\N	I've Been Making a Video Series about Building a 16-bit Virtual Machine.	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	18	2020-07-03 18:59:33.077+05:30	2020-07-04 01:59:33.078+05:30	NYZBMVHGV	b6tM3mBtu	\N
+BIhNsbI1V	\N	Generators in Rust, C++20, Go, and More	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	4	2020-07-03 15:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	b6tM3mBtu	\N
+xF1cZWHpj	\N	The Colorful Game of Life - a variant of Conway's Game of Life	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	f	11	2020-06-27 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	GtyhTgwJq	\N
+jZP86yhpY	\N	Some random post	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	11	2020-06-27 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	tBivRDqvZ	GtyhTgwJq	\N
+iTqvgXBvY	\N	Feel-O-Meter (visualize the dominant emotions in your Spotify playlists based on lyrics)	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	10	2020-06-17 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	fNXw9iDwT	\N
+VPdjkcN1d	\N	What a typical 100% Serverless Architecture looks like in AWS!	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	3	2020-06-17 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	BV1bUwube	\N
+GzaWD7pdh	\N	One	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	0	2020-06-07 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	fNXw9iDwT	\N
+pbI4WNsf3	\N	I built an open-source personal assistant powered by an artificial neural network in Go	<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n	t	1	2020-07-04 01:57:33.078+05:30	2020-07-04 01:59:33.078+05:30	L6bHNwQhh	fNXw9iDwT	\N
 \.
 
 
@@ -184,13 +203,32 @@ q3Z9Ngzkf	\N	I built an open-source personal assistant powered by an artificial 
 --
 
 COPY public.tags (id, text, "createdAt", "updatedAt") FROM stdin;
-XNaAIBsQu	Python	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-TdEPcidQK	C/C++	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-zDG4S2uZL	Web	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-ejfGssvbJ	Mobile	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-mATjSBKwv	General	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-LI8bC19Zg	Data/ML	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
-J25pcMNuX	Cloud	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
+ZjIIhFY14	Python	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+BV1bUwube	C/C++	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+fNXw9iDwT	Web	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+b6tM3mBtu	Mobile	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+GtyhTgwJq	General	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+QAYxbxt63	Data/ML	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+2F42EqymE	Cloud	2020-07-04 01:59:32.054+05:30	2020-07-04 01:59:32.054+05:30
+\.
+
+
+--
+-- Data for Name: teammates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.teammates (id, "createdAt", "updatedAt", "userId", "postId") FROM stdin;
+3m4qqfjrc	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	NYZBMVHGV	RYEMVmbJx
+iyzb1BGCI	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	RYEMVmbJx
+fPigKLtBc	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	BIhNsbI1V
+xXnc31KFD	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	xF1cZWHpj
+G8X9g9YAt	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	tBivRDqvZ	jZP86yhpY
+JFNjJKyqL	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	jZP86yhpY
+dNCifIyaX	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	iTqvgXBvY
+a3K34PcJ8	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	VPdjkcN1d
+cgkYAxnCA	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	m3TGjkjwc	GzaWD7pdh
+pnhBjQTvr	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	L6bHNwQhh	pbI4WNsf3
+NTZIA1nR6	2020-07-04 01:59:33.078+05:30	2020-07-04 01:59:33.078+05:30	EB5xxfzNF	pbI4WNsf3
 \.
 
 
@@ -199,11 +237,11 @@ J25pcMNuX	Cloud	2020-06-29 16:19:36.319+05:30	2020-06-29 16:19:36.319+05:30
 --
 
 COPY public.users (id, email, "userName", "firstName", "lastName", "imageUrl", password, department, college, year, badges, karma, "viaGoogle", "registeredViaLoginViaGoogle", "registeredViaRegisterViaGoogle", "createdAt", "updatedAt") FROM stdin;
-E9cFrkqrV	abcd@gmail.com	random_user	Venugopal	Venkatnappamrum	https://api.adorable.io/avatars/80/random_user.png	$2a$10$nKNK88Af3Vxhn7HWFODhV.zXSzdjfKh984LfvWvQ/HY7uEeSWsb1O	Computer	I2IT	2	\N	0	f	f	f	2020-06-29 16:19:36.347+05:30	2020-06-29 16:19:36.347+05:30
-DRt1tdYKq	abcde@gmail.com	abcde	Aniket	Nigade	https://api.adorable.io/avatars/80/abcde.png	$2a$10$T4AtRy0Y69gWkg2gEDn7JeVsFN77SGQR1j4dZmAeW4TMvZY782P2K	ENTC	I2IT	3	{"Python Expert"}	2	f	f	f	2020-06-29 16:19:36.348+05:30	2020-06-29 16:19:36.348+05:30
-WK1CCqJGU	raj@gmail.com	thecodersblock	Raj	Negi	https://api.adorable.io/avatars/80/thecodersblock.png	$2a$10$a/A3U93CgR0qi95VQ7lyXOutYAraxLwDlM8sZcMr4bgXn.RTWcCJi	IT	I2IT	4	{}	72	f	f	f	2020-06-29 16:19:36.348+05:30	2020-06-29 16:19:36.348+05:30
-L7HNJLHpm	riya@gmail.com	riyanegi	Riya	Negi	https://api.adorable.io/avatars/80/riya.png	$2a$10$mleB309VrbniMRPIMrICoOnKMKbFkflq5f.m2Fv6iT1QP0bjj0U9m	IT	I2IT	4	{"Site Admin","JS Expert"}	51	f	f	f	2020-06-29 16:19:36.349+05:30	2020-06-29 16:19:36.349+05:30
-p2hA5QtUe	thecodersblock@gmail.com	theOG	OG RAJ	YES	https://api.adorable.io/avatars/80/theog.png	$2a$10$cneWrPO3SRPJwPuf.TztB.ZKmYmwyaOYFobYJAhQe0j5RZ/exBNo2	Computer	I2IT	2	\N	324	f	f	f	2020-06-29 16:19:36.349+05:30	2020-06-29 16:19:36.349+05:30
+NYZBMVHGV	abcd@gmail.com	random_user	Venugopal	Venkatnappamrum	https://api.adorable.io/avatars/80/random_user.png	$2a$10$CqZfAWrN10cQ6eIUtkJUKedZ7k6iuprOdXVG1r0pHABAympPJlX0m	Computer	I2IT	2	\N	0	f	f	f	2020-07-04 01:59:32.08+05:30	2020-07-04 01:59:32.08+05:30
+m3TGjkjwc	abcde@gmail.com	abcde	Aniket	Nigade	https://api.adorable.io/avatars/80/abcde.png	$2a$10$NsRnS9H37DfKQsvMCJa/hOtF1qNlGPF/8yXo.H.nJDdIdi38KEgiS	ENTC	I2IT	3	{"Python Expert"}	2	f	f	f	2020-07-04 01:59:32.081+05:30	2020-07-04 01:59:32.081+05:30
+EB5xxfzNF	raj@gmail.com	thecodersblock	Raj	Negi	https://api.adorable.io/avatars/80/thecodersblock.png	$2a$10$5XNnLFAlyFSgKVzsn8gqkui6uOalttsqjp/eprmMrrp/CGOGCmkBO	IT	I2IT	4	{}	72	f	f	f	2020-07-04 01:59:32.081+05:30	2020-07-04 01:59:32.081+05:30
+tBivRDqvZ	riya@gmail.com	riyanegi	Riya	Negi	https://api.adorable.io/avatars/80/riya.png	$2a$10$1IG7lncjf2Q4b2Pri7QjTOeEGkt1klLMFyJ5tzMIIYyRsICiQleh2	IT	I2IT	4	{"Site Admin","JS Expert"}	51	f	f	f	2020-07-04 01:59:32.081+05:30	2020-07-04 01:59:32.081+05:30
+L6bHNwQhh	thecodersblock@gmail.com	theOG	OG RAJ	YES	https://api.adorable.io/avatars/80/theog.png	$2a$10$XUkNckdd1Dc0468TTzKg2.x1jZzIhrGvEORkXNOXncUVJrok/cnJa	Computer	I2IT	2	\N	324	f	f	f	2020-07-04 01:59:32.082+05:30	2020-07-04 01:59:32.082+05:30
 \.
 
 
@@ -245,6 +283,14 @@ ALTER TABLE ONLY public.posts
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: teammates teammates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.teammates
+    ADD CONSTRAINT teammates_pkey PRIMARY KEY (id);
 
 
 --
@@ -317,6 +363,22 @@ ALTER TABLE ONLY public.posts
 
 ALTER TABLE ONLY public.posts
     ADD CONSTRAINT "posts_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: teammates teammates_postId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.teammates
+    ADD CONSTRAINT "teammates_postId_fkey" FOREIGN KEY ("postId") REFERENCES public.posts(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: teammates teammates_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.teammates
+    ADD CONSTRAINT "teammates_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
