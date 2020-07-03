@@ -151,7 +151,7 @@ class PostsList extends React.Component {
                       {this.props.user &&
                         this.props.account &&
                         this.props.account.id === this.props.user.id ? (
-                          <span className="feature-but-div">
+                          <span className="feature-but-div ml-2">
                             <Link
                               className=" com-links edit-link"
                               to={{

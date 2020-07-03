@@ -119,6 +119,9 @@ z-index: 10 !important;
   padding:10px 13px;
 }
 
+.icon-btn:focus{
+  outline: 0;
+}
 .modal-backdrop
 {
     opacity:0.2 !important;

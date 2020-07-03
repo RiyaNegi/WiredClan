@@ -109,22 +109,25 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className="col-12 col-md-11" key={post.id}>
-        <label className="signin-heading"><h2>{post.title}</h2></label>
+      <div className="col-12 col-md-11 p-0" key={post.id}>
+        <label className="signin-heading" style={{ fontSize: 40 }}>{post.title}</label>
         <div>
-          <a href={`/users/${post.userId}`} className="no-decoration">
-            <span className="text-muted" > Posted by </span>{" "}
-            <span className="font-weight-bold" >
-              {" "}
-              <img
-                src={post.user.imageUrl}
-                style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
-                alt="userIcon"
-                className="mr-1"
-              />
-              {post.user.firstName} {post.user.lastName}
-            </span>
-          </a>
+          <span className="text-muted" > Posted by </span>{" "}
+          {post.teammates.map((i, index) =>
+            <a href={`/users/${i.userId}`} className="no-decoration">
+              <span className="font-weight-bold" >
+                {" "}
+                <img
+                  src={i.user.imageUrl}
+                  style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
+                  alt="userIcon"
+                  className="mr-1"
+                />
+                {i.user.firstName} {i.user.lastName}
+              </span>
+              <span>{!(post.teammates.length === (index + 1)) && ", "}</span>
+            </a>
+          )}
         </div>
         <div className="mt-3 post-display" style={{ fontSize: 18 }}>
           <div

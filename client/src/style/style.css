@@ -157,13 +157,13 @@ input:-webkit-autofill:active  {
   font-size:14px;
   margin: 0px 5px!important;
   width:70px;
-  padding-bottom: 0px;
+  padding: 5px;
   border-radius: 4px;
 }
 .post-item-buttons:hover{
 
   outline:none;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(240, 240, 240);
 }
 .post-item-buttons:focus {outline:0;}
 

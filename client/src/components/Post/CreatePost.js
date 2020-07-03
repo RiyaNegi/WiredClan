@@ -78,7 +78,7 @@ class CreatePost extends Component {
   };
 
   notify = () =>
-    toast.error('⚠️ All fields are required', {
+    toast.error('⚠️ Tag, title, body are required', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,

@@ -156,6 +156,27 @@ export const updatePost = (postId, title, published, description, tagId, userId)
   };
 };
 
+export const previewPost = (postId, title, published, description, tagId, userId) => {
+  return (dispatch) => {
+    request
+      .post(
+        `/api/posts/${postId}`,
+        { postId, title, published, description, tagId }
+      )
+      .then((response) => {
+        dispatch({
+          type: UPDATE_POST,
+          payload: response.data,
+        });
+        var redirectUrl = { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: true } }
+        History.push(redirectUrl);
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+};
+
 export const deleteLike = (postId) => {
   return (dispatch) => {
     request.delete(`/api/likes`, {

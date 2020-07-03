@@ -80,11 +80,24 @@ class EditPost extends Component {
         );
         return
       }
+      else if (name === "preview" && params["title"] && params["postTag"].value && params["postEditor"]) {
+        let teammates = params["members"] && params["members"].map(i => i.id)
+        this.props.previewPost(
+          postId,
+          params["title"],
+          false,
+          params["postEditor"],
+          params["postTag"].value,
+          teammates,
+          this.props.account.id
+        );
+        return
+      }
     };
   };
 
   notify = () =>
-    toast.error('⚠️ All fields are required', {
+    toast.error('⚠️ Tag, title, body are required', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: true,
@@ -248,14 +261,13 @@ class EditPost extends Component {
                   className="icon-btn"
                   action="submit"
                   name="save"
-                >              <Link
-                  className="com-links "
-                  to={`/previewPost/${this.props.post.id}`}
-                ><FontAwesomeIcon
-                      icon={faEye}
-                      size="1x"
-                      color="black"
-                    />              </Link>
+                  onClick={handleSubmit(this.handleFormSubmit("preview"))}
+                >
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    size="1x"
+                    color="black"
+                  />
                 </button>
               </OverlayTrigger>
               <button
