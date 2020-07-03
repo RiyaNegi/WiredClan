@@ -9,8 +9,7 @@ import Loader from "react-loader-spinner";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
-
+import { toast, ToastContainer } from "react-toastify";
 
 class HomePage extends PureComponent {
   constructor(props) {

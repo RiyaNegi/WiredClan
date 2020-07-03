@@ -52,7 +52,7 @@ const PostController = () => {
 
   const destroy = async (req, res) => {
     try {
-      const result = PostService.destroy({ id: req.params.id, userId: req.session.id });
+      const result = await PostService.destroy({ id: req.params.id, userId: req.session.userId });
       return res.status(200).json({ status: !!result });
     } catch (err) {
       logger.error(err);
