@@ -566,8 +566,6 @@ Optional:
 ### other commands
 
 - `npm run dev` - simply start the server withou a watcher
-- `npm run create-sqlite-db` - creates the sqlite database
-- `npm run drop-sqlite-db` - drops **ONLY** the sqlite database
 - `npm run lint` - linting with [eslint](http://eslint.org/)
 - `npm run nodemon` - same as `npm start``
 - `npm run prepush` - a hook wich runs before pushing to a repository, runs `npm test` and `npm run dropDB`

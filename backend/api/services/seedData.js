@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Tag = require('../models/Tag');
+const Teammate = require('../models/Teammate');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
 const moment = require('moment');
@@ -101,12 +102,14 @@ const seed = async () => {
           userId: users[0].id,
           karma: 18,
           tagId: tags[3].id,
+          teammates: [{ userId: users[0].id }, { userId: users[2].id }],
           title: "I've Been Making a Video Series about Building a 16-bit Virtual Machine.",
           description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
           createdAt: moment().subtract(7, 'h'),
         },
         {
           userId: users[1].id,
+          teammates: [{ userId: users[1].id }],
           karma: 4,
           tagId: tags[3].id,
           title: 'Generators in Rust, C++20, Go, and More',
@@ -116,6 +119,7 @@ const seed = async () => {
         },
         {
           userId: users[2].id,
+          teammates: [{ userId: users[2].id }],
           karma: 11,
           tagId: tags[4].id,
           title: "The Colorful Game of Life - a variant of Conway's Game of Life",
@@ -125,7 +129,18 @@ const seed = async () => {
 
         },
         {
+          userId: users[3].id,
+          teammates: [{ userId: users[3].id }, { userId: users[1].id }],
+          karma: 11,
+          tagId: tags[4].id,
+          title: 'Some random post',
+          published: true,
+          description: '<p>This is my first blog. <strong>AMAZING</strong>.</p>\n<p>This tool, is awesome.</p>\n<p></p>\n<div style="text-align:left;"><img src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_1280.jpg" alt="pic" style="height: 300px;width: 300px"/></div>\n<p></p>\n<p></p>\n',
+          createdAt: moment().subtract(7, 'd'),
+        },
+        {
           userId: users[2].id,
+          teammates: [{ userId: users[2].id }],
           karma: 10,
           tagId: tags[2].id,
           title: 'Feel-O-Meter (visualize the dominant emotions in your Spotify playlists based on lyrics)',
@@ -135,6 +150,7 @@ const seed = async () => {
         },
         {
           userId: users[1].id,
+          teammates: [{ userId: users[1].id }],
           karma: 3,
           tagId: tags[1].id,
           title: 'What a typical 100% Serverless Architecture looks like in AWS!',
@@ -143,7 +159,8 @@ const seed = async () => {
 
         },
         {
-          userId: users[2].id,
+          userId: users[1].id,
+          teammates: [{ userId: users[1].id }],
           karma: 0,
           tagId: tags[2].id,
           title: 'One',
@@ -152,7 +169,8 @@ const seed = async () => {
 
         },
         {
-          userId: users[0].id,
+          userId: users[4].id,
+          teammates: [{ userId: users[4].id }, { userId: users[2].id }],
           karma: 1,
           tagId: tags[2].id,
           title: 'I built an open-source personal assistant powered by an artificial neural network in Go',
@@ -160,7 +178,50 @@ const seed = async () => {
           createdAt: moment().subtract(2, 'm'),
 
         },
-      ]).then(async (posts) => {
+      ], { include: [Teammate] }).then(async (posts) => {
+        // const x = await Teammate.bulkCreate([
+        //   {
+        //     userId: users[2].id,
+        //     postId: posts[0].id,
+        //   },
+        //   {
+        //     userId: users[1].id,
+        //     postId: posts[1].id,
+        //   },
+        //   {
+        //     userId: users[2].id,
+        //     postId: posts[1].id,
+        //   },
+        //   {
+        //     userId: users[2].id,
+        //     postId: posts[2].id,
+        //   },
+        //   {
+        //     userId: users[1].id,
+        //     postId: posts[3].id,
+        //   },
+        //   {
+        //     userId: users[2].id,
+        //     postId: posts[4].id,
+        //   },
+        //   {
+        //     userId: users[1].id,
+        //     postId: posts[5].id,
+        //   },
+        //   {
+        //     userId: users[2].id,
+        //     postId: posts[6].id,
+        //   },
+        //   {
+        //     userId: users[3].id,
+        //     postId: posts[1].id,
+        //   },
+        //   {
+        //     userId: users[3].id,
+        //     postId: posts[5].id,
+        //   },
+        // ]);
+        // console.log('ONE OF THEM', x[0].get({ plain: true }));
         await Like.bulkCreate([
           {
             userId: users[2].id,
@@ -250,5 +311,7 @@ const seed = async () => {
       console.log(e);
     });
 };
+
+// seed();
 
 module.exports = seed;
