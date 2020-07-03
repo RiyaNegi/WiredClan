@@ -120,6 +120,7 @@ class EditPost extends Component {
       }}
       init={{
         selector: '.rich-editor-field textarea',
+        content_css: '/editor.css?' + new Date().getTime(),
         plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: false,
@@ -133,7 +134,7 @@ class EditPost extends Component {
         autosave_retention: "2m",
         fullpage_default_font_size: "16px",
         image_advtab: true,
-        content_css: '//www.tiny.cloud/css/codepen.min.css',
+        // content_css: '//www.tiny.cloud/css/codepen.min.css',
         link_list: [
           { title: 'My page 1', value: 'http://www.tinymce.com' },
           { title: 'My page 2', value: 'http://www.moxiecode.com' }

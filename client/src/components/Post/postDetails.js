@@ -12,7 +12,8 @@ import "./details.css";
 import * as authActions from "../../actions/authActions";
 import { Modal, Button } from "react-bootstrap";
 import History from "../../history.js";
-
+import Prism from "prismjs";
+import "../../style/prism.css"
 
 
 class PostDetails extends Component {
@@ -39,6 +40,28 @@ class PostDetails extends Component {
   componentWillMount() {
     this.props.fetchPost(this.props.match.params.id);
   }
+
+  // componentDidMount() {
+  //   Prism.highlightAll();
+  // }
+
+
+  componentDidMount() {
+    this.updateCodeSyntaxHighlighting();
+  }
+
+  componentDidUpdate() {
+    this.updateCodeSyntaxHighlighting();
+  }
+
+  updateCodeSyntaxHighlighting = () => {
+    document.querySelectorAll("pre code").forEach(block => {
+      debugger;
+      Prism.highlightElement(block, Prism.languages.python);
+      // Prism.highlight(block);
+    });
+  };
+
   convertDataFromJSONToHTML = (object) => {
     const html = object;
     const cleanHtml = (html) => {
@@ -166,7 +189,7 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="col-12 col-md-11 mt-md-4 mt-2 p-0">
+      <div className="col-12 col-md-11 col-md-4 mt-2 p-0">
         {this.renderPostDetails()}
         <Comments comments={this.props.comments} postId={this.props.post.id} />
         <Modal
