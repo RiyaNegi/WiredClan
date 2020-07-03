@@ -34,7 +34,7 @@ const Post = sequelize.define('post', {
       return `${moment(this.createdAt).fromNow()}`;
     },
   },
-}, { tableName: 'posts' });
+}, { tableName: 'posts', paranoid: true });
 
 Post.hasMany(Comment);
 Comment.belongsTo(Post);
