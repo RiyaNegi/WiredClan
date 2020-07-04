@@ -7,6 +7,7 @@ import {
   FETCH_ACCOUNT,
   FETCH_USER,
   FETCH_POSTS,
+  RESET_POST_DETAILS,
 } from "./types";
 
 import { handleError } from "./handleError";
@@ -75,6 +76,9 @@ export const signoutUser = () => {
 
 export const fetchUser = (id, draft) => {
   return (dispatch) => {
+    dispatch({
+      type: RESET_POST_DETAILS,
+    });
     request
       .get(
         `/api/users/${id}`
