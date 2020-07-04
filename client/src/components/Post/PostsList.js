@@ -7,7 +7,7 @@ import { Modal, Button, Badge } from "react-bootstrap";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import * as authActions from "../../actions/authActions";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import slugify from "slugify";
 import PostLikes from "./likes";
 
@@ -204,8 +204,11 @@ class PostsList extends React.Component {
             );
           })
         ) : (
-            <div className="loader">
-              <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+            <div className="col-6 mt-5">
+              <PacmanLoader
+                size={40}
+                color={"yellow"}
+              />
             </div>
           )}
       </div >

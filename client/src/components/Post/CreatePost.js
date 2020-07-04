@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
@@ -132,10 +132,9 @@ class CreatePost extends Component {
         toolbar: 'undo redo | bold italic underline strikethrough | alignleft alignjustify | outdent indent |  numlist bullist | backcolor removeformat| emoticons | insertfile image media link anchor codesample  | fullscreen  preview ',
         toolbar_sticky: true,
         autosave_ask_before_unload: true,
-        autosave_interval: "30s",
-        autosave_prefix: "{path}{query}-{id}-",
+        autosave_interval: "0s",
         autosave_restore_when_empty: false,
-        autosave_retention: "2m",
+        autosave_retention: "0m",
         fullpage_default_font_size: "16px",
         image_advtab: true,
         // content_css: '//www.tiny.cloud/css/codepen.min.css',
@@ -183,10 +182,13 @@ class CreatePost extends Component {
 
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
-    if (!this.props.tags || !Editor) {
+    if (!this.props.tags || this.props.isLoading) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }

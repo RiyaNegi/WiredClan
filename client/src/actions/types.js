@@ -24,6 +24,10 @@ export const ADD_TEAMMATE = "add_teammate";
 export const REMOVE_TEAMMATE = "remove_teammate";
 export const REMOVE_SEARCHED_USER = 'REMOVE_SEARCHED_USER';
 export const REMOVE_ERROR_MESSAGE = 'REMOVE_ERROR_MESSAGE';
+export const SET_LOADING = 'SET_LOADING';
+export const REMOVE_STATE = 'REMOVE_STATE';
+
+
 
 
 

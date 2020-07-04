@@ -4,7 +4,7 @@ import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Select from "react-select";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 
 const yearArrray = [{ value: 1, label: 'First' },
@@ -50,8 +50,11 @@ class UserForm extends PureComponent {
     const { handleSubmit, submitting } = this.props;
     if (!this.props.user) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }

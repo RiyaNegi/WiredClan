@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { Link } from "react-router-dom";
 import { faPen, faTrash, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -190,8 +190,11 @@ class PostDetails extends Component {
   render() {
     if (!this.props.post) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }
