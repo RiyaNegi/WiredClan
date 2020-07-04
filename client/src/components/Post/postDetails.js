@@ -41,9 +41,9 @@ class PostDetails extends Component {
     this.props.fetchPost(this.props.match.params.id);
   }
 
-  // componentDidMount() {
-  //   Prism.highlightAll();
-  // }
+  componentDidMount() {
+    // Prism.highlightAll();
+  }
 
 
   componentDidMount() {
@@ -56,8 +56,8 @@ class PostDetails extends Component {
 
   updateCodeSyntaxHighlighting = () => {
     document.querySelectorAll("pre code").forEach(block => {
-      debugger;
-      Prism.highlightElement(block, Prism.languages.python);
+      // // debugger;
+      Prism.highlightElement(block, Prism.languages.html);
       // Prism.highlight(block);
     });
   };

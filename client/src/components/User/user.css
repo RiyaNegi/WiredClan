@@ -19,6 +19,10 @@
   border-bottom: 2px solid #5850ec !important;
 }
 
+.nav-tabs > a:focus {
+  outline-color: transparent;
+}
+
 .profile-box {
   background-color: #ffefdc;
 }
