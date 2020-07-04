@@ -53,7 +53,7 @@ class HomePage extends PureComponent {
   };
 
   render() {
-    if (!this.props.posts || this.props.posts.posts) {
+    if (!this.props.posts || !this.props.posts[0].user) {
       return (
         <div className="col-6 mt-5">
           <PacmanLoader
