@@ -33,7 +33,6 @@ class PostDetails extends Component {
     return (e) => {
       this.props.deletePost(postId);
       this.handleCloseModal();
-      History.push("/");
     };
   };
 
