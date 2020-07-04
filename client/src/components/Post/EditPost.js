@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { Editor } from '@tinymce/tinymce-react';
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +14,8 @@ import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import renderMembers from "./renderMembers";
 
 import TextareaAutosize from 'react-textarea-autosize';
+
+
 
 function renderTooltip(props) {
   return (
@@ -190,11 +191,14 @@ class EditPost extends Component {
   )
 
   render() {
-    const { handleSubmit } = this.props;
-    if (!this.props.post || !this.props.tags || !Editor) {
+    const { handleSubmit, submitting } = this.props;
+    if (!this.props.post || !this.props.tags || this.props.isLoading) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }
@@ -262,6 +266,7 @@ class EditPost extends Component {
                   action="submit"
                   name="save"
                   onClick={handleSubmit(this.handleFormSubmit("preview"))}
+                  disabled={submitting}
                 >
                   <FontAwesomeIcon
                     icon={faEye}
@@ -275,6 +280,7 @@ class EditPost extends Component {
                 action="submit"
                 name="save"
                 onClick={handleSubmit(this.handleFormSubmit("save"))}
+                disabled={submitting}
               >
                 Save Draft
                 </button>
@@ -283,6 +289,7 @@ class EditPost extends Component {
                 action="submit"
                 name="publish"
                 onClick={handleSubmit(this.handleFormSubmit("publish"))}
+                disabled={submitting}
               >
                 Publish
                 </button>
@@ -349,7 +356,8 @@ const mapStateToProps = (state) => {
     post: state.postDetails.details,
     description: state.postDetails.description,
     initialValues: populatePostValues(state, desc),
-    tags: state.postDetails.tags
+    tags: state.postDetails.tags,
+    isLoading: state.createPost.isLoading
   };
 };
 

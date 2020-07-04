@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
@@ -184,10 +184,13 @@ class CreatePost extends Component {
 
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
-    if (!this.props.tags || !Editor) {
+    if (!this.props.tags || this.props.isLoading) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }

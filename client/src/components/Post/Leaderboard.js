@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "react-bootstrap";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import "./leaderboard.css";
 
 const Leaderboard = ({ className, style, topContributors }) => {
@@ -14,8 +14,11 @@ const Leaderboard = ({ className, style, topContributors }) => {
       </span>
       <div className="d-flex flex-column mt-2">
         {!topContributors ? (
-          <div className="loader">
-            <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+          <div className="col-6 mt-5">
+            <PacmanLoader
+              size={40}
+              color={"yellow"}
+            />
           </div>
         ) : (
             topContributors.map((user) => (

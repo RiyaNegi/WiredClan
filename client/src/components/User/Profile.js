@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
-import Loader from "react-loader-spinner";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Badge } from "react-bootstrap";
@@ -114,8 +114,11 @@ class Profile extends Component {
   render() {
     if (!this.props.user || !this.props.posts || (this.props.account ? (this.props.account.id === this.props.user.id ? !this.props.drafts : null) : null)) {
       return (
-        <div className="loader">
-          <Loader type="ThreeDots" color="#ffe31a" height={100} width={100} />
+        <div className="col-6 mt-5">
+          <PacmanLoader
+            size={40}
+            color={"yellow"}
+          />
         </div>
       );
     }
