@@ -11,6 +11,7 @@ export const DELETE_COMMENT = "delete_comment";
 export const CREATE_POST = "create_post";
 export const UPDATE_POST = "update_post";
 export const DELETE_POST = "delete_post";
+export const DELETE_POST_DETAIL = "DELETE_POST_DETAIL";
 export const FETCH_SEARCH = "fetch_search";
 export const FETCH_TOP_CONTRIBUTORS = "FETCH_TOP_CONTRIBUTORS";
 export const GOOGLE_LOGIN = "google_login";

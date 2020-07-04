@@ -1,13 +1,12 @@
 import { FETCH_POST_DETAILS, FETCH_TAGS } from "../actions/types";
 import {
   POST_COMMENT, RESET_POST_DETAILS, UPDATE_COMMENT,
-  DELETE_COMMENT, CREATE_POST_LIKE, DELETE_POST_LIKE
+  DELETE_COMMENT, CREATE_POST_LIKE, DELETE_POST_LIKE, DELETE_POST_DETAIL
 } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case RESET_POST_DETAILS:
-      debugger;
       return {};
     case FETCH_POST_DETAILS:
       return {

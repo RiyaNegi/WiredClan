@@ -32,7 +32,7 @@ class PostDetails extends Component {
 
   handleDeleteClick = (postId) => {
     return (e) => {
-      this.props.deletePost(postId);
+      this.props.deletePostDetail(postId);
       this.handleCloseModal();
     };
   };
@@ -192,7 +192,7 @@ class PostDetails extends Component {
         <div className="col-6 mt-5">
           <PacmanLoader
             size={40}
-            color={"yellow"}
+            color={"#FADA5E"}
           />
         </div>
       );

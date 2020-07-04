@@ -187,7 +187,7 @@ class CreatePost extends Component {
         <div className="col-6 mt-5">
           <PacmanLoader
             size={40}
-            color={"yellow"}
+            color={"#FADA5E"}
           />
         </div>
       );
