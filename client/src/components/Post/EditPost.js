@@ -111,7 +111,6 @@ class EditPost extends Component {
     return (
       < TextareaAutosize
         onChange={(e) => {
-          debugger;
           titleProps.input.onChange(e.target.value);
         }}
         onBlur={titleProps.handleBlur}

@@ -5,15 +5,16 @@ import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PostDetailLikes from "./postDetailLike";
 import "./details.css";
 import * as authActions from "../../actions/authActions";
 import { Modal, Button } from "react-bootstrap";
 import History from "../../history.js";
-import Prism from "prismjs";
+// import Prism from 'prismjs'
 import "../../style/prism.css"
+import hljs from 'highlight.js';
 
 
 class PostDetails extends Component {
@@ -55,9 +56,11 @@ class PostDetails extends Component {
   }
 
   updateCodeSyntaxHighlighting = () => {
+    // hljs.configure({ useBR: false, tabReplace: '    ' });
+
     document.querySelectorAll("pre code").forEach(block => {
-      // // debugger;
-      Prism.highlightElement(block, Prism.languages.html);
+      // Prism.highlight(block.innerHTML, Prism.languages.javascript, 'javascript')
+      hljs.highlightBlock(block);
       // Prism.highlight(block);
     });
   };
@@ -132,7 +135,8 @@ class PostDetails extends Component {
         <div className="mt-3 post-display" style={{ fontSize: 18 }}>
           <div
             dangerouslySetInnerHTML={{
-              __html: this.convertDataFromJSONToHTML(post.description),
+              // __html: this.convertDataFromJSONToHTML(post.description),
+              __html: (post.description),
             }}
           ></div>
         </div>

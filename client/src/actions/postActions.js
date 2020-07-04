@@ -11,7 +11,6 @@ import {
 
 export const createPost = (title, published, description, tagId, teammateIds, userId) => {
   return (dispatch) => {
-    debugger;
     request
       .post(
         `/api/posts`,
