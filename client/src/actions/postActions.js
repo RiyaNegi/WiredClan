@@ -6,7 +6,7 @@ import request from "./request";
 import {
   CREATE_POST, DELETE_POST, FETCH_POSTS, FETCH_POST_DETAILS, UPDATE_POST, CREATE_LIKE, DELETE_LIKE,
   CREATE_POST_LIKE, DELETE_POST_LIKE, FETCH_EMAIL_USER,
-  REMOVE_SEARCHED_USER, REMOVE_ERROR_MESSAGE, SET_LOADING
+  REMOVE_SEARCHED_USER, REMOVE_ERROR_MESSAGE, SET_LOADING, RESET_POST_DETAILS
 } from "./types";
 
 export const createPost = (title, published, description, tagId, teammateIds, userId) => {
@@ -63,6 +63,7 @@ export const deletePost = (postId) => {
           type: DELETE_POST,
           postId,
         });
+        History.push("/HomePage")
       })
       .catch((error) => {
         handleError(error);

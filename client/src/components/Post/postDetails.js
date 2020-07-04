@@ -34,7 +34,6 @@ class PostDetails extends Component {
     return (e) => {
       this.props.deletePost(postId);
       this.handleCloseModal();
-      History.push("/");
     };
   };
 
@@ -112,7 +111,7 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className="col-12 col-md-11 p-0" key={post.id}>
+      <div className="col-12 col-md-11 p-0 img-fix-div" key={post.id}>
         <label className="signin-heading" style={{ fontSize: 40 }}>{post.title}</label>
         <div>
           <span className="text-muted" > Posted by </span>{" "}
