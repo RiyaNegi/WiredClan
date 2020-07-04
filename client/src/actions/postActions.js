@@ -165,6 +165,10 @@ export const updatePost = (postId, title, published, description, tagId, userId)
 
 export const previewPost = (postId, title, published, description, tagId, userId) => {
   return (dispatch) => {
+    dispatch({
+      type: SET_LOADING,
+      isLoading: true
+    });
     request
       .post(
         `/api/posts/${postId}`,

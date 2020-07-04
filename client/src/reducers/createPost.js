@@ -6,7 +6,7 @@ import {
 export const reducer = (state = {}, action) => {
     switch (action.type) {
         case CREATE_POST:
-            return { ...state, post: action.payload, isLoading: true }
+            return { ...state, post: action.payload, isLoading: false }
         case UPDATE_POST:
             return { ...state, post: action.payload, edit: true, isLoading: false }
         case FETCH_EMAIL_USER:
