@@ -1,7 +1,18 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import logo from "./logoOld.png";
+import logoOne from "./logoOne.png";
+import logoOld from "./logoOld.png";
+import logoTwo from "./logoTwo.png";
+import logoFour from "./logoFour.png";
+import logoThree from "./logoThree.png";
+import logoFive from "./logoFive.png";
+import logoSix from "./logoSix.png";
+import logoSeven from "./logoSeven.png";
+import logoEight from "./logoEight.png";
+import logoNine from "./logoNine.png";
+import logoEight2 from "./logoEight2.png";
+import logoTen from "./logoTen.png";
 class Header extends PureComponent {
   state = {
     active: false,
@@ -42,7 +53,18 @@ class Header extends PureComponent {
           >
             J
           </label> */}
-          <img src={logo} style={{ width: 130, height: 17 }} alt="userIcon" />
+          {/* <img src={logoOne} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
+          {/* <img src={logoOld} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
+          {/* <img src={logoTwo} style={{ width: 120, height: 27 }} alt="userIcon" /> */}
+          {/* <img src={logoThree} style={{ width: 100 }} alt="userIcon" /> */}
+          {/* <img src={logoFour} style={{ width: 120 }} alt="userIcon" /> */}
+          {/* <img src={logoFive} style={{ width: 170 }} alt="userIcon" /> */}
+          {/* <img src={logoSix} style={{ width: 170 }} alt="userIcon" /> */}
+          <img src={logoSeven} style={{ width: 200 }} alt="userIcon" />
+          {/* <img src={logoEight} style={{ width: 200 }} alt="userIcon" /> */}
+          {/* <img src={logoTen} style={{ width: 200 }} alt="userIcon" /> */}
+          {/* <img src={logoEight2} style={{ width: 200 }} alt="userIcon" /> */}
+
         </a>
         <button
           className="navbar-toggler"
