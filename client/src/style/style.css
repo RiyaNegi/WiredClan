@@ -268,11 +268,11 @@ input:-webkit-autofill:active  {
 }
 
 .com-links{
-  color: inherit;
+  color: #494949;
   text-decoration: none !important;  
 }
 .com-links:hover {
-  color: inherit;
+  color: #494949;
   text-decoration: none !important;  
 }
 

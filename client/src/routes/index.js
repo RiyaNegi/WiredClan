@@ -12,6 +12,8 @@ import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
 import pageNotFound from "../components/pageNotFound";
+import Hackathon from "../components/Hackathon";
+
 
 const Routes = () => {
   return (
@@ -29,6 +31,7 @@ const Routes = () => {
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
         <Route path="/:slug/:id" component={postDetails} />
+        <Route path="/Hackathon" component={Hackathon} />
         <Route component={pageNotFound} />
       </Switch>
     </App>

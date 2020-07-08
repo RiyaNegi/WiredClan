@@ -98,6 +98,11 @@ class Header extends PureComponent {
                   {this.props.user.firstName} {this.props.user.lastName}
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/Hackathon">
+                  Hackathon
+                </a>
+              </li>
               <li className="nav-item dropdown ">
                 <a
                   className="nav-link dropdown-toggle"
