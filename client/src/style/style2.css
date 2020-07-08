@@ -1,7 +1,4 @@
-.timer-box{
-  border-left : 1px solid rgb(211, 211, 211);
-  padding:30px;
-}
+
 /* .modal-backdrop
 
 
@@ -20,4 +17,11 @@
 } */
 
 
+.hackathon-idea-card:hover {
+  border: 1px solid rgb(230, 230, 230);
+  -webkit-box-shadow: 0px 0px 74px -40px rgba(90,100,237,0.69);
+  -moz-box-shadow: 0px 0px 74px -40px rgba(90,100,237,0.69);
+  box-shadow: 0px 0px 74px -40px rgba(90,100,237,0.69);
+  
 
+}
