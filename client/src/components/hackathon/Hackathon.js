@@ -150,6 +150,7 @@ class Hackathon extends Component {
           <h4 className="text-muted">Vote for the submissions so far</h4>
           <PostsList className="" posts={this.props.posts} />
         </div>
+        <a target="_blank" href="https://icons8.com/icons/set/python">Python</a>, <a target="_blank" href="https://icons8.com/icons/set/c-programming">C Programming</a> and other icons by <a target="_blank" href="https://icons8.com">Icons8</a>
       </div >
     )
   }
