@@ -12,8 +12,7 @@ import Profile from "../components/User/Profile";
 import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
 import pageNotFound from "../components/pageNotFound";
-import Hackathon from "../components/Hackathon";
-
+import Hackathon from "../components/hackathon/Hackathon";
 
 const Routes = () => {
   return (

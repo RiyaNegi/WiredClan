@@ -1,18 +1,18 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import logoOne from "./logoOne.png";
-import logoOld from "./logoOld.png";
-import logoTwo from "./logoTwo.png";
-import logoFour from "./logoFour.png";
-import logoThree from "./logoThree.png";
-import logoFive from "./logoFive.png";
-import logoSix from "./logoSix.png";
-import logoSeven from "./logoSeven.png";
-import logoEight from "./logoEight.png";
-import logoNine from "./logoNine.png";
-import logoEight2 from "./logoEight2.png";
-import logoTen from "./logoTen.png";
+// import logoOne from "./logoOne.png";
+// import logoOld from "./logoOld.png";
+// import logoTwo from "./logoTwo.png";
+// import logoFour from "./logoFour.png";
+// import logoThree from "./logoThree.png";
+// import logoFive from "./logoFive.png";
+// import logoSix from "./logoSix.png";
+import logoSeven from "./logos/logoSeven.png";
+// import logoEight from "./logoEight.png";
+// import logoNine from "./logoNine.png";
+// import logoEight2 from "./logoEight2.png";
+// import logoTen from "./logoTen.png";
 class Header extends PureComponent {
   state = {
     active: false,
