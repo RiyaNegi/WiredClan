@@ -20,6 +20,9 @@ async function postByUser({ id }, currentUserId) {
   let post = posts.find((p) =>
     p.teammates
       .find((teammate) => teammate.userId === currentUserId));
+  if (!post) {
+    return undefined;
+  }
   const PostService = require('./PostService');
   post = await PostService.get({ id: post.id, userId: currentUserId });
   return post;
