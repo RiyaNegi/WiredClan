@@ -1,38 +1,20 @@
-const User = require('../models/User');
-const Post = require('../models/Post');
+
+// import PostService from '../services';
 const PostService = require('../services/PostService');
+
+const User = require('../models/User');
 const Comment = require('../models/Comment');
-const Tag = require('../models/Tag');
-const Like = require('../models/Like');
-const Sequelize = require('sequelize');
 const logger = require('../../logger');
+const session = require('express-session');
 
 const PostController = () => {
   const getAll = async (req, res) => {
     try {
-      const result = await Post.findAll({
-        where: { published: true, title: { [Sequelize.Op.iLike]: `%${req.query.search || ''}%` } },
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-        include: [Comment, User, Tag, Like],
-        limit: 20,
-        offset: (parseInt(req.query.page, 10) - 1) || 0 * 20,
-      });
+      const result = await PostService.getAll(req.params, session.userId);
 
       return res.status(200).json({
         page: 1,
-        result: result.map((i) => {
-          const x = i.get({ plain: true });
-          return {
-            ...x,
-            commentsCount: x.comments.length,
-            comments: undefined,
-            likesCount: x.likes.length,
-            likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
-            likes: undefined,
-          };
-        }),
+        result,
       });
     } catch (err) {
       logger.error(err);

@@ -1,10 +1,44 @@
+/* eslint-disable no-param-reassign */
 
+const Sequelize = require('sequelize');
 const Post = require('../models/Post');
 const Teammate = require('../models/Teammate');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const Tag = require('../models/Tag');
 const Like = require('../models/Like');
+
+async function getAll({
+  search, hackathonId, page,
+}, currentUserId) {
+  const whereQuery = {
+    published: true,
+    title: { [Sequelize.Op.iLike]: `%${search || ''}%` },
+  };
+  if (hackathonId) {
+    whereQuery.hackathonId = hackathonId;
+  }
+  const result = await Post.findAll({
+    where: whereQuery,
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [Comment, User, Tag, Like],
+    limit: 20,
+    offset: (parseInt(page, 10) - 1) || 0 * 20,
+  }).map((i) => {
+    const x = i.get({ plain: true });
+    return {
+      ...x,
+      commentsCount: x.comments.length,
+      comments: undefined,
+      likesCount: x.likes.length,
+      likedByCurrentUser: !!currentUserId && !!x.likes.find((like) => like.userId === currentUserId),
+      likes: undefined,
+    };
+  });
+  return result;
+}
 
 async function get({ id, userId }) {
   const teammate = await Teammate.findOne({ postId: id, userId });
@@ -59,22 +93,31 @@ async function get({ id, userId }) {
 }
 
 async function createPostAndTeammates({
-  title, published, description, tagId, teammateIds, userId,
+  title, published, description, tagId, teammateIds, userId, hackathonId,
 }) {
+  // Add self to team if not present
   if (!teammateIds) {
-    // eslint-disable-next-line no-param-reassign
     teammateIds = [userId];
   } else if (!teammateIds.includes(userId)) {
     teammateIds.unshift(userId);
   }
-  // eslint-disable-next-line no-param-reassign
   teammateIds = [...new Set(teammateIds)];
+
+  // Check if alreadyRegisteredPost
+  if (hackathonId) {
+    const HackathonService = require('./HackathonService');
+    const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, userId);
+    if (alreadyRegisteredPost) {
+      return null;
+    }
+  }
 
   let post = await Post.create({
     title,
     published,
     description,
     tagId,
+    hackathonId,
     teammates: teammateIds.map((teammateId) => ({ userId: teammateId })),
     userId,
   }, { include: [Teammate] });
@@ -115,5 +158,6 @@ module.exports = {
   createPostAndTeammates,
   update,
   get,
+  getAll,
   destroy,
 };

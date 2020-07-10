@@ -27,6 +27,9 @@ const privateRoutes = {
   // Teammates routes
   'POST /teammates': 'TeammateController.create',
   'DELETE /teammates': 'TeammateController.destroy',
+
+  // Hackathons routes
+  'GET /hackathons/:name': 'HackathonController.get',
 };
 
 module.exports = privateRoutes;
