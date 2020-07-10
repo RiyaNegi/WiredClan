@@ -36,7 +36,7 @@ class Signin extends PureComponent {
     return (
       <React.Fragment>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 column sign-box">
+          <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 column flex-column sign-box">
             <label className="mt-3 d-flex justify-content-center signin-heading">Sign in to your account</label>
             <fieldset className="mt-4 form-group sign-text">
               <label>Email:</label>

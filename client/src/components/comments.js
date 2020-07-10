@@ -45,6 +45,22 @@ class Comments extends Component {
     };
   };
 
+  handleCancel = (commentId) => {
+    return (e) => {
+      let filteredReplyArray = this.state.replyClicked.filter(
+        (i) => i.id !== commentId
+      );
+      let filteredEditArray = this.state.editClicked.filter(
+        (i) => i.id !== commentId
+      );
+      this.setState({
+        replyClicked: filteredReplyArray,
+        editClicked: filteredEditArray,
+      });
+    };
+  };
+
+
   handleEditClick = (commentId) => {
     return (e) => {
       var newStateArray = this.state.editClicked.slice();
@@ -241,20 +257,6 @@ class Comments extends Component {
     };
   };
 
-  handleCancel = (commentId) => {
-    return (e) => {
-      let filteredReplyArray = this.state.replyClicked.filter(
-        (i) => i.id !== commentId
-      );
-      let filteredEditArray = this.state.editClicked.filter(
-        (i) => i.id !== commentId
-      );
-      this.setState({
-        replyClicked: filteredReplyArray,
-        editClicked: filteredEditArray,
-      });
-    };
-  };
 
   notify = () =>
     toast.dark("🚀  Comment Posted!", {
