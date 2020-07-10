@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import Sequelize from 'sequelize';
+import sequelize from '../../config/database';
+import randomId from './randomId';
 
-const Post = require('./Post');
+import Post from './Post';
 
 const Hackathon = sequelize.define('hackathon', {
   id: {
@@ -25,4 +25,4 @@ const Hackathon = sequelize.define('hackathon', {
 Hackathon.hasMany(Post);
 Post.belongsTo(Hackathon);
 
-module.exports = Hackathon;
+export default Hackathon;

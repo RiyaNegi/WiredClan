@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import sequelize from '../../config/database';
+import randomId from './randomId';
 
-const Post = require('./Post');
-const User = require('./User');
+import Post from './Post';
+import User from './User';
 
 const Like = sequelize.define('like', {
   id: {
@@ -40,4 +40,4 @@ User.hasMany(Like);
 // Post.belongsToMany(User, { through: Like });
 
 
-module.exports = Like;
+export default Like;

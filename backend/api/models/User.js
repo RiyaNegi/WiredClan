@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
-const bcryptService = require('../services/bcrypt.service');
-const randomId = require('./randomId');
+import Sequelize from 'sequelize';
+import bcryptService from '../services/bcrypt.service';
+import randomId from './randomId';
 
-const sequelize = require('../../config/database');
+import sequelize from '../../config/database';
 
-const Post = require('./Post');
-const Comment = require('./Comment');
-// const Like = require('./Like');
+import Post from './Post';
+import Comment from './Comment';
+// const Like from './Like');
 
 const hooks = {
   beforeCreate(user) {
@@ -93,4 +93,4 @@ Comment.belongsTo(User);
 // User.belongsToMany(Post, { through: Like });
 
 
-module.exports = User;
+export default User;

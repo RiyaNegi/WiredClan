@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('teammates', {
       id: {

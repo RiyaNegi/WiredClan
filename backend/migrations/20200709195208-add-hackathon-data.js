@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
+import moment from 'moment';
+import Hackathon from '../api/models/Hackathon';
 
-const Hackathon = require('../api/models/Hackathon');
-const moment = require('moment');
-
-module.exports = {
+export default {
   up: async (queryInterface, _Sequelize) => {
     await Hackathon.create({
       name: 'UNO-JULY-2020',

@@ -5,4 +5,4 @@ const DB_STATUS = {
   CREATE_PENDING: 'CREATE_PENDING',
 };
 
-module.exports = { DB_STATUS };
+export default { DB_STATUS };

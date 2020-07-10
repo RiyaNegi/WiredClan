@@ -8,7 +8,8 @@
             "error",
             "always"
         ],
-        "max-len": 0
+        "max-len": 0,
+        "import/first": 0,
     },
     "env": {
         "jest": true

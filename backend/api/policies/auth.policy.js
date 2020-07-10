@@ -1,7 +1,7 @@
-// const JWTService = require('../services/auth.service');
+// const JWTService from '../services/auth.service');
 
 // // usually: "Authorization: Bearer [token]" or "token: [token]"
-// module.exports = (req, res, next) => {
+// export default (req, res, next) => {
 //   let tokenToVerify;
 //   return next();
 //   if (req.session.userId) {

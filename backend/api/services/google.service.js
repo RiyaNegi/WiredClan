@@ -1,7 +1,7 @@
-const axios = require('axios');
-const logger = require('../../logger');
+import axios from 'axios';
+import logger from '../../logger';
 
-module.exports = class Google {
+export default class Google {
   constructor(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;

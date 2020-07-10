@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
 
-const Sequelize = require('sequelize');
-const Post = require('../models/Post');
-const Teammate = require('../models/Teammate');
-const User = require('../models/User');
-const Comment = require('../models/Comment');
-const Tag = require('../models/Tag');
-const Like = require('../models/Like');
+import Sequelize from 'sequelize';
+import Post from '../models/Post';
+import Teammate from '../models/Teammate';
+
+import User from '../models/User';
+import Comment from '../models/Comment';
+import Tag from '../models/Tag';
+import Like from '../models/Like';
+import HackathonService from './HackathonService';
 
 async function getAll({
   search, hackathonId, page,
@@ -105,7 +107,7 @@ async function createPostAndTeammates({
 
   // Check if alreadyRegisteredPost
   if (hackathonId) {
-    const HackathonService = require('./HackathonService');
+    // const HackathonService from './HackathonService');
     const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, userId);
     if (alreadyRegisteredPost) {
       return null;
@@ -154,7 +156,7 @@ async function destroy({ id, userId }) {
   return result;
 }
 
-module.exports = {
+export default {
   createPostAndTeammates,
   update,
   get,

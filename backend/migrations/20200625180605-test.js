@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-module.exports = {
+export default {
   up: async (queryInterface, _Sequelize) => {
     queryInterface.sequelize.query(`
     ALTER TABLE posts
@@ -21,5 +21,5 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-  }
+  },
 };

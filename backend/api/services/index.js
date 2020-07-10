@@ -1,13 +1,9 @@
-// const PostService = require('./PostService');
+// import fs from 'fs');
 
-// // export * from './PostService';
-// // export * from './HackathonService';
-
-// module.exports = PostService;
-
-// const HackathonService = require('./HackathonService');
-
-
-// module.exports = HackathonService;
-
-// // module.exports = { PostService, HackathonService };
+// fs.readdirSync(`${__dirname}/`).forEach((file) => {
+//   if (file.match(/\.js$/) !== null && file !== 'index.js') {
+//     const name = file.replace('.js', '');
+//     // eslint-disable-next-line global-require,import/no-dynamic-require
+//     exports[name] fom`./${file}`);
+//   }
+// });

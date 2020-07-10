@@ -87,7 +87,7 @@ We use [Sequelize](http://docs.sequelizejs.com/) as ORM, if you want further inf
 Example Controller for all **CRUD** oparations:
 
 ```js
-const Model = require('../models/Model');
+const Model from '../models/Model');
 
 const ModelController = () => {
   const create = async (req, res) => {
@@ -225,13 +225,13 @@ Models in this boilerplate have a naming convention: `Model.js` and uses [Sequel
 Example User Model:
 
 ```js
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
 // for encrypting our passwords
-const bcryptSevice = require('../services/bcrypt.service');
+const bcryptSevice from '../services/bcrypt.service');
 
 // the DB connection
-const sequelize = require('../../config/database');
+const sequelize from '../../config/database');
 
 // hooks are functions that can run before or after a specific event
 const hooks = {
@@ -269,7 +269,7 @@ User.prototype.toJSON = function () {
 
 // IMPORTANT
 // don't forget to export the Model
-module.exports = User;
+export default User;
 ```
 
 ## Policies
@@ -283,7 +283,7 @@ Only allow if the user is marked as admin.
 > Note: this is not a secure example, only for presentation puposes
 
 ```js
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
   if(req.body.userrole === 'admin') {
     // do some verification stuff
     const verified = verifyAdmin(req.body.userid);
@@ -304,7 +304,7 @@ To use this policy on all routes that only admins are allowed:
 api.js
 
 ```js
-const adminPolicy = require('./policies/admin.policy');
+const adminPolicy from './policies/admin.policy');
 
 app.all('/admin/*', (req, res, next) => adminPolicy(req,res,next));
 ```
@@ -314,7 +314,7 @@ Or for one specific route
 api.js
 
 ```js
-const adminPolicy = require('./policies/admin.policy');
+const adminPolicy from './policies/admin.policy');
 
 app.get('/admin/myroute',
   (req, res, next) => adminPolicy(req,res,next),
@@ -376,7 +376,7 @@ const commentService = () => {
   };
 };
 
-module.exports = commentService;
+export default commentService;
 ```
 
 ## Config
@@ -436,20 +436,20 @@ const userRoutes = {
   'DELETE /user/': 'UserController.destroy',
 };
 
-module.exports = userRoutes;
+export default userRoutes;
 ```
 
 To use these routes in your application, require them in the config/index.js and export them.
 
 ```js
-const userRoutes = require('./userRoutes');
+const userRoutes from './userRoutes');
 
 const config = {
   allTheOtherStuff,
   userRoutes,
 };
 
-module.exports = config;
+export default config;
 ```
 
 api.js
@@ -482,11 +482,11 @@ To test a Controller we create `fake requests` to our api routes.
 Example `GET /user` from last example with prefix `prefix`:
 
 ```js
-const request = require('supertest');
+const request from 'supertest');
 const {
   beforeAction,
   afterAction,
-} = require('../setup/_setup');
+} from '../setup/_setup');
 
 let api;
 

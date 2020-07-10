@@ -1,5 +1,5 @@
-const database = require('../../config/database');
-// const seedData = require('./seedData');
+import database from '../../config/database';
+// const seedData from './seedData');
 
 const dbService = (environment, migrate) => {
   const authenticateDB = () => database.authenticate();
@@ -113,4 +113,5 @@ const dbService = (environment, migrate) => {
   };
 };
 
-module.exports = dbService;
+// export default dbService;
+export default dbService;

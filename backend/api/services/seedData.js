@@ -1,10 +1,11 @@
-const User = require('../models/User');
-const Post = require('../models/Post');
-const Tag = require('../models/Tag');
-const Teammate = require('../models/Teammate');
-const Comment = require('../models/Comment');
-const Like = require('../models/Like');
-const moment = require('moment');
+import moment from 'moment';
+
+import User from '../models/User';
+import Post from '../models/Post';
+import Tag from '../models/Tag';
+import Teammate from '../models/Teammate';
+import Comment from '../models/Comment';
+import Like from '../models/Like';
 
 const seed = async () => {
   const tags = await Tag.bulkCreate([
@@ -314,4 +315,4 @@ const seed = async () => {
 
 // seed();
 
-module.exports = seed;
+export default seed;

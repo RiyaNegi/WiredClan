@@ -1,29 +1,39 @@
-/**
- * third party libraries
- */
-const bodyParser = require('body-parser');
-const express = require('express');
-const helmet = require('helmet');
-const http = require('http');
-const mapRoutes = require('express-routes-mapper');
-const compression = require('compression');
+/* eslint-disable import/extensions */
 
-// const cors = require('cors');
-const morgan = require('morgan');
-// const fs = require('fs');
-// const path = require('path');
-const Sentry = require('@sentry/node');
+import bodyParser from 'body-parser';
+
+import express from 'express';
+import helmet from 'helmet';
+import http from 'http';
+// import mapRoutes from 'express-routes-mapper';
+import compression from 'compression';
+
+// const cors from 'cors');
+import morgan from 'morgan';
+// const fs from 'fs');
+// const path from 'path');
+import Sentry from '@sentry/node';
+import routes from './controllers';
 
 /**
  * server configuration
  */
-const config = require('../config/');
-const dbService = require('./services/db.service');
-// const auth = require('./policies/auth.policy');
+import config from '../config';
+import dbService from './services/db.service.js';
+
+import Promise from 'bluebird';
+import redis from 'redis';
+
+import RedisStore from 'connect-redis';
+
+import logger from '../logger.js';
+// const auth from './policies/auth.policy');
 
 // environment: development, staging, testing, production
 const environment = process.env.NODE_ENV;
-require('dotenv').config();
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
@@ -33,16 +43,16 @@ if (process.env.NODE_ENV === 'production') {
   app.use(Sentry.Handlers.requestHandler());
 }
 
-const Promise = require('bluebird');
-const session = Promise.promisifyAll(require('express-session'));
-const redis = require('redis');
+import expressSessions from 'express-session';
 
-const RedisStore = require('connect-redis')(session);
+const session = Promise.promisifyAll(expressSessions);
 
 const redisClient = redis.createClient();
 
+const RedisStoreClass = RedisStore(session);
+
 app.use(session({
-  store: new RedisStore({ client: redisClient }),
+  store: new RedisStoreClass({ client: redisClient }),
   secret: 'do not tell anybody',
   resave: false,
   saveUninitialized: false,
@@ -54,8 +64,6 @@ app.use(session({
     httpOnly: false,
   },
 }));
-
-const logger = require('../logger');
 
 logger.stream = {
   write(message) {
@@ -77,9 +85,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const server = http.Server(app);
-const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
-const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
+// const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
+// const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
+
 const DB = dbService(environment, config.migrate).start();
+
 
 // allow cross origin requests
 // configure to only allow requests from certain origins
@@ -114,8 +124,10 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // fill routes for express application
-app.use('/api/auth', mappedOpenRoutes);
-app.use('/api', mappedAuthRoutes);
+// app.use('/api/auth', mappedOpenRoutes);
+// app.use('/api', mappedAuthRoutes);
+
+routes(app);
 
 server.listen(config.port, () => {
   if (environment !== 'production' &&
