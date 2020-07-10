@@ -15,12 +15,14 @@ async function allPosts({ id }) {
   return posts.map((post) => post.get({ plain: true }));
 }
 
-async function postByUser({ id }, userId) {
+async function postByUser({ id }, currentUserId) {
   const posts = await allPosts({ id });
-  return posts.find((post) =>
-    post
-      .teammates
-      .find((teammate) => teammate.userId === userId));
+  let post = posts.find((p) =>
+    p.teammates
+      .find((teammate) => teammate.userId === currentUserId));
+  const PostService = require('./PostService');
+  post = await PostService.get({ id: post.id, userId: currentUserId });
+  return post;
 }
 
 async function getAllDetails({ name, page }, currentUserId) {
