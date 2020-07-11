@@ -1,12 +1,26 @@
 /* eslint-disable no-param-reassign */
 
-const Sequelize = require('sequelize');
-const Post = require('../models/Post');
-const Teammate = require('../models/Teammate');
-const User = require('../models/User');
-const Comment = require('../models/Comment');
-const Tag = require('../models/Tag');
-const Like = require('../models/Like');
+import Sequelize from 'sequelize';
+import Post from '../models/Post';
+import Teammate from '../models/Teammate';
+
+import User from '../models/User';
+import Comment from '../models/Comment';
+import Tag from '../models/Tag';
+import Like from '../models/Like';
+// eslint-disable-next-line import/no-cycle
+import HackathonService from './HackathonService';
+
+function decorateListItem(post, currentUserId) {
+  return {
+    ...post,
+    commentsCount: post.comments.length,
+    comments: undefined,
+    likesCount: post.likes.length,
+    likedByCurrentUser: !!currentUserId && !!post.likes.find((like) => like.userId === currentUserId),
+    likes: undefined,
+  };
+}
 
 async function getAll({
   search, hackathonId, page,
@@ -26,17 +40,7 @@ async function getAll({
     include: [Comment, User, Tag, Like],
     limit: 20,
     offset: (parseInt(page, 10) - 1) || 0 * 20,
-  }).map((i) => {
-    const x = i.get({ plain: true });
-    return {
-      ...x,
-      commentsCount: x.comments.length,
-      comments: undefined,
-      likesCount: x.likes.length,
-      likedByCurrentUser: !!currentUserId && !!x.likes.find((like) => like.userId === currentUserId),
-      likes: undefined,
-    };
-  });
+  }).map((post) => decorateListItem(post.get({ plain: true }, currentUserId)));
   return result;
 }
 
@@ -93,22 +97,27 @@ async function get({ id, userId }) {
 }
 
 async function createPostAndTeammates({
-  title, published, description, tagId, teammateIds, userId, hackathonId,
-}) {
+  title, published, description, tagId, teammateIds, hackathonId,
+}, currentUserId) {
+  // return if not logged in
+  if (!currentUserId) {
+    throw new Error('Invalid Create API');
+  }
+
   // Add self to team if not present
   if (!teammateIds) {
-    teammateIds = [userId];
-  } else if (!teammateIds.includes(userId)) {
-    teammateIds.unshift(userId);
+    teammateIds = [currentUserId];
+  } else if (!teammateIds.includes(currentUserId)) {
+    teammateIds.unshift(currentUserId);
   }
   teammateIds = [...new Set(teammateIds)];
 
   // Check if alreadyRegisteredPost
   if (hackathonId) {
-    const HackathonService = require('./HackathonService');
-    const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, userId);
+    // const HackathonService from './HackathonService');
+    const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, currentUserId);
     if (alreadyRegisteredPost) {
-      return null;
+      throw new Error('Invalid Create API');
     }
   }
 
@@ -119,7 +128,7 @@ async function createPostAndTeammates({
     tagId,
     hackathonId,
     teammates: teammateIds.map((teammateId) => ({ userId: teammateId })),
-    userId,
+    userId: currentUserId,
   }, { include: [Teammate] });
   post = post.get({ plain: true });
   return post;
@@ -154,10 +163,11 @@ async function destroy({ id, userId }) {
   return result;
 }
 
-module.exports = {
+export default {
   createPostAndTeammates,
   update,
   get,
   getAll,
   destroy,
+  decorateListItem,
 };

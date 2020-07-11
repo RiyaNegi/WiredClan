@@ -32,4 +32,4 @@ const privateRoutes = {
   'GET /hackathons/:name': 'HackathonController.get',
 };
 
-module.exports = privateRoutes;
+export default privateRoutes;

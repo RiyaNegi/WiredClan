@@ -1,6 +1,7 @@
 const winston = require('winston');
-require('winston-daily-rotate-file');
 const Sentry = require('@sentry/node');
+
+const DailyRotateFile = require('winston-daily-rotate-file');
 
 const logFormat = winston.format.printf((info) => {
   const date = new Date().toISOString();
@@ -18,12 +19,12 @@ const logFormat = winston.format.printf((info) => {
 });
 
 const transports = [
-  new winston.transports.DailyRotateFile({
+  new DailyRotateFile({
     datePattern: 'DD-MM-YYYY',
     filename: 'logs/error.log',
     level: 'error',
   }),
-  new winston.transports.DailyRotateFile({
+  new DailyRotateFile({
     datePattern: 'DD-MM-YYYY',
     filename: 'logs/all.log',
     level: 'debug',

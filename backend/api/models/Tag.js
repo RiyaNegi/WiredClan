@@ -1,8 +1,8 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import Sequelize from 'sequelize';
+import sequelize from '../config/database';
+import randomId from './randomId';
 
-const Post = require('./Post');
+import Post from './Post';
 
 const Tag = sequelize.define('tag', {
   id: {
@@ -18,4 +18,4 @@ const Tag = sequelize.define('tag', {
 Tag.hasMany(Post);
 Post.belongsTo(Tag);
 
-module.exports = Tag;
+export default Tag;

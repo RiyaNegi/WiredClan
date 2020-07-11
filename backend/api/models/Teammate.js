@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import sequelize from '../config/database';
+import randomId from './randomId';
 
-const Post = require('./Post');
-const User = require('./User');
+import Post from './Post';
+import User from './User';
 
 const Teammate = sequelize.define('teammate', {
   id: {
@@ -17,8 +17,7 @@ const Teammate = sequelize.define('teammate', {
 Teammate.belongsTo(User);
 Teammate.belongsTo(Post);
 
-
 Post.hasMany(Teammate);
 User.hasMany(Teammate);
 
-module.exports = Teammate;
+export default Teammate;

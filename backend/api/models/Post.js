@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize');
-const moment = require('moment');
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import Sequelize from 'sequelize';
+import moment from 'moment';
+import sequelize from '../config/database';
+import randomId from './randomId';
 
-const Comment = require('./Comment');
+import Comment from './Comment';
 
 const Post = sequelize.define('post', {
   id: {
@@ -39,4 +39,4 @@ const Post = sequelize.define('post', {
 Post.hasMany(Comment);
 Comment.belongsTo(Post);
 
-module.exports = Post;
+export default Post;

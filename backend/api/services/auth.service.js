@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const secret = process.env.NODE_ENV === 'production' ? 'process.env.JWT_SECRET' : 'secret';
 
@@ -12,4 +12,4 @@ const authService = () => {
   };
 };
 
-module.exports = authService;
+export default authService;

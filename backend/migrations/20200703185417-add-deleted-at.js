@@ -1,6 +1,4 @@
-
-
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => queryInterface.addColumn(
     'posts',
     'deletedAt',

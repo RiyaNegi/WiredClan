@@ -1,9 +1,8 @@
+import Tag from '../models/Tag';
+import logger from '../../logger';
 
-const Tag = require('../models/Tag');
-const logger = require('../../logger');
-
-const TagController = () => {
-  const getAll = async (req, res) => {
+const config = (router) => router
+  .get('/', async (req, res) => {
     try {
       const result = await Tag.findAll();
       return res.status(200).json(result);
@@ -11,11 +10,9 @@ const TagController = () => {
       logger.error(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
-  };
+  });
 
-  return {
-    getAll,
-  };
+export default {
+  path: '/tags',
+  config,
 };
-
-module.exports = TagController;

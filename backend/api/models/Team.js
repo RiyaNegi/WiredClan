@@ -1,10 +1,10 @@
-// const Sequelize = require('sequelize');
+// import Sequelize from 'sequelize';
 
-// const sequelize = require('../../config/database');
-// const randomId = require('./randomId');
+// const sequelize from '../config/database');
+// const randomId from './randomId');
 
-// const Post = require('./Post');
-// const User = require('./User');
+// const Post from './Post');
+// const User from './User');
 
 // const Team = sequelize.define('team', {
 //   id: {
@@ -31,8 +31,7 @@
 // Team.belongsTo(User);
 // Team.belongsTo(Post);
 
-
 // Post.hasMany(Team);
 // User.hasMany(Team);
 
-// module.exports = Team;
+// export default Team;

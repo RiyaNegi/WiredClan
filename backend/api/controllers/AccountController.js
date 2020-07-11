@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-const User = require('../models/User');
-const Post = require('../models/Post');
-const authService = require('../services/auth.service');
-const bcryptService = require('../services/bcrypt.service');
-const logger = require('../../logger');
+import User from '../models/User';
+import Post from '../models/Post';
+import authService from '../services/auth.service';
+import bcryptService from '../services/bcrypt.service';
+import logger from '../../logger';
 
 const AccountController = () => {
   const register = async (req, res) => {
@@ -90,7 +90,6 @@ const AccountController = () => {
     }
   };
 
-
   return {
     register,
     login,
@@ -100,4 +99,4 @@ const AccountController = () => {
   };
 };
 
-module.exports = AccountController;
+export default AccountController;

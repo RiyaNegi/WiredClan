@@ -1,7 +1,7 @@
-const { customAlphabet } = require('nanoid');
+import { customAlphabet } from 'nanoid';
 
 const alphabet = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
 
-module.exports = function randomId() {
+export default function randomId() {
   return customAlphabet(alphabet, 9);
-};
+}

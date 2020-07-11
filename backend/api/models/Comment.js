@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const moment = require('moment');
-const sequelize = require('../../config/database');
-const randomId = require('./randomId');
+import Sequelize from 'sequelize';
+import moment from 'moment';
+import sequelize from '../config/database';
+import randomId from './randomId';
 
 const Comment = sequelize.define('comment', {
   id: {
@@ -22,4 +22,4 @@ const Comment = sequelize.define('comment', {
 
 Comment.hasMany(Comment, { as: 'replyComments', foreignKey: 'parentId', useJunctionTable: false });
 
-module.exports = Comment;
+export default Comment;

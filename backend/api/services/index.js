@@ -1,13 +1,7 @@
-// const PostService = require('./PostService');
+// import PostService from './PostService';
 
-// // export * from './PostService';
-// // export * from './HackathonService';
+// export default PostService;
 
-// module.exports = PostService;
+// import HackathonService from './HackathonService';
 
-// const HackathonService = require('./HackathonService');
-
-
-// module.exports = HackathonService;
-
-// // module.exports = { PostService, HackathonService };
+// export default HackathonService;

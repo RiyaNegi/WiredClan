@@ -1,8 +1,9 @@
-const Sequelize = require('sequelize');
-const path = require('path');
+import Sequelize from 'sequelize';
+import path from 'path';
 
-const connection = require('./connection');
+import connection from './connection';
 
+// eslint-disable-next-line import/no-mutable-exports
 let database;
 
 switch (process.env.NODE_ENV) {
@@ -57,4 +58,4 @@ switch (process.env.NODE_ENV) {
     );
 }
 
-module.exports = database;
+export default database;

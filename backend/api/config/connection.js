@@ -22,7 +22,7 @@ const production = {
   dialect: 'postgres',
 };
 
-module.exports = {
+export default {
   development,
   testing,
   production,

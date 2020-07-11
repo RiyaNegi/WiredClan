@@ -1,14 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 
-const Sequelize = require('sequelize');
-const Post = require('../models/Post');
-const Teammate = require('../models/Teammate');
-const User = require('../models/User');
-const Comment = require('../models/Comment');
-const Tag = require('../models/Tag');
-const Like = require('../models/Like');
-const Hackathon = require('../models/Hackathon');
+// import { PostService } from './index';
+
+import Sequelize from 'sequelize';
+import Post from '../models/Post';
+import Teammate from '../models/Teammate';
+
+import User from '../models/User';
+import Comment from '../models/Comment';
+import Tag from '../models/Tag';
+import Like from '../models/Like';
+import Hackathon from '../models/Hackathon';
+
+// eslint-disable-next-line import/no-cycle
+import PostService from './PostService';
 
 async function allPosts({ id }) {
   const posts = await Post.findAll({ where: { hackathonId: id }, include: [Teammate] });
@@ -17,20 +23,17 @@ async function allPosts({ id }) {
 
 async function postByUser({ id }, currentUserId) {
   const posts = await allPosts({ id });
-  let post = posts.find((p) =>
-    p.teammates
-      .find((teammate) => teammate.userId === currentUserId));
+  let post = posts.find((p) => p.teammates
+    .find((teammate) => teammate.userId === currentUserId));
   if (!post) {
     return undefined;
   }
-  const PostService = require('./PostService');
   post = await PostService.get({ id: post.id, userId: currentUserId });
   return post;
 }
 
 async function getAllDetails({ name, page }, currentUserId) {
   const hackathon = await Hackathon.findOne({ where: { name } });
-  const PostService = require('./PostService');
   const xxx = await PostService.getAll({
     hackathonId: hackathon.id, page,
   }, currentUserId);
@@ -43,7 +46,7 @@ async function getAllDetails({ name, page }, currentUserId) {
   return result;
 }
 
-module.exports = {
+export default {
   getAllDetails,
   allPosts,
   postByUser,
