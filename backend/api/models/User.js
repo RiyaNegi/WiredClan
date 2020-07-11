@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import bcryptService from '../services/bcrypt.service';
 import randomId from './randomId';
 
-import sequelize from '../../config/database';
+import sequelize from '../config/database';
 
 import Post from './Post';
 import Comment from './Comment';

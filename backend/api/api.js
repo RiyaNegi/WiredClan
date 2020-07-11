@@ -1,4 +1,6 @@
 /* eslint-disable import/extensions */
+require('@babel/register');
+require('@babel/polyfill');
 
 import bodyParser from 'body-parser';
 
@@ -12,13 +14,14 @@ import compression from 'compression';
 import morgan from 'morgan';
 // const fs from 'fs');
 // const path from 'path');
-import Sentry from '@sentry/node';
+import * as Sentry from '@sentry/node';
+
 import routes from './controllers/index';
 
 /**
  * server configuration
  */
-import config from '../config';
+import config from './config';
 import dbService from './services/db.service.js';
 
 import Promise from 'bluebird';

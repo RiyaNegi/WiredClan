@@ -3,7 +3,7 @@
 // const mapRoutes from 'express-routes-mapper');
 
 // const config from '../../config/');
-// const database from '../../config/database');
+// const database from '../config/database');
 // const auth from '../../api/policies/auth.policy');
 
 // const beforeAction = async () => {

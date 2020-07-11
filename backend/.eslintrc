@@ -3,13 +3,16 @@
     "plugins": [
         "import"
     ],
+    "ignorePatterns": [
+        "build/**"
+    ],
     "rules": {
         "arrow-parens": [
             "error",
             "always"
         ],
         "max-len": 0,
-        "import/first": 0,
+        "import/first": 0
     },
     "env": {
         "jest": true

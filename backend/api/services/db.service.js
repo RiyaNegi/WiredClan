@@ -1,4 +1,4 @@
-import database from '../../config/database';
+import database from '../config/database';
 // const seedData from './seedData');
 
 const dbService = (environment, migrate) => {

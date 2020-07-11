@@ -8,7 +8,7 @@ import Like from '../models/Like';
 import Teammate from '../models/Teammate';
 
 import Tag from '../models/Tag';
-import sequelize from '../../config/database';
+import sequelize from '../config/database';
 import logger from '../../logger';
 import UserService from '../services/UserService';
 

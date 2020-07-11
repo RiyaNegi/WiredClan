@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import sequelize from '../../config/database';
+import sequelize from '../config/database';
 import randomId from './randomId';
 
 import Post from './Post';

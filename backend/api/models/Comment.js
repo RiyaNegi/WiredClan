@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import moment from 'moment';
-import sequelize from '../../config/database';
+import sequelize from '../config/database';
 import randomId from './randomId';
 
 const Comment = sequelize.define('comment', {

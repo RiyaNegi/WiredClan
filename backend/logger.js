@@ -1,7 +1,7 @@
-import winston from 'winston';
-import Sentry from '@sentry/node';
+const winston = require('winston');
+const Sentry = require('@sentry/node');
 
-import DailyRotateFile from 'winston-daily-rotate-file';
+const DailyRotateFile = require('winston-daily-rotate-file');
 
 const logFormat = winston.format.printf((info) => {
   const date = new Date().toISOString();
@@ -42,4 +42,4 @@ const logger = winston.createLogger({
   transports,
 });
 
-export default logger;
+module.exports = logger;

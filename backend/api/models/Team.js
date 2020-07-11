@@ -1,6 +1,6 @@
 // import Sequelize from 'sequelize';
 
-// const sequelize from '../../config/database');
+// const sequelize from '../config/database');
 // const randomId from './randomId');
 
 // const Post from './Post');

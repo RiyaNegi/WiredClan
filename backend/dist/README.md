@@ -231,7 +231,7 @@ import Sequelize from 'sequelize';
 const bcryptSevice from '../services/bcrypt.service');
 
 // the DB connection
-const sequelize from '../../config/database');
+const sequelize from '../config/database');
 
 // hooks are functions that can run before or after a specific event
 const hooks = {
