@@ -35,6 +35,10 @@ class PostsList extends React.Component {
 
   handleDeleteClick = (postId) => {
     return (e) => {
+      if (this.props.hackathon) {
+        this.props.handleDeleteIdea(postId)
+        return
+      }
       this.props.deletePost(postId);
       this.handleCloseModal(postId)
     };

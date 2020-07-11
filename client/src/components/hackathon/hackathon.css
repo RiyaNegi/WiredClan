@@ -6,14 +6,9 @@
 }
 
 .idea-card {
-  border: 1px solid rgb(223, 223, 223);
+  border-bottom: 1px solid rgb(223, 223, 223);
   padding: 15px;
   border-radius: 4px; 
-}
-
-.idea-card:hover {
-  cursor: pointer;
-  background-color: rgb(242, 255, 254);
 }
 
 
@@ -78,4 +73,13 @@
 
 .cancel-button{
   width:30px !important;
+}
+
+.collapse-button{
+  width:40px !important;
+}
+
+.register-title{
+  z-index: 5;
+  margin-top: -26px;
 }

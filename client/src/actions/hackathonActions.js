@@ -4,7 +4,7 @@ import { handleError } from "./handleError";
 import request from "./request";
 
 import {
-    CREATE_HACKATHON_POST, FETCH_HACKATHON_DETAILS, SET_LOADING
+    CREATE_HACKATHON_POST, FETCH_HACKATHON_DETAILS, SET_LOADING, DELETE_HACKATHON_POST
 } from "./types";
 
 export const createHackathonPost = (title, published, tagId, hackathonId) => {
@@ -42,6 +42,23 @@ export const fetchHackathonDetails = () => {
                 dispatch({
                     type: FETCH_HACKATHON_DETAILS,
                     payload: response.data,
+                });
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    };
+};
+
+export const deleteHackathonPost = (postId) => {
+    return (dispatch) => {
+        request
+            .delete(`/api/posts/${postId}`)
+            .then((response) => {
+                debugger;
+                dispatch({
+                    type: DELETE_HACKATHON_POST,
+                    postId,
                 });
             })
             .catch((error) => {
