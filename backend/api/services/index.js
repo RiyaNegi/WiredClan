@@ -1,9 +1,7 @@
-// import fs from 'fs');
+// import PostService from './PostService';
 
-// fs.readdirSync(`${__dirname}/`).forEach((file) => {
-//   if (file.match(/\.js$/) !== null && file !== 'index.js') {
-//     const name = file.replace('.js', '');
-//     // eslint-disable-next-line global-require,import/no-dynamic-require
-//     exports[name] fom`./${file}`);
-//   }
-// });
+// export default PostService;
+
+// import HackathonService from './HackathonService';
+
+// export default HackathonService;

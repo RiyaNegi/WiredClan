@@ -31,13 +31,10 @@ const Like = sequelize.define('like', {
 Like.belongsTo(User);
 Like.belongsTo(Post);
 
-
 Post.hasMany(Like);
 User.hasMany(Like);
 
-
 // User.belongsToMany(Post, { through: Like });
 // Post.belongsToMany(User, { through: Like });
-
 
 export default Like;

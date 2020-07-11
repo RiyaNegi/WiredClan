@@ -1,4 +1,3 @@
-
 import authService from '../services/auth.service';
 import bcryptService from '../services/bcrypt.service';
 import Google from '../services/google.service';
@@ -41,7 +40,6 @@ const config = (router) => router
         const token = authService().issue({ id: user.id });
         req.session.userId = user.id;
         req.session.cookie.originalMaxAge = 31556952000;
-
 
         return res.status(200).json({ token, user });
       }

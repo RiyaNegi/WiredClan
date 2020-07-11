@@ -17,7 +17,6 @@ const Teammate = sequelize.define('teammate', {
 Teammate.belongsTo(User);
 Teammate.belongsTo(Post);
 
-
 Post.hasMany(Teammate);
 User.hasMany(Teammate);
 

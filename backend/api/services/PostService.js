@@ -8,6 +8,7 @@ import User from '../models/User';
 import Comment from '../models/Comment';
 import Tag from '../models/Tag';
 import Like from '../models/Like';
+// eslint-disable-next-line import/no-cycle
 import HackathonService from './HackathonService';
 
 function decorateListItem(post, currentUserId) {

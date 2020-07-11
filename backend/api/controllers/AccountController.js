@@ -90,7 +90,6 @@ const AccountController = () => {
     }
   };
 
-
   return {
     register,
     login,

@@ -16,20 +16,17 @@ import morgan from 'morgan';
 // const path from 'path');
 import * as Sentry from '@sentry/node';
 
-import routes from './controllers/index';
-
 /**
  * server configuration
  */
-import config from './config';
-import dbService from './services/db.service.js';
 
 import Promise from 'bluebird';
 import redis from 'redis';
 
 import RedisStore from 'connect-redis';
 
-import logger from '../logger.js';
+import expressSessions from 'express-session';
+
 // const auth from './policies/auth.policy');
 
 // environment: development, staging, testing, production
@@ -40,13 +37,17 @@ dotenv.config();
 
 const app = express();
 
+import logger from '../logger.js';
+
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({ dsn: 'https://8a0b81953b134fb3ad1daeaa83af56a5@o412718.ingest.sentry.io/5291989' });
   // The request handler must be the first middleware on the app
   app.use(Sentry.Handlers.requestHandler());
 }
 
-import expressSessions from 'express-session';
+import dbService from './services/db.service.js';
+import config from './config';
+import routes from './controllers/index';
 
 const session = Promise.promisifyAll(expressSessions);
 
@@ -93,7 +94,6 @@ const server = http.Server(app);
 
 const DB = dbService(environment, config.migrate).start();
 
-
 // allow cross origin requests
 // configure to only allow requests from certain origins
 // app.use(cors());
@@ -114,7 +114,6 @@ app.use((req, res, next) => {
   }
 });
 
-
 // secure express app
 app.use(helmet({
   dnsPrefetchControl: false,
@@ -133,14 +132,15 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 routes(app);
 
 server.listen(config.port, () => {
-  if (environment !== 'production' &&
-    environment !== 'development' &&
-    environment !== 'testing'
+  if (environment !== 'production'
+    && environment !== 'development'
+    && environment !== 'testing'
   ) {
     // eslint-disable-next-line no-console
     console.error(`NODE_ENV is set to ${environment}, but only production and development are valid.`);
     process.exit(1);
   }
+  // eslint-disable-next-line no-console
   console.log(`Running on PORT:${config.port}`);
   return DB;
 });

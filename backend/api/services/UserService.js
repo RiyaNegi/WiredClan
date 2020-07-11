@@ -27,7 +27,6 @@ async function get(id, currentUserId) {
   user = user.get({ plain: true });
 
   const postIds = user.teammates.map((teammate) => teammate.postId);
-  console.log(postIds);
   delete user.teammates;
   let allPosts = await Post.findAll({
     where: { id: postIds },

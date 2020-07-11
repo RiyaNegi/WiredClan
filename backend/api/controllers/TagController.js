@@ -1,4 +1,3 @@
-
 import Tag from '../models/Tag';
 import logger from '../../logger';
 
@@ -17,4 +16,3 @@ export default {
   path: '/tags',
   config,
 };
-

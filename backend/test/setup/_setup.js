@@ -18,7 +18,6 @@
 //   testapp.use('/public', mappedOpenRoutes);
 //   testapp.use('/private', mappedAuthRoutes);
 
-
 //   await database.authenticate();
 //   await database.drop();
 //   await database.sync().then(() => console.log('Connection to the database has been established successfully'));
@@ -29,6 +28,5 @@
 // const afterAction = async () => {
 //   await database.close();
 // };
-
 
 // export default { beforeAction, afterAction };

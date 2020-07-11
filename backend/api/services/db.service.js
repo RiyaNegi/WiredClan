@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import database from '../config/database';
 // const seedData from './seedData');
 

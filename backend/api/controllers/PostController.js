@@ -1,4 +1,3 @@
-
 import session from 'express-session';
 
 import PostService from '../services/PostService';
@@ -103,4 +102,3 @@ export default {
   path: '/posts',
   config,
 };
-

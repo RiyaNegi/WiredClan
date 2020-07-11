@@ -16,7 +16,6 @@ export default {
           return res.status(200).json({ success: !!like });
         } catch (err) {
           logger.error(err);
-          console.log(err);
           return res.status(500).json({ msg: 'Internal server error' });
         }
       })
@@ -27,7 +26,6 @@ export default {
           return res.status(200).json({ status: !!result });
         } catch (err) {
           logger.error(err);
-          console.log(err);
           return res.status(500).json({ msg: 'Internal server error' });
         }
       });

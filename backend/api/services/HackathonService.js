@@ -12,6 +12,8 @@ import Comment from '../models/Comment';
 import Tag from '../models/Tag';
 import Like from '../models/Like';
 import Hackathon from '../models/Hackathon';
+
+// eslint-disable-next-line import/no-cycle
 import PostService from './PostService';
 
 async function allPosts({ id }) {
@@ -21,9 +23,8 @@ async function allPosts({ id }) {
 
 async function postByUser({ id }, currentUserId) {
   const posts = await allPosts({ id });
-  let post = posts.find((p) =>
-    p.teammates
-      .find((teammate) => teammate.userId === currentUserId));
+  let post = posts.find((p) => p.teammates
+    .find((teammate) => teammate.userId === currentUserId));
   if (!post) {
     return undefined;
   }
@@ -33,7 +34,6 @@ async function postByUser({ id }, currentUserId) {
 
 async function getAllDetails({ name, page }, currentUserId) {
   const hackathon = await Hackathon.findOne({ where: { name } });
-  console.log(PostService);
   const xxx = await PostService.getAll({
     hackathonId: hackathon.id, page,
   }, currentUserId);

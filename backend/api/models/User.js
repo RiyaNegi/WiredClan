@@ -79,7 +79,7 @@ const User = sequelize.define('user', {
 
 // eslint-disable-next-line
 User.prototype.toJSON = function () {
-  const values = Object.assign({}, this.get());
+  const values = { ...this.get() };
 
   delete values.password;
 
@@ -91,6 +91,5 @@ Post.belongsTo(User);
 User.hasMany(Comment);
 Comment.belongsTo(User);
 // User.belongsToMany(Post, { through: Like });
-
 
 export default User;

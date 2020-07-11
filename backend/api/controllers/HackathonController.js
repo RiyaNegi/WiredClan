@@ -1,4 +1,3 @@
-
 import HackathonService from '../services/HackathonService';
 import logger from '../../logger';
 

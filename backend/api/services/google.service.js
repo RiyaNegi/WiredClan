@@ -18,4 +18,4 @@ export default class Google {
         logger.error(err);
       });
   }
-};
+}

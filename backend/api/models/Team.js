@@ -31,7 +31,6 @@
 // Team.belongsTo(User);
 // Team.belongsTo(Post);
 
-
 // Post.hasMany(Team);
 // User.hasMany(Team);
 

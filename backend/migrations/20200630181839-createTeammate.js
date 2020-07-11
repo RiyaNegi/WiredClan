@@ -1,4 +1,3 @@
-
 export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('teammates', {
