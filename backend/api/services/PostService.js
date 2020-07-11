@@ -10,6 +10,17 @@ import Tag from '../models/Tag';
 import Like from '../models/Like';
 import HackathonService from './HackathonService';
 
+function decorateListItem(post, currentUserId) {
+  return {
+    ...post,
+    commentsCount: post.comments.length,
+    comments: undefined,
+    likesCount: post.likes.length,
+    likedByCurrentUser: !!currentUserId && !!post.likes.find((like) => like.userId === currentUserId),
+    likes: undefined,
+  };
+}
+
 async function getAll({
   search, hackathonId, page,
 }, currentUserId) {
@@ -28,17 +39,7 @@ async function getAll({
     include: [Comment, User, Tag, Like],
     limit: 20,
     offset: (parseInt(page, 10) - 1) || 0 * 20,
-  }).map((i) => {
-    const x = i.get({ plain: true });
-    return {
-      ...x,
-      commentsCount: x.comments.length,
-      comments: undefined,
-      likesCount: x.likes.length,
-      likedByCurrentUser: !!currentUserId && !!x.likes.find((like) => like.userId === currentUserId),
-      likes: undefined,
-    };
-  });
+  }).map((post) => decorateListItem(post.get({ plain: true }, currentUserId)));
   return result;
 }
 
@@ -95,22 +96,27 @@ async function get({ id, userId }) {
 }
 
 async function createPostAndTeammates({
-  title, published, description, tagId, teammateIds, userId, hackathonId,
-}) {
+  title, published, description, tagId, teammateIds, hackathonId,
+}, currentUserId) {
+  // return if not logged in
+  if (!currentUserId) {
+    throw new Error('Invalid Create API');
+  }
+
   // Add self to team if not present
   if (!teammateIds) {
-    teammateIds = [userId];
-  } else if (!teammateIds.includes(userId)) {
-    teammateIds.unshift(userId);
+    teammateIds = [currentUserId];
+  } else if (!teammateIds.includes(currentUserId)) {
+    teammateIds.unshift(currentUserId);
   }
   teammateIds = [...new Set(teammateIds)];
 
   // Check if alreadyRegisteredPost
   if (hackathonId) {
     // const HackathonService from './HackathonService');
-    const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, userId);
+    const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, currentUserId);
     if (alreadyRegisteredPost) {
-      return null;
+      throw new Error('Invalid Create API');
     }
   }
 
@@ -121,7 +127,7 @@ async function createPostAndTeammates({
     tagId,
     hackathonId,
     teammates: teammateIds.map((teammateId) => ({ userId: teammateId })),
-    userId,
+    userId: currentUserId,
   }, { include: [Teammate] });
   post = post.get({ plain: true });
   return post;
@@ -162,4 +168,5 @@ export default {
   get,
   getAll,
   destroy,
+  decorateListItem,
 };

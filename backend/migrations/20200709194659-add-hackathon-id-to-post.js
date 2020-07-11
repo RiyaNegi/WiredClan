@@ -1,6 +1,6 @@
 
 
-export default {
+module.exports = {
   up: async (queryInterface, Sequelize) => queryInterface.addColumn(
     'posts',
     'hackathonId',

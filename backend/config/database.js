@@ -3,6 +3,7 @@ import path from 'path';
 
 import connection from './connection';
 
+// eslint-disable-next-line import/no-mutable-exports
 let database;
 
 switch (process.env.NODE_ENV) {

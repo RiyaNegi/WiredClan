@@ -1,5 +1,5 @@
 
-export default {
+module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('hackathons', {
       id: {

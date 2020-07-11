@@ -13,7 +13,7 @@ import morgan from 'morgan';
 // const fs from 'fs');
 // const path from 'path');
 import Sentry from '@sentry/node';
-import routes from './controllers';
+import routes from './controllers/index';
 
 /**
  * server configuration

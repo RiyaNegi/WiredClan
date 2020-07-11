@@ -34,7 +34,7 @@ const config = (router) => router
 
   .post('/', async (req, res) => {
     try {
-      const post = await PostService.createPostAndTeammates({ ...req.body, userId: req.session.userId });
+      const post = await PostService.createPostAndTeammates(req.body, req.session.userId);
       return res.status(200).json({ ...post });
     } catch (err) {
       logger.error(err);

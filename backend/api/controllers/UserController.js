@@ -10,6 +10,7 @@ import Teammate from '../models/Teammate';
 import Tag from '../models/Tag';
 import sequelize from '../../config/database';
 import logger from '../../logger';
+import UserService from '../services/UserService';
 
 const config = (router) => router
   .post('/logout', async (req, res) => {
@@ -49,14 +50,7 @@ const config = (router) => router
   })
   .get('/', async (req, res) => {
     try {
-      const [result, metadata] = await sequelize.query(`
-      select users."id", users."firstName", users."lastName", users."badges", COUNT(users."id") AS "likesCount"
-          from users
-            inner join likes 
-              on likes."userId" = users."id"
-          group by users."id"
-          ORDER BY COUNT(users."id") DESC
-          LIMIT 5; `);
+      const result = await UserService.getAll();
 
       return res.status(200).json({
         page: 1,
@@ -69,51 +63,7 @@ const config = (router) => router
   })
   .get('/:id', async (req, res) => {
     try {
-      let user = await User.findOne({
-        where: Sequelize.or({
-          id: req.params.id,
-        }, {
-          email: req.params.id,
-        }),
-        include: [Teammate, Like],
-      });
-      user = user.get({ plain: true });
-
-      const postIds = user.teammates.map((teammate) => teammate.postId);
-      delete user.teammates;
-      let allPosts = await Post.findAll({
-        where: { id: postIds },
-        include: [Comment, Tag, Like],
-      });
-      allPosts = allPosts.map((post) => post.get({ plain: true }));
-
-      let likesCount = 0;
-      if (req.session.userId && user.id === req.session.userId) {
-        user.drafts = allPosts.filter((post) => !(post.published)).map((x) => {
-          likesCount += x.likes.length;
-          return {
-            ...x,
-            commentsCount: x.comments.length,
-            comments: undefined,
-            likesCount: x.likes.length,
-            likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
-            likes: undefined,
-          };
-        });
-      }
-      user.posts = allPosts.filter((post) => post.published).map((x) => {
-        likesCount += x.likes.length;
-        return {
-          ...x,
-          commentsCount: x.comments.length,
-          comments: undefined,
-          likesCount: x.likes.length,
-          likedByCurrentUser: !!req.session.userId && !!x.likes.find((like) => like.userId === req.session.userId),
-          likes: undefined,
-        };
-      });
-      user.likesCount = likesCount;
-      delete user.likes;
+      const user = await UserService.get(req.params.id, req.session.userId);
       return res.status(200).json(user);
     } catch (err) {
       logger.error(err);
