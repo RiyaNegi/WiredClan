@@ -21,6 +21,16 @@ const config = (router) => router
     }
   })
 
+  .delete('/:id', async (req, res) => {
+    try {
+      const result = await PostService.destroy(req.params.id, req.session.userId);
+      return res.status(200).json({ status: !!result });
+    } catch (err) {
+      logger.error(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  })
+
   .get('/:id', async (req, res) => {
     try {
       const post = await PostService.get({ id: req.params.id, userId: req.session.userId });
