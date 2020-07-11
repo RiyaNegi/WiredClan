@@ -60,7 +60,7 @@ export const signoutUser = () => {
   return (dispatch) => {
 
     request
-      .post(`/api/logout`)
+      .post(`/api/users/logout`)
       .then((response) => {
         localStorage.removeItem("token");
         localStorage.removeItem("profileData");
