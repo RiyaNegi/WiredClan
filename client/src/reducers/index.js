@@ -6,11 +6,14 @@ import { reducer as postDetailsReducer } from "./postDetails";
 import { reducer as leaderboardReducer } from "./leaderboard";
 import { reducer as profileDetailsReducer } from "./profileDetails";
 import { reducer as createPostReducer } from "./createPost";
+import { reducer as hackathonReducer } from "./hackathon";
+
 
 const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
   posts: postReducer,
+  hackathon: hackathonReducer,
   postDetails: postDetailsReducer,
   leaderboard: leaderboardReducer,
   userDetails: profileDetailsReducer,
