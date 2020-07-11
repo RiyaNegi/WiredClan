@@ -154,12 +154,13 @@ async function update({
   return post;
 }
 
-async function destroy({ id, userId }) {
+async function destroy(id, currentUserId) {
   const post = await Post.findOne({ where: { id }, include: [Teammate] });
-  if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(userId) === false) {
+  if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(currentUserId) === false) {
     return null;
   }
-  const result = await Post.destroy({ where: { id, userId } });
+  // Second parameter to ensure only owner can delete the file?
+  const result = await Post.destroy({ where: { id, userId: currentUserId } });
   return result;
 }
 
