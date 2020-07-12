@@ -114,7 +114,6 @@ async function createPostAndTeammates({
 
   // Check if alreadyRegisteredPost
   if (hackathonId) {
-    // const HackathonService from './HackathonService');
     const alreadyRegisteredPost = await HackathonService.postByUser({ id: hackathonId }, currentUserId);
     if (alreadyRegisteredPost) {
       throw new Error('Invalid Create API');

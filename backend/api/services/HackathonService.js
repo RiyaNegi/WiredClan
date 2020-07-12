@@ -34,16 +34,16 @@ async function postByUser({ id }, currentUserId) {
 
 async function getAllDetails({ name, page }, currentUserId) {
   const hackathon = await Hackathon.findOne({ where: { name } });
-  const xxx = await PostService.getAll({
+  const posts = await PostService.getAll({
     hackathonId: hackathon.id, page,
   }, currentUserId);
   const postByCurrentUser = await postByUser({ id: hackathon.id }, currentUserId);
-  const result = {
+
+  return {
     ...hackathon.get({ plain: true }),
-    posts: xxx,
+    posts,
     postByCurrentUser,
   };
-  return result;
 }
 
 export default {
