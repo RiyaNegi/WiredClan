@@ -198,7 +198,7 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="col-12 col-md-11 col-md-4 mt-2 p-0">
+      <div className="col-12 col-md-11 col-md-4 mt-4 p-0">
         {this.renderPostDetails()}
         <Comments comments={this.props.comments} postId={this.props.post.id} />
         <Modal
