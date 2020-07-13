@@ -34,11 +34,13 @@ export const createHackathonPost = (title, published, tagId, hackathonId) => {
 
 export const fetchHackathonDetails = () => {
     return (dispatch) => {
+        debugger;
         request
             .get(
                 `/api/hackathons/UNO-JULY-2020`
             )
             .then((response) => {
+                debugger
                 dispatch({
                     type: FETCH_HACKATHON_DETAILS,
                     payload: response.data,
@@ -55,7 +57,6 @@ export const deleteHackathonPost = (postId) => {
         request
             .delete(`/api/posts/${postId}`)
             .then((response) => {
-                debugger;
                 dispatch({
                     type: DELETE_HACKATHON_POST,
                     postId,

@@ -87,7 +87,7 @@ class Registration extends Component {
             </div>
             <label className="d-flex justify-content-center register-title"><h4>Submission Form</h4></label>
             <form className="p-3">
-                <h4 className="text-muted">Title</h4>
+                <span className="text-muted" style={{ fontSize: 25 }}>Title</span>
                 <fieldset >
                     <Field name="title" component={this.renderTitle}
                     />
@@ -121,9 +121,9 @@ class Registration extends Component {
                             </div>
                     ))}
                 </div>
-                <div className='mt-4 d-flex justify-content-center'>
+                <div className='mt-5 d-flex justify-content-center'>
                     <button
-                        className="sign-btn p-2 px-3"
+                        className="sign-btn p-2 px-5"
                         action="submit"
                         name="save"
                         disabled={submitting}

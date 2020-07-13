@@ -13,8 +13,14 @@ const yearArrray = [{ value: 1, label: 'First' },
 { value: 3, label: 'Third' },
 { value: 4, label: 'Fourth' }]
 class Signup extends PureComponent {
-  handleFormSubmit(formProps) {
+  handleFormSubmit = (formProps) => {
     let confirmPassword = formProps.password
+    debugger;
+    if (this.props.location.state && this.props.location.state.loc) {
+      this.props.signupUser(formProps, confirmPassword,
+        this.props.location.state.loc);
+      return
+    }
     this.props.signupUser(formProps, confirmPassword);
   }
 
@@ -42,12 +48,22 @@ class Signup extends PureComponent {
     }
   }
   responseGoogle = (response) => {
-    this.props.googleLogin({
-      accessToken: response.accessToken,
-      email: response.profileObj.email,
-      firstName: response.profileObj.givenName,
-      lastName: response.profileObj.familyName,
-    })
+    if (this.props.location.state && this.props.location.state.loc) {
+      this.props.googleLogin({
+        accessToken: response.accessToken,
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+      }, this.props.location.state.loc)
+    }
+    else {
+      this.props.googleLogin({
+        accessToken: response.accessToken,
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+      })
+    }
   }
 
   render() {

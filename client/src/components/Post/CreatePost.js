@@ -42,6 +42,7 @@ class CreatePost extends Component {
   handleFormSubmit = (name) => {
     return (params) => {
       var teammateIds = params["members"] && params["members"].map(i => i.id)
+      var published = name === "submit" ? true : name === "save" ? false : null;
       if (!this.props.account) {
         // this.notifyLogin();
         return
@@ -50,14 +51,9 @@ class CreatePost extends Component {
         this.notify()
         return
       }
-      else if (name === "submit" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], true, params["createPostEditor"],
+      else if (params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
+        this.props.createPost(params["postTitle"], published, params["createPostEditor"],
           params["postTag"].id, teammateIds, this.props.account.id);
-        return
-      }
-      else if (name === "save" && params["postTitle"] && params["postTag"].id && params["createPostEditor"]) {
-        this.props.createPost(params["postTitle"], false,
-          params["createPostEditor"], params["postTag"].id, teammateIds, this.props.account.id);
         return
       }
       else {
@@ -322,8 +318,7 @@ class CreatePost extends Component {
 const mapStateToProps = (state) => {
   return {
     account: state.auth.data,
-    tags: state.postDetails.tags,
-
+    tags: state.postDetails.tags
   };
 };
 

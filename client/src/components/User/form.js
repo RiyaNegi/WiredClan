@@ -17,11 +17,13 @@ class UserForm extends PureComponent {
     this.props.fetchAccount(this.props.match.params.id);
   }
 
-  handleFormSubmit = (userId, redirectHomeAfterSubmit) => (formProps) => {
+  handleFormSubmit = (userId) => (formProps) => {
     formProps = { ...formProps, year: formProps.year.value }
+    debugger;
     this.props.updateUser(
       { ...formProps, id: userId },
-      redirectHomeAfterSubmit ? "/" : undefined
+      this.props.location.state && this.props.location.state.redirectHomeAfterSubmit ? "/ " : undefined,
+      this.props.location.state && this.props.location.state.loc ? `/${this.props.location.state.loc}` : undefined
     );
   };
 
@@ -131,7 +133,7 @@ class UserForm extends PureComponent {
             </fieldset>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
-              <Link to="/">
+              <Link to={this.props.location.state && this.props.location.state.loc ? "/Hackathon" : "/"}>
                 <button className=" px-4 sign-btn ">
                   Skip
                   </button>

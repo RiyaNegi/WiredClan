@@ -83,3 +83,17 @@
   z-index: 5;
   margin-top: -26px;
 }
+
+.faq-card{
+  border : 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  font-weight: 900;
+  font-size:18px;
+  color:rgb(149, 149, 149)
+}
+
+.faq-text{
+  font-size: 14px;
+  color:rgb(149, 149, 149);
+  font-weight:400;
+}
