@@ -101,7 +101,7 @@ class Profile extends Component {
             <div className="mt-4">
               <Button variant=" col-12 new-post-button p-0">
                 <Link className="com-links" to={"/CreatePost"}>
-                  <div className=" p-2 py-2 com-links"><span role="img" aria-label="post">📝</span> New Post</div>
+                  <div className=" p-2 py-2 com-links" style={{ color: "white" }}><span role="img" aria-label="post">📝</span> New Post</div>
                 </Link>
               </Button>
             </div>

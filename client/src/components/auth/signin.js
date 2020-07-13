@@ -74,10 +74,12 @@ class Signin extends PureComponent {
               />
             </fieldset>
             {this.renderError()}
-            <button action="submit" className="col-6 sign-btn mt-3">
-              Sign in
+            <div className="d-flex justify-content-center">
+              <button action="submit" className="col-5 sign-button button-7 mt-3" id="button-7">
+                <div id="dub-arrow"><img src="https://github.com/atloomer/atloomer.github.io/blob/master/img/iconmonstr-arrow-48-240.png?raw=true" alt="" /></div>
+                Sign in
             </button>
-
+            </div>
             <div className="d-flex justify-content-center mt-3">
               <GoogleLogin
                 clientId="967814823791-iohjqrepre2s3pbo5eds8ods6fce086c.apps.googleusercontent.com"
