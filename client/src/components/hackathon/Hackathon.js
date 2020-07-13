@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Timer from "../Timer"
 import hackathon from "../hackathon11.jpg"
 import History from "../../history.js";
+import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
 import PostsList from "../Post/PostsList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -232,22 +233,34 @@ class Hackathon extends Component {
                   account={this.props.account} hackathon={true}
                   draft={true} posts={[this.props.postByCurrentUser]} handleDeleteIdea={this.handleDeleteIdea.bind(this)} />
                 <div className="d-flex justify-content-end">
-                  <Button variant="primary">Edit</Button>{' '}
+                  <Link
+                    className=" com-links edit-link"
+                    to={{
+                      pathname: `/posts/${this.props.postByCurrentUser.id}/edit`,
+                      state: { edit: true },
+                    }}
+                  >
+                    <Button variant="primary">Edit</Button>{' '}
+                  </Link>
                   <Button className="ml-2" variant="success" onClick={this.handlePublish}>Publish</Button>{' '}
                 </div>
               </div>
             </div>
-            <div className="col-4 mt-4">
-              <Leaderboard topContributors={this.props.topContributors} />
-            </div>
-          </div>
+            <div className="column col-8 col-md-4 mt-md-0 mt-3">
+              <div className="col-12 mt-2">
+                <Leaderboard topContributors={this.props.topContributors} />
+              </div>
+              <div className="col-12 mt-3">
+                <FAQ />
+              </div>
+            </div>          </div>
         ) : null}
         <div className="col-12 row">
           <div className="col-8 p-0 mt-4">
             <h4 className="text-muted">Vote for the submissions so far</h4>
             <PostsList className="" posts={this.props.hackathonPosts} />
           </div>
-          <div className="column col-4 col-md-4 mt-md-0 mt-3">
+          <div className="column col-12 col-md-4 mt-md-0 mt-3">
             {this.state.showParticipating ? (
               <span>
                 <div className="col-12 mt-2">

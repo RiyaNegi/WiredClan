@@ -169,6 +169,7 @@ export const updatePost = (postId, title, published, description, tagId, userId,
         });
         if (hackathonId) {
           History.push("/Hackathon")
+          History.go()
         }
         else {
           var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
