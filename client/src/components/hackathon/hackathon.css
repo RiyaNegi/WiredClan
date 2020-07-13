@@ -6,14 +6,9 @@
 }
 
 .idea-card {
-  border: 1px solid rgb(223, 223, 223);
+  border-bottom: 1px solid rgb(223, 223, 223);
   padding: 15px;
   border-radius: 4px; 
-}
-
-.idea-card:hover {
-  cursor: pointer;
-  background-color: rgb(242, 255, 254);
 }
 
 
@@ -78,4 +73,27 @@
 
 .cancel-button{
   width:30px !important;
+}
+
+.collapse-button{
+  width:40px !important;
+}
+
+.register-title{
+  z-index: 5;
+  margin-top: -26px;
+}
+
+.faq-card{
+  border : 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  font-weight: 900;
+  font-size:18px;
+  color:rgb(149, 149, 149)
+}
+
+.faq-text{
+  font-size: 14px;
+  color:rgb(149, 149, 149);
+  font-weight:400;
 }

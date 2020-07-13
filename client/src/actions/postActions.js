@@ -151,7 +151,7 @@ export const createLike = (postId) => {
   };
 };
 
-export const updatePost = (postId, title, published, description, tagId, userId) => {
+export const updatePost = (postId, title, published, description, tagId, userId, hackathonId) => {
   return (dispatch) => {
     dispatch({
       type: SET_LOADING,
@@ -160,16 +160,21 @@ export const updatePost = (postId, title, published, description, tagId, userId)
     request
       .post(
         `/api/posts/${postId}`,
-        { postId, title, published, description, tagId }
+        { postId, title, published, description, tagId, hackathonId }
       )
       .then((response) => {
         dispatch({
           type: UPDATE_POST,
           payload: response.data,
         });
-        var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
-          : { pathname: `/users/${userId}`, state: { draft: true } }
-        History.push(redirectUrl);
+        if (hackathonId) {
+          History.push("/Hackathon")
+        }
+        else {
+          var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
+            : { pathname: `/users/${userId}`, state: { draft: true } }
+          History.push(redirectUrl);
+        }
       })
       .catch((error) => {
         handleError(error);

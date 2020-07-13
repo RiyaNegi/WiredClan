@@ -6,8 +6,14 @@ import "./auth.css";
 import googleIcon from "./googleIcon.png";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import History from "../../history.js";
+
 class Signin extends PureComponent {
   handleFormSubmit({ email, password }) {
+    if (this.props.location.state && this.props.location.state.loc) {
+      this.props.signinUser({ email, password }, this.props.location.state.loc);
+      return
+    }
     this.props.signinUser({ email, password });
   }
 
@@ -22,17 +28,29 @@ class Signin extends PureComponent {
   }
 
   responseGoogle = (response) => {
-    this.props.googleLogin({
-      accessToken: response.accessToken,
-      email: response.profileObj.email,
-      firstName: response.profileObj.givenName,
-      lastName: response.profileObj.familyName,
-    });
+    if (this.props.location.state && this.props.location.state.loc) {
+      this.props.googleLogin({
+        accessToken: response.accessToken,
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+      }, this.props.location.state.loc);
+    }
+    else {
+      this.props.googleLogin({
+        accessToken: response.accessToken,
+        email: response.profileObj.email,
+        firstName: response.profileObj.givenName,
+        lastName: response.profileObj.familyName,
+      });
 
+    }
   };
 
   render() {
     const { handleSubmit } = this.props;
+    debugger;
+    let location = (this.props.location.state && this.props.location.state.loc) ? "hackathon" : null
     return (
       <React.Fragment>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -82,7 +100,8 @@ class Signin extends PureComponent {
             </div>
             <div className="d-flex justify-content-center" style={{ marginLeft: 11, marginTop: 8 }}>
               Don't have an account? Click here to {" "}
-              <Link className="ml-1" to="/signup">{" "} Sign up</Link>
+              <Link className="ml-1" to={{ pathname: '/signup', state: { loc: location } }}
+              >{" "} Sign up</Link>
             </div>
           </div>
         </form>
@@ -94,7 +113,7 @@ class Signin extends PureComponent {
             alt="userIcon"
           />
         </div> */}
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }

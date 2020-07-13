@@ -12,7 +12,7 @@ import {
 
 import { handleError } from "./handleError";
 
-export const signinUser = ({ email, password }) => {
+export const signinUser = ({ email, password }, loc) => {
   return (dispatch) => {
     // submit email/password to the server
     request
@@ -22,8 +22,14 @@ export const signinUser = ({ email, password }) => {
         // - save the jwt token
         localStorage.setItem("token", response.data.token);
         // - redirect to the route '/posts'
-        fetchAccount(response.data.user.id, true)(dispatch);
-        History.push("/");
+        if (loc) {
+          fetchAccount(response.data.user.id, true, "hackathon")(dispatch);
+          return
+        }
+        else {
+          fetchAccount(response.data.user.id, true)(dispatch);
+          return
+        }
       })
       .catch(() => {
         // if request is bad...
@@ -33,14 +39,22 @@ export const signinUser = ({ email, password }) => {
   };
 };
 
-export const signupUser = ({ email, password, firstName, lastName, college, year }, confirmPassword) => {
+export const signupUser = ({ email, password, firstName, lastName, college, year }, confirmPassword, loc) => {
   return (dispatch) => {
+    debugger
     request
       .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year ? year.value : undefined, confirmPassword })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        fetchAccount(response.data.user.id, true)(dispatch);
-        History.push("/");
+        debugger;
+        if (loc) {
+          fetchAccount(response.data.user.id, true, "hackathon")(dispatch);
+          return
+        }
+        else {
+          fetchAccount(response.data.user.id, true)(dispatch);
+          return
+        }
       })
       .catch((err) => {
         dispatch(authError(err.response.data.error));
@@ -60,7 +74,7 @@ export const signoutUser = () => {
   return (dispatch) => {
 
     request
-      .post(`/api/logout`)
+      .post(`/api/users/logout`)
       .then((response) => {
         localStorage.removeItem("token");
         localStorage.removeItem("profileData");
@@ -102,7 +116,7 @@ export const fetchUser = (id, draft) => {
 
 export const updateUser = (
   { id, firstName, lastName, year, college },
-  redirect = `/users/${id}`
+  redirect = `/users/${id}`, loc
 ) => {
   return (dispatch) => {
     request
@@ -116,7 +130,12 @@ export const updateUser = (
           payload: response.data,
         });
         localStorage.setItem("profileData", JSON.stringify(response.data));
-        History.push(redirect);
+        if (loc) {
+          History.push(loc);
+        }
+        else {
+          History.push(redirect);
+        }
       })
       .catch((error) => {
         handleError(error);
@@ -124,7 +143,7 @@ export const updateUser = (
   };
 };
 
-export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
+export const googleLogin = ({ email, accessToken, firstName, lastName }, loc) => {
   return (dispatch) => {
     console.log("Sending request as:", {
       email,
@@ -141,7 +160,14 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
       })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        fetchAccount(response.data.user.id, true)(dispatch);
+        if (loc) {
+          fetchAccount(response.data.user.id, true, "hackathon")(dispatch);
+          return
+        }
+        else {
+          fetchAccount(response.data.user.id, true)(dispatch);
+          return
+        }
       })
       .catch(() => {
         dispatch(authError("Something went wrong."));
@@ -150,7 +176,7 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }) => {
 };
 
 // TODO: Remove.
-export const fetchAccount = (id, redirect = false) => {
+export const fetchAccount = (id, redirect = false, loc) => {
   return (dispatch) => {
     request
       .get(`/api/users/${id}`)
@@ -162,12 +188,19 @@ export const fetchAccount = (id, redirect = false) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("profileData", JSON.stringify(response.data));
         if (redirect) {
+          debugger;
           if (!response.data.college || !response.data.year) {
-            History.push("/users/" + response.data.id + "/form", {
-              redirectHomeAfterSubmit: true,
+            History.push({
+              pathname: "/users/" + response.data.id + "/form",
+              state: {
+                redirectHomeAfterSubmit: true, loc: loc
+              }
             });
-          } else {
-            History.push("/");
+          } else if (loc === "hackathon") {
+            History.push("/Hackathon");
+          }
+          else {
+            History.push("/")
           }
         }
       })

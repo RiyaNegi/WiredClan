@@ -53,33 +53,39 @@ class EditPost extends Component {
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
+      let published = name === "save" ? false : name === "publish" ? true : null;
       if (!params["postTag"] || !params["title"] || !params["postEditor"]) {
         this.notify()
         return
       }
-      else if (name === "save" && params["title"] && params["postTag"].value && params["postEditor"]) {
+      else if (params["title"] && params["postTag"].value && params["postEditor"]) {
         var teammates = params["members"] && params["members"].map(i => i.id)
-        this.props.updatePost(
-          postId,
-          params["title"],
-          false,
-          params["postEditor"],
-          params["postTag"].value,
-          teammates,
-          this.props.account.id
-        );
-        return
-      } else if (name === "publish" && params["title"] && params["postTag"].value && params["postEditor"]) {
-        this.props.updatePost(
-          postId,
-          params["title"],
-          true,
-          params["postEditor"],
-          params["postTag"].value,
-          teammates,
-          this.props.account.id
-        );
-        return
+        if (this.props.hackathonId) {
+          this.props.updatePost(
+            postId,
+            params["title"],
+            published,
+            params["postEditor"],
+            params["postTag"].value,
+            teammates,
+            this.props.account.id,
+            this.props.hackathonId
+          );
+          return
+        }
+        else {
+          this.props.updatePost(
+            postId,
+            params["title"],
+            published,
+            params["postEditor"],
+            params["postTag"].value,
+            teammates,
+            this.props.account.id
+          );
+          return
+        }
+
       }
       else if (name === "preview" && params["title"] && params["postTag"].value && params["postEditor"]) {
         let teammates = params["members"] && params["members"].map(i => i.id)
@@ -368,7 +374,8 @@ const mapStateToProps = (state) => {
     description: state.postDetails.description,
     initialValues: populatePostValues(state, desc),
     tags: state.postDetails.tags,
-    isLoading: state.createPost.isLoading
+    isLoading: state.createPost.isLoading,
+    hackathonId: state.postDetails.hackathonId
   };
 };
 

@@ -9,6 +9,8 @@ import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import './hackathon.css';
 import ideas from './ideas.json'
+import { ToastContainer, toast } from "react-toastify";
+
 
 class Registration extends Component {
     constructor(props) {
@@ -29,9 +31,24 @@ class Registration extends Component {
         }
     };
 
+    notify = () =>
+        toast.error('⚠️ Title and Category are required', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+        });
+
+
     handleFormSubmit = (name) => {
         return (params) => {
-            debugger;
+            if (!params["title"] || !this.state.selectedLabelId) {
+                this.notify()
+                return
+            }
             this.props.createHackathonPost(params["title"], false,
                 this.state.selectedLabelId, this.props.hackathonId);
             // console.log("submitted:", this.state.selectedLabelId)
@@ -54,9 +71,9 @@ class Registration extends Component {
     }
 
     render() {
-        const { handleSubmit, submitting, pristine } = this.props;
+        const { handleSubmit, submitting } = this.props;
         return <div className="">
-            <div className="d-flex p-1 justify-content-end">
+            <div className="d-flex p-3 justify-content-end register-cancel">
                 <button
                     className="post-item-buttons cancel-button"
                     onClick={this.props.onClose}
@@ -68,14 +85,14 @@ class Registration extends Component {
                     />{" "}
                 </button>
             </div>
-            <label className="d-flex justify-content-center font-weight-bold"><h4>Submission Form</h4></label>
+            <label className="d-flex justify-content-center register-title"><h4>Submission Form</h4></label>
             <form className="p-3">
-                <h4 className="text-muted">Title</h4>
+                <span className="text-muted" style={{ fontSize: 25 }}>Title</span>
                 <fieldset >
                     <Field name="title" component={this.renderTitle}
                     />
                 </fieldset>
-                <h4 className="text-muted  mt-3">Area</h4>
+                <h4 className="text-muted  mt-3">Project Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {ideas.map((i) => (
                         this.state.selectedLabelId === i.id ?
@@ -104,12 +121,12 @@ class Registration extends Component {
                             </div>
                     ))}
                 </div>
-                <div className='mt-3 d-flex justify-content-center'>
+                <div className='mt-5 d-flex justify-content-center'>
                     <button
-                        className="sign-btn p-2"
+                        className="sign-btn p-2 px-5"
                         action="submit"
                         name="save"
-                        disabled={submitting || pristine}
+                        disabled={submitting}
                         onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
                     >
                         Submit Idea
@@ -117,6 +134,17 @@ class Registration extends Component {
                 </div>
                 <div className="mt-3 text-muted d-flex justify-content-center">Your idea won't be posted until you click "Publish" later on.</div>
             </form>
+            <div><ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+            /></div>
         </div>
     }
 }

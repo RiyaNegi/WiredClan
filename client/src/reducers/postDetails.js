@@ -9,12 +9,14 @@ export const reducer = (state = {}, action) => {
     case RESET_POST_DETAILS:
       return {};
     case FETCH_POST_DETAILS:
+      debugger
       return {
         ...state,
         details: { ...action.payload, comments: null },
         comments: action.payload.comments,
         description: action.payload.description,
-        postUser: action.payload.userId
+        postUser: action.payload.userId,
+        hackathonId: action.payload.hackathonId
       };
     case POST_COMMENT:
       let newState = JSON.parse(JSON.stringify(state));
