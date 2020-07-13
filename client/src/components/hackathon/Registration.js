@@ -51,7 +51,6 @@ class Registration extends Component {
             }
             this.props.createHackathonPost(params["title"], false,
                 this.state.selectedLabelId, this.props.hackathonId);
-            // console.log("submitted:", this.state.selectedLabelId)
         }
     }
 
@@ -64,7 +63,7 @@ class Registration extends Component {
                 onBlur={titleProps.handleBlur}
                 value={titleProps.input.value}
                 className="post-comment"
-                placeholder="Submit idea here..."
+                placeholder=""
                 ref={(tag) => (this.textarea = tag)}
             />
         )
@@ -85,14 +84,17 @@ class Registration extends Component {
                     />{" "}
                 </button>
             </div>
-            <label className="d-flex justify-content-center register-title"><h4>Submission Form</h4></label>
+            <label className="d-flex justify-content-center register-title"><h4>My Project</h4></label>
+            <div className="mt-1 text-muted d-flex justify-content-center">You can edit this later, if needed.</div>
+            <div className="mt-1 text-muted d-flex justify-content-center">Your idea won't be posted until you click "Publish" later on.</div>
+
             <form className="p-3">
                 <span className="text-muted" style={{ fontSize: 25 }}>Title</span>
                 <fieldset >
                     <Field name="title" component={this.renderTitle}
                     />
                 </fieldset>
-                <h4 className="text-muted  mt-3">Project Category</h4>
+                <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {ideas.map((i) => (
                         this.state.selectedLabelId === i.id ?
@@ -129,10 +131,9 @@ class Registration extends Component {
                         disabled={submitting}
                         onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
                     >
-                        Submit Idea
+                        Save Idea
                 </button>
                 </div>
-                <div className="mt-3 text-muted d-flex justify-content-center">Your idea won't be posted until you click "Publish" later on.</div>
             </form>
             <div><ToastContainer
                 position="top-right"

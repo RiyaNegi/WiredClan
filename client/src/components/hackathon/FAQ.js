@@ -10,8 +10,10 @@ class FAQ extends Component {
                 <li>If participating as a team, only one member needs to register for the hackathon(can add teammates later).</li>
                 <li>You only need an awesome idea to register(can fill contents later).</li>
                 <li>Plagiarized projects will be disqualified.</li>
+                <li>Icons provided by < a target="_blank" href="https://icons8.com" className="text-muted"> Icons8</a >.</li>
             </label>
-            <Link to="#" className="mt-0"><h6>Learn more</h6></Link>
+            {/* <Link to="#" className="mt-0"><h6>Learn more</h6></Link> */}
+
         </div>
     }
 }

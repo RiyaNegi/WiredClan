@@ -163,15 +163,16 @@ export const updatePost = (postId, title, published, description, tagId, userId,
         { postId, title, published, description, tagId, hackathonId }
       )
       .then((response) => {
-        dispatch({
-          type: UPDATE_POST,
-          payload: response.data,
-        });
         if (hackathonId) {
-          History.push("/Hackathon")
+          History.push("/hackathon")
           History.go()
         }
         else {
+          dispatch({
+            type: UPDATE_POST,
+            payload: response.data,
+          });
+
           var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
             : { pathname: `/users/${userId}`, state: { draft: true } }
           History.push(redirectUrl);
