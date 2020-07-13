@@ -303,7 +303,15 @@ header
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15) !important;
 }
 
-.background-header .logo,
+.background-header .main-nav img {
+  /* color: #1e1e1e !important; */
+  /* background-color: pink !important; */
+  filter: none !important;
+   /* invert(100%) sepia(100%) saturate(0%) hue-rotate(98deg) brightness(109%) contrast(101%); */
+
+}
+
+.background-header,
 .background-header .main-nav .nav li a {
   color: #1e1e1e !important;
 }
@@ -372,6 +380,11 @@ header
 
 .header-area .main-nav .nav li:last-child {
   padding-right: 0px;
+}
+
+.header-area .main-nav img {
+  /* background-color: green; */
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(98deg) brightness(109%) contrast(101%);
 }
 
 .header-area .main-nav .nav li a {
@@ -722,6 +735,7 @@ welcome
   align-items: center;
   justify-content: center;
   background-image: url(../images/banner-bg.png);
+  /* background-image: url(../images/banner-bg.png); */
   background-repeat: no-repeat;
 /*
 TRY IT ... with or without CENTER CENTER
@@ -814,7 +828,7 @@ TRY IT ... with or without CENTER CENTER
   .welcome-area .header-text h1 {
     font-weight: 600;
     font-size: 24px !important;
-    line-height: 30px !important;
+    /* line-height: 30px !important; */
     margin-bottom: 20px !important;
   }
   .welcome-area .header-text h1 span {

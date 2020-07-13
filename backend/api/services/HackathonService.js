@@ -1,7 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 
 // import { PostService } from './index';
+
+import moment from 'moment';
 
 import Sequelize from 'sequelize';
 import Post from '../models/Post';
@@ -32,8 +35,7 @@ async function postByUser({ id }, currentUserId) {
   return post;
 }
 
-async function getAllDetails({ name, page }, currentUserId) {
-  const hackathon = await Hackathon.findOne({ where: { name } });
+async function _getAllDetails(hackathon, page, currentUserId) {
   const posts = await PostService.getAll({
     hackathonId: hackathon.id, page,
   }, currentUserId);
@@ -46,8 +48,25 @@ async function getAllDetails({ name, page }, currentUserId) {
   };
 }
 
+async function getAllDetails({ name, page }, currentUserId) {
+  const hackathon = await Hackathon.findOne({ where: { name } });
+  return _getAllDetails(hackathon, page, currentUserId);
+}
+
+async function getAllCurrentDetails(currentUserId) {
+  const hackathon = await Hackathon.findOne({
+    where: {
+      endDate: {
+        [Sequelize.Op.gt]: moment().format(),
+      },
+    },
+  });
+  return _getAllDetails(hackathon, undefined, currentUserId);
+}
+
 export default {
   getAllDetails,
   allPosts,
   postByUser,
+  getAllCurrentDetails,
 };

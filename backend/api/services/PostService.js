@@ -38,8 +38,8 @@ async function getAll({
       ['createdAt', 'DESC'],
     ],
     include: [Comment, User, Tag, Like],
-    limit: 20,
-    offset: (parseInt(page, 10) - 1) || 0 * 20,
+    limit: 100,
+    offset: (parseInt(page, 10) - 1) || 0 * 100,
   }).map((post) => decorateListItem(post.get({ plain: true }, currentUserId)));
   return result;
 }
