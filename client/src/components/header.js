@@ -28,10 +28,10 @@ class Header extends PureComponent {
 
   render() {
     return (
-      <nav className="d-flex flex-row navbar container navbar-expand-lg navbar-light">
-
-        <a className="navbar-brand" href="/">
-          {/* <label
+      <nav className="d-flex flex-row navbar navbar-expand-lg navbar-light">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            {/* <label
             style={{
               border: "2px solid black",
               fontSize: 20,
@@ -54,103 +54,105 @@ class Header extends PureComponent {
           >
             J
           </label> */}
-          {/* <img src={logoOne} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
-          {/* <img src={logoOld} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
-          {/* <img src={logoTwo} style={{ width: 120, height: 27 }} alt="userIcon" /> */}
-          {/* <img src={logoThree} style={{ width: 100 }} alt="userIcon" /> */}
-          {/* <img src={logoFour} style={{ width: 120 }} alt="userIcon" /> */}
-          {/* <img src={logoFive} style={{ width: 170 }} alt="userIcon" /> */}
-          {/* <img src={logoSix} style={{ width: 170 }} alt="userIcon" /> */}
-          <img src={logoSeven} style={{ width: 200 }} alt="userIcon" />
-          {/* <img src={logoEight} style={{ width: 200 }} alt="userIcon" /> */}
-          {/* <img src={logoTen} style={{ width: 200 }} alt="userIcon" /> */}
-          {/* <img src={logoEight2} style={{ width: 200 }} alt="userIcon" /> */}
+            {/* <img src={logoOne} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
+            {/* <img src={logoOld} style={{ width: 150, height: 27 }} alt="userIcon" /> */}
+            {/* <img src={logoTwo} style={{ width: 120, height: 27 }} alt="userIcon" /> */}
+            {/* <img src={logoThree} style={{ width: 100 }} alt="userIcon" /> */}
+            {/* <img src={logoFour} style={{ width: 120 }} alt="userIcon" /> */}
+            {/* <img src={logoFive} style={{ width: 170 }} alt="userIcon" /> */}
+            {/* <img src={logoSix} style={{ width: 170 }} alt="userIcon" /> */}
+            <img src={logoSeven} style={{ width: 200 }} alt="userIcon" />
+            {/* <img src={logoEight} style={{ width: 200 }} alt="userIcon" /> */}
+            {/* <img src={logoTen} style={{ width: 200 }} alt="userIcon" /> */}
+            {/* <img src={logoEight2} style={{ width: 200 }} alt="userIcon" /> */}
 
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
 
-          {this.props.authenticated ? (
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href={`/users/${this.props.user.id}`}>
-                  <img
-                    src={this.props.user.imageUrl}
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 20 / 2,
-                      marginRight: 5,
-                    }}
-                    alt="usericon"
-                  />
-                  {this.props.user.firstName} {this.props.user.lastName}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/Hackathon">
-                  Hackathon
-                </a>
-              </li>
-              <li className="nav-item dropdown ">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="/"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  My Account
-                </a>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <a
-                    className="dropdown-item"
-                    href={`/users/${this.props.user.id}`}
-                  >
-                    Profile
-                  </a>
-                  <a className="dropdown-item" href="/signout">
-                    Logout
-                  </a>
-                </div>
-              </li>
-            </ul>
-          ) : (
+            {this.props.authenticated ? (
               <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link" href={`/users/${this.props.user.id}`}>
+                    <img
+                      src={this.props.user.imageUrl}
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 20 / 2,
+                        marginRight: 5,
+                      }}
+                      alt="usericon"
+                    />
+                    {this.props.user.firstName} {this.props.user.lastName}
+                  </a>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/Hackathon">
                     Hackathon
                 </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/signup">
-                    Sign Up
+                <li className="nav-item dropdown ">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="/"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    My Account
                 </a>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/signin">
-                    Sign In
-                </Link>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href={`/users/${this.props.user.id}`}
+                    >
+                      Profile
+                  </a>
+                    <a className="dropdown-item" href="/signout">
+                      Logout
+                  </a>
+                  </div>
                 </li>
               </ul>
-            )}
+            ) : (
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <a className="nav-link" href="/Hackathon">
+                      Hackathon
+                </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/signup">
+                      Sign Up
+                </a>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signin">
+                      Sign In
+                </Link>
+                  </li>
+                </ul>
+              )}
+          </div>
+
         </div>
       </nav>
     );
