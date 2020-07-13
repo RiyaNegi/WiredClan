@@ -28,7 +28,8 @@ class Header extends PureComponent {
 
   render() {
     return (
-      <nav className="d-flex flex-row navbar navbar-expand-lg navbar-light px-0">
+      <nav className="d-flex flex-row navbar container navbar-expand-lg navbar-light">
+
         <a className="navbar-brand" href="/">
           {/* <label
             style={{

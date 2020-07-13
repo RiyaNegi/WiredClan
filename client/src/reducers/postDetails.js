@@ -9,7 +9,6 @@ export const reducer = (state = {}, action) => {
     case RESET_POST_DETAILS:
       return {};
     case FETCH_POST_DETAILS:
-      debugger
       return {
         ...state,
         details: { ...action.payload, comments: null },

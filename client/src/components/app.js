@@ -27,21 +27,25 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container main-container">
+        <div className="main-container">
+
+
           <Header />
-          {this.props.location.pathname === "/signin" ||
-            this.props.location.pathname === "/signup" ? (
-              <div className=" signin-container container mt-md-0 mt-3">
-                {this.props.children}
-              </div>
-            ) : (
-              <div className="container p-0 mt-md-0 mt-1">{this.props.children}</div>
-            )}
+          <div className="container">
+
+            {this.props.location.pathname === "/signin" ||
+              this.props.location.pathname === "/signup" ? (
+                <div className=" signin-container container mt-md-0 mt-3">
+                  {this.props.children}
+                </div>
+              ) : (
+                <div className="mt-1">{this.props.children}</div>
+              )}
+          </div>
           <footer className="page-footer">
             <p className="footer-text pt-5 pb-4">Made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
           </footer>
         </div>
-
       </React.Fragment>
     );
   }

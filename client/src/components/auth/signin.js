@@ -49,7 +49,6 @@ class Signin extends PureComponent {
 
   render() {
     const { handleSubmit } = this.props;
-    debugger;
     let location = (this.props.location.state && this.props.location.state.loc) ? "hackathon" : null
     return (
       <React.Fragment>

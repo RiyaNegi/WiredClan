@@ -19,7 +19,6 @@ class UserForm extends PureComponent {
 
   handleFormSubmit = (userId) => (formProps) => {
     formProps = { ...formProps, year: formProps.year.value }
-    debugger;
     this.props.updateUser(
       { ...formProps, id: userId },
       this.props.location.state && this.props.location.state.redirectHomeAfterSubmit ? "/ " : undefined,

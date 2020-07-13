@@ -15,7 +15,6 @@ const yearArrray = [{ value: 1, label: 'First' },
 class Signup extends PureComponent {
   handleFormSubmit = (formProps) => {
     let confirmPassword = formProps.password
-    debugger;
     if (this.props.location.state && this.props.location.state.loc) {
       this.props.signupUser(formProps, confirmPassword,
         this.props.location.state.loc);

@@ -41,12 +41,10 @@ export const signinUser = ({ email, password }, loc) => {
 
 export const signupUser = ({ email, password, firstName, lastName, college, year }, confirmPassword, loc) => {
   return (dispatch) => {
-    debugger
     request
       .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year ? year.value : undefined, confirmPassword })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        debugger;
         if (loc) {
           fetchAccount(response.data.user.id, true, "hackathon")(dispatch);
           return
@@ -188,7 +186,6 @@ export const fetchAccount = (id, redirect = false, loc) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem("profileData", JSON.stringify(response.data));
         if (redirect) {
-          debugger;
           if (!response.data.college || !response.data.year) {
             History.push({
               pathname: "/users/" + response.data.id + "/form",
