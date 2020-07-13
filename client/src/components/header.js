@@ -84,8 +84,27 @@ class Header extends PureComponent {
 
             {this.props.authenticated ? (
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link" href={`/users/${this.props.user.id}`}>
+                <li className="nav-item pr-4">
+                  <a
+                    style={{
+                      // backgroundColor: '#ceffff',
+                      // boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.48)',
+                      color: '#313131'
+                    }}
+                    className="nav-link" href="/Hackathon">
+                    Hackathon
+                  </a>
+                </li>
+                <li className="nav-item dropdown ">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="/"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
                     <img
                       src={this.props.user.imageUrl}
                       style={{
@@ -98,24 +117,6 @@ class Header extends PureComponent {
                     />
                     {this.props.user.firstName} {this.props.user.lastName}
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/Hackathon">
-                    Hackathon
-                </a>
-                </li>
-                <li className="nav-item dropdown ">
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="/"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    My Account
-                </a>
                   <div
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdownMenuLink"

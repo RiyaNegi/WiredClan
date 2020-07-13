@@ -173,7 +173,6 @@ export const googleLogin = ({ email, accessToken, firstName, lastName }, loc) =>
   };
 };
 
-// TODO: Remove.
 export const fetchAccount = (id, redirect = false, loc) => {
   return (dispatch) => {
     request

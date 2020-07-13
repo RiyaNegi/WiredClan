@@ -32,6 +32,7 @@ async function getAll({
   if (hackathonId) {
     whereQuery.hackathonId = hackathonId;
   }
+
   const result = await Post.findAll({
     where: whereQuery,
     order: [
@@ -40,8 +41,9 @@ async function getAll({
     include: [Comment, User, Tag, Like],
     limit: 100,
     offset: (parseInt(page, 10) - 1) || 0 * 100,
-  }).map((post) => decorateListItem(post.get({ plain: true }, currentUserId)));
-  return result;
+  });
+
+  return result.map((post) => decorateListItem(post.get({ plain: true }), currentUserId));
 }
 
 async function get({ id, userId }) {
