@@ -44,7 +44,7 @@ const Leaderboard = ({ className, style, topContributors }) => {
                       </Badge>
                     )}
                   </span>
-                  <span className="col-3 pl-0 font-weight-bold d-flex text-muted justify-content-end">
+                  <span className="col-3 pl-0 font-weight-bold d-flex justify-content-end">
                     {user.likesCount} 🔥
                 </span>
                 </a>

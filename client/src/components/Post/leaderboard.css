@@ -1,7 +1,14 @@
 .leaderboard-box {
-  background-color: #fff9c4;
+  background-color: #1F1F1F;
+  box-shadow: 3px 13px 57px 6px rgba(0,0,0,1);
+}
+
+.leaderboard-box * {
+  color: white !important;
+  
 }
 
 .leaderboard-row:hover {
-  background-color: #eeeeee;
+  background-color: #2e2e2e;
 }
+

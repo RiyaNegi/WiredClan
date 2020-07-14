@@ -72,7 +72,7 @@ class Profile extends Component {
                 size="1x"
                 color="gray"
               />
-              <div className="ml-2 text-muted font-weight-bold">
+              <div className="ml-2 text-muted-profile font-weight-bold">
                 {this.props.user.likesCount} likes
             </div>
             </div>
@@ -82,16 +82,16 @@ class Profile extends Component {
               {this.props.user.badges[0]}
             </Badge>
           )}
-          <div className="text-muted font-weight-bold text-center">
+          <div className="text-muted-profile font-weight-bold text-center">
             {this.props.user.college}
           </div>
           {this.props.user.year && (
-            <div className="text-muted font-weight-bold">
+            <div className="text-muted-profile font-weight-bold">
               Year {this.props.user.year}
             </div>
           )}
           {this.props.account && this.props.user.id === this.props.account.id && (
-            <div className="text-muted font-weight-bold">
+            <div className="text-muted-profile font-weight-bold">
               <a href={`/users/${this.props.user.id}/form`}>edit</a>
             </div>
           )}
@@ -125,7 +125,7 @@ class Profile extends Component {
 
     return (
       <div className="mt-4 row">
-        <div className="col-12 col-md-3">{this.renderUserCard()}</div>
+        <div style={{ zIndex: 1 }} className="col-12 col-md-3">{this.renderUserCard()}</div>
         <div className="col-12 col-md-9">
           <React.Fragment>
             <Tabs defaultActiveKey={this.props.location.state && this.props.location.state.draft ? "user-drafts" : "user-posts"} id="user-tab">

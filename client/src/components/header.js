@@ -8,8 +8,9 @@ import { Link } from "react-router-dom";
 // import logoThree from "./logoThree.png";
 // import logoFive from "./logoFive.png";
 // import logoSix from "./logoSix.png";
-import logoSeven from "./logos/logoSeven.png";
+// import logoSeven from "./logos/logoSeven.png";
 // import logoEight from "./logoEight.png";
+import logoEightWhite from "./logos/logoEightWhite.png";
 // import logoNine from "./logoNine.png";
 // import logoEight2 from "./logoEight2.png";
 // import logoTen from "./logoTen.png";
@@ -61,8 +62,8 @@ class Header extends PureComponent {
             {/* <img src={logoFour} style={{ width: 120 }} alt="userIcon" /> */}
             {/* <img src={logoFive} style={{ width: 170 }} alt="userIcon" /> */}
             {/* <img src={logoSix} style={{ width: 170 }} alt="userIcon" /> */}
-            <img src={logoSeven} style={{ width: 200 }} alt="userIcon" />
-            {/* <img src={logoEight} style={{ width: 200 }} alt="userIcon" /> */}
+            {/* <img src={logoSeven} style={{ width: 200}} alt="userIcon" /> */}
+            <img src={logoEightWhite} style={{ width: 150 }} alt="userIcon" />
             {/* <img src={logoTen} style={{ width: 200 }} alt="userIcon" /> */}
             {/* <img src={logoEight2} style={{ width: 200 }} alt="userIcon" /> */}
 
@@ -89,15 +90,16 @@ class Header extends PureComponent {
                     style={{
                       // backgroundColor: '#ceffff',
                       // boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.48)',
-                      color: '#313131'
+                      color: 'white'
                     }}
                     className="nav-link" href="/Hackathon">
-                    Hackathon
+                    <strong>Hackathon</strong>
                   </a>
                 </li>
                 <li className="nav-item dropdown ">
                   <a
-                    className="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle text-white
+                    "
                     href="/"
                     id="navbarDropdownMenuLink"
                     role="button"
@@ -112,6 +114,7 @@ class Header extends PureComponent {
                         height: 20,
                         borderRadius: 20 / 2,
                         marginRight: 5,
+
                       }}
                       alt="usericon"
                     />

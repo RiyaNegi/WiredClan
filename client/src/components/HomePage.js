@@ -66,9 +66,18 @@ class HomePage extends PureComponent {
 
     return (
       <React.Fragment>
-        <div className="mt-md-4 d-flex row justify-content-between">
-          <PostsList className="col-md-7" posts={this.props.posts} />
-          <div className="col-md-5 col-lg-4">
+        <div className="mt-md-2 d-flex row justify-content-between">
+
+          <div className="col-md-7 mt-4">
+            <div className="d-flex flex-row align-items-center">
+              <div className="latest-text">What's New</div>
+              <div className=" latest-line" />
+            </div>
+            <PostsList className="mt-2" posts={this.props.posts} />
+
+          </div>
+
+          <div className="col-md-5 col-lg-4 mt-4">
             <Leaderboard topContributors={this.props.topContributors} />
             <div className="mt-4">
               <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
