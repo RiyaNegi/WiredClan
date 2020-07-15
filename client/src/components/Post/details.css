@@ -179,6 +179,22 @@ z-index: 10 !important;
   max-width: 100% !important;
 }
 
+
+.css-26l3qy-menu >span, div, p {
+  color: rgb(80, 80, 80) !important;
+  background-color: transparent; 
+}
+
+.css-yk16xz-control{
+  background-color: transparent !important; 
+  border: 1px solid rgb(53, 53, 53) !important;
+}
+
+.css-yk16xz-control:focus{
+  background-color: transparent !important; 
+  border: 1px solid rgb(53, 53, 53) !important;
+}
+
 .Select-tag.is-open {
 z-index: 10 !important;
 }

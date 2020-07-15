@@ -58,7 +58,7 @@ class Signin extends PureComponent {
             <fieldset className="mt-4 form-group sign-text">
               <label>Email:</label>
               <Field
-                className="form-control "
+                className="form-control"
                 name="email"
                 component="input"
                 type="text"

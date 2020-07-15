@@ -6,31 +6,31 @@
 
 .signin-heading{
     font-size: 30px;
-    font-family: 'Frank Ruhl Libre', serif;  
+    font-family: 'Frank Ruhl Libre', serif; 
+    color:white; 
   }
 .hr {height:1px; border:none; color:#000; background-color:#000;}
 .sign-box{
-    border : 1px solid rgb(228, 228, 228);
-    box-shadow:    2px 2px 9px 0px rgba(30, 50, 50, 0.25);
+  background-color: #1F1F1F;
+  box-shadow: 3px 13px 57px 6px rgba(0,0,0,1);
     border-radius: 5px;
     padding:30px;
     margin: 0 auto;
-    background-color: white;
     position: relative;
     z-index: 1;
 }
+
 .signup-box{
     flex-direction: column;
-    border : 1px solid rgb(231, 229, 229);
-    box-shadow: 0 4px 6px -1px rgba(14, 14, 14, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #1F1F1F;
+    box-shadow: 3px 13px 57px 6px rgba(0,0,0,1);
     border-radius: 5px;
     padding:30px;
     width: 550px;
     margin: 0 auto;
 }
 .sign-text{
-    color:black;
+  color:white; 
     font-weight: 800;
 }
 
@@ -54,7 +54,7 @@
 
 
 .sign-btn {
-      background-color: #202020;
+      background-color: #070707;
     border: 1px solid #202020;
     color: white;
     font-weight:700;
@@ -65,8 +65,8 @@
   
   .sign-btn:hover {
     border: 1px solid #202020;
-    color: #202020;
-    background-color: white;
+    color: #dddddd;
+    background-color: rgb(12, 12, 12);
 
   }
   .sign-btn:hover {
@@ -147,7 +147,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: black
+    background-color: black;
+    border-radius:4px;
   }
 
 #button-7 {
@@ -185,4 +186,10 @@
 
 .sign-button:focus{
   outline:0;
+}
+
+.form-control{
+  border: 1px solid rgb(53, 53, 53) !important;
+  background-color: transparent !important;
+  color:rgb(131, 131, 131) !important;
 }
