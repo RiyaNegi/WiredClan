@@ -310,7 +310,7 @@ class Comments extends Component {
             </div>
             <div className="d-flex ml-2 mt-1 float-right">
               <button
-                className="post-comment-btn px-3"
+                className="post-comment-btn px-4"
                 action="submit"
                 disabled={submitting || pristine}
               >

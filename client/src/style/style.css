@@ -155,10 +155,10 @@ body {
   color: white !important;
   background-image: linear-gradient(to left, #55bdf1 0%, #2fadec 51%, #84fab0 100%);
   font-weight:700;
+  border:none;
 }
 
 .new-post-button:hover {
-  background-image: linear-gradient(to left, #8fd3f4 0%, #8fd3f4 51%, #84fab0 100%);
   background-position: right center; /* change the direction of the change here */
 }
 
@@ -325,18 +325,21 @@ body {
 }
 
 .post-comment-btn {
-  background-image: linear-gradient(to right, #f857a6 0%, #ff5858 100%, #f857a6 100%);
   color: white;
+  text-align: center;
+  background-size: 200% auto;
   font-weight:700;
   border-radius:5px;
+  transition: 0.5s;
   padding:6px;
   /* margin: 0 auto; */
+  background-image: linear-gradient(to left, #ff5f87 0%, #ff4242 55%, #ff53a9 100%);
   border:none;
 }
 
 .post-comment-btn:hover {
   background-position: right center;
-    color: #ebebeb;
+    /* color: #ebebeb; */
 }
 
 .post-comment-btn:focus {
@@ -371,7 +374,7 @@ body {
   display:flex;
   height:3px;
   width: 100%;
-  background-image: linear-gradient(to left, #83ecfa 0%, #5cffff 51%, #84fab0 100%);
+  background-image: linear-gradient(to left, #ff5f87 0%, #ff4242 55%, #ff53a9 100%);
 }
 
 .latest-text{
