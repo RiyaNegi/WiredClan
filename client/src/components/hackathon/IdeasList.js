@@ -17,15 +17,15 @@ class IdeasList extends Component {
     return (<div className="p-3 d-flex justify-content-between">
       <div className="col-10 col-md-11">
         <h4 className="">Trouble finding an idea?</h4>
-        <h6 className="text-muted">Find inspiration in our curated list! (expand)</h6>
+        <h6 className="text-muted">Find inspiration in our curated list!</h6>
         <Collapse in={this.state.open}>
           <div id="example-collapse-text">
             {ideas.map((idea) => (
               <div className="mt-2">
                 {idea.list.map(i =>
                   <div className="idea-card d-flex justify-content-between mt-2 flex-wrap">
-                    <li className="col-md-11 col-10">{i}</li>
-                    <span className="col-md-1 col-2 ">
+                    <li className="">{i}</li>
+                    <span className=" ">
                       <Badge
                         className="post-link badge-light p-2  float-right"
                         style={{ backgroundColor: "#e9e9e9" }}
