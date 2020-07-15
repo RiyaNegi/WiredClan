@@ -18,6 +18,7 @@ const Routes = () => {
   return (
     <App>
       <Switch>
+        <Route exact path="/hey" render={() => { window.location.href = "hey" }} />
         <Route exact path="/" component={HomePage} />
         <Route exact path="/test" component={test} />
         <Route path="/signin" component={Signin} />

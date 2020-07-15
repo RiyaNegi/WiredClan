@@ -32,6 +32,8 @@ const store = createStore(
 );
 //
 
+
+
 // const token = localStorage.getItem("token");
 const profileData = JSON.parse(localStorage.getItem("profileData"));
 // if we have a token, consiger the user to be signed in
@@ -41,6 +43,9 @@ if (profileData) {
 
   store.dispatch({ type: AUTH_USER });
   store.dispatch({ type: FETCH_ACCOUNT, payload: profileData });
+} else if (!localStorage["alreadyVisited"]) {
+  localStorage["alreadyVisited"] = true;
+  History.push('hey');
 }
 
 ReactDOM.render(
