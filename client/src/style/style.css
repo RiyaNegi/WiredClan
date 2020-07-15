@@ -21,13 +21,12 @@
   }
 }
 
-* {
+.main-container > .container {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,sans-serif !important;
 }
 
-.navbar * {
+.navbar .nav-link {
   font-family: 'Montserrat', sans-serif !important;
-  /* color: white !important; */
 }
 
 input:-webkit-autofill,
