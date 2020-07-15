@@ -11,15 +11,18 @@
   border-radius: 4px; 
 }
 
+.card1 div {
+  /* color: black; */
+}
 
 .card1 {
   display: block;
   position: relative;
   max-width: 262px;
   color: rgb(104, 104, 104);
-  background-color: #f2f8f9;
+  background-color: #2c3033;
   border-radius: 4px;
-  border: 1px solid rgb(224, 224, 224);
+  border: none;
   padding: 32px 24px;
   text-decoration: none;
   z-index: 0;
@@ -31,7 +34,7 @@
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: #00838d;
+  background: #2ec1cc;
   height: 32px;
   width: 32px;
   border-radius: 32px;
@@ -47,17 +50,22 @@
 }
 
 .card1-selected{
-  background: #3bcad5;
+  background: #3fced8;
   color:rgb(255, 255, 255);
   /* z-index: d; */
 }
+
+.card1-selected div{
+  color:rgb(255, 255, 255);
+}
+
 .card1-selected:before {
   content: "";
   position: absolute;
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: #3bcad5;
+  background: #3fced8;
   height: 32px;
   width: 32px;
   border-radius: 32px;
