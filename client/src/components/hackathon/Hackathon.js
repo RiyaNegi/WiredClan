@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Timer from "../Timer"
-import hackathon from "../hackathon11.jpg"
+import hackathon from "../hackathon1.png"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -106,7 +106,7 @@ class Hackathon extends Component {
 
             {!this.props.postByCurrentUser && !this.state.showParticipating &&
               <React.Fragment>
-                <div className="col-12 mt-3">
+                <div className="col-12 mt-3 post-box">
                   <div className='d-flex flex-column box-shadow p-4'>
                     <span><h4>Hackathon July 2020</h4></span>
                     <span className="text-muted"><h6> Can submit any pre-existing project or make a new project in given time.</h6>
@@ -115,18 +115,21 @@ class Hackathon extends Component {
                       <input className="d-flex align-self-center" type="checkbox" id="conduct" name="conduct" value="conduct" />
                       <span className="ml-1" for="conduct" > I agree to the terms & conditions of WiredClan.</span>
                     </span>
-                    <button
-                      onClick={this.handleRegisterClick}
-                      type="button"
-                      class="sign-btn p-2 px-4 col-4 mt-3"
-                    >Register</button>
+                    <div className="d-flex justify-content-center">
+                      <button
+                        onClick={this.handleRegisterClick}
+                        type="button"
+                        class="post-comment-btn p-2 px-4 col-4 mt-3"
+                      >Register</button>
+                    </div>
+                  </div>
+                  <div className="col-12 mt-3"
+                  >
+                    <IdeasList></IdeasList>
                   </div>
                 </div>
 
-                <div className="col-12 mt-3"
-                >
-                  <IdeasList></IdeasList>
-                </div>
+
 
               </React.Fragment>
             }

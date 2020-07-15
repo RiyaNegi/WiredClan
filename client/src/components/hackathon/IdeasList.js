@@ -14,7 +14,7 @@ class IdeasList extends Component {
   }
 
   render() {
-    return (<div className="p-3 d-flex justify-content-between" style={{ backgroundColor: 'white', border: '1px solid #e1e1e1', borderRadius: '3px' }}>
+    return (<div className="p-3 d-flex justify-content-between">
       <div className="col-10 col-md-11">
         <h4 className="">Trouble finding an idea?</h4>
         <h6 className="text-muted">Find inspiration in our curated list! (expand)</h6>

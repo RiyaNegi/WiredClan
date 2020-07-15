@@ -111,20 +111,20 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className="post-details-box col-12 col-md-11 img-fix-div" key={post.id}>
-        <label className="signin-heading" style={{ fontSize: 40 }}>{post.title}</label>
-        <div>
+      <div className=" col-12 col-md-11 img-fix-div" key={post.id}>
+        <label className="signin-heading" style={{ fontSize: 40, color: "white" }}>{post.title}</label>
+        <div className="postedby-box">
           <span className="text-muted" > Posted by </span>{" "}
           {post.teammates.map((i, index) =>
             <a href={`/users/${i.userId}`} className="no-decoration">
-              <span className="font-weight-bold" >
-                {" "}
+              <span className="font-weight-bold text-muted" >
+                {" "}{" "}
                 <img
                   src={i.user.imageUrl}
                   style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                   alt="userIcon"
                   className="mr-1"
-                />
+                />{" "}
                 {i.user.firstName} {i.user.lastName}
               </span>
               <span>{!(post.teammates.length === (index + 1)) && ", "}</span>
@@ -198,7 +198,7 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="col-12 col-md-11 col-md-4 mt-4 p-0">
+      <div className="post-details-box col-12 col-md-11 col-md-4 mt-4 p-5">
         {this.renderPostDetails()}
         <Comments comments={this.props.comments} postId={this.props.post.id} />
         <Modal

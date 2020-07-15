@@ -120,6 +120,7 @@ class CreatePost extends Component {
       }}
       init={{
         selector: '.rich-editor-field textarea',
+        skin: 'oxide-dark',
         content_css: '/editor.css?' + new Date().getTime(),
         plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
@@ -273,7 +274,7 @@ class CreatePost extends Component {
                 Save As Draft
                 </button>
               <button
-                className="ml-2 sign-btn"
+                className="ml-2 post-comment-btn"
                 action="submit"
                 name="submit"
                 disabled={submitting || pristine}

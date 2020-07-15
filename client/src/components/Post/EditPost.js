@@ -140,6 +140,7 @@ class EditPost extends Component {
       init={{
         selector: '.rich-editor-field textarea',
         content_css: '/editor.css?' + new Date().getTime(),
+        skin: 'oxide-dark',
         plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: false,
@@ -279,7 +280,7 @@ class EditPost extends Component {
                 overlay={renderTooltip}
               >
                 <button
-                  className="icon-btn"
+                  className="icon-btn mr-3"
                   action="submit"
                   name="save"
                   onClick={handleSubmit(this.handleFormSubmit("preview"))}
@@ -288,12 +289,12 @@ class EditPost extends Component {
                   <FontAwesomeIcon
                     icon={faEye}
                     size="1x"
-                    color="black"
+                    color="gray"
                   />
                 </button>
               </OverlayTrigger>
               <button
-                className=" draft-post-btn"
+                className=" draft-post-btn mr-2"
                 action="submit"
                 name="save"
                 onClick={handleSubmit(this.handleFormSubmit("save"))}
@@ -302,7 +303,7 @@ class EditPost extends Component {
                 Save Draft
                 </button>
               <button
-                className="ml-2 sign-btn "
+                className="ml-2 post-comment-btn px-3 mr-3 "
                 action="submit"
                 name="publish"
                 onClick={handleSubmit(this.handleFormSubmit("publish"))}

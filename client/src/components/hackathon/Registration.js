@@ -125,7 +125,7 @@ class Registration extends Component {
                 </div>
                 <div className='mt-5 d-flex justify-content-center'>
                     <button
-                        className="sign-btn p-2 px-5"
+                        className="post-comment-btn p-2 px-5"
                         action="submit"
                         name="save"
                         disabled={submitting}

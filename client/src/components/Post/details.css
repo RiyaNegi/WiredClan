@@ -99,8 +99,8 @@ z-index: 10 !important;
 }
 
 .draft-post-btn {
-  border: 1px solid #686868;
-  color: #686868;
+  border: 1px solid #cfcfcf;
+  color: #cfcfcf;
   background-color: transparent;
   font-weight:700;
   border-radius:5px;
@@ -133,17 +133,17 @@ z-index: 10 !important;
 }
 
 .team-modal-button{
-  background-color: white;
+  background-color: transparent;
   outline: 0;
   border:none;
   width:130px;
   font-weight: 800;
   padding:5px 0px;
-  color:rgb(107, 107, 107);
+  color:rgb(223, 223, 223);
   border-left: 1px solid rgb(202, 202, 202);
 }
 .team-modal-button:hover{
-  color:rgb(59, 59, 59);
+  color:rgb(255, 255, 255);
 }
 .team-modal-button:focus{
   outline:0;
@@ -192,6 +192,8 @@ z-index: 10 !important;
   width: 100%;
   font-size: 34px;
   border: none !important;
+  background-color: transparent;
+  color:white;
 }
 
 .textarea-title:hover {
