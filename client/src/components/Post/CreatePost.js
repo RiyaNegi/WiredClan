@@ -274,7 +274,7 @@ class CreatePost extends Component {
                 Save As Draft
                 </button>
               <button
-                className="ml-2 post-comment-btn"
+                className="ml-3 post-comment-btn px-2"
                 action="submit"
                 name="submit"
                 disabled={submitting || pristine}

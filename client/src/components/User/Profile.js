@@ -54,7 +54,7 @@ class Profile extends Component {
   renderUserCard() {
     return (
       <React.Fragment>
-        <div className="box-shadow d-flex flex-column align-items-center profile-box p-3">
+        <div className="box-shadow d-flex flex-column align-items-center profile-box p-3 mt-3">
           <img
             className=""
             src={this.props.user.imageUrl}
