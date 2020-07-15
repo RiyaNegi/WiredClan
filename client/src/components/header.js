@@ -29,7 +29,7 @@ class Header extends PureComponent {
 
   render() {
     return (
-      <nav className="d-flex flex-row navbar navbar-expand-lg navbar-light">
+      <nav className="d-flex flex-row navbar navbar-expand-lg navbar-dark">
         <div className="container">
           <a className="navbar-brand" href="/">
             {/* <label
@@ -87,18 +87,13 @@ class Header extends PureComponent {
               <ul className="navbar-nav">
                 <li className="nav-item pr-4">
                   <a
-                    style={{
-                      // backgroundColor: '#ceffff',
-                      // boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.48)',
-                      color: 'white'
-                    }}
-                    className="nav-link" href="/Hackathon">
+                    className="nav-link text-white" href="/Hackathon">
                     <strong>Hackathon</strong>
                   </a>
                 </li>
                 <li className="nav-item dropdown ">
                   <a
-                    className="nav-link dropdown-toggle text-white
+                    className="nav-link dropdown-toggle
                     "
                     href="/"
                     id="navbarDropdownMenuLink"
