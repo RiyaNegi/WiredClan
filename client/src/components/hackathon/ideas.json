@@ -15,7 +15,7 @@
     "id": "BV1bUwube",
     "name": "C",
     "imageUrl": "icons8-c-programming-100.png",
-    "height": "54px",
+    "height": "80px",
     "list": [
       " Snake Game in C/C++",
       "Calendar Application"
@@ -26,7 +26,7 @@
     "id": "ZjIIhFY14",
     "name": "python",
     "imageUrl": "icons8-python-100.png",
-    "height": "54px",
+    "height": "80px",
     "list": [
       "idea 1",
       "idea 2"
@@ -37,7 +37,7 @@
     "id": 4,
     "name": "java",
     "imageUrl": "icons8-java-100.png",
-    "height": "54px",
+    "height": "80px",
     "list": [
       "idea 1",
       "idea 2"
@@ -59,7 +59,7 @@
     "id": "2F42EqymE",
     "name": "cloud",
     "imageUrl": "icons8-cloud-link-100.png",
-    "height": "70px",
+    "height": "80px",
     "list": [
       "idea 1",
       "idea 2"

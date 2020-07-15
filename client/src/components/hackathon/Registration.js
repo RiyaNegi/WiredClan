@@ -96,32 +96,23 @@ class Registration extends Component {
                 </fieldset>
                 <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
-                    {ideas.map((i) => (
-                        this.state.selectedLabelId === i.id ?
-                            <div className="col-4">
-                                <Field name="areaButton" component={() => <button key={i.id} className="card1 p-3 mt-3 w-100 card1-selected" href="#"
-                                    value={i.name} id={i}
-                                    onClick={this.handleClick(i.id)}
+                    {
+                        ideas.map(idea => (
+
+                            <div className="col-12 col-md-4">
+                                <Field name="areaButton" component={() => <button key={idea.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === idea.id && 'card1-selected'}`} href="#"
+                                    value={idea.name} id={idea.id}
+                                    onClick={this.handleClick(idea.id)}
                                 >
-                                    <img src={i.imageUrl} height={i.height}></img>
-                                    <div className="font-weight-bold">{i.label}</div>
+                                    <img src={idea.imageUrl} height={idea.height}></img>
+                                    <div className="font-weight-bold" style={{ marginTop: `${80 - parseInt(idea.height, 10)}px` }}>{idea.label}</div>
                                 </button>
                                 }
                                 />
                             </div>
-                            : <div className="col-4">
-                                <Field name="areaButton" component={() =>
-                                    <button key={i.id} className="card1 p-3 mt-3 w-100" href="#"
-                                        value={i.name} id={i}
-                                        onClick={this.handleClick(i.id)}
-                                    >
-                                        <img src={i.imageUrl} height={i.height}></img>
-                                        <div className="font-weight-bold">{i.label}</div>
-                                    </button>
-                                }
-                                />
-                            </div>
-                    ))}
+                        ))
+                    }
+
                 </div>
                 <div className='mt-5 d-flex justify-content-center'>
                     <button
@@ -134,6 +125,7 @@ class Registration extends Component {
                         Save Idea
                 </button>
                 </div>
+                <hr style={{ marginTop: '50px', backgroundColor: 'black' }}></hr>
             </form>
             <div><ToastContainer
                 position="top-right"

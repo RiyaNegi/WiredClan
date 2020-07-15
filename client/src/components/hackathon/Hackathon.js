@@ -102,30 +102,33 @@ class Hackathon extends Component {
           onClose={this.handleClose.bind(this)} />}
 
         <div className="col-12 row p-0 m-0">
-          <div className="col-12 col-md-8 p-0">
+          <div className="col-12 col-md-8 p-0" style={{ zIndex: 1 }}>
 
             {!this.props.postByCurrentUser && !this.state.showParticipating &&
               <React.Fragment>
-                <div className="col-12 mt-3 post-box">
-                  <div className='d-flex flex-column box-shadow p-4'>
-                    <span><h4>Hackathon July 2020</h4></span>
-                    <span className="text-muted"><h6> Can submit any pre-existing project or make a new project in given time.</h6>
-                    </span>
-                    <span className="d-flex">
-                      <input className="d-flex align-self-center" type="checkbox" id="conduct" name="conduct" value="conduct" />
-                      <span className="ml-1" for="conduct" > I agree to the terms & conditions of WiredClan.</span>
-                    </span>
-                    <div className="d-flex justify-content-center">
-                      <button
-                        onClick={this.handleRegisterClick}
-                        type="button"
-                        class="new-post-button p-2 px-4 col-4 mt-3"
-                      >Register</button>
+                <div className="col-12 mt-3 pl-0 pr-4">
+
+                  <div className="hackathon-register-box pt-3">
+                    <div className='d-flex flex-column box-shadow'>
+                      <span><h4>Hackathon July 2020</h4></span>
+                      <span className="text-muted"><h6> Can submit any pre-existing project or make a new project in given time.</h6>
+                      </span>
+                      <span className="d-flex">
+                        <input className="d-flex align-self-center" type="checkbox" id="conduct" name="conduct" value="conduct" />
+                        <span className="ml-1" for="conduct" > I agree to the terms & conditions of WiredClan.</span>
+                      </span>
+                      <div className="d-flex justify-content-center">
+                        <button
+                          onClick={this.handleRegisterClick}
+                          type="button"
+                          class="new-post-button p-2 col-4 mt-3"
+                        >Register</button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-12 mt-3"
-                  >
-                    <IdeasList></IdeasList>
+                    <div className="col-12 mt-3"
+                    >
+                      <IdeasList></IdeasList>
+                    </div>
                   </div>
                 </div>
 
@@ -135,7 +138,7 @@ class Hackathon extends Component {
             }
 
             {this.props.postByCurrentUser && <div className="col-12 mt-3">
-              <div className="p-3" style={{ backgroundColor: '#f2fffe', border: '1px solid #e1e1e1', borderRadius: '3px' }}>
+              <div className="p-3" style={{ backgroundColor: 'rgb(40, 40, 40)', border: '', borderRadius: '3px' }}>
                 <h4 className="text-muted">My post <span style={{ color: '#c0c0c0' }}> {this.props.postByCurrentUser.published ? '(Public)' : '(Private)'} </span></h4>
                 <PostsList className="" user={this.props.postByCurrentUser.user}
                   account={this.props.account} hackathon={true}
@@ -156,7 +159,7 @@ class Hackathon extends Component {
             </div>}
 
             {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3">
-              <h4 className="text-muted">Vote for the submissions so far</h4>
+              <h4 className="text-muted mt-4">Vote for the posts so far</h4>
               <PostsList className="" posts={this.props.hackathonPosts} />
             </div>}
 
@@ -164,10 +167,10 @@ class Hackathon extends Component {
 
           <div className="col-12 col-md-4 p-0"
           >
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-3 pr-md-0">
               <Leaderboard topContributors={this.props.topContributors} />
             </div>
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-4 pr-md-0">
               <FAQ />
             </div>
           </div>

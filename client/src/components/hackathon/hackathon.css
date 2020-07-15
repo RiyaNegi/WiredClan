@@ -1,3 +1,8 @@
+.hackathon-register-box {
+  background-color: #272e3b;
+
+}
+
 .hackathon-idea-card:hover {
   border: 1px solid rgb(230, 230, 230);
   -webkit-box-shadow: 0px 0px 74px -40px rgba(90,100,237,0.69);
@@ -6,9 +11,13 @@
 }
 
 .idea-card {
-  border-bottom: 1px solid rgb(223, 223, 223);
+  border-bottom: 1px solid rgb(66, 66, 66);
   padding: 15px;
-  border-radius: 4px; 
+  /* border-radius: 4px;  */
+}
+
+.idea-card li {
+  list-style: none;
 }
 
 .card1 div {
@@ -93,7 +102,8 @@
 }
 
 .faq-card{
-  border : 1px solid rgb(202, 202, 202);
+  border : 2px solid rgb(46, 46, 46);
+  background-color: rgb(29, 29, 29);
   border-radius: 6px;
   font-weight: 900;
   font-size:18px;
@@ -104,4 +114,9 @@
   font-size: 14px;
   color:rgb(149, 149, 149);
   font-weight:400;
+}
+
+
+.post-item-buttons.collapse-button {
+  background-color: rgba(97, 99, 104, 0.171);
 }
