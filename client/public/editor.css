@@ -9,3 +9,8 @@ body{
     margin: 8px 6px !important;
     background-color: #24282f;
 }
+
+
+.mce-content-body p, .mce-content-body span, .mce-content-body div {
+    color: rgb(223, 223, 223) !important;
+  }

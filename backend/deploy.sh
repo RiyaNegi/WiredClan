@@ -1,5 +1,7 @@
  #!/bin/bash
 
+source ~/.nvm/nvm.sh
+
 nvm use 12.13.1
 node -v
 
