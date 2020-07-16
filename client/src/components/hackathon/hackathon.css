@@ -115,3 +115,48 @@
 .post-item-buttons.collapse-button {
   background-color: rgba(97, 99, 104, 0.171);
 }
+
+.count {
+  background-color: #0303033f;
+  color: #fff;
+  display: block;
+  font-size: 2em;
+  line-height: 2.4em;
+  overflow: hidden;
+  text-align: center;
+  top: 0;
+  width: 60px;
+}
+
+.counter {
+  /* background-color: rgba(0,0,0,0.6); */
+  border : 2px solid rgb(49, 49, 49);
+  border-radius: 5px;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+text-align: center;
+}
+
+.entry {
+  text-align: center;
+  padding: 5px;
+}
+
+  .entry-value {
+    margin: 0 auto;
+  }
+
+  .entry-title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+  }
