@@ -1,5 +1,8 @@
  #!/bin/bash
 
+nvm use 12.13.1
+node -v
+
 cd /root/jimmy-master
 # # Install dependencies in production mode.
 cd client
