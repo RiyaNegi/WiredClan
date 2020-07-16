@@ -345,8 +345,8 @@ class Comments extends Component {
       return <div>woah! No comments here..</div>;
     }
     return (
-      <div className="d-flex flex-column col-12 col-md-10 mt-5 comment-card pl-md-3 pr-md-5 p-sm-0">
-        <label className="signin-heading text-muted p-md-4 p-2">Comments</label>
+      <div className="d-flex flex-column col-12 col-md-10 mt-5 comment-card pl-md-3 p-sm-0">
+        <label className="signin-heading text-muted">Comments</label>
         {(!this.props.account) ? (<div className="d-flex col-12 mt-2">
           <div className="signin-box-com">
             <div className="">

@@ -369,7 +369,7 @@ body {
   margin: 2px 0 !important;
 }
 
-.img-fix-div img{
+.img-fix-div img {
   max-width:700px;
   max-height:500px; 
 }
@@ -390,9 +390,8 @@ body {
 }
 
 .postedby-box{
-  border-bottom:1px dashed gray;
-  border-top:1px dashed gray;
-  padding:10px;
+  border-bottom:1px dashed #4d4d56;
+  border-top:1px dashed #4d4d56;
 }
 .dropdown-item:hover{
   background-color: rgb(235, 235, 235)

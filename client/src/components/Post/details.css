@@ -3,14 +3,10 @@
   padding: 15px !important;
 }
 
-.post-tag-button:hover {
-  background-color: #f1f1f1 !important;
-  border: none !important;
-}
-
 .post-tag-button {
-  background-color: #f1f1f1 !important;
+  background-color: #3f3f3f !important;
   border: none !important;
+  color: rgb(224, 224, 224) !important;
 }
 
 .details-red-heart {

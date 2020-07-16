@@ -98,8 +98,7 @@ class Header extends PureComponent {
                 </li>
                 <li className="nav-item dropdown ">
                   <a
-                    className="nav-link dropdown-toggle
-                    "
+                    className="nav-link dropdown-toggle"
                     href="/"
                     id="navbarDropdownMenuLink"
                     role="button"

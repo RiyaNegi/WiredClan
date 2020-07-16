@@ -111,13 +111,13 @@ class PostDetails extends Component {
   renderPostDetails() {
     let post = this.props.post;
     return (
-      <div className=" col-12 col-md-11 img-fix-div" key={post.id}>
+      <div className="img-fix-div" key={post.id}>
         <label className="signin-heading" style={{ fontSize: 40, color: "white" }}>{post.title}</label>
-        <div className="postedby-box">
+        <div className="postedby-box py-2">
           <span className="text-muted" > Posted by </span>{" "}
           {post.teammates.map((i, index) =>
             <a href={`/users/${i.userId}`} className="no-decoration">
-              <span className="font-weight-bold text-muted" >
+              <span className="font-weight-bold ml-1 text-muted" >
                 {" "}{" "}
                 <img
                   src={i.user.imageUrl}
@@ -139,12 +139,12 @@ class PostDetails extends Component {
             }}
           ></div>
         </div>
-        <div className="mt-2 d-flex flex-row justify-content-between">
+        <div className="mt-3 d-flex flex-row flex-wrap justify-content-between">
           <PostDetailLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
-          <div className="d-flex mr-md-5">
+          <div className="d-flex mt-3">
             <button
               type="button"
-              className="btn btn-light post-tag-button text-l-gray align-self-center"
+              className="btn btn-dark post-tag-button align-self-center"
             >
               {this.props.post.tag.text}
             </button>
@@ -198,35 +198,37 @@ class PostDetails extends Component {
       );
     }
     return (
-      <div className="post-details-box col-12 col-md-11 col-md-4 mt-4 p-5">
-        {this.renderPostDetails()}
-        <Comments comments={this.props.comments} postId={this.props.post.id} />
-        <Modal
-          className="modal-background"
-          show={this.state.showModal}
-          onHide={this.handleCloseModal}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Delete Post</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Delete this post permanently?</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={this.handleCloseModal}
-            >
-              Close
-  </Button>
-            <Button
-              variant="primary"
-              onClick={this.handleDeleteClick(this.props.post.id)}
-            >
-              Delete
-  </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+      <div className="row justify-content-center">
 
+        <div className="post-details-box col-12 col-md-10 mt-4 p-4">
+          {this.renderPostDetails()}
+          <Comments comments={this.props.comments} postId={this.props.post.id} />
+          <Modal
+            className="modal-background"
+            show={this.state.showModal}
+            onHide={this.handleCloseModal}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Delete Post</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Delete this post permanently?</Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={this.handleCloseModal}
+              >
+                Close
+  </Button>
+              <Button
+                variant="primary"
+                onClick={this.handleDeleteClick(this.props.post.id)}
+              >
+                Delete
+  </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      </div>
     );
   }
 }
