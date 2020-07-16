@@ -1,5 +1,6 @@
  #!/bin/bash
 
+source ~/.profile
 nvm use 12.13.1
 node -v
 
