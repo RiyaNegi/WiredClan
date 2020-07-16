@@ -101,11 +101,11 @@ class Registration extends Component {
 
                             <div className="col-12 col-md-4">
                                 <Field name="areaButton" component={() => <button key={idea.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === idea.id && 'card1-selected'}`} href="#"
-                                    value={idea.name} id={idea.id}
+                                    value={idea.text} id={idea.id}
                                     onClick={this.handleClick(idea.id)}
                                 >
                                     <img src={idea.imageUrl} height={idea.height}></img>
-                                    <div className="font-weight-bold" style={{ marginTop: `${80 - parseInt(idea.height, 10)}px` }}>{idea.label}</div>
+                                    <div className="font-weight-bold" style={{ marginTop: `${80 - parseInt(idea.height, 10)}px` }}>{idea.text}</div>
                                 </button>
                                 }
                                 />

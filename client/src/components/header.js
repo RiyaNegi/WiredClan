@@ -85,12 +85,12 @@ class Header extends PureComponent {
 
             {this.props.authenticated ? (
               <ul className="navbar-nav">
-                <li className="nav-item pr-4">
+                {/* <li className="nav-item pr-4">
                   <a
                     className="nav-link text-white" href="/Hackathon">
                     <strong>Hackathon</strong>
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item dropdown ">
                   <a
                     className="nav-link dropdown-toggle
