@@ -94,6 +94,7 @@
 
 .Select-signup {
     z-index: 10 !important;
+    width: 100px !important;
   }
   
   .Select-signup.is-open {

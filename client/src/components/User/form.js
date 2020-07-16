@@ -101,36 +101,39 @@ class UserForm extends PureComponent {
                 />
               </fieldset>
             </div>
-            <fieldset className="form-group">
-              <label className="sign-text">Batch Year</label>
-              <Field
-                name="year"
-                options={yearArrray}
-                component={(props) => (
-                  <Select
-                    {...props}
-                    className="basic-single col-12 p-0 Select-signup Select-tag"
-                    classNamePrefix="needsclick "
-                    placeholder="Select Year.."
-                    isSearchable={false}
-                    value={props.input.value}
-                    onChange={(value) => props.input.onChange(value)}
-                    onBlur={event => event.preventDefault()}
-                    options={props.options}
-                  />
-                )}
-                multi
-              />
-            </fieldset>
-            <fieldset className="form-group">
-              <label className="sign-text">College</label>
-              <Field
-                className="form-control signup-field"
-                type="text"
-                name="college"
-                component="input"
-              />
-            </fieldset>
+            <div className="d-flex">
+              <fieldset className="form-group col-6 pl-0">
+                <label className="sign-text">Batch Year</label>
+                <Field
+                  name="year"
+                  options={yearArrray}
+                  component={(props) => (
+                    <Select
+                      {...props}
+                      className="basic-single Select-signup Select-tag"
+                      classNamePrefix="needsclick "
+                      placeholder="Select Year.."
+                      isSearchable={false}
+                      value={props.input.value}
+                      onChange={(value) => props.input.onChange(value)}
+                      onBlur={event => event.preventDefault()}
+                      options={props.options}
+                    />
+                  )}
+                  multi
+                />
+              </fieldset>
+              <fieldset className="form-group col-6 pr-0">
+                <label className="sign-text">College</label>
+                <Field
+                  className="form-control signup-field"
+                  type="text"
+                  name="college"
+                  component="input"
+                />
+              </fieldset>
+
+            </div>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
               <Link to={this.props.location.state && this.props.location.state.loc ? "/Hackathon" : "/"}>

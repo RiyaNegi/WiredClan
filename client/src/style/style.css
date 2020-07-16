@@ -69,7 +69,7 @@ input:-webkit-autofill:active  {
 
 .needsclick.__menu {
   color: rgb(47, 47, 47) !important;
-  background-color: white !important; 
+  background-color: rgb(51, 51, 51) !important; 
 }
 
 .needsclick.__control {
