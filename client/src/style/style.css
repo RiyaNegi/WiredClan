@@ -36,12 +36,32 @@ input:-webkit-autofill:active  {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-.modal-header {
+.Modal.Header{
+  color:black;
+}
+
+.modal-header div {
   border: none;
+  color : rgb(41, 41, 41) !important;
+}
+
+.modal-header {
+  border: none !important;
+  color : rgb(41, 41, 41) !important;
 }
 
 .modal-body {
+  color: rgb(77, 77, 77);
   padding-top: 0px;
+}
+
+.nav-link.dropdown-toggle:after {
+  margin-left: 8px;
+}
+
+
+.modal-body div, .modal-body span {
+  color: rgb(77, 77, 77);
 }
 
 body {

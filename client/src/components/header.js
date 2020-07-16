@@ -90,7 +90,7 @@ class Header extends PureComponent {
                     Home
                 </a>
                 </li>
-                <li className="nav-item pr-4">
+                <li className="nav-item pr-1">
                   <a
                     className="nav-link" href="/Hackathon">
                     <strong>Hackathon</strong>
@@ -112,7 +112,7 @@ class Header extends PureComponent {
                         width: 20,
                         height: 20,
                         borderRadius: 20 / 2,
-                        marginRight: 5,
+                        marginRight: 7,
 
                       }}
                       alt="usericon"
