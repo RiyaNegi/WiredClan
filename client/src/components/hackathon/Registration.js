@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 class Registration extends Component {
     constructor(props) {
         super(props);
+        console.log("tags.filter((tag) => tag.imageUrl)", this.props.tags);
         this.state = {
             selectedLabelId: undefined,
         };
@@ -70,7 +71,7 @@ class Registration extends Component {
     }
 
     render() {
-        const { handleSubmit, submitting } = this.props;
+        const { handleSubmit, submitting, tags } = this.props;
         return <div className="">
             <div className="d-flex p-3 justify-content-end register-cancel">
                 <button
@@ -97,15 +98,15 @@ class Registration extends Component {
                 <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {
-                        ideas.map(idea => (
+                        tags.filter((tag) => tag.imageUrl).map(tag => (
 
                             <div className="col-12 col-md-4">
-                                <Field name="areaButton" component={() => <button key={idea.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === idea.id && 'card1-selected'}`} href="#"
-                                    value={idea.text} id={idea.id}
-                                    onClick={this.handleClick(idea.id)}
+                                <Field name="areaButton" component={() => <button key={tag.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === tag.id && 'card1-selected'}`} href="#"
+                                    value={tag.text} id={tag.id}
+                                    onClick={this.handleClick(tag.id)}
                                 >
-                                    <img src={idea.imageUrl} height={idea.height}></img>
-                                    <div className="font-weight-bold" style={{ marginTop: `${80 - parseInt(idea.height, 10)}px` }}>{idea.text}</div>
+                                    <img src={tag.imageUrl} height={tag.uiData.height}></img>
+                                    <div className="font-weight-bold" style={{ marginTop: `${80 - parseInt(tag.uiData.height, 10)}px` }}>{tag.text}</div>
                                 </button>
                                 }
                                 />
