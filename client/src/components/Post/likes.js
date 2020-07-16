@@ -12,38 +12,36 @@ class PostLikes extends React.Component {
     super(props);
     this.state = {
       likes: this.props.likesCount,
-      updated: false,
+      updated: this.props.likedByCurrentUser,
       id: this.props.postId,
       likeLoginNotify: false
     };
   }
 
-  updateLikes = (id) => {
-    return () => {
-      if (!this.props.account && !this.state.likeLoginNotify) {
-        this.notify();
-        this.setState({ likeLoginNotify: true })
-      }
-      else if (this.props.account && !this.state.updated && !this.props.likedByCurrentUser) {
-        this.props.createLike(this.props.postId);
-        this.setState((prevState, props) => {
-          return {
-            likes: prevState.likes + 1,
-            updated: true
-          };
-        });
-
-      } else if (this.props.account && this.state.likes > 0) {
-        this.props.deleteLike(this.props.postId);
-        this.setState((prevState, props) => {
-          return {
-            likes: prevState.likes - 1,
-            updated: false
-          };
-        });
-
-      }
-
+  updateLikes = (e) => {
+    debugger;
+    if (!this.props.account && !this.state.likeLoginNotify) {
+      this.notify();
+      this.setState({ likeLoginNotify: true })
+      return
+    }
+    else if (this.props.account && !this.state.updated && !this.state.updated) {
+      debugger
+      this.props.createLike(this.props.postId);
+      this.setState({
+        likes: this.state.likes + 1,
+        updated: true
+      });
+      return
+    }
+    else if (this.props.account && this.state.likes > 0) {
+      debugger
+      this.props.deleteLike(this.props.postId);
+      this.setState({
+        likes: this.state.likes - 1,
+        updated: false
+      });
+      return
     }
 
   }
@@ -63,12 +61,12 @@ class PostLikes extends React.Component {
     return (
       <div className="">
         <button className="px-3 pt-2 upvote d-flex flex-column align-items-center h-100 like-button"
-          onClick={this.updateLikes(this.state.id)}>
+          onClick={this.updateLikes}>
           <FontAwesomeIcon
             className=" white-heart"
             icon={faHeartr}
             size="1x"
-            color={this.props.likedByCurrentUser ? "#eb6c4c" : "gray"}
+            color={this.state.updated ? "#eb6c4c" : "gray"}
           />
           <span className="text-muted "> {this.state.likes}</span>
           <FontAwesomeIcon

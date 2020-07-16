@@ -15,7 +15,8 @@ export const reducer = (state = {}, action) => {
         comments: action.payload.comments,
         description: action.payload.description,
         postUser: action.payload.userId,
-        hackathonId: action.payload.hackathonId
+        hackathonId: action.payload.hackathonId,
+        likedByCurrentUser: action.payload.likedByCurrentUser
       };
     case POST_COMMENT:
       let newState = JSON.parse(JSON.stringify(state));

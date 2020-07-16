@@ -9,7 +9,7 @@ import logger from '../../logger';
 const config = (router) => router
   .get('/', async (req, res) => {
     try {
-      const result = await PostService.getAll(req.params, session.userId);
+      const result = await PostService.getAll(req.params, req.session.userId);
 
       return res.status(200).json({
         page: 1,
@@ -97,7 +97,7 @@ const config = (router) => router
     }
   })
 
-  .delete('/posts/:postId/comments/:id', async (req, res) => {
+  .delete('/:postId/comments/:id', async (req, res) => {
     try {
       const user = (await User.findOne({ where: { id: req.session.userId } })).toJSON();
       const result = await Comment.destroy({ where: { id: req.params.id, userId: user.id } });

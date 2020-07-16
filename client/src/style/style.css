@@ -359,6 +359,11 @@ body {
   top: 4em !important;
 }
 
+.Toastify__toast-body{
+  color: white!important;
+  font-weight: 700
+} 
+
 .mce-content-body p {
   padding: 0;
   margin: 2px 0 !important;
