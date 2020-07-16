@@ -1,9 +1,9 @@
 [
   {
-    "label": "Mobile Development",
+    "text": "Mobile Development",
     "id": "b6tM3mBtu",
     "name": "mobile",
-    "imageUrl": "icons8-android-100.png",
+    "imageUrl": "icons/icons8-android-100.png",
     "height": "80px",
     "list": [
       " Notes App",
@@ -11,10 +11,10 @@
     ]
   },
   {
-    "label": "C/C++",
+    "text": "C/C++",
     "id": "BV1bUwube",
     "name": "C",
-    "imageUrl": "icons8-c-programming-100.png",
+    "imageUrl": "icons/icons8-c-programming-100.png",
     "height": "80px",
     "list": [
       " Snake Game in C/C++",
@@ -22,10 +22,10 @@
     ]
   },
   {
-    "label": "Python",
+    "text": "Python",
     "id": "ZjIIhFY14",
     "name": "python",
-    "imageUrl": "icons8-python-100.png",
+    "imageUrl": "icons/icons8-python-100.png",
     "height": "80px",
     "list": [
       "idea 1",
@@ -33,10 +33,10 @@
     ]
   },
   {
-    "label": "Java",
+    "text": "Java",
     "id": 4,
     "name": "java",
-    "imageUrl": "icons8-java-100.png",
+    "imageUrl": "icons/icons8-java-100.png",
     "height": "80px",
     "list": [
       "idea 1",
@@ -44,10 +44,10 @@
     ]
   },
   {
-    "label": "Web Development",
+    "text": "Web Development",
     "id": "fNXw9iDwT",
     "name": "web",
-    "imageUrl": "icons8-web-100.png",
+    "imageUrl": "icons/icons8-web-100.png",
     "height": "70px",
     "list": [
       "idea 1",
@@ -55,10 +55,10 @@
     ]
   },
   {
-    "label": "Cloud Development",
+    "text": "Cloud Development",
     "id": "2F42EqymE",
     "name": "cloud",
-    "imageUrl": "icons8-cloud-link-100.png",
+    "imageUrl": "icons/icons8-cloud-link-100.png",
     "height": "80px",
     "list": [
       "idea 1",

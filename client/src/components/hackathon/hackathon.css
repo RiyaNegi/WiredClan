@@ -13,11 +13,6 @@
 .idea-card {
   border-bottom: 1px solid rgb(66, 66, 66);
   padding: 15px;
-  /* border-radius: 4px;  */
-}
-
-.idea-card li {
-  list-style: none;
 }
 
 .card1 div {

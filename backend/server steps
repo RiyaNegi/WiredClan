@@ -6,6 +6,8 @@
 # ssh-add ~/.ssh/id_rsa
 
 
+source ~/.profile
+
 sudo apt update
 sudo apt install -y postgresql postgresql-contrib
 

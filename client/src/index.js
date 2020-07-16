@@ -45,7 +45,9 @@ if (profileData) {
   store.dispatch({ type: FETCH_ACCOUNT, payload: profileData });
 } else if (!localStorage["alreadyVisited"]) {
   localStorage["alreadyVisited"] = true;
-  History.push('hey');
+  // History.push('hey/index.html');
+  window.location.assign('hey/index.html');
+
 }
 
 ReactDOM.render(

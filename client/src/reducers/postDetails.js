@@ -64,7 +64,7 @@ export const reducer = (state = {}, action) => {
       }
       return newDelState;
     case FETCH_TAGS:
-      let tagsArray = action.payload.map(i => ({ id: i.id, text: i.text }))
+      let tagsArray = action.payload;
       return {
         ...state, tags: tagsArray,
       };

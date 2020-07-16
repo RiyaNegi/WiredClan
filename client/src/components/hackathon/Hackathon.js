@@ -29,6 +29,8 @@ class Hackathon extends Component {
   componentWillMount() {
     this.props.fetchTopContributors();
     this.props.fetchHackathonDetails();
+    this.props.fetchTags();
+
   }
 
   handleClose() {
@@ -83,7 +85,7 @@ class Hackathon extends Component {
   }
 
   render() {
-    if (!this.props.hackathonPosts) {
+    if (!this.props.hackathonPosts || !this.props.tags) {
       return (
         <div className="col-6 mt-5">
           <PacmanLoader
@@ -95,10 +97,10 @@ class Hackathon extends Component {
     }
     return (
       <div className="mt-4">
-        <img className="col-12 p-0" src={hackathon} height="300px" alt="hackathon" />
+        <img className="col-12 p-0" src={hackathon} alt="hackathon" />
 
 
-        {this.state.showParticipating && <Registration hackathonId={this.props.hackathonId}
+        {this.state.showParticipating && <Registration tags={this.props.tags} hackathonId={this.props.hackathonId}
           onClose={this.handleClose.bind(this)} />}
 
         <div className="col-12 row p-0 m-0">
@@ -106,7 +108,7 @@ class Hackathon extends Component {
 
             {!this.props.postByCurrentUser && !this.state.showParticipating &&
               <React.Fragment>
-                <div className="col-12 mt-3 pl-0 pr-4">
+                <div className="col-12 mt-3 pl-md-0 pr-md-4">
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
@@ -127,7 +129,7 @@ class Hackathon extends Component {
                     </div>
                     <div className="col-12 mt-3"
                     >
-                      <IdeasList></IdeasList>
+                      <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList>
                     </div>
                   </div>
                 </div>
@@ -197,6 +199,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     account: state.auth.data,
+    tags: state.postDetails.tags,
     authenticated: state.auth.authenticated,
     topContributors: state.leaderboard.topContributors,
     hackathonPosts: state.hackathon.hackathonPosts,

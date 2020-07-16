@@ -2,44 +2,22 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom";
 
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import ideas from './ideas.json'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button, Collapse, Badge } from 'react-bootstrap';
 
 class IdeasList extends Component {
 
-  state = {
-    ...ideas.map((idea) => ({ [`show${idea.language}`]: false })),
+  constructor(props) {
+    super();
+    this.state = {
+      // ...this.props.ideas.map((idea) => ({ [`show${idea.language}`]: false })),
+    }
   }
 
+
   render() {
-    return (<div className="p-3 d-flex justify-content-between">
-      <div className="col-10 col-md-11">
-        <h4 className="">Trouble finding an idea?</h4>
-        <h6 className="text-muted">Find inspiration in our curated list!</h6>
-        <Collapse in={this.state.open}>
-          <div id="example-collapse-text">
-            {ideas.map((idea) => (
-              <div className="mt-2">
-                {idea.list.map(i =>
-                  <div className="idea-card d-flex justify-content-between mt-2 flex-wrap">
-                    <li className="">{i}</li>
-                    <span className=" ">
-                      <Badge
-                        className="post-link badge-light p-2  float-right"
-                        style={{ backgroundColor: "#e9e9e9" }}
-                      >
-                        {idea.label}
-                      </Badge>
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </Collapse>
-      </div>
+    return (<div className="p-3 row">
       <div className="col-2 col-md-1 p-2">
         <button
           className="post-item-buttons collapse-button"
@@ -54,6 +32,41 @@ class IdeasList extends Component {
           />
         </button>
       </div>
+      <div className="col-10 col-md-11">
+        <h5 className="">Trouble finding an idea?</h5>
+        <h6 className="text-muted">Find inspiration in our curated list!</h6>
+      </div>
+
+
+      <Collapse className="col-12 p-0" in={this.state.open}>
+        <div className="col-12 p-0" id="example-collapse-text">
+          {this.props.ideas.map((idea) => (
+            <div className="mt-2">
+
+              <div className="idea-card mt-2">
+
+                <span className="">
+                  <Badge
+                    className="post-link badge-light p-1"
+                    style={{ backgroundColor: "#e9e9e9" }}
+                  >
+                    {idea.difficulty}
+                  </Badge>
+                  <Badge
+                    className="post-link badge-light p-1 mx-2"
+                    style={{ backgroundColor: "#e9e9e9" }}
+                  >
+                    {idea.tagText}
+                  </Badge>
+
+                </span>
+                {idea.text}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Collapse>
+
     </div>
     );
   }

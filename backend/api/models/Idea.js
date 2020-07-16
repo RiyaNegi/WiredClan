@@ -2,9 +2,9 @@ import Sequelize from 'sequelize';
 import sequelize from '../config/database';
 import randomId from './randomId';
 
-import Post from './Post';
+import Tag from './Tag';
 
-const Tag = sequelize.define('tag', {
+const Idea = sequelize.define('idea', {
   id: {
     type: Sequelize.STRING,
     defaultValue: randomId(),
@@ -13,15 +13,12 @@ const Tag = sequelize.define('tag', {
   text: {
     type: Sequelize.STRING,
   },
-  imageUrl: {
+  difficulty: {
     type: Sequelize.STRING,
   },
-  uiData: {
-    type: Sequelize.JSON,
-  },
-}, { tableName: 'tags' });
+}, { tableName: 'ideas' });
 
-Tag.hasMany(Post);
-Post.belongsTo(Tag);
+Idea.belongsTo(Tag);
+Tag.hasMany(Idea);
 
-export default Tag;
+export default Idea;
