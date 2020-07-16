@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import Timer from "../Timer"
 import hackathon from "../hackathon1.png"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
@@ -18,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import FAQ from "./FAQ"
 import IdeasList from "./IdeasList";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import Timer from "./Timer";
 
 class Hackathon extends Component {
 
@@ -169,6 +169,9 @@ class Hackathon extends Component {
 
           <div className="col-12 col-md-4 p-0"
           >
+            <div className="col-12 mt-3 pr-md-0">
+              <Timer targetDate="Jul 17, 2020" targetTime="18:20:00" />
+            </div>
             <div className="col-12 mt-3 pr-md-0">
               <Leaderboard topContributors={this.props.topContributors} />
             </div>
