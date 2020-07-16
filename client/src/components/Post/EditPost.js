@@ -165,20 +165,7 @@ class EditPost extends Component {
         autosave_restore_when_empty: false,
         autosave_retention: "0m",
         fullpage_default_font_size: "16px",
-        image_advtab: true,
-        // content_css: '//www.tiny.cloud/css/codepen.min.css',
-        link_list: [
-          { title: 'My page 1', value: 'http://www.tinymce.com' },
-          { title: 'My page 2', value: 'http://www.moxiecode.com' }
-        ],
-        image_list: [
-          { title: 'My page 1', value: 'http://www.tinymce.com' },
-          { title: 'My page 2', value: 'http://www.moxiecode.com' }
-        ],
-        image_class_list: [
-          { title: 'None', value: '' },
-          { title: 'Some class', value: 'class-name' }
-        ],
+        image_advtab: false,
         importcss_append: true,
         file_picker_callback: function (callback, value, meta) {
           /* Provide file and text for the link dialog */
@@ -187,8 +174,19 @@ class EditPost extends Component {
           }
 
           /* Provide image and alt text for the image dialog */
-          if (meta.filetype === 'image') {
-            callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+          if (meta.filetype == 'image') {
+            var input = document.getElementById('my-file');
+            input.click();
+            input.onchange = function () {
+              var file = input.files[0];
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                callback(e.target.result, {
+                  alt: file.name
+                });
+              };
+              reader.readAsDataURL(file);
+            };
           }
 
           /* Provide alternative source and posted for the media dialog */
@@ -332,6 +330,7 @@ class EditPost extends Component {
               />
             </fieldset>
             <fieldset className="rich-editor-field">
+              <input id="my-file" type="file" name="my-file" style={{ display: 'none' }} onchange="" />
               <Field
                 className="col-md-12 col-6 rich-editor"
                 name="postEditor"
