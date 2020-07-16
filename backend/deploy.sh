@@ -1,6 +1,6 @@
  #!/bin/bash
 
-sudo nvm use 12.13.1
+nvm use 12.13.1
 node -v
 
 cd /root/jimmy-master
