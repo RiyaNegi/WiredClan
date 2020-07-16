@@ -223,9 +223,9 @@ class EditPost extends Component {
     let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
       <div className="mt-3">
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <form style={{ zIndex: 1 }} onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
-            <div className="col-10 col-md-9 mt-2 row">
+            <div className="col-9 col-md-8 mt-2 row">
               <fieldset>
                 <Field
                   name='postTag'
