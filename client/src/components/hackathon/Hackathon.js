@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "../hackathon1.png"
+import hackathon from "../hackathon3.png"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";

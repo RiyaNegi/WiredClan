@@ -349,7 +349,7 @@ class Comments extends Component {
         <label className="signin-heading text-muted">Comments</label>
         {(!this.props.account) ? (<div className="d-flex col-12 mt-2">
           <div className="signin-box-com">
-            <div className="">
+            <div className="d-flex align-items-center">
               {" "}
               Sign in or Sign up to comment
       </div>
