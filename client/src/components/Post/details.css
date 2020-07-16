@@ -170,26 +170,6 @@ z-index: 10 !important;
   outline:0;
 }
 
-.Select-tag {
-  z-index: 10 !important;
-  width:200px !important;
-  max-width: 100% !important;
-}
-
-
-.Select-tag div {
-  color: rgb(80, 80, 80) !important;
-  background-color: transparent; 
-}
-
-.needsclick.__menu {
-  color: rgb(80, 80, 80) !important;
-  background-color: white !important; 
-}
-
-.needsclick.__control {
-  border: 1px solid rgb(78, 78, 78);
-}
 
 /* .css-yk16xz-control{
   background-color: transparent !important; 

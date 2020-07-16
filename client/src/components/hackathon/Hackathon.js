@@ -47,7 +47,7 @@ class Hackathon extends Component {
       return
     }
     else {
-      History.push({ pathname: '/signin', state: { loc: 'hackathon' } })
+      History.push({ pathname: '/signup', state: { loc: 'hackathon' } })
       return
     }
   }

@@ -99,7 +99,7 @@ class Signin extends PureComponent {
                 cookiePolicy={'single_host_origin'}
               />
             </div>
-            <div className="d-flex justify-content-center" style={{ marginLeft: 11, marginTop: 8 }}>
+            <div className="d-flex justify-content-center mt-3" style={{ marginLeft: 11 }}>
               Don't have an account? Click here to {" "}
               <Link className="ml-1" to={{ pathname: '/signup', state: { loc: location } }}
               >{" "} Sign up</Link>

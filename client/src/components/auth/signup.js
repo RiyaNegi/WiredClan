@@ -111,7 +111,7 @@ class Signup extends PureComponent {
                 component={(props) => (
                   <Select
                     {...props}
-                    className="basic-single p-0 Select-signup "
+                    className="basic-single m-0 p-0 Select-signup Select-tag"
                     classNamePrefix="needsclick "
                     placeholder="Select Year.."
                     isSearchable={false}
@@ -169,7 +169,7 @@ class Signup extends PureComponent {
               cookiePolicy={'single_host_origin'}
             />
           </div>
-          <div className="d-flex justify-content-center" style={{ marginLeft: 11, marginTop: 8 }}>
+          <div className="d-flex justify-content-center mt-3" style={{ marginLeft: 11 }}>
             Have an account? Click here to <Link className="ml-1" to="/signin">Sign in</Link>
           </div>
         </div>

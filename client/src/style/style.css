@@ -55,6 +55,27 @@ input:-webkit-autofill:active  {
   padding-top: 0px;
 }
 
+.Select-tag {
+  z-index: 10 !important;
+  width:200px !important;
+  max-width: 100% !important;
+}
+
+
+.Select-tag div {
+  color: rgb(165, 165, 165) !important;
+  background-color: transparent; 
+}
+
+.needsclick.__menu {
+  color: rgb(47, 47, 47) !important;
+  background-color: white !important; 
+}
+
+.needsclick.__control {
+  border: 1px solid rgb(78, 78, 78);
+}
+
 .nav-link.dropdown-toggle:after {
   margin-left: 8px;
 }
