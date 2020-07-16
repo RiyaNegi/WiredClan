@@ -153,6 +153,7 @@ export const createLike = (postId) => {
 
 export const updatePost = (postId, title, published, description, tagId, userId, hackathonId) => {
   return (dispatch) => {
+    debugger;
     dispatch({
       type: SET_LOADING,
       isLoading: true
@@ -172,7 +173,6 @@ export const updatePost = (postId, title, published, description, tagId, userId,
             type: UPDATE_POST,
             payload: response.data,
           });
-
           var redirectUrl = published ? { pathname: `/${slugify(response.data.title)}/${response.data.id}`, state: { draft: false } }
             : { pathname: `/users/${userId}`, state: { draft: true } }
           History.push(redirectUrl);
@@ -184,7 +184,7 @@ export const updatePost = (postId, title, published, description, tagId, userId,
   };
 };
 
-export const previewPost = (postId, title, published, description, tagId, userId) => {
+export const previewPost = (postId, title, published, description, tagId) => {
   return (dispatch) => {
     dispatch({
       type: SET_LOADING,

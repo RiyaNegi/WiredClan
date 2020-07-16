@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
@@ -196,9 +196,10 @@ class CreatePost extends Component {
     if (!this.props.tags || this.props.isLoading) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );

@@ -7,7 +7,7 @@ import { Modal, Button, Badge } from "react-bootstrap";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
 import * as authActions from "../../actions/authActions";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import slugify from "slugify";
 import PostLikes from "./likes";
 
@@ -209,9 +209,10 @@ class PostsList extends React.Component {
           })
         ) : (
             <div className="col-6 mt-5">
-              <PacmanLoader
+              <BeatLoader
+
                 size={40}
-                color={"#FADA5E"}
+                color={"#65ffea"}
               />
             </div>
           )}

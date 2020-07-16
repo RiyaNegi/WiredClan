@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "react-bootstrap";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import "./leaderboard.css";
 
 const Leaderboard = ({ className, style, topContributors }) => {
@@ -15,9 +15,10 @@ const Leaderboard = ({ className, style, topContributors }) => {
       <div className="d-flex flex-column mt-2">
         {!topContributors ? (
           <div className="col-6 mt-5">
-            <PacmanLoader
+            <BeatLoader
+
               size={40}
-              color={"#FADA5E"}
+              color={"#65ffea"}
             />
           </div>
         ) : (

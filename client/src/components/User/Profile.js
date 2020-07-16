@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Badge } from "react-bootstrap";
@@ -115,9 +115,10 @@ class Profile extends Component {
     if (!this.props.user || !this.props.posts || (this.props.account ? (this.props.account.id === this.props.user.id ? !this.props.drafts : null) : null)) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );

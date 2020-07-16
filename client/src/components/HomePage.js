@@ -5,7 +5,7 @@ import * as postActions from "../actions/postActions";
 import * as leaderboardActions from "../actions/leaderboardActions";
 import * as authActions from "../actions/authActions";
 import { Link } from "react-router-dom";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
@@ -56,9 +56,10 @@ class HomePage extends PureComponent {
     if (!this.props.posts || (this.props.posts.length !== 0 && !this.props.posts[0].user)) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );

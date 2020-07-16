@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
 import { faPen, faTrash, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -189,9 +189,10 @@ class PostDetails extends Component {
     if (!this.props.post) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );

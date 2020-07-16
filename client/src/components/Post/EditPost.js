@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import { Editor } from '@tinymce/tinymce-react';
 import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
@@ -53,53 +53,51 @@ class EditPost extends Component {
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
+      debugger;
       let published = name === "save" ? false : name === "publish" ? true : null;
       if (!params["postTag"] || !params["title"] || !params["postEditor"]) {
         this.notify()
         return
       }
+      else if (name === "preview" && params["title"] && params["postTag"].value && params["postEditor"]) {
+        this.props.previewPost(
+          postId,
+          params["title"],
+          false,
+          params["postEditor"],
+          params["postTag"].value
+        );
+        return
+      }
       else if (params["title"] && params["postTag"].value && params["postEditor"]) {
-        var teammates = params["members"] && params["members"].map(i => i.id)
         if (this.props.hackathonId) {
+          debugger
           this.props.updatePost(
             postId,
             params["title"],
             published,
             params["postEditor"],
             params["postTag"].value,
-            teammates,
             this.props.account.id,
             this.props.hackathonId
           );
           return
         }
         else {
+          debugger;
           this.props.updatePost(
             postId,
             params["title"],
             published,
             params["postEditor"],
             params["postTag"].value,
-            teammates,
             this.props.account.id
           );
           return
         }
 
       }
-      else if (name === "preview" && params["title"] && params["postTag"].value && params["postEditor"]) {
-        let teammates = params["members"] && params["members"].map(i => i.id)
-        this.props.previewPost(
-          postId,
-          params["title"],
-          false,
-          params["postEditor"],
-          params["postTag"].value,
-          teammates,
-          this.props.account.id
-        );
-        return
-      }
+
     };
   };
 
@@ -211,9 +209,10 @@ class EditPost extends Component {
     if (!this.props.post || !this.props.tags || this.props.isLoading) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );
