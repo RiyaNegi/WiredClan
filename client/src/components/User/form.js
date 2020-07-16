@@ -4,7 +4,7 @@ import * as authActions from "../../actions/authActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Select from "react-select";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 
 
 const yearArrray = [{ value: 1, label: 'First' },
@@ -52,9 +52,10 @@ class UserForm extends PureComponent {
     if (!this.props.user) {
       return (
         <div className="col-6 mt-5">
-          <PacmanLoader
+          <BeatLoader
+
             size={40}
-            color={"#FADA5E"}
+            color={"#65ffea"}
           />
         </div>
       );
