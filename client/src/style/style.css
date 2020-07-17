@@ -97,6 +97,7 @@ body {
 
 iframe {
   border: none !important;
+  width: 100%;
 }
 
 .post-box {

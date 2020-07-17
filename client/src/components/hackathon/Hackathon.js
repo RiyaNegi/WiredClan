@@ -167,7 +167,7 @@ class Hackathon extends Component {
           <div className="col-12 col-md-4 p-0"
           >
             <div className="col-12 mt-3 pr-md-0">
-              <Timer targetDate="Jul 17, 2020" targetTime="18:20:00" />
+              <Timer targetDate="Aug 3, 2020" targetTime="12:00:00" />
             </div>
             <div className="col-12 mt-4 pr-md-0">
               <FAQ />
