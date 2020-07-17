@@ -49,6 +49,11 @@
   width: 100%;
 }
 
+.post-display iframe {
+  border: none !important;
+  width: 100%;
+}
+
 
 .Select {
   width: 400px !important;
