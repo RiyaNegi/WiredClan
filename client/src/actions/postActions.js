@@ -76,7 +76,7 @@ export const deletePostDetail = (postId) => {
     request
       .delete(`/api/posts/${postId}`)
       .then((response) => {
-        History.push("/HomePage");
+        History.push("/home");
       })
       .catch((error) => {
         handleError(error);
