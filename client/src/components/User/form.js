@@ -14,7 +14,7 @@ const yearArrray = [{ value: 1, label: 'First' },
 
 class UserForm extends PureComponent {
   componentWillMount() {
-    this.props.fetchAccount(this.props.match.params.id);
+    this.props.fetchAccount(this.props.user.id);
   }
 
   handleFormSubmit = (userId) => (formProps) => {

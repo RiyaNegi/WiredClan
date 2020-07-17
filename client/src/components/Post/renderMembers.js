@@ -18,7 +18,9 @@ class renderMembers extends Component {
   handleSearchClick() {
     this.props.removeSearchedUser();
     this.props.removeErrorMessage();
-    this.props.fetchEmailUser(this.state.email)
+    if (this.state.email) {
+      this.props.fetchEmailUser(this.state.email)
+    }
     if (this.props.errorMessage) {
       this.setState({ email: '', showMessage: null })
       return
@@ -55,7 +57,7 @@ class renderMembers extends Component {
 
 
   render() {
-    const { fields } = this.props;
+    const { fields, pristine } = this.props;
     console.log("fieldarray :", fields.getAll())
     return <div className="px-4 pb-3">
       <div className="py-2" style={{}}>
