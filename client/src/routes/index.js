@@ -15,23 +15,25 @@ import pageNotFound from "../components/pageNotFound";
 import Hackathon from "../components/hackathon/Hackathon";
 
 const Routes = () => {
+  const profileData = JSON.parse(localStorage.getItem("profileData"));
   return (
     <App>
       <Switch>
-        <Route exact path="/hey" render={() => { window.location.href = "hey" }} />
-        <Route exact path="/" component={HomePage} />
+        {/* <Route exact path="/hey" render={() => { window.location.href = "hey" }} /> */}
+        {profileData && <Route exact path="/" component={HomePage} />}
+        {!profileData && <Route exact path="/" render={() => { window.location.href = "hey/index.html" }} />}
         <Route exact path="/test" component={test} />
         <Route path="/signin" component={Signin} />
         <Route path="/signout" component={Signout} />
         <Route path="/users/:id/form" component={UserForm} />
         <Route path="/signup" component={Signup} />
         <Route path="/previewPost/:id" component={postDetails} />
-        <Route path="/HomePage" component={HomePage} />
+        <Route path="/home" component={HomePage} />
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
         <Route path="/:slug/:id" component={postDetails} />
-        <Route path="/Hackathon" component={Hackathon} />
+        <Route path="/hackathon" component={Hackathon} />
         <Route component={pageNotFound} />
       </Switch>
     </App>

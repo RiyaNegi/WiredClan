@@ -20,7 +20,7 @@ class App extends Component {
       (this.props.location.pathname === "/signin" ||
         this.props.location.pathname === "/signup")
     ) {
-      History.push("/");
+      History.push("/home");
     }
   }
 

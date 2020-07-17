@@ -77,7 +77,7 @@ export const signoutUser = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("profileData");
         localStorage.removeItem("auth");
-        History.push("/");
+        History.push("/home");
         dispatch({
           type: UNAUTH_USER,
         });
@@ -193,10 +193,10 @@ export const fetchAccount = (id, redirect = false, loc) => {
               }
             });
           } else if (loc === "hackathon") {
-            History.push("/Hackathon");
+            History.push("/hackathon");
           }
           else {
-            History.push("/")
+            History.push("/home")
           }
         }
       })

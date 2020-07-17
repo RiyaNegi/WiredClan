@@ -43,12 +43,13 @@ if (profileData) {
 
   store.dispatch({ type: AUTH_USER });
   store.dispatch({ type: FETCH_ACCOUNT, payload: profileData });
-} else if (!localStorage["alreadyVisited"]) {
-  localStorage["alreadyVisited"] = true;
-  // History.push('hey/index.html');
-  window.location.assign('hey/index.html');
-
 }
+// else if (!localStorage["alreadyVisited"]) {
+//   localStorage["alreadyVisited"] = true;
+//   // History.push('hey/index.html');
+//   window.location.assign('hey');
+
+// }
 
 ReactDOM.render(
   <Provider store={store}>

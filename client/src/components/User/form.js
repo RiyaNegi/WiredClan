@@ -136,7 +136,7 @@ class UserForm extends PureComponent {
             </div>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
-              <Link to={this.props.location.state && this.props.location.state.loc ? "/Hackathon" : "/"}>
+              <Link to={this.props.location.state && this.props.location.state.loc ? "/Hackathon" : "/home"}>
                 <button className=" px-4 sign-btn ">
                   Skip
                   </button>

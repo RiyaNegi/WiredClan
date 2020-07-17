@@ -23,7 +23,7 @@ export const createHackathonPost = (title, published, tagId, hackathonId) => {
                     type: CREATE_HACKATHON_POST,
                     payload: response.data,
                 });
-                History.push("/Hackathon")
+                History.push("/hackathon")
                 History.go();
             })
             .catch((error) => {

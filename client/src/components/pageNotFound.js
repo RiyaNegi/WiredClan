@@ -14,7 +14,7 @@ class pageNotFound extends Component {
                     OOPS! This page doesn't exist
                 </div>
                 <div className="d-flex align-items-center justify-content-center  mt-5">
-                    <Link to="/">
+                    <Link to="/home">
                         <button className="back-home-btn p-2">
                             Back to HomePage
                 </button>

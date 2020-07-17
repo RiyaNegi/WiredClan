@@ -31,7 +31,7 @@ class Header extends PureComponent {
     return (
       <nav className="d-flex flex-row navbar navbar-expand-lg navbar-dark">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/home">
             {/* <label
             style={{
               border: "2px solid black",
@@ -86,13 +86,13 @@ class Header extends PureComponent {
             {this.props.authenticated ? (
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link" href="/">
+                  <a className="nav-link" href="/home">
                     Home
                 </a>
                 </li>
                 <li className="nav-item pr-1">
                   <a
-                    className="nav-link" href="/Hackathon">
+                    className="nav-link" href="/hackathon">
                     <strong>Hackathon</strong>
                   </a>
                 </li>
@@ -138,12 +138,12 @@ class Header extends PureComponent {
             ) : (
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <a className="nav-link" href="/">
+                    <a className="nav-link" href="/home">
                       Home
                 </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/Hackathon">
+                    <a className="nav-link" href="/hackathon">
                       Hackathon
                 </a>
                   </li>
