@@ -25,7 +25,7 @@ npm install
 echo "Running migrations..."
 sequelize db:migrate
 echo "Restarting BE"
-pm2 restart backend
+pm2 restart npm
 echo "Done."
 
 # # Location of our bare repository.
