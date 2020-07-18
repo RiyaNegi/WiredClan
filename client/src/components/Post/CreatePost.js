@@ -9,14 +9,17 @@ import { ToastContainer, toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
 import { Editor } from '@tinymce/tinymce-react';
 import renderMembers from "./renderMembers";
+import modalTutorial from "./modalTutorial";
 import TextareaAutosize from 'react-textarea-autosize';
+import init from './init';
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
-      loginNotify: false
+      loginNotify: false,
+      showVideoTutorial: false,
     };
 
   }
@@ -25,8 +28,12 @@ class CreatePost extends Component {
     this.setState({ showModal: true });
   };
 
+  handleShowVideoTutorial = () => {
+    this.setState({ showVideoTutorial: true });
+  }
+
   handleCloseModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, showVideoTutorial: false });
   };
 
 
@@ -118,74 +125,7 @@ class CreatePost extends Component {
       onEditorChange={(content) => {
         editorProps.input.onChange(content);
       }}
-      init={{
-        selector: '.rich-editor-field textarea',
-        skin: 'oxide-dark',
-        content_css: '/editor.css?' + new Date().getTime(),
-        plugins: 'fullpage autoresize preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media codesample table hr nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-        imagetools_cors_hosts: ['picsum.photos'],
-        textpattern_patterns: [
-          { start: '*', end: '*', format: 'italic' },
-          { start: '**', end: '**', format: 'bold' },
-          { start: '#', format: 'h1' },
-          { start: '##', format: 'h2' },
-          { start: '###', format: 'h3' },
-          { start: '####', format: 'h4' },
-          { start: '#####', format: 'h5' },
-          { start: '######', format: 'h6' },
-          { start: '1. ', cmd: 'InsertOrderedList' },
-          { start: '* ', cmd: 'InsertUnorderedList' },
-          { start: '- ', cmd: 'InsertUnorderedList' }
-        ],
-        menubar: false,
-        block_formats: '3=h3',
-        toolbar: 'undo redo | bold italic underline strikethrough | alignleft alignjustify | outdent indent |  numlist bullist | backcolor removeformat| emoticons | insertfile image media link anchor codesample  | fullscreen  preview ',
-        toolbar_sticky: true,
-        autosave_ask_before_unload: true,
-        autosave_interval: "0s",
-        autosave_restore_when_empty: false,
-        autosave_retention: "0m",
-        fullpage_default_font_size: "16px",
-        image_advtab: false,
-        // content_css: '//www.tiny.cloud/css/codepen.min.css',
-
-        importcss_append: true,
-        file_picker_callback: function (callback, value, meta) {
-          /* Provide file and text for the link dialog */
-          if (meta.filetype === 'file') {
-            callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
-          }
-
-          /* Provide image and alt text for the image dialog */
-
-          if (meta.filetype == 'image') {
-            var input = document.getElementById('my-file');
-            input.click();
-            input.onchange = function () {
-              var file = input.files[0];
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                callback(e.target.result, {
-                  alt: file.name
-                });
-              };
-              reader.readAsDataURL(file);
-            };
-          }
-
-          /* Provide alternative source and posted for the media dialog */
-          if (meta.filetype === 'media') {
-            callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
-          }
-        },
-        min_height: 430,
-        image_caption: true,
-        quickbars_selection_toolbar: 'bold italic | quicklink h5 blockquote quickimage quicktable',
-        noneditable_noneditable_class: "mceNonEditable",
-        toolbar_mode: 'sliding',
-        branding: false,
-        contextmenu: "link image imagetools table"
-      }}
+      init={init}
     // onBlur={(event, value) => { props.input.onChange(event.target.getContent()) }}
     />
   )
@@ -312,6 +252,35 @@ class CreatePost extends Component {
                 component={this.renderRichEditor}
               />
             </fieldset>
+            <div className="float-right mt-3">
+              <a
+                className="text-decoration-none text-muted "
+                href="#"
+                onClick={this.handleShowVideoTutorial}
+              >How to upload a demo video?
+                </a>
+              <Modal
+                className="modal-background"
+                show={this.state.showVideoTutorial}
+                onHide={this.handleCloseModal}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>How to link a YouTube video?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="p-6">
+                  <FieldArray name="members" component={modalTutorial} />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={this.handleCloseModal}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+            </div>
           </div>
         </form>
       </div>
