@@ -121,8 +121,8 @@ class Hackathon extends Component {
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
-                            class="new-post-button p-2 col-4 mt-3"
-                          >Register</button>
+                            class="new-post-button p-2 px-5 mt-3"
+                          >REGISTER</button>
                         </div>
                       </div>
                     </div>

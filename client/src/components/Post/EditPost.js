@@ -219,10 +219,10 @@ class EditPost extends Component {
     }
     let tagsArrray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
-      <div className="mt-3">
+      <div className="">
         <form style={{ zIndex: 1 }} onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
-            <div className="col-9 col-md-8 mt-2 row">
+          <div className="d-flex flex-row flex-wrap justify-content-between">
+            <div className="d-flex flex-row mt-3">
               <fieldset>
                 <Field
                   name='postTag'
@@ -230,7 +230,7 @@ class EditPost extends Component {
                   component={(props) => (
                     <Select
                       {...props}
-                      className="basic-single col-11 col-md-6 ml-4 ml-md-2 p-0 mt-3 mt-md-0 Select-tag"
+                      className="basic-single Select-tag"
                       classNamePrefix="needsclick "
                       isSearchable={false}
                       value={props.input.value}
@@ -241,9 +241,9 @@ class EditPost extends Component {
                   )}
                 />
               </fieldset>
-              <div className="col-8 mt-3 mt-md-0 col-md-3 mr-4 d-flex align-self-center">
+              <div className="">
                 <button
-                  className="team-modal-button ml-2"
+                  className="team-modal-button ml-3 mt-1"
                   type="button"
                   onClick={this.handleShowModal}
                 >Manage Team
@@ -270,7 +270,7 @@ class EditPost extends Component {
                 </Modal>
               </div>
             </div>
-            <div className="d-flex flex-row ml-4 ">
+            <div className="d-flex flex-row mt-3">
               <OverlayTrigger
                 placement="top"
                 delay={{ show: 100, hide: 100 }}

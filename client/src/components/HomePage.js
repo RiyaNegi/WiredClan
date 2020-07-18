@@ -83,9 +83,9 @@ class HomePage extends PureComponent {
             <div className="mt-4">
               <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
                 {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >
-                  <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 New Post</div>
+                  <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 NEW POST</div>
                 </Link>)
-                  : <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 New Post</div>
+                  : <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 NEW POST</div>
                 }
               </Button>
             </div>

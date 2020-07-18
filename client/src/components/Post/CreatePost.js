@@ -210,13 +210,13 @@ class CreatePost extends Component {
     }
     let tagsArray = this.props.tags.map(i => ({ value: i.text, label: i.text, id: i.id }))
     return (
-      <div className="mt-4">
+      <div className="">
         <form >
-          <div className="d-flex row flex-column-reverse flex-md-row flex-wrap justify-content-between">
+          <div className="d-flex flex-row flex-wrap justify-content-between">
             {/* <label className="m-0 d-flex align-self-center">
               CREATE A NEW POST
             </label> */}
-            <div className="col-10 col-md-9 mt-2 row">
+            <div className="d-flex flex-row mt-3">
               <fieldset>
                 <Field
                   name='postTag'
@@ -224,7 +224,7 @@ class CreatePost extends Component {
                   component={(selectProps) => (
                     <Select
                       {...selectProps}
-                      className="basic-single col-10 col-md-6 ml-4 ml-md-2 p-0 mt-3 mt-md-0 Select-tag"
+                      className="basic-single Select-tag"
                       classNamePrefix="needsclick "
                       placeholder="Select Tag.."
                       isSearchable={false}
@@ -236,9 +236,9 @@ class CreatePost extends Component {
                   )}
                 />
               </fieldset>
-              <div className="col-8 mt-3 mt-md-0 col-md-3 mr-4 d-flex align-self-center">
+              <div className="">
                 <button
-                  className="team-modal-button ml-2"
+                  className="team-modal-button ml-3 mt-1"
                   type="button"
                   onClick={this.handleShowModal}
                 >Manage Team
@@ -265,7 +265,7 @@ class CreatePost extends Component {
                 </Modal>
               </div>
             </div>
-            <div className="d-flex flex-row ml-4 ">
+            <div className="d-flex flex-row mt-3">
               <button
                 className="draft-post-btn"
                 action="submit"
