@@ -4,7 +4,7 @@ import Teammate from '../models/Teammate';
 import logger from '../../logger';
 
 const config = (router) => router
-  .post('/', async (req, res) => {
+  .delete('/', async (req, res) => {
     try {
       const post = await Post.findOne({ where: { id: req.body.postId }, include: [Teammate] });
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
@@ -21,7 +21,7 @@ const config = (router) => router
       return res.status(500).json({ msg: 'Internal server error' });
     }
   })
-  .delete('/', async (req, res) => {
+  .post('/', async (req, res) => {
     try {
       const post = await Post.findOne({ where: { id: req.body.postId }, include: [Teammate] });
       if (post.get({ plain: true }).teammates.map((teammate) => teammate.userId).includes(req.session.userId) === false) {
