@@ -50,6 +50,9 @@ const User = sequelize.define('user', {
   year: {
     type: Sequelize.INTEGER,
   },
+  mobile: {
+    type: Sequelize.STRING,
+  },
   badges: {
     type: Sequelize.ARRAY(Sequelize.STRING),
   },
@@ -73,7 +76,7 @@ const User = sequelize.define('user', {
   hooks,
   tableName,
   defaultScope: {
-    attributes: { exclude: ['password', 'email', 'viaGoogle', 'registeredViaLoginViaGoogle'] },
+    attributes: { exclude: ['mobile', 'password', 'email', 'viaGoogle', 'registeredViaLoginViaGoogle'] },
   },
 });
 

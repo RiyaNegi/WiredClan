@@ -94,6 +94,7 @@ const config = (router) => router
           firstName: body.firstName,
           lastName: body.lastName,
           year: body.year,
+          mobile: body.mobile,
           college: body.college,
           imageUrl: `https://api.adorable.io/avatars/80/${body.firstName}${body.lastName}.png`,
         });

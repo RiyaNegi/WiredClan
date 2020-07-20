@@ -21,7 +21,7 @@ class UserForm extends PureComponent {
     formProps = { ...formProps, year: formProps.year.value }
     this.props.updateUser(
       { ...formProps, id: userId },
-      this.props.location.state && this.props.location.state.redirectHomeAfterSubmit ? "/ " : undefined,
+      this.props.location.state && this.props.location.state.redirectHomeAfterSubmit ? "/home" : undefined,
       this.props.location.state && this.props.location.state.loc ? `/${this.props.location.state.loc}` : undefined
     );
   };
@@ -124,6 +124,19 @@ class UserForm extends PureComponent {
                 />
               </fieldset>
               <fieldset className="form-group col-6 pr-0">
+                <label className="sign-text">Mobile</label>
+                <Field
+                  className="form-control signup-field"
+                  type="text"
+                  name="mobile"
+                  component="input"
+                />
+              </fieldset>
+
+            </div>
+
+            <div className="d-flex">
+              <fieldset className="form-group col-12 px-0">
                 <label className="sign-text">College</label>
                 <Field
                   className="form-control signup-field"
@@ -132,7 +145,6 @@ class UserForm extends PureComponent {
                   component="input"
                 />
               </fieldset>
-
             </div>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">

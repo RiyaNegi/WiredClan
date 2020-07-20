@@ -39,10 +39,10 @@ export const signinUser = ({ email, password }, loc) => {
   };
 };
 
-export const signupUser = ({ email, password, firstName, lastName, college, year }, confirmPassword, loc) => {
+export const signupUser = ({ email, password, firstName, lastName, college, year, mobile }, confirmPassword, loc) => {
   return (dispatch) => {
     request
-      .post(`/api/auth/register`, { email, password, firstName, lastName, college, year: year ? year.value : undefined, confirmPassword })
+      .post(`/api/auth/register`, { email, password, firstName, lastName, college, mobile, year: year ? year.value : undefined, confirmPassword })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         if (loc) {
@@ -113,14 +113,14 @@ export const fetchUser = (id, draft) => {
 };
 
 export const updateUser = (
-  { id, firstName, lastName, year, college },
+  { id, firstName, lastName, year, college, mobile },
   redirect = `/users/${id}`, loc
 ) => {
   return (dispatch) => {
     request
       .patch(
         `/api/users/${id}`,
-        { id, firstName, lastName, year, college },
+        { id, firstName, lastName, year, college, mobile },
       )
       .then((response) => {
         dispatch({

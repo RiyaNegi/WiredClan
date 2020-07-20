@@ -125,6 +125,17 @@ class Signup extends PureComponent {
               />
             </fieldset>
             <fieldset className="form-group  col-12 col-md-6">
+              <label className="sign-text">Mobile Number</label>
+              <Field
+                className="form-control signup-field"
+                type="text"
+                name="mobile"
+                component="input"
+              />
+            </fieldset>
+          </div>
+          <div className="d-flex row">
+            <fieldset className="form-group  col-12">
               <label className="sign-text">College</label>
               <Field
                 className="form-control signup-field"

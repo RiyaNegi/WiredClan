@@ -71,6 +71,7 @@ async function getAll() {
 
     user.likesCount = likesCount;
     delete user.teammates;
+    delete user.mobile;
     return user;
   });
   users.sort((a, b) => b.likesCount - a.likesCount);
