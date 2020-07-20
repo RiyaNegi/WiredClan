@@ -149,6 +149,16 @@ class PostsList extends React.Component {
                           {post.tag.text}
                         </Badge>
                         <span className="mx-1">|</span>
+                        {post.hackathonId && (
+                          <span>
+                            <Badge
+                              className="post-link badge-light "
+                              style={{ backgroundColor: "#e9e9e9" }}
+                            >
+                              Hackathon
+                        </Badge>
+                            <span className="mx-1">|</span>
+                          </span>)}
                         {post.commentsCount}
                         {post.commentsCount === 1 ? " comment" : " comments"}
                       </span>
