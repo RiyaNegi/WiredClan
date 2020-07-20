@@ -157,7 +157,7 @@ class Hackathon extends Component {
               </div>
             </div>}
 
-            {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3">
+            {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
               <h4 className="text-muted mt-4">Vote for the posts so far</h4>
               <PostsList className="" posts={this.props.hackathonPosts} />
             </div>}
