@@ -40,7 +40,7 @@ async function get(id, currentUserId) {
   if (currentUserId && user.id === currentUserId) {
     user.drafts = allPosts.filter((post) => !(post.published)).map((draft) => {
       draft = PostService.optimizedDecorateListItem(draft, currentUserId, comments, likes);
-      likesCount += draft.likesCount;
+      // likesCount += draft.likesCount;
       return draft;
     });
   }
@@ -68,7 +68,7 @@ async function getAll() {
     let likesCount = 0;
     user = user.get({ plain: true });
     user.teammates.forEach((teammate) => {
-      if (teammate.post) {
+      if (teammate.post && teammate.post.published && !teammate.post.deletedAt) {
         likesCount += teammate.post.likes.length;
       }
     });

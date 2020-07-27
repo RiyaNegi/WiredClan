@@ -13,16 +13,16 @@ import HackathonService from './HackathonService';
 
 // import logger from '../../logger.js';
 
-function decorateListItem(post, currentUserId) {
-  return {
-    ...post,
-    commentsCount: post.comments.length,
-    comments: undefined,
-    likesCount: post.likes.length,
-    likedByCurrentUser: !!currentUserId && !!post.likes.find((like) => like.userId === currentUserId),
-    likes: undefined,
-  };
-}
+// function decorateListItem(post, currentUserId) {
+//   return {
+//     ...post,
+//     commentsCount: post.comments.length,
+//     comments: undefined,
+//     likesCount: post.likes.length,
+//     likedByCurrentUser: !!currentUserId && !!post.likes.find((like) => like.userId === currentUserId),
+//     likes: undefined,
+//   };
+// }
 
 function optimizedDecorateListItem(post, currentUserId, comments, likes) {
   return {
@@ -190,6 +190,6 @@ export default {
   get,
   getAll,
   destroy,
-  decorateListItem,
+  // decorateListItem,
   optimizedDecorateListItem,
 };
