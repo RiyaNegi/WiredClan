@@ -24,6 +24,17 @@ function decorateListItem(post, currentUserId) {
   };
 }
 
+function optimizedDecorateListItem(post, currentUserId, comments, likes) {
+  return {
+    ...post,
+    commentsCount: comments.filter((obj) => obj.postId === post.id).length,
+    comments: undefined,
+    likesCount: likes.filter((obj) => obj.postId === post.id).length,
+    likedByCurrentUser: !!currentUserId && !!likes.find((like) => like.postId === post.id && like.userId === currentUserId),
+    likes: undefined,
+  };
+}
+
 async function getAll({
   search, hackathonId, page,
 }, currentUserId) {
@@ -36,16 +47,20 @@ async function getAll({
   }
 
   const result = await Post.findAll({
+    attributes: { exclude: ['description'] },
     where: whereQuery,
     order: [
       ['createdAt', 'DESC'],
     ],
-    include: [Comment, User, Tag, Like],
+    include: [User, Tag],
     limit: 100,
     offset: (parseInt(page, 10) - 1) || 0 * 100,
   });
 
-  return result.map((post) => decorateListItem(post.get({ plain: true }), currentUserId));
+  const comments = await Comment.findAll();
+  const likes = await Like.findAll();
+
+  return result.map((post) => optimizedDecorateListItem(post.get({ plain: true }), currentUserId, comments, likes));
 }
 
 async function get({ id, userId }) {
@@ -176,4 +191,5 @@ export default {
   getAll,
   destroy,
   decorateListItem,
+  optimizedDecorateListItem,
 };

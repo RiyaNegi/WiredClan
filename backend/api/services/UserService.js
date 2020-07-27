@@ -30,20 +30,24 @@ async function get(id, currentUserId) {
   delete user.teammates;
   let allPosts = await Post.findAll({
     where: { id: postIds },
-    include: [Comment, Tag, Like],
+    include: [Tag],
   });
   allPosts = allPosts.map((post) => post.get({ plain: true }));
+  const comments = await Comment.findAll();
+  const likes = await Like.findAll();
 
   let likesCount = 0;
   if (currentUserId && user.id === currentUserId) {
     user.drafts = allPosts.filter((post) => !(post.published)).map((draft) => {
-      likesCount += draft.likes.length;
-      return PostService.decorateListItem(draft, currentUserId);
+      draft = PostService.optimizedDecorateListItem(draft, currentUserId, comments, likes);
+      likesCount += draft.likesCount;
+      return draft;
     });
   }
   user.posts = allPosts.filter((post) => post.published).map((post) => {
-    likesCount += post.likes.length;
-    return PostService.decorateListItem(post, currentUserId);
+    post = PostService.optimizedDecorateListItem(post, currentUserId, comments, likes);
+    likesCount += post.likesCount;
+    return post;
   });
   user.likesCount = likesCount;
   return user;
