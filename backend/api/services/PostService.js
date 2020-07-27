@@ -11,6 +11,8 @@ import Like from '../models/Like';
 // eslint-disable-next-line import/no-cycle
 import HackathonService from './HackathonService';
 
+// import logger from '../../logger.js';
+
 function decorateListItem(post, currentUserId) {
   return {
     ...post,
@@ -69,32 +71,34 @@ async function get({ id, userId }) {
       {
         model: Like,
       },
-      {
-        model: Comment,
-        where: { parentId: null },
-        required: false,
-        include: [
-          {
-            model: User,
-            attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
-              'year', 'department', 'id'],
-          },
-          {
-            model: Comment,
-            as: 'replyComments',
-            include: {
-              model: User,
-              attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
-                'year', 'department', 'id'],
-            },
-          },
-        ],
-      },
     ],
   })).toJSON();
+
   post.likedByCurrentUser = !!userId && !!post.likes.find((like) => like.userId === userId);
   post.likesCount = post.likes.length;
   delete post.likes;
+  const comments = await Comment.findAll({
+    where: { postId: post.id, parentId: null },
+    required: false,
+    include: [
+      {
+        model: User,
+        attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
+          'year', 'department', 'id'],
+      },
+      {
+        model: Comment,
+        as: 'replyComments',
+        include: {
+          model: User,
+          attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
+            'year', 'department', 'id'],
+        },
+      },
+    ],
+  });
+
+  post.comments = comments.map((comment) => comment.get({ plain: true }));
   return post;
 }
 

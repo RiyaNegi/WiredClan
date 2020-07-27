@@ -19,7 +19,7 @@ sudo apt install postgresql-client-11
 pg_basebackup -V
 
 
-# pg_dump -d jimmy_db -n public -f jimmy_db.sql
+# pg_dump -d jimmy_db -n public -f jimmy_db_prod.sql # Add -U backup on production
 
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE cdn_db;"
