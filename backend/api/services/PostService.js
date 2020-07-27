@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 
 import Sequelize from 'sequelize';
@@ -24,12 +25,57 @@ import HackathonService from './HackathonService';
 //   };
 // }
 
-function optimizedDecorateListItem(post, currentUserId, comments, likes) {
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  const costs = [];
+  for (let i = 0; i <= s1.length; i++) {
+    let lastValue = i;
+    for (let j = 0; j <= s2.length; j++) {
+      if (i === 0) costs[j] = j;
+      else if (j > 0) {
+        let newValue = costs[j - 1];
+        if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
+          newValue = Math.min(Math.min(newValue, lastValue),
+            costs[j]) + 1;
+        }
+        costs[j - 1] = lastValue;
+        lastValue = newValue;
+      }
+    }
+    if (i > 0) costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
+}
+
+function similarity(s1, s2) {
+  let longer = s1;
+  let shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  const longerLength = longer.length;
+  if (longerLength === 0) {
+    return 1.0;
+  }
+  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+
+function optimizedDecorateListItem(post, currentUserId, comments, likes, hackathonId) {
+  const likesCount = likes.filter((obj) => {
+    if (hackathonId) {
+      return obj.postId === post.id && ['I2IT', 'International institute of information technology', 'I2it'].find((college) => obj.user.college && similarity(college, obj.user.college) > 0.6);
+    }
+    return obj.postId === post.id;
+  }).length;
+
   return {
     ...post,
     commentsCount: comments.filter((obj) => obj.postId === post.id).length,
     comments: undefined,
-    likesCount: likes.filter((obj) => obj.postId === post.id).length,
+    likesCount,
     likedByCurrentUser: !!currentUserId && !!likes.find((like) => like.postId === post.id && like.userId === currentUserId),
     likes: undefined,
   };
@@ -58,9 +104,9 @@ async function getAll({
   });
 
   const comments = await Comment.findAll();
-  const likes = await Like.findAll();
+  const likes = await Like.findAll({ include: [User] });
 
-  return result.map((post) => optimizedDecorateListItem(post.get({ plain: true }), currentUserId, comments, likes));
+  return result.map((post) => optimizedDecorateListItem(post.get({ plain: true }), currentUserId, comments, likes, hackathonId));
 }
 
 async function get({ id, userId }) {
