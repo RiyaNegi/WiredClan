@@ -115,8 +115,16 @@ class Hackathon extends Component {
                         <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
                         <div style={{ fontSize: '17px' }}>🥉 3rd Prize: Rs 500</div>
-                        <div className="text-muted mt-3"><h6> Can submit any pre-existing project or make a new project in given time.</h6>
+                        <hr style={{ backgroundColor: '#505050' }} />
+                        <h5>Guidelines to publish post</h5>
+                        <div className="text-muted">
+                          <li> Can submit any pre-existing project or make a new project in given time.</li>
+                          <li> Need to add a link to the source code or add code snippets of important parts of the code of the project to confirm authenticity (eg. Github repo, codepen, codesandbox, live code).</li>
+                          <li> Publish the post after adding proper context about your project, by adding screenshots or demo videos of your implementation.</li>
+                          <li> Just PPTs don't qualify as projects.</li>
+                          <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li>
                         </div>
+                        <hr style={{ backgroundColor: '#505050' }} />
                         <div className="d-flex justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
