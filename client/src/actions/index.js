@@ -121,36 +121,18 @@ export const fetchTagTopContributors = (tagId) => {
 
 export const fetchTag = (community) => {
   return (dispatch) => {
-    const response = {
-      data: {
-        id: "ZjIIhFY14",
-        text: "Python",
-        imageUrl: "icons/icons8-python-100.png",
-      }
-    }
-    dispatch({
-      type: FETCH_TAG,
-      payload: response.data,
-    });
-    fetchTagPosts(response.data.id)(dispatch);
-    fetchTagTopContributors(response.data.id)(dispatch);
-    ;
+    request
+      .get(`/api/tags/${community}`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_TAG,
+          payload: response.data,
+        });
+        fetchTagPosts(response.data.id)(dispatch);
+        fetchTagTopContributors(response.data.id)(dispatch);
+      });
   }
 };
-// export const fetchTag = (community) => {
-//   return (dispatch) => {
-//     request
-//       .get(`/api/tags/${community}`)
-//       .then((response) => {
-//         dispatch({
-//           type: FETCH_TAG,
-//           payload: response.data,
-//         });
-//         fetchTagPosts(response.data.Id);
-//         fetchTagTopContributors(response.data.Id);
-//       });
-//   }
-// };
 
 export const fetchTags = () => {
   return (dispatch) => {

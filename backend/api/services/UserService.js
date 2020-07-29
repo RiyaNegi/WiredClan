@@ -53,7 +53,7 @@ async function get(id, currentUserId) {
   return user;
 }
 
-async function getAll() {
+async function getAll({ tagId }) {
   // const [users, metadata] = await sequelize.query(`
   //     select users."id", users."firstName", users."lastName", users."badges", COUNT(users."id") AS "likesCount"
   //         from users
@@ -62,13 +62,17 @@ async function getAll() {
   //         group by users."id"
   //         ORDER BY COUNT(users."id") DESC
   //         LIMIT 5; `);
+  const query = { include: [{ model: Teammate, include: [{ model: Post, include: [Like] }] }] };
 
-  let users = await User.findAll({ include: [{ model: Teammate, include: [{ model: Post, include: [Like] }] }] });
+  let users = await User.findAll(query);
   users = users.map((user) => {
     let likesCount = 0;
     user = user.get({ plain: true });
+
     user.teammates.forEach((teammate) => {
-      if (teammate.post && teammate.post.published && !teammate.post.deletedAt) {
+      if (teammate.post
+        && (!tagId || (tagId && tagId === teammate.post.tagId))
+        && teammate.post.published && !teammate.post.deletedAt) {
         likesCount += teammate.post.likes.length;
       }
     });
