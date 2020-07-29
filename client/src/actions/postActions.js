@@ -84,9 +84,9 @@ export const deletePostDetail = (postId) => {
   };
 };
 
-export const fetchPosts = () => {
+export const fetchPosts = (tagId) => {
   return (dispatch) => {
-    request.get(`/api/posts?page=1`)
+    request.get(`/api/posts?page=1&tagId=${tagId}`)
       .then((response) => {
         dispatch({
           type: FETCH_POSTS,
@@ -98,6 +98,7 @@ export const fetchPosts = () => {
       });
   };
 };
+
 
 export const removeSearchedUser = () => {
   return (dispatch) => {

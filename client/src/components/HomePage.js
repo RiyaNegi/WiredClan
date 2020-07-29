@@ -10,6 +10,7 @@ import PostsList from "./Post/PostsList";
 import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
+import CommunityBox from "./communities/CommunityBox";
 
 class HomePage extends PureComponent {
   constructor(props) {
@@ -88,6 +89,7 @@ class HomePage extends PureComponent {
                   : <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 NEW POST</div>
                 }
               </Button>
+              <CommunityBox />
             </div>
           </div>
         </div>

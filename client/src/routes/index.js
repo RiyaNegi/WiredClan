@@ -13,6 +13,7 @@ import CreatePost from "../components/Post/CreatePost";
 import EditPost from "../components/Post/EditPost";
 import pageNotFound from "../components/pageNotFound";
 import Hackathon from "../components/hackathon/Hackathon";
+import Community from "../components/communities/Community";
 
 const Routes = () => {
   const profileData = JSON.parse(localStorage.getItem("profileData"));
@@ -32,8 +33,9 @@ const Routes = () => {
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
-        <Route path="/:slug/:id" component={postDetails} />
         <Route path="/hackathon" component={Hackathon} />
+        <Route path="/community/:slug/" component={Community} />
+        <Route path="/:slug/:id" component={postDetails} />
         <Route component={pageNotFound} />
       </Switch>
     </App>

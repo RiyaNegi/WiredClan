@@ -1,9 +1,18 @@
-import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE } from "../actions/types";
+import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE, FETCH_TAG, RESET_POSTS, RESET_TOP_CONTRIBUTORS } from "../actions/types";
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:
       return { ...state, posts: action.posts, drafts: action.drafts };
+    case FETCH_TAG:
+      debugger;
+      return {
+        ...state, tag: action.payload,
+      };
+    case RESET_POSTS:
+      return [];
+    case RESET_TOP_CONTRIBUTORS:
+      return [];
     case FETCH_SEARCH:
       return { ...state, posts: action.posts, drafts: action.drafts };
     case DELETE_POST:
