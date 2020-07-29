@@ -167,7 +167,7 @@ class Hackathon extends Component {
 
             {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
               <h4 className="text-muted mt-4">Vote for the posts so far</h4>
-              <h6 className="text-muted mt-2">(Only I2IT votes counted here)</h6>
+              <h6 className="text-muted mt-2">(Votes by only google verified users counted here)</h6>
               <PostsList className="mt-2" posts={this.props.hackathonPosts} />
             </div>}
 
