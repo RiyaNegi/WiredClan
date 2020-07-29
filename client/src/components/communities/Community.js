@@ -69,10 +69,10 @@ class Community extends PureComponent {
         return (
             <React.Fragment>
                 <div className="box-shadow com-card row  p-4 mt-4">
-                    <img src={`/${this.props.tag.imageUrl}`} height="84px"></img>
+                    <img src={`/${this.props.tag.imageUrl}`} height="100%"></img>
                     <span className="d-flex flex-column align-self-center ml-4">
-                        <label className="" style={{ fontSize: 30 }}>{this.props.tag.text} {" "} Clan</label>
-                        <label className="font-weight-light" style={{ fontSize: 20 }}>A community for all fellow {this.props.tag.text} developers</label>
+                        <h3 className="" >{this.props.tag.text} {" "} Clan</h3>
+                        <label className="font-weight-light">A community for all fellow {this.props.tag.text} developers</label>
                     </span>
                 </div>
                 <div className="mt-md-2 d-flex row justify-content-between">
@@ -81,6 +81,7 @@ class Community extends PureComponent {
                             <div className="latest-text">What's New</div>
                             <div className=" latest-line" />
                         </div>
+                        {this.props.posts && this.props.posts.length === 0 && <div className="mt-4">Nothing! Looks like you'll get to be the first one to post here.</div>}
                         <PostsList className="mt-2" posts={this.props.posts} />
 
                     </div>

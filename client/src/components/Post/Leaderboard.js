@@ -9,7 +9,7 @@ const Leaderboard = ({ className, style, topContributors }) => {
       className={`box-shadow leaderboard-box ${className} px-0 pt-3`}
       style={{ height: "fit-content", ...style }}
     >
-      <span className="text-muted" style={{ marginLeft: "15px" }}>
+      <span className="font-weight-bold text-muted" style={{ marginLeft: "15px" }}>
         Top Contributors
       </span>
       <div className="d-flex flex-column mt-2">

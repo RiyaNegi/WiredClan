@@ -25,13 +25,13 @@ class CommunityBox extends Component {
                 </div>
             );
         }
-        return <div className="faq-card p-3 mt-4">
-            <label className="text-muted">Clans</label>
-            <div className="p-2">
-                {this.props.tags.map(i => <a href={`/community/${slugify(i.text)}`}>
-                    <div className="row mt-2">
-                        <img src={i.imageUrl} height="60px"></img>
-                        <label className="align-self-center ml-4">{i.text}</label>
+        return <div className="com-box p-3 mt-4">
+            <label className="text-muted font-weight-bold">Clans</label>
+            <div className="">
+                {this.props.tags.filter((tag) => tag.imageUrl).map(i => <a className="text-decoration-none" href={`/community/${slugify(i.text)}`}>
+                    <div className="row mt-2 com-item p-2">
+                        <img src={i.imageUrl} height="30px"></img>
+                        <label className="align-self-center ml-2">{i.text}</label>
                     </div>
                 </a>
                 )}

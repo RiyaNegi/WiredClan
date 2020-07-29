@@ -7,7 +7,18 @@
     font-size:18px;
     /* color:rgb(223, 223, 223); */
     /* box-shadow: 3px 13px 57px 6px rgba(0,0,0,1); */ 
-    -webkit-box-shadow: 0 8px 6px -6px black;
+    /* -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
-         box-shadow: 0 8px 6px -6px black;
+         box-shadow: 0 8px 6px -6px black; */
+  }
+
+
+  .com-box {
+    border-radius: 7px;
+    /* border: 1px solid blue; */
+    background-color: #23262c;
+  }
+
+  .com-item:hover {
+      background-color: #282c35;
   }
