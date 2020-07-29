@@ -1,5 +1,3 @@
-import session from 'express-session';
-
 import PostService from '../services/PostService';
 
 import User from '../models/User';

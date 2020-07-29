@@ -51,7 +51,7 @@ const config = (router) => router
   })
   .get('/', async (req, res) => {
     try {
-      const result = await UserService.getAll();
+      const result = await UserService.getAll(req.query);
 
       return res.status(200).json({
         page: 1,
