@@ -195,7 +195,6 @@ class Hackathon extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts.posts,
     account: state.auth.data,
     tags: state.postDetails.tags,
     authenticated: state.auth.authenticated,

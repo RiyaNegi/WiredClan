@@ -59,6 +59,7 @@
     "request": "^2.88.2",
     "sequelize": "^5.0.0",
     "sequelize-cli": "6.2.0",
+    "slugify": "^1.4.5",
     "sqlite3": "^4.0.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"

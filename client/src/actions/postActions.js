@@ -84,13 +84,14 @@ export const deletePostDetail = (postId) => {
   };
 };
 
-export const fetchPosts = (tagId) => {
+export const fetchPosts = (page = 1) => {
   return (dispatch) => {
-    request.get(`/api/posts?page=1&tagId=${tagId}`)
+    request.get(`/api/posts?page=${page}`)
       .then((response) => {
         dispatch({
           type: FETCH_POSTS,
           posts: response.data.result,
+          page: page
         });
       })
       .catch((error) => {

@@ -9,10 +9,10 @@ import logger from '../../logger';
 const config = (router) => router
   .get('/', async (req, res) => {
     try {
-      const result = await PostService.getAll(req.params, req.session.userId);
+      const result = await PostService.getAll(req.query, req.session.userId);
 
       return res.status(200).json({
-        page: 1,
+        page: req.params.page,
         result,
       });
     } catch (err) {
