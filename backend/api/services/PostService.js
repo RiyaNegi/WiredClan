@@ -82,7 +82,7 @@ function optimizedDecorateListItem(post, currentUserId, comments, likes, hackath
 }
 
 async function getAll({
-  search, hackathonId, page,
+  search, hackathonId, tagId, page, limit,
 }, currentUserId) {
   const whereQuery = {
     published: true,
@@ -91,7 +91,12 @@ async function getAll({
   if (hackathonId) {
     whereQuery.hackathonId = hackathonId;
   }
+  if (tagId) {
+    whereQuery.tagId = tagId;
+  }
 
+  // limit = parseInt(limit, 10);
+  limit = limit && parseInt(limit, 10) < 10 ? limit : 10;
   const result = await Post.findAll({
     attributes: { exclude: ['description'] },
     where: whereQuery,
@@ -99,8 +104,8 @@ async function getAll({
       ['createdAt', 'DESC'],
     ],
     include: [User, Tag],
-    limit: 100,
-    offset: (parseInt(page, 10) - 1) || 0 * 100,
+    limit,
+    offset: ((parseInt(page, 10) - 1) || 0) * limit,
   });
 
   const comments = await Comment.findAll();

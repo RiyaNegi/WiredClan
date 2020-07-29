@@ -15,7 +15,6 @@ import { ToastContainer, toast } from "react-toastify";
 class Registration extends Component {
     constructor(props) {
         super(props);
-        console.log("tags.filter((tag) => tag.imageUrl)", this.props.tags);
         this.state = {
             selectedLabelId: undefined,
         };

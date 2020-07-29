@@ -75,7 +75,12 @@ class HomePage extends PureComponent {
               <div className=" latest-line" />
             </div>
             <PostsList className="mt-2" posts={this.props.posts} />
-
+            <a href="#more" id="more" className="text-l-gray" onClick={(e) => {
+              e.preventDefault();
+              this.props.fetchPosts(this.props.page + 1)
+            }}>
+              More
+            </a>
           </div>
 
           <div className="col-md-5 col-lg-4 mt-4">
@@ -111,6 +116,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     account: state.auth.data,
+    page: state.posts.page,
     authenticated: state.auth.authenticated,
     search: state.posts.searchArray,
     topContributors: state.leaderboard.topContributors,

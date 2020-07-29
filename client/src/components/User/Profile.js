@@ -39,7 +39,6 @@ class Profile extends Component {
     };
   }
 
-
   renderPosts(posts, { draft } = { draft: false }) {
     return (
       <PostsList

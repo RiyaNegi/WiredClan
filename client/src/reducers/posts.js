@@ -3,9 +3,20 @@ import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE } from
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      return { ...state, posts: action.posts, drafts: action.drafts };
+      if (action.page > 1) {
+        let posts = state.posts, drafts = state.drafts;
+        if (state.posts) {
+          posts = state.posts.concat(action.posts);
+        }
+        if (state.drafts) {
+          drafts = state.drafts.concat(action.drafts);
+        }
+
+        return { ...state, page: action.page, posts, drafts };
+      }
+      return { ...state, page: action.page, posts: action.posts, drafts: action.drafts };
     case FETCH_SEARCH:
-      return { ...state, posts: action.posts, drafts: action.drafts };
+      return { ...state, page: action.page, posts: action.posts, drafts: action.drafts };
     case DELETE_POST:
       let newDelStatePost = JSON.parse(JSON.stringify(state.posts));
       let arrPostIndex = newDelStatePost.findIndex(

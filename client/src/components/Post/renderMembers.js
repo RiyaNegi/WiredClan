@@ -30,7 +30,6 @@ class renderMembers extends Component {
 
   handleAddClick(fields, { id, firstName, lastName, imageUrl }) {
     return () => {
-      console.log("fieldarray :", fields.getAll())
       if (fields.getAll() && fields.getAll().filter((item) => item.id === id).length > 0) {
         this.setState({ email: '', showMessage: "This user is already added in your team" })
         return
@@ -58,7 +57,6 @@ class renderMembers extends Component {
 
   render() {
     const { fields, pristine } = this.props;
-    console.log("fieldarray :", fields.getAll())
     return <div className="px-4 pb-3">
       <div className="py-2" style={{}}>
         <div className="d-flex post-comment justify-content-between">

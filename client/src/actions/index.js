@@ -85,7 +85,6 @@ export const fetchSearch = (text) => {
       request
         .get(`api/posts?page=1&search=${text}`)
         .then((response) => {
-          console.log(response);
           dispatch({
             type: FETCH_SEARCH,
             payload: response.data,
