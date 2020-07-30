@@ -19,14 +19,12 @@ class PostLikes extends React.Component {
   }
 
   updateLikes = (e) => {
-    debugger;
     if (!this.props.account && !this.state.likeLoginNotify) {
       this.notify();
       this.setState({ likeLoginNotify: true })
       return
     }
     else if (this.props.account && !this.state.updated && !this.state.updated) {
-      debugger
       this.props.createLike(this.props.postId);
       this.setState({
         likes: this.state.likes + 1,
@@ -35,7 +33,6 @@ class PostLikes extends React.Component {
       return
     }
     else if (this.props.account && this.state.likes > 0) {
-      debugger
       this.props.deleteLike(this.props.postId);
       this.setState({
         likes: this.state.likes - 1,

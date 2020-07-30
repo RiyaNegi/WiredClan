@@ -58,7 +58,6 @@ class EditPost extends Component {
   handleFormSubmit = (name) => {
     let postId = this.props.post.id;
     return (params) => {
-      debugger;
       let published = name === "save" ? false : name === "publish" ? true : null;
       if (!params["postTag"] || !params["title"] || !params["postEditor"]) {
         this.notify()
@@ -76,7 +75,6 @@ class EditPost extends Component {
       }
       else if (params["title"] && params["postTag"].value && params["postEditor"]) {
         if (this.props.hackathonId) {
-          debugger
           this.props.updatePost(
             postId,
             params["title"],
@@ -89,7 +87,6 @@ class EditPost extends Component {
           return
         }
         else {
-          debugger;
           this.props.updatePost(
             postId,
             params["title"],

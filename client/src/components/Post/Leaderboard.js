@@ -3,15 +3,17 @@ import { Badge } from "react-bootstrap";
 import BeatLoader from "react-spinners/BeatLoader";
 import "./leaderboard.css";
 
-const Leaderboard = ({ className, style, topContributors }) => {
+const Leaderboard = ({ className, style, topContributors, community }) => {
   return (
     <div
       className={`box-shadow leaderboard-box ${className} px-0 pt-3`}
       style={{ height: "fit-content", ...style }}
     >
-      <span className="font-weight-bold text-muted" style={{ marginLeft: "15px" }}>
-        Top Contributors
-      </span>
+      {community ? <span className="font-weight-bold text-muted" style={{ marginLeft: "15px" }}>
+        Top {community} Contributors
+      </span> : <span className="font-weight-bold text-muted" style={{ marginLeft: "15px" }}>
+          Top Contributors
+      </span>}
       <div className="d-flex flex-column mt-2">
         {!topContributors ? (
           <div className="col-6 mt-5">
