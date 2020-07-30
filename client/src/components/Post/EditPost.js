@@ -270,7 +270,7 @@ class EditPost extends Component {
               />
             </fieldset>
             <fieldset className="rich-editor-field">
-              <input id="my-file" type="file" name="my-file" style={{ display: 'none' }} onchange="" />
+              <input id="my-file" type="file" accept="image/x-png,image/jpeg" name="my-file" style={{ display: 'none' }} onchange="" />
               <Field
                 className="col-md-12 col-6 rich-editor"
                 name="postEditor"
