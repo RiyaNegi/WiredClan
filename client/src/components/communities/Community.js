@@ -72,7 +72,7 @@ class Community extends PureComponent {
                     <img src={`/${this.props.tag.imageUrl}`} height="100%"></img>
                     <span className="d-flex flex-column align-self-center ml-4">
                         <h3 className="" >{this.props.tag.text} {" "} Clan</h3>
-                        <label className="font-weight-light">A community for all fellow {this.props.tag.text} developers</label>
+                        <label className="font-weight-light">A community for all fellow {this.props.tag.text} folks.</label>
                     </span>
                 </div>
                 <div className="mt-md-2 d-flex row justify-content-between">

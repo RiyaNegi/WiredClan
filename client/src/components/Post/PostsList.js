@@ -142,21 +142,25 @@ class PostsList extends React.Component {
                       <div className="d-md-none"></div>
                       <span className="font-weight-light post-link">
                         <span className="mx-1 hidden-sm-down">|</span>
-                        <Badge
-                          className="post-link badge-light "
-                          style={{ backgroundColor: "#e9e9e9" }}
-                        >
-                          {post.tag.text}
-                        </Badge>
+                        <a className="text-decoration-none" href={`/community/${slugify(post.tag.text)}`}>
+                          <Badge
+                            className="post-link badge-light "
+                            style={{ backgroundColor: "#e9e9e9", color: "black" }}
+                          >
+                            {post.tag.text}
+                          </Badge>
+                        </a>
                         <span className="mx-1">|</span>
                         {post.hackathonId && (
                           <span>
-                            <Badge
-                              className="post-link badge-light "
-                              style={{ backgroundColor: "#e9e9e9" }}
-                            >
-                              Hackathon
+                            <a className="text-decoration-none" href={`/hackathon`}>
+                              <Badge
+                                className="post-link badge-light "
+                                style={{ backgroundColor: "#e9e9e9" }}
+                              >
+                                Hackathon
                         </Badge>
+                            </a>
                             <span className="mx-1">|</span>
                           </span>)}
                         {post.commentsCount}

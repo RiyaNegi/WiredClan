@@ -5,16 +5,16 @@ import * as postActions from "../../actions/postActions";
 import Comments from "../comments";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from "react-router-dom";
-import { faPen, faTrash, faBolt } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PostDetailLikes from "./postDetailLike";
 import "./details.css";
 import * as authActions from "../../actions/authActions";
 import { Modal, Button } from "react-bootstrap";
-import History from "../../history.js";
-// import Prism from 'prismjs'
 import "../../style/prism.css"
 import hljs from 'highlight.js';
+import slugify from "slugify";
+
 
 
 class PostDetails extends Component {
@@ -141,12 +141,14 @@ class PostDetails extends Component {
         <div className="mt-3 d-flex flex-row flex-wrap justify-content-between">
           <PostDetailLikes likesCount={post.likesCount} postId={post.id} likedByCurrentUser={post.likedByCurrentUser} />
           <div className="d-flex mt-3">
-            <button
-              type="button"
-              className="btn btn-dark post-tag-button align-self-center"
-            >
-              {this.props.post.tag.text}
-            </button>
+            <a className="text-decoration-none" href={`/community/${slugify(this.props.post.tag.text)}`}>
+              <button
+                type="button"
+                className="btn btn-dark post-tag-button align-self-center"
+              >
+                {this.props.post.tag.text}
+              </button>
+            </a>
             {(this.props.account && this.props.account.id === this.props.postUser) && (
               <div className="d-flex align-items-center">
                 <Link
