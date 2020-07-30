@@ -16,7 +16,6 @@ export const reducer = (state = {}, action) => {
       }
       return { ...state, page: action.page, posts: action.posts, drafts: action.drafts };
     case FETCH_TAG:
-      debugger;
       return {
         ...state, tag: action.payload,
       };

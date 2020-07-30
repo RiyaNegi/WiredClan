@@ -68,7 +68,7 @@ class Community extends PureComponent {
 
         return (
             <React.Fragment>
-                <div className="box-shadow com-card row  p-4 mt-4">
+                <div className="d-flex box-shadow com-card row  p-2 mt-4">
                     <img src={`/${this.props.tag.imageUrl}`} height="100%"></img>
                     <span className="d-flex flex-column align-self-center ml-4">
                         <h3 className="" >{this.props.tag.text} {" "} Clan</h3>
@@ -94,7 +94,7 @@ class Community extends PureComponent {
                     </div>
 
                     <div className="col-md-5 col-lg-4 mt-4">
-                        <Leaderboard topContributors={this.props.topContributors} />
+                        <Leaderboard community={this.props.tag.text} topContributors={this.props.topContributors} />
                         <div className="mt-4">
                             <Button variant=" col-12 new-post-button p-0" onClick={this.notifypost}>
                                 {this.props.account && this.props.authenticated ? (<Link className="com-links" to={"/CreatePost"} >

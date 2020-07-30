@@ -13,9 +13,9 @@
   }
 
 
-  .com-box {
+  .community-box {
     border-radius: 7px;
-    /* border: 1px solid blue; */
+    border: 1px solid rgb(54, 54, 54);
     background-color: #23262c;
   }
 

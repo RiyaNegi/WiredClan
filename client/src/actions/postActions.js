@@ -155,7 +155,6 @@ export const createLike = (postId) => {
 
 export const updatePost = (postId, title, published, description, tagId, userId, hackathonId) => {
   return (dispatch) => {
-    debugger;
     dispatch({
       type: SET_LOADING,
       isLoading: true
