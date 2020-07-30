@@ -72,7 +72,11 @@ class Community extends PureComponent {
                     <img src={`/${this.props.tag.imageUrl}`} height="100%"></img>
                     <span className="d-flex flex-column align-self-center ml-4">
                         <h3 className="" >{this.props.tag.text} {" "} Clan</h3>
-                        <label className="font-weight-light">A community for all fellow {this.props.tag.text} folks.</label>
+                        {this.props.tag.text === 'General' ?
+                            <label className="font-weight-light">Post what you want! Anything goes.</label>
+                            :
+                            <label className="font-weight-light">A community for all fellow {this.props.tag.text} folks.</label>
+                        }
                     </span>
                 </div>
                 <div className="mt-md-2 d-flex row justify-content-between">
@@ -81,7 +85,10 @@ class Community extends PureComponent {
                             <div className="latest-text">What's New</div>
                             <div className=" latest-line" />
                         </div>
-                        {this.props.posts && this.props.posts.length === 0 && <div className="mt-4">Nothing! Looks like you'll get to be the first one to post here.</div>}
+                        {this.props.posts && this.props.posts.length === 0 && <div className="mt-4 d-flex flex-column align-items-center">
+                            <img src="/tumble3.gif"></img>
+                            <div className="mt-3">Looks like you'll get to be the first one to post here.</div>
+                        </div>}
                         <PostsList className="mt-2" posts={this.props.posts} />
 
                     </div>
