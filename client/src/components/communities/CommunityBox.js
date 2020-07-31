@@ -26,7 +26,7 @@ class CommunityBox extends Component {
         }
         return <div className="community-box p-3 mt-4">
             <label className="text-muted font-weight-bold " style={{ fontSize: 20 }}>Clans</label>
-            <hr style={{ backgroundColor: '#505050', marginTop: 2 }} />
+            {/* <hr style={{ backgroundColor: '#505050', marginTop: 2 }} /> */}
             <div className="">
                 {this.props.tags.filter((tag) => tag.imageUrl).map(i => <a className="text-decoration-none" href={`/community/${slugify(i.text)}`}>
                     <div className="row mt-1 com-item p-1 px-3">

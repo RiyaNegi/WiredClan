@@ -68,16 +68,16 @@ class Community extends PureComponent {
 
         return (
             <React.Fragment>
-                <div className="d-flex box-shadow com-card row  p-2 mt-4">
+                <div className="d-flex box-shadow com-card flex-row  p-2 mt-4">
                     <img src={`/${this.props.tag.imageUrl}`} height="100%"></img>
-                    <span className="d-flex flex-column align-self-center ml-4">
+                    <div className="align-self-center ml-4">
                         <h3 className="" >{this.props.tag.text} {" "} Clan</h3>
                         {this.props.tag.text === 'General' ?
                             <label className="font-weight-light">Post what you want! Anything goes.</label>
                             :
                             <label className="font-weight-light">A community for all fellow {this.props.tag.text} folks.</label>
                         }
-                    </span>
+                    </div>
                 </div>
                 <div className="mt-md-2 d-flex row justify-content-between">
                     <div className="col-md-7 mt-4">
