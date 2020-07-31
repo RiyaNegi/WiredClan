@@ -110,7 +110,7 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>Hackathon July 2020</h3></span>
+                      <span className="text-white"><h3>Project Hackathon 2020</h3></span>
                       <div className=" mt-2">
                         <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
@@ -176,7 +176,7 @@ class Hackathon extends Component {
           <div className="col-12 col-md-4 p-0"
           >
             <div className="col-12 mt-3 pr-md-0">
-              <Timer targetDate="Aug 5, 2020" targetTime="12:00:00" />
+              <Timer targetDate="Aug 10, 2020" targetTime="12:00:00" />
             </div>
             <div className="col-12 mt-4 pr-md-0">
               <FAQ />
