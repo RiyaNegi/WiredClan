@@ -76,7 +76,7 @@ class Timer extends Component {
                         </div>
                     </div>
                 ) : (
-                        <p className="alert-danger">Expired</p>
+                        <p className="alert-danger">Time Up! <br /> Voting is open until 13th Aug</p>
                     )}
             </Fragment>
         );

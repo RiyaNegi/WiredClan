@@ -126,11 +126,11 @@ class Hackathon extends Component {
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
                         <div className="d-flex justify-content-center">
-                          <button
+                          {/* <button
                             onClick={this.handleRegisterClick}
                             type="button"
                             class="new-post-button p-2 px-5 mt-3"
-                          >REGISTER</button>
+                          >REGISTER</button> */}
                         </div>
                       </div>
                     </div>
