@@ -76,7 +76,7 @@ const User = sequelize.define('user', {
   hooks,
   tableName,
   defaultScope: {
-    attributes: { exclude: ['mobile', 'password', 'email', 'viaGoogle', 'registeredViaLoginViaGoogle'] },
+    attributes: { exclude: ['mobile', 'password', 'email', 'registeredViaLoginViaGoogle'] },
   },
 });
 
