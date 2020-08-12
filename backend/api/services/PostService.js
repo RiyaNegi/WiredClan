@@ -66,7 +66,9 @@ function similarity(s1, s2) {
 function optimizedDecorateListItem(post, currentUserId, comments, likes, hackathonId) {
   const likesCount = likes.filter((obj) => {
     if (hackathonId) {
-      return post.user.viaGoogle && obj.postId === post.id && ['I2IT', 'International institute of information technology', 'I2it'].find((college) => obj.user.college && similarity(college, obj.user.college) > 0.6);
+      return obj.postId === post.id
+        && obj.user.viaGoogle
+        && ['I2IT', 'International institute of information technology', 'I2it'].find((college) => obj.user.college && similarity(college, obj.user.college) > 0.6);
     }
     return obj.postId === post.id;
   }).length;
