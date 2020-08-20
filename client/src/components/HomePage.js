@@ -94,6 +94,15 @@ class HomePage extends PureComponent {
                   : <div className="p-2 py-2 com-links" style={{ color: "white" }}>📝 NEW POST</div>
                 }
               </Button>
+
+              <div className="col-12 mt-3 p-0">
+                Want to chat with like minded folks?
+                  <a className="com-links" href="https://discord.gg/GxgKG2U" >
+                  <div className="p-2 py-2 com-links btn" style={{ color: "white" }}> <img height="30px" className="pr-2"
+                    src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/91_Discord_logo_logos-512.png" />
+                      Join our Discord</div>
+                </a>
+              </div>
               <CommunityBox />
             </div>
           </div>
