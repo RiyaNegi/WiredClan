@@ -5,6 +5,7 @@ import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import History from "../history.js";
 import Cookies from 'universal-cookie';
+import Social from "./Social"
 
 class App extends Component {
   componentWillMount() {
@@ -42,8 +43,14 @@ class App extends Component {
                 <div className="mt-1">{this.props.children}</div>
               )}
           </div>
-          <footer className="page-footer">
-            <p className="footer-text pt-5 pb-4">Made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
+          <footer className="page-footer px-5 py-4">
+            <hr style={{ backgroundColor: '#424242' }} />
+            <div className="d-flex flex-row justify-content-between px-md-4 pt-md-2">
+              <div>
+                <Social />
+              </div>
+              <p className="footer-text px-md-4 pt-md-1">Made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
+            </div>
           </footer>
         </div>
       </React.Fragment>
