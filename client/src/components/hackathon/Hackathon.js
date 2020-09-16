@@ -126,11 +126,11 @@ class Hackathon extends Component {
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
                         <div className="d-flex justify-content-center">
-                          {/* <button
+                          <button
                             onClick={this.handleRegisterClick}
                             type="button"
                             class="new-post-button p-2 px-5 mt-3"
-                          >REGISTER</button> */}
+                          >REGISTER</button>
                         </div>
                       </div>
                     </div>
@@ -176,7 +176,7 @@ class Hackathon extends Component {
           <div className="col-12 col-md-4 p-0"
           >
             <div className="col-12 mt-3 pr-md-0">
-              <Timer targetDate="Aug 10, 2020" targetTime="23:00:00" />
+              <Timer targetDate="Aug 10, 2021" targetTime="23:00:00" />
             </div>
             <div className="col-12 mt-4 pr-md-0">
               <FAQ />
