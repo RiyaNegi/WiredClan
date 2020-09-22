@@ -45,12 +45,12 @@ class Registration extends Component {
 
     handleFormSubmit = (name) => {
         return (params) => {
-            if (!params["title"] || !this.state.selectedLabelId) {
+            if (!params["title"] || !this.state.selectedLabelId || !this.state.selectedIdeaCode) {
                 this.notify()
                 return
             }
             this.props.createHackathonPost(params["title"], false,
-                this.state.selectedLabelId, this.props.hackathonId);
+                this.state.selectedLabelId, this.props.hackathonId, this.state.selectedIdeaCode);
         }
     }
 
@@ -97,9 +97,9 @@ class Registration extends Component {
                 <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {
-                        tags.filter((tag) => tag.text !== 'General').map(tag => (
+                        tags.filter((tag) => ['General', 'C/C++', 'Cloud', 'Java', 'Python'].includes(tag.text) === false).map(tag => (
 
-                            <div className="col-12 col-md-4">
+                            <div className="col-12 col-md-4" style={{ backgroundColor: 'yellow' }}>
                                 <Field name="areaButton" component={() => <button key={tag.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === tag.id && 'card1-selected'}`} href="#"
                                     value={tag.text} id={tag.id}
                                     onClick={this.handleClick(tag.id)}
@@ -112,7 +112,9 @@ class Registration extends Component {
                             </div>
                         ))
                     }
-
+                    {true && <div>
+                        <h4 className="text-muted  mt-3">Category</h4>
+                        Develop a full fledged app, with functionality similar to Amazon's mobile app. You can develop the app for Android or iOS. </div>}
                 </div>
                 <div className='mt-5 d-flex justify-content-center'>
                     <button

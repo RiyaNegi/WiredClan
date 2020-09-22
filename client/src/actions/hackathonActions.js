@@ -7,7 +7,7 @@ import {
     CREATE_HACKATHON_POST, FETCH_HACKATHON_DETAILS, SET_LOADING, DELETE_HACKATHON_POST
 } from "./types";
 
-export const createHackathonPost = (title, published, tagId, hackathonId) => {
+export const createHackathonPost = (title, published, tagId, hackathonId, ideaCode) => {
     return (dispatch) => {
         dispatch({
             type: SET_LOADING,
@@ -16,7 +16,7 @@ export const createHackathonPost = (title, published, tagId, hackathonId) => {
         request
             .post(
                 `/api/posts`,
-                { title, published, tagId, hackathonId },
+                { title, published, tagId, hackathonId, ideaCode },
             )
             .then((response) => {
                 dispatch({
@@ -36,7 +36,7 @@ export const fetchHackathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/UNO-JULY-2020`
+                `/api/hackathons/DJ-SEPT-2020`
             )
             .then((response) => {
                 dispatch({

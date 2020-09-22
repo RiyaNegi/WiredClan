@@ -171,7 +171,7 @@ async function get({ id, userId }) {
 }
 
 async function createPostAndTeammates({
-  title, published, description, tagId, teammateIds, hackathonId,
+  title, published, description, tagId, teammateIds, hackathonId, ideaCode,
 }, currentUserId) {
   // return if not logged in
   if (!currentUserId) {
@@ -200,6 +200,7 @@ async function createPostAndTeammates({
     description,
     tagId,
     hackathonId,
+    ideaCode,
     teammates: teammateIds.map((teammateId) => ({ userId: teammateId })),
     userId: currentUserId,
   }, { include: [Teammate] });

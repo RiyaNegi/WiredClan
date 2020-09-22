@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "../hackathon3.png"
+import hackathon from "./djHackathon2.png"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -110,34 +110,71 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>Project Hackathon 2020</h3></span>
+                      <span className="text-white"><h3>CODEIT-20</h3></span>
                       <div className=" mt-2">
-                        <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
+                        {/* <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
-                        <div style={{ fontSize: '17px' }}>🥉 3rd Prize: Rs 500</div>
+                        <div style={{ fontSize: '17px' }}>🥉 3rd Prize: Rs 500</div> */}
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <h5>Guidelines to publish post</h5>
+                        <h5>Rulebook</h5>
+
                         <div className="text-muted">
-                          <li> Can submit any pre-existing project or make a new project in given time.</li>
-                          <li> Need to add a link to the source code or add code snippets of important parts of the code of the project to confirm authenticity (eg. Github repo, codepen, codesandbox, live code).</li>
-                          <li> Publish the post after adding proper context about your project, by adding screenshots or demo videos of your implementation.</li>
-                          <li> Just PPTs don't qualify as projects.</li>
-                          <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li>
+                          <ol>
+
+                            <li>
+                              The hackathon will <b>begin at 2:00PM on 26th September</b>, 2020 and go on for 24 hours. All teams will have to follow the submission guidelines.
+                          </li>
+
+                            <li>
+                              Problem Statement will be mailed to the group leader and will be uploaded on the group at  <b>6pm on 25th September</b>, 2020 and will also be available on this page.
+                          </li>
+
+                            <li>
+                              Problem statement will be given to the teams based on their selected tech stack. Every tech stack is associated with a problem statement. Eg. If there are two problem statements A and B and two tech stacks 1 and 2. The person selecting tech stack 1 will be allotted problem statement A. Once allotted problem statements cannot be changed.
+                          </li>
+
+                            <li>
+                              All participants have to compulsorily join the Zoom meeting at sharp 1 pm for the inauguration ceremony.
+                          </li>
+
+                            <li>
+                              All participants need to sign up on Wired Clan by 5:00 pm on 24th September, 2020. Failure to do so might lead to elimination. This is simply a registration, you can form teams once the contest starts.
+                          </li>
+
+                            <li>
+                              All participants can keep editing a short description post explaining what they're trying to do in the post (it will be auto-published once contest time is up). Also, record a small YouTube video giving a demo, and link it, along with the GitHub repo.
+                          </li>
+
+                            <li>
+                              Since the hackathon is completely virtual, teams will have to maintain 1 public repository. This will enable us to track your progress in the duration of the event. Each team has to make at least one commit every 6 hours.
+                          </li>
+
+                            <li>
+                              After the hackathon the submitted solution will be reviewed and the top 3-5 teams from every category will have to pitch their solutions in front of the respective hiring companies, accompanied by an interview round.
+                          </li>
+
+                            {/* <li> Can submit any pre-existing project or make a new project in given time.</li>
+                            <li> Need to add a link to the source code or add code snippets of important parts of the code of the project to confirm authenticity (eg. Github repo, codepen, codesandbox, live code).</li>
+                            <li> Publish the post after adding proper context about your project, by adding screenshots or demo videos of your implementation.</li>
+                            <li> Just PPTs don't qualify as projects.</li>
+                            <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li> */}
+
+                          </ol>
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <div className="d-flex justify-content-center">
+                        {/* <div className="d-flex justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
                             class="new-post-button p-2 px-5 mt-3"
                           >REGISTER</button>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
-                    <div className="col-12 mt-3"
+                    {/* <div className="col-12 mt-3"
                     >
                       <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </React.Fragment>
@@ -176,11 +213,11 @@ class Hackathon extends Component {
           <div className="col-12 col-md-4 p-0"
           >
             <div className="col-12 mt-3 pr-md-0">
-              <Timer targetDate="Aug 10, 2021" targetTime="23:00:00" />
+              <Timer targetDate="Sept 25, 2020" targetTime="14:00:00" />
             </div>
-            <div className="col-12 mt-4 pr-md-0">
+            {/* <div className="col-12 mt-4 pr-md-0">
               <FAQ />
-            </div>
+            </div> */}
           </div>
         </div>
 

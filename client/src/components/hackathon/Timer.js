@@ -37,7 +37,7 @@ class Timer extends Component {
         } else {
             this.setState({
                 remaining: {
-                    days: -1, // Math.floor(this.distance / (1000 * 60 * 60 * 24)),
+                    days: Math.floor(this.distance / (1000 * 60 * 60 * 24)),
                     hours: Math.floor(
                         (this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
                     ),
