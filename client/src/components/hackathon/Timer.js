@@ -68,7 +68,9 @@ class Timer extends Component {
                             {Object.entries(remaining).map((el, i) => (
                                 <div key={i} className="entry">
                                     <div key={el[1]} className="entry-value">
-                                        <span className="count">{el[1] + 1}</span>
+
+                                        <span className="count">{el[1]}</span>
+
                                     </div>
                                     <div className="entry-title mt-2">{el[0].toUpperCase()}</div>
                                 </div>
@@ -76,7 +78,7 @@ class Timer extends Component {
                         </div>
                     </div>
                 ) : (
-                        <p className="alert-danger">Time Up! <br /> Voting is open until 13th Aug</p>
+                        <p className="alert-info p-3" >Hackathon Begins!</p>
                     )}
             </Fragment>
         );

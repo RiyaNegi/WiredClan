@@ -23,8 +23,68 @@ class Hackathon extends Component {
 
   state = {
     showParticipating: false,
-    open: false
+    open: false,
+    remaining: {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    },
+    isExpired: false,
+    targetDate: "Sept 26, 2020",
+    targetTime: "14:00:00",
   }
+
+
+  // used to set and clear interval
+  timer;
+  // used to calculate the distance between "current date and time" and the "target date and time"
+  distance;
+
+  componentDidMount() {
+    this.setDate();
+    this.counter();
+  }
+
+  setDate = () => {
+    const { targetDate, targetTime } = this.state,
+      // Get todays date and time
+      now = new Date().getTime(),
+      // Set the date we're counting down to
+      countDownDate = new Date(targetDate + " " + targetTime).getTime();
+
+    // Find the distance between now and the count down date
+    this.distance = countDownDate - now;
+
+    // target date and time is less than current date and time
+    if (this.distance < 0) {
+      clearInterval(this.timer);
+      this.setState({ isExpired: true });
+    } else {
+      this.setState({
+        remaining: {
+          days: Math.floor(this.distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor(
+            (this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ),
+          minutes: Math.floor((this.distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((this.distance % (1000 * 60)) / 1000)
+        },
+        isExpired: false
+      });
+    }
+  };
+
+  counter = () => {
+    this.timer = setInterval(() => {
+      this.setDate();
+    }, 1000);
+  };
+
+
+
+
+
 
   componentWillMount() {
     this.props.fetchTopContributors();
@@ -85,6 +145,8 @@ class Hackathon extends Component {
   }
 
   render() {
+    const { isExpired } = this.state;
+
     if (!this.props.hackathonPosts || !this.props.tags) {
       return (
         <div className="col-6 mt-5">
@@ -206,13 +268,13 @@ category as winner. </li>
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {/* <div className="d-flex justify-content-center">
+                        {isExpired && <div className="d-flex justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
                             class="new-post-button p-2 px-5 mt-3"
-                          >REGISTER</button>
-                        </div> */}
+                          >START</button>
+                        </div>}
                       </div>
                     </div>
                     {/* <div className="col-12 mt-3"
@@ -257,7 +319,7 @@ category as winner. </li>
           <div className="col-12 col-md-4 p-0"
           >
             <div className="col-12 mt-3 pr-md-0">
-              <Timer targetDate="Sept 25, 2020" targetTime="14:00:00" />
+              <Timer targetDate={this.state.targetDate} targetTime={this.state.targetTime} />
             </div>
             <div className="col-12 mt-4 pr-md-0">
               <FAQ />
