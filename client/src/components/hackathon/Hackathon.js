@@ -259,9 +259,9 @@ category as winner. </li>
             <div className="col-12 mt-3 pr-md-0">
               <Timer targetDate="Sept 25, 2020" targetTime="14:00:00" />
             </div>
-            {/* <div className="col-12 mt-4 pr-md-0">
+            <div className="col-12 mt-4 pr-md-0">
               <FAQ />
-            </div> */}
+            </div>
           </div>
         </div>
 
