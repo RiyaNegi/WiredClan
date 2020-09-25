@@ -116,42 +116,69 @@ class Hackathon extends Component {
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
                         <div style={{ fontSize: '17px' }}>🥉 3rd Prize: Rs 500</div> */}
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <h5>Rulebook</h5>
+                        <h5>RULEBOOK</h5>
 
                         <div className="text-muted">
                           <ol>
 
                             <li>
-                              The hackathon will <b>begin at 2:00PM on 26th September</b>, 2020 and go on for 24 hours. All teams will have to follow the submission guidelines.
+                              The hackathon will begin on <b>2:00PM on 26th
+                              September, 2020</b> and will go on for 24 hours. All
+                              teams will have to follow the submission guidelines.
                           </li>
 
                             <li>
-                              Problem Statement will be mailed to the group leader and will be uploaded on the group at  <b>6pm on 25th September</b>, 2020 and will also be available on this page.
+
+                              Problem statement along with submission details will be
+                              mailed to the group leader and will be uploaded on the
+                              group at 6PM on 25th september, 2020. The problem
+                              statement should be executed in the tech stack allotted to
+you.                          </li>
+
+                            <li>
+                              All participants must compulsorily join the Zoom
+                              meeting at <b>sharp 1PM</b> for the inauguration
+ceremony.                          </li>
+
+                            <li>
+                              All teams will be assigned a specific slot in which
+                              they will be having their mentoring and doubt solving
+                              session. In this session, the teams will must screen
+share and show their progress to the mentors.                          </li>
+
+                            <li>
+                              All participants need to sign up on wired clan
+                              by noon on 25th
+                              September, 2020. Failure to do so might lead to
+elimination.                          </li>
+
+                            <li>
+                              Since the hackathon is completely virtual, teams will have
+                              to maintain 1 public repository. This will enable us to track
+                              your progress in the duration of the event. Each team must
+                              make at least one commit every 6 hours.
                           </li>
 
                             <li>
-                              Problem statement will be given to the teams based on their selected tech stack. Every tech stack is associated with a problem statement. Eg. If there are two problem statements A and B and two tech stacks 1 and 2. The person selecting tech stack 1 will be allotted problem statement A. Once allotted problem statements cannot be changed.
+                              All the teams must link a 1.5 - 2 mins YouTube video with a voice-over
+                              explaining their project along with the GitHub link and a
+                              short description in their Wired Clan post (It will auto publish once the contest is over). Details for the following will be attached in the
+                              problem statement mail.
                           </li>
 
                             <li>
-                              All participants have to compulsorily join the Zoom meeting at sharp 1 pm for the inauguration ceremony.
-                          </li>
+                              After the hackathon the submitted solution will be
+                              reviewed and the top 3-5 teams from every category will
+                              have to pitch their solutions in front of the respective
+hiring companies, accompanied by an interview round.                          </li>
 
-                            <li>
-                              All participants need to sign up on Wired Clan by 5:00 pm on 24th September, 2020. Failure to do so might lead to elimination. This is simply a registration, you can form teams once the contest starts.
-                          </li>
 
-                            <li>
-                              All participants can keep editing a short description post explaining what they're trying to do in the post (it will be auto-published once contest time is up). Also, record a small YouTube video giving a demo, and link it, along with the GitHub repo.
-                          </li>
 
-                            <li>
-                              Since the hackathon is completely virtual, teams will have to maintain 1 public repository. This will enable us to track your progress in the duration of the event. Each team has to make at least one commit every 6 hours.
-                          </li>
 
-                            <li>
-                              After the hackathon the submitted solution will be reviewed and the top 3-5 teams from every category will have to pitch their solutions in front of the respective hiring companies, accompanied by an interview round.
-                          </li>
+                            {/* <li>
+                              JUDGING ROUND:
+                          
+                            </li> */}
 
                             {/* <li> Can submit any pre-existing project or make a new project in given time.</li>
                             <li> Need to add a link to the source code or add code snippets of important parts of the code of the project to confirm authenticity (eg. Github repo, codepen, codesandbox, live code).</li>
@@ -160,6 +187,23 @@ class Hackathon extends Component {
                             <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li> */}
 
                           </ol>
+                        </div>
+
+                        <h5>JUDGING ROUND</h5>
+                        <div className="text-muted">
+                          <ul>
+                            <li>
+                              The submitted solution will be reviewed by the judges.
+                              The solutions of top teams from every category will
+                              be sent to the respective companies.
+                              </li>
+                            <li>The companies will shortlist 3-5 teams who will
+                            conduct a live pitching session followed by a Q/A
+session in front of the respective hiring companies.</li>
+                            <li>The companies will announce one team from each
+category as winner. </li>
+                          </ul>
+
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
                         {/* <div className="d-flex justify-content-center">
