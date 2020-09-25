@@ -237,7 +237,7 @@ class EditPost extends Component {
               >
                 Save Draft
                 </button>
-              <button
+              {!this.props.hackathonId && <button
                 className="ml-2 post-comment-btn px-3 mr-3 "
                 action="submit"
                 name="publish"
@@ -245,7 +245,7 @@ class EditPost extends Component {
                 disabled={submitting}
               >
                 Publish
-                </button>
+                </button>}
               <ToastContainer
                 position="top-right"
                 autoClose={3000}

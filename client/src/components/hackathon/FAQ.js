@@ -9,6 +9,7 @@ class FAQ extends Component {
             <label className="faq-text">
                 <li>If participating as a team, only one member needs to click on "Start", at the start of the hackathon.</li>
                 <li>Once one member clicks "Start", you'll get a private post, to which you can add the rest of your teammates.</li>
+                <li>Projects will be private during the hackathon but auto-published once contest time is over.</li>
                 <li>Plagiarized projects will be disqualified.</li>
                 <li>If page doesn't load, try a hard refresh. In case of issues, contact the organizing team.</li>
                 {/* <li>Icons provided by < a target="_blank" href="https://icons8.com" className="text-muted"> Icons8</a >.</li> */}

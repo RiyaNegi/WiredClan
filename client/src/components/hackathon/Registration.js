@@ -9,6 +9,8 @@ import * as actions from "../../actions";
 import * as postActions from "../../actions/postActions";
 import './hackathon.css';
 import ideas from './ideas.json'
+
+// import IdeasListTemp from "./IdeasListTemp";
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -17,6 +19,7 @@ class Registration extends Component {
         super(props);
         this.state = {
             selectedLabelId: undefined,
+            selectedIdeaCode: undefined,
         };
     }
 
@@ -28,6 +31,18 @@ class Registration extends Component {
                 return
             }
             this.setState({ selectedLabelId: id })
+        }
+    };
+
+
+    handleIdeaCodeClick = (imgId) => {
+        return (e) => {
+            let id = imgId;
+            if (this.state.selectedIdeaCode === id) {
+                this.setState({ selectedIdeaCode: undefined })
+                return
+            }
+            this.setState({ selectedIdeaCode: id })
         }
     };
 
@@ -99,7 +114,7 @@ class Registration extends Component {
                     {
                         tags.filter((tag) => ['General', 'C/C++', 'Cloud', 'Java', 'Python'].includes(tag.text) === false).map(tag => (
 
-                            <div className="col-12 col-md-4" style={{ backgroundColor: 'yellow' }}>
+                            <div className="col-12 col-md-4">
                                 <Field name="areaButton" component={() => <button key={tag.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === tag.id && 'card1-selected'}`} href="#"
                                     value={tag.text} id={tag.id}
                                     onClick={this.handleClick(tag.id)}
@@ -112,10 +127,31 @@ class Registration extends Component {
                             </div>
                         ))
                     }
-                    {true && <div>
-                        <h4 className="text-muted  mt-3">Category</h4>
-                        Develop a full fledged app, with functionality similar to Amazon's mobile app. You can develop the app for Android or iOS. </div>}
+
                 </div>
+                {true && <div>
+                    <h4 className="text-muted mt-4">Problem Statement</h4>
+                    <div className="col-12 row p-0 m-0">
+                        {
+                            ['Masterbridge', 'Winsoft', 'ScrapShut'].map(tag => (
+
+                                <div className="col-12 col-md-4">
+                                    <Field name="areaButton" component={() => <button key={tag} className={`card1 p-3 mt-3 w-100 ${this.state.selectedIdeaCode === tag && 'card1-selected'}`} href="#"
+                                        value={tag.text} id={tag}
+                                        onClick={this.handleIdeaCodeClick(tag)}
+                                    >
+                                        {/* <img src={tag.imageUrl} height={tag.uiData.height}></img> */}
+                                        <div className="font-weight-bold" >{tag}</div>
+                                    </button>
+                                    }
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+
+
+                </div>}
                 <div className='mt-5 d-flex justify-content-center'>
                     <button
                         className="post-comment-btn p-2 px-5"
@@ -124,7 +160,7 @@ class Registration extends Component {
                         disabled={submitting}
                         onClick={handleSubmit(this.handleFormSubmit("save")).bind(this)}
                     >
-                        Save Idea
+                        Create
                 </button>
                 </div>
                 <hr style={{ marginTop: '50px', backgroundColor: 'black' }}></hr>

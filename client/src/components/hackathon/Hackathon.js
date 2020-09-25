@@ -102,6 +102,7 @@ class Hackathon extends Component {
   }
 
   handleRegisterClick = () => {
+    window.scrollTo(0, 250);
     if (this.props.account) {
       this.setState({ showParticipating: !this.state.showParticipating })
       return
@@ -268,7 +269,7 @@ category as winner. </li>
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {isExpired && <div className="d-flex justify-content-center">
+                        {isExpired && <div className="d-flex pb-3 justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
@@ -303,7 +304,7 @@ category as winner. </li>
                   >
                     <Button variant="primary">Edit</Button>{' '}
                   </Link>
-                  <Button className="ml-2" variant="success" onClick={this.handlePublish}>Publish</Button>{' '}
+                  {/* <Button className="ml-2" variant="success" onClick={this.handlePublish}>Publish</Button>{' '} */}
                 </div>
               </div>
             </div>}
