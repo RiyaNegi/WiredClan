@@ -31,7 +31,7 @@ class Hackathon extends Component {
       seconds: 0
     },
     isExpired: false,
-    targetDate: "Sept 26, 2020",
+    targetDate: "Sept 25, 2020",
     targetTime: "14:00:00",
   }
 
@@ -269,7 +269,7 @@ category as winner. </li>
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {isExpired && <div className="d-flex pb-3 justify-content-center">
+                        {isExpired && false && <div className="d-flex pb-3 justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"

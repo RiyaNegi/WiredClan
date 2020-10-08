@@ -50,6 +50,7 @@ class App extends Component {
                 <Social />
               </div>
               <p className="footer-text px-md-4 pt-md-1">Made with <span style={{ verticalAlign: 'sub', fontSize: '22px', fontFamily: "'Frank Ruhl Libre', serif" }}>❤</span> in India </p>
+              <p className="footer-text px-md-4 pt-md-1"><a className="text-l-gray text-decoration-none text-gray" href="/join"> Join Us </a> </p>
             </div>
           </footer>
         </div>

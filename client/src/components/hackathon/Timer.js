@@ -78,7 +78,7 @@ class Timer extends Component {
                         </div>
                     </div>
                 ) : (
-                        <p className="alert-info p-3" >Hackathon Begins!</p>
+                        <p className="alert-info p-3" >Hackathon Ended.</p>
                     )}
             </Fragment>
         );

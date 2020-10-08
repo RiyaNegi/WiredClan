@@ -6,6 +6,7 @@ import Signout from "../components/auth/signout";
 import Signup from "../components/auth/signup";
 import UserForm from "../components/User/form";
 import HomePage from "../components/HomePage";
+import JoinUs from "../components/JoinUs";
 import test from "../components/test";
 import postDetails from "../components/Post/postDetails";
 import Profile from "../components/User/Profile";
@@ -30,6 +31,7 @@ const Routes = () => {
         <Route path="/signup" component={Signup} />
         <Route path="/previewPost/:id" component={postDetails} />
         <Route path="/home" component={HomePage} />
+        <Route path="/join" component={JoinUs} />
         <Route path="/CreatePost" component={CreatePost} />
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
