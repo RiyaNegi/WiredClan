@@ -141,7 +141,7 @@ class Signup extends PureComponent {
           </div>
           <div className="d-flex row">
             <fieldset className="form-group  col-12">
-              <label className="sign-text">College</label>
+              <label className="sign-text">College*</label>
               <Field
                 className="form-control signup-field"
                 type="text"
