@@ -34,7 +34,7 @@ export const signinUser = ({ email, password }, loc) => {
       .catch(() => {
         // if request is bad...
         // - show an error to the user
-        dispatch(authError("Something went wrong."));
+        dispatch(authError("The email address or password is incorrect."));
       });
   };
 };

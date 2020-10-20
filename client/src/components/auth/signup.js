@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import googleIcon from "./googleIcon.png";
 import { GoogleLogin } from "react-google-login";
+import normalizePhone from './normalizePhone'
 
 
 const yearArrray = [{ value: 1, label: 'First' },
@@ -64,6 +65,9 @@ class Signup extends PureComponent {
       })
     }
   }
+
+  passwordLength = (value) =>
+    value && value.length >= 6 ? undefined : "Password must be at least 6 characters."
 
   render() {
     const { handleSubmit, submitting } = this.props;
@@ -131,6 +135,7 @@ class Signup extends PureComponent {
                 type="text"
                 name="mobile"
                 component="input"
+                normalize={normalizePhone}
               />
             </fieldset>
           </div>
@@ -141,7 +146,7 @@ class Signup extends PureComponent {
                 className="form-control signup-field"
                 type="text"
                 name="college"
-                component="input"
+                component={this.renderField}
               />
             </fieldset>
           </div>
@@ -152,6 +157,7 @@ class Signup extends PureComponent {
               label="Password*"
               component={this.renderField}
               type="password"
+              validate={this.passwordLength}
             />
           </fieldset>
           {this.renderError()}
@@ -198,6 +204,10 @@ const validate = values => {
     // eslint-disable-next-line no-useless-escape
   } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email)) {
     errors.email = "Invalid email address";
+  }
+
+  if (!values.college) {
+    errors.college = "Please enter college";
   }
 
   if (!values.password) {

@@ -47,6 +47,31 @@ class Signin extends PureComponent {
     }
   };
 
+  email = (value) =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+      ? "Invalid email address"
+      : undefined
+  required = (value) =>
+    value || typeof value === "number" ? undefined : "Required"
+
+  renderField = ({input, label, type, meta: {touched, error, warning}}) => (
+    <React.Fragment>
+      <input
+        {...input}
+        placeholder={label}
+        type={type}
+        className="form-control"
+      />
+      {touched &&
+        ((error && (
+          <span className="text-danger signin-text-error">
+            {error}
+          </span>
+        )) ||
+          (warning && <span className="text-danger signin-text-error">{warning}</span>))}
+    </React.Fragment>
+  )
+
   render() {
     const { handleSubmit } = this.props;
     let location = (this.props.location.state && this.props.location.state.loc) ? "hackathon" : null
@@ -60,8 +85,9 @@ class Signin extends PureComponent {
               <Field
                 className="form-control"
                 name="email"
-                component="input"
+                component={this.renderField}
                 type="text"
+                validate={[this.required, this.email]}
               />
             </fieldset>
             <fieldset className="form-group sign-text">
@@ -69,8 +95,9 @@ class Signin extends PureComponent {
               <Field
                 className="form-control"
                 name="password"
-                component="input"
+                component={this.renderField}
                 type="password"
+                validate={[this.required]}
               />
             </fieldset>
             {this.renderError()}
