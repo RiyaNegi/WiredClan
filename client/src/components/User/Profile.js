@@ -63,6 +63,9 @@ class Profile extends Component {
           <label className="mt-3 font-weight-bold text-center">
             {this.props.user.firstName} {this.props.user.lastName}
           </label>
+          <label className="mt-3 font-weight-bold text-center">
+           Bio: {this.props.user.bio}
+          </label>
           <div>
             <div className="d-flex flex-row align-items-center">
               <FontAwesomeIcon
