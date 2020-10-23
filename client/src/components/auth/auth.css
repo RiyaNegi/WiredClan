@@ -34,6 +34,10 @@
     font-weight: 800;
 }
 
+.signin-text-error{
+	font-weight: 400;
+}
+
 .signuptext-danger{
     border:2px solid red;
 }
