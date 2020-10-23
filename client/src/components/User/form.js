@@ -146,6 +146,18 @@ class UserForm extends PureComponent {
                 />
               </fieldset>
             </div>
+
+            <div className="d-flex">
+              <fieldset className="form-group col-12 px-0">
+                <label className="sign-text">Bio</label>
+                <Field
+                  className="form-control signup-field"
+                  type="text"
+                  name="bio"
+                  component="textarea"
+                />
+              </fieldset>
+            </div>
             {this.renderError()}
             <div className="d-flex mt-2 justify-content-between">
               <Link to={this.props.location.state && this.props.location.state.loc ? "/Hackathon" : "/home"}>
@@ -215,6 +227,7 @@ const mapStateToProps = (state) => {
           value: year,
         },
         college: state.auth.data.college,
+        bio: state.auth.data.bio
       }
       : {},
     user: state.auth.data
