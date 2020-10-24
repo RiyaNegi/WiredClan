@@ -14,6 +14,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../../style/prism.css"
 import hljs from 'highlight.js';
 import slugify from "slugify";
+import { AVATAR_URL } from "../../config"
 
 
 
@@ -119,7 +120,7 @@ class PostDetails extends Component {
               <span className="font-weight-bold ml-1 text-muted" >
                 {" "}{" "}
                 <img
-                  src={i.user.imageUrl}
+                  src={AVATAR_URL + i.user.userName}
                   style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                   alt="userIcon"
                   className="mr-1"

@@ -40,3 +40,12 @@
 .text-muted-profile, .text-muted-profile a {
   color: rgb(214, 214, 214) !important;
 }
+
+.divider {
+    width: 100%;
+    background-color: rgba(179, 179, 179, 0.60);
+}
+
+.editicon {
+    right: 30px;
+}

@@ -10,6 +10,7 @@ import * as authActions from "../../actions/authActions";
 import BeatLoader from "react-spinners/BeatLoader";
 import slugify from "slugify";
 import PostLikes from "./likes";
+import { AVATAR_URL } from "../../config"
 
 class PostsList extends React.Component {
   state = {
@@ -123,8 +124,8 @@ class PostsList extends React.Component {
                         <img
                           src={
                             this.props.user
-                              ? this.props.user.imageUrl
-                              : post.user.imageUrl
+                              ? AVATAR_URL + this.props.user.userName
+                              : AVATAR_URL + post.user.userName
                           }
                           style={{
                             width: 20,

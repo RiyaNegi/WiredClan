@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import BeatLoader from "react-spinners/BeatLoader";
+import { AVATAR_URL } from "../../config"
 
 
 const yearArrray = [{ value: 1, label: 'First' },
@@ -76,7 +77,7 @@ class UserForm extends PureComponent {
           <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 flex-column sign-box">
             <div className="d-flex justify-content-center" >
               <img
-                src={this.props.user.imageUrl}
+                src={AVATAR_URL + this.props.user.userName}
                 style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
                 alt="userIcon"
               />

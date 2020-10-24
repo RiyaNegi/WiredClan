@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import { Button, Tabs, Tab, Badge } from "react-bootstrap";
 import PostsList from "../Post/PostsList";
 import * as authActions from "../../actions/authActions";
-import { faFire as faHeartr } from "@fortawesome/free-solid-svg-icons";
+import { faFire as faHeartr, faUserEdit } from "@fortawesome/free-solid-svg-icons";
+import { AVATAR_URL } from "../../config"
 
 
 import "./user.css";
@@ -54,18 +55,30 @@ class Profile extends Component {
     return (
       <React.Fragment>
         <div className="box-shadow d-flex flex-column align-items-center profile-box p-3 mt-3">
-          <img
+          <div className="row"><img
             className=""
-            src={this.props.user.imageUrl}
+            src={AVATAR_URL + this.props.user.userName}
             style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
             alt="userIcon"
           />
+          {this.props.account && this.props.user.id === this.props.account.id && (
+            <div className="text-muted-profile font-weight-bold position-absolute editicon">
+              <a href={`/users/${this.props.user.id}/form`}> <FontAwesomeIcon
+                className="white-heart"
+                title="Edit Profile"
+                icon={faUserEdit}
+                size="1x"
+                color="rgba(214,214,214)"
+              /> </a>
+            </div>
+          )}</div>
           <label className="mt-3 font-weight-bold text-center">
             {this.props.user.firstName} {this.props.user.lastName}
           </label>
           <label className="mt-3 font-weight-bold text-center">
            Bio: {this.props.user.bio}
           </label>
+          <hr class="mt-1 mb-2 divider"/>
           <div>
             <div className="d-flex flex-row align-items-center">
               <FontAwesomeIcon
@@ -90,11 +103,6 @@ class Profile extends Component {
           {this.props.user.year && (
             <div className="text-muted-profile font-weight-bold">
               Year {this.props.user.year}
-            </div>
-          )}
-          {this.props.account && this.props.user.id === this.props.account.id && (
-            <div className="text-muted-profile font-weight-bold">
-              <a href={`/users/${this.props.user.id}/form`}>edit</a>
             </div>
           )}
         </div>
