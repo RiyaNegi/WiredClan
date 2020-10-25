@@ -130,7 +130,7 @@ class Comments extends Component {
               >
                 <div className="usericon">
                   <img
-                    src={ AVATAR_URL + comment.user.userName }
+                    src={ AVATAR_URL + comment.user.userName  + comment.user.avatar}
                     style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                     alt="userIcon"
                   />
@@ -287,7 +287,7 @@ class Comments extends Component {
             <div className="d-flex">
               <div className="profile-icon">
                 <img
-                  src={AVATAR_URL + this.props.account.userName}
+                  src={AVATAR_URL + this.props.account.userName + this.props.account.avatar}
                   style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
                   alt="userIcon"
                 />

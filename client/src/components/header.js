@@ -108,7 +108,7 @@ class Header extends PureComponent {
                     aria-expanded="false"
                   >
                     <img
-                      src={AVATAR_URL + this.props.user.userName}
+                      src={AVATAR_URL + this.props.user.userName + this.props.user.avatar}
                       style={{
                         width: 20,
                         height: 20,

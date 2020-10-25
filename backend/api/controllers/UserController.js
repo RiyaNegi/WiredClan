@@ -41,6 +41,7 @@ const config = (router) => router
         year: req.body.year,
         mobile: req.body.mobile,
         college: req.body.college,
+        avatar: req.body.avatar,
         bio: req.body.bio
       });
       user = user.get({ plain: true });

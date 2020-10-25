@@ -113,14 +113,14 @@ export const fetchUser = (id, draft) => {
 };
 
 export const updateUser = (
-  { id, firstName, lastName, year, college, mobile, bio },
+  { id, firstName, lastName, year, college, mobile, bio, avatar },
   redirect = `/users/${id}`, loc
 ) => {
   return (dispatch) => {
     request
       .patch(
         `/api/users/${id}`,
-        { id, firstName, lastName, year, college, mobile, bio },
+        { id, firstName, lastName, year, college, mobile, bio, avatar },
       )
       .then((response) => {
         dispatch({

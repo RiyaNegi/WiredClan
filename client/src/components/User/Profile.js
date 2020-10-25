@@ -57,7 +57,7 @@ class Profile extends Component {
         <div className="box-shadow d-flex flex-column align-items-center profile-box p-3 mt-3">
           <div className="row"><img
             className=""
-            src={AVATAR_URL + this.props.user.userName}
+            src={AVATAR_URL + this.props.user.userName + this.props.user.avatar}
             style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
             alt="userIcon"
           />
