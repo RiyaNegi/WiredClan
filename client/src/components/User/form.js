@@ -97,7 +97,7 @@ class UserForm extends PureComponent {
             <div className="d-flex justify-content-center align-items-center" >
             <FontAwesomeIcon
                 onClick={()=> this.prevAvatar()}
-                style={{cursor: 'pointer'}}
+                style={this.state.avatar === 0 ? {opacity: 0} : {cursor: 'pointer'}}
                 className="mr-3"
                 title="Change Avatar"
                 icon={faChevronLeft}
