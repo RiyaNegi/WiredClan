@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import BeatLoader from "react-spinners/BeatLoader";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AVATAR_URL } from "../../config"
 
 
 const yearArrray = [{ value: 1, label: 'First' },
@@ -13,6 +16,24 @@ const yearArrray = [{ value: 1, label: 'First' },
 { value: 4, label: 'Fourth' }]
 
 class UserForm extends PureComponent {
+    constructor(props) {
+      super(props)
+      this.state = {
+        avatar: this.props.user.avatar
+      };
+    };
+  
+  nextAvatar(){
+    this.setState({avatar: this.state.avatar+1})
+  }
+
+  prevAvatar(){
+    if(this.state.avatar > 0){
+        this.setState({avatar: this.state.avatar-1})
+    }
+  }
+    
+
   componentWillMount() {
     this.props.fetchAccount(this.props.user.id);
   }
@@ -20,7 +41,7 @@ class UserForm extends PureComponent {
   handleFormSubmit = (userId) => (formProps) => {
     formProps = { ...formProps, year: formProps.year.value }
     this.props.updateUser(
-      { ...formProps, id: userId },
+      { ...formProps, id: userId, avatar: this.state.avatar },
       this.props.location.state && this.props.location.state.redirectHomeAfterSubmit ? "/home" : undefined,
       this.props.location.state && this.props.location.state.loc ? `/${this.props.location.state.loc}` : undefined
     );
@@ -53,7 +74,6 @@ class UserForm extends PureComponent {
       return (
         <div className="col-6 mt-5">
           <BeatLoader
-
             size={40}
             color={"#65ffea"}
           />
@@ -74,11 +94,29 @@ class UserForm extends PureComponent {
           )}
         >
           <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 flex-column sign-box">
-            <div className="d-flex justify-content-center" >
+            <div className="d-flex justify-content-center align-items-center" >
+            <FontAwesomeIcon
+                onClick={()=> this.prevAvatar()}
+                style={this.state.avatar === 0 ? {opacity: 0} : {cursor: 'pointer'}}
+                className="mr-3"
+                title="Change Avatar"
+                icon={faChevronLeft}
+                size="2x"
+                color="rgba(214,214,214)"
+              />
               <img
-                src={this.props.user.imageUrl}
+                src={AVATAR_URL + this.props.user.userName + this.state.avatar}
                 style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
                 alt="userIcon"
+            />
+              <FontAwesomeIcon
+                onClick={()=> this.nextAvatar()}
+                style={{cursor: 'pointer'}}
+                className="ml-3"
+                title="Change Avatar"
+                icon={faChevronRight}
+                size="2x"
+                color="rgba(214,214,214)"
               />
             </div>
             <div className="d-flex mt-5">

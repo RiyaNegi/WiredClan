@@ -26,6 +26,7 @@ import redis from 'redis';
 import RedisStore from 'connect-redis';
 
 import expressSessions from 'express-session';
+import avatarsMiddleware from 'adorable-avatars';
 
 // const auth from './policies/auth.policy');
 
@@ -128,6 +129,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // fill routes for express application
 // app.use('/api/auth', mappedOpenRoutes);
 // app.use('/api', mappedAuthRoutes);
+
+// Adorable avatars
+app.use('/avatar', avatarsMiddleware);
 
 routes(app);
 

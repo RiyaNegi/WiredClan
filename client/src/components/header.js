@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { AVATAR_URL } from "../config"
 // import logoOne from "./logoOne.png";
 // import logoOld from "./logoOld.png";
 // import logoTwo from "./logoTwo.png";
@@ -107,7 +108,7 @@ class Header extends PureComponent {
                     aria-expanded="false"
                   >
                     <img
-                      src={this.props.user.imageUrl}
+                      src={AVATAR_URL + this.props.user.userName + this.props.user.avatar}
                       style={{
                         width: 20,
                         height: 20,

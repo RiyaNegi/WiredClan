@@ -38,6 +38,9 @@ const User = sequelize.define('user', {
   bio: {
     type: Sequelize.STRING,
   },
+  avatar: {
+    type: Sequelize.INTEGER,
+  },
   imageUrl: {
     type: Sequelize.STRING,
   },
