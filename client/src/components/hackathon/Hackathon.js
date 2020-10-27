@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "./djHackathon2.png"
+import hackathon from "./hackocracy.jpg"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -23,7 +23,7 @@ class Hackathon extends Component {
 
   state = {
     showParticipating: false,
-    open: false,
+    open: true,
     remaining: {
       days: 0,
       hours: 0,
@@ -31,8 +31,8 @@ class Hackathon extends Component {
       seconds: 0
     },
     isExpired: false,
-    targetDate: "Sept 25, 2020",
-    targetTime: "14:00:00",
+    targetDate: "Oct 30, 2020",
+    targetTime: "09:00:00",
   }
 
 
@@ -173,67 +173,50 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>CODEIT-20</h3></span>
+                      <span className="text-white"><h3>~hackocracy 2020</h3></span>
                       <div className=" mt-2">
                         {/* <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
                         <div style={{ fontSize: '17px' }}>🥉 3rd Prize: Rs 500</div> */}
+
+
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <h5>RULEBOOK</h5>
+                        <h5>Timeline</h5>
+                        <div className="text-muted">
+                          <ul>
+                            <li>The opening ceremony and theme release would take place on 29 Oct, 2020. The Google meet link will be shared on the discord channel itself.</li>
+                            <li>All the teams are requested to submit their projects in the given submission format by 9.00 AM on 2nd Nov, 2020.</li>
+                          </ul>
+                        </div>
+
+                        <h5>Rules & Regulation</h5>
 
                         <div className="text-muted">
+                          All teams must abide by the following rules stated by the organizers:
                           <ol>
 
                             <li>
-                              The hackathon will begin on <b>2:00PM on 26th
-                              September, 2020</b> and will go on for 24 hours. All
-                              teams will have to follow the submission guidelines.
+                              All the participants are requested to register on WiredClan website individually.
                           </li>
 
                             <li>
 
-                              Problem statement along with submission details will be
-                              mailed to the group leader and will be uploaded on the
-                              group at 6PM on 25th september, 2020. The problem
-                              statement should be executed in the tech stack allotted to
+                              All design elements, code, hardware builds, etc. for your project must be created during the event. While you may not begin coding in advance, you can plan and discuss with your team in advance. Written documents and design sketches are allowed.
 you.                          </li>
 
                             <li>
-                              All participants must compulsorily join the Zoom
-                              meeting at <b>sharp 1PM</b> for the inauguration
+                              Plagiarism of any sort may result in direct disqualification from the competition.
 ceremony.                          </li>
 
                             <li>
-                              All teams will be assigned a specific slot in which
-                              they will be having their mentoring and doubt solving
-                              session. In this session, the teams will must screen
-share and show their progress to the mentors.                          </li>
+                              Teams must be comprised of 2-4 people.</li>
 
                             <li>
-                              All participants need to sign up on wired clan
-                              by noon on 25th
-                              September, 2020. Failure to do so might lead to
-elimination.                          </li>
+                              The prizes will be awarded solely based on the decision of the judging panel.</li>
 
                             <li>
-                              Since the hackathon is completely virtual, teams will have
-                              to maintain 1 public repository. This will enable us to track
-                              your progress in the duration of the event. Each team must
-                              make at least one commit every 6 hours.
+                              The decision of the judging panel will be final and binding and can’t be challenged.
                           </li>
-
-                            <li>
-                              All the teams must link a 1.5 - 2 mins YouTube video with a voice-over
-                              explaining their project along with the GitHub link and a
-                              short description in their Wired Clan post (It will auto publish once the contest is over). Details for the following will be attached in the
-                              problem statement mail.
-                          </li>
-
-                            <li>
-                              After the hackathon the submitted solution will be
-                              reviewed and the top 3-5 teams from every category will
-                              have to pitch their solutions in front of the respective
-hiring companies, accompanied by an interview round.                          </li>
 
 
 
@@ -250,22 +233,39 @@ hiring companies, accompanied by an interview round.                          </
                             <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li> */}
 
                           </ol>
+                          Please join the following social media platforms to get more updates:
+<br /><a className="text-decoration-none text-l-gray" href="https://www.instagram.com/acmccet">https://www.instagram.com/acmccet </a>
+                          <br /><a className="text-decoration-none text-l-gray" href="https://www.facebook.com/acmccet/">https://www.facebook.com/acmccet/</a>
                         </div>
 
-                        <h5>JUDGING ROUND</h5>
+                        <h5>Submission Format</h5>
                         <div className="text-muted">
-                          <ul>
-                            <li>
-                              The submitted solution will be reviewed by the judges.
-                              The solutions of top teams from every category will
-                              be sent to the respective companies.
-                              </li>
-                            <li>The companies will shortlist 3-5 teams who will
-                            conduct a live pitching session followed by a Q/A
-session in front of the respective hiring companies.</li>
-                            <li>The companies will announce one team from each
-category as winner. </li>
-                          </ul>
+                          <b>The participants are required to make a short video of 1-2 minutes as a part of their project submission. They have to share the link of the Google drive containing the video.
+                          </b>
+                          <li>
+                            Tech Stack
+                          </li>
+                          <li>
+                            Project Description
+                          </li>
+                          <li>
+                            Software Design Description (SDD)
+                          </li>
+                          <li>
+                            Literature Survey
+                          </li>
+                          <li>
+                            Why is this solution different from past ones?
+                          </li>
+                          <li>
+                            Purpose/Aim of the project
+                          </li>
+                          <li>
+                            Scalability Description
+                          </li>
+                          <li>
+                            Features
+                          </li>
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
