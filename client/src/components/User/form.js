@@ -16,23 +16,23 @@ const yearArrray = [{ value: 1, label: 'First' },
 { value: 4, label: 'Fourth' }]
 
 class UserForm extends PureComponent {
-    constructor(props) {
-      super(props)
-      this.state = {
-        avatar: this.props.user.avatar
-      };
+  constructor(props) {
+    super(props)
+    this.state = {
+      avatar: this.props.user.avatar
     };
-  
-  nextAvatar(){
-    this.setState({avatar: this.state.avatar+1})
+  };
+
+  nextAvatar() {
+    this.setState({ avatar: this.state.avatar + 1 })
   }
 
-  prevAvatar(){
-    if(this.state.avatar > 0){
-        this.setState({avatar: this.state.avatar-1})
+  prevAvatar() {
+    if (this.state.avatar > 0) {
+      this.setState({ avatar: this.state.avatar - 1 })
     }
   }
-    
+
 
   componentWillMount() {
     this.props.fetchAccount(this.props.user.id);
@@ -95,9 +95,9 @@ class UserForm extends PureComponent {
         >
           <div className="col-12 col-md-6 p-4 d-flex justify-self-center mt-5 flex-column sign-box">
             <div className="d-flex justify-content-center align-items-center" >
-            <FontAwesomeIcon
-                onClick={()=> this.prevAvatar()}
-                style={this.state.avatar === 0 ? {opacity: 0} : {cursor: 'pointer'}}
+              <FontAwesomeIcon
+                onClick={() => this.prevAvatar()}
+                style={this.state.avatar === 0 ? { opacity: 0 } : { cursor: 'pointer' }}
                 className="mr-3"
                 title="Change Avatar"
                 icon={faChevronLeft}
@@ -105,13 +105,13 @@ class UserForm extends PureComponent {
                 color="rgba(214,214,214)"
               />
               <img
-                src={AVATAR_URL + this.props.user.userName + this.state.avatar}
+                src={"https://" + AVATAR_URL + this.props.user.userName + this.state.avatar + ".svg"}
                 style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
                 alt="userIcon"
-            />
+              />
               <FontAwesomeIcon
-                onClick={()=> this.nextAvatar()}
-                style={{cursor: 'pointer'}}
+                onClick={() => this.nextAvatar()}
+                style={{ cursor: 'pointer' }}
                 className="ml-3"
                 title="Change Avatar"
                 icon={faChevronRight}

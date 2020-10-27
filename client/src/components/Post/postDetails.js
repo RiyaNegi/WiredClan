@@ -120,7 +120,7 @@ class PostDetails extends Component {
               <span className="font-weight-bold ml-1 text-muted" >
                 {" "}{" "}
                 <img
-                  src={AVATAR_URL + i.user.userName + i.user.avatar}
+                  src={"https://" + AVATAR_URL + i.user.userName + i.user.avatar + ".svg"}
                   style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                   alt="userIcon"
                   className="mr-1"

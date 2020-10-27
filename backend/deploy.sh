@@ -11,7 +11,7 @@ cd client
 rm src/config.js
 echo 'const SERVER_URL = "https://wiredclan.com";
 const SERVER_PORT = "443";
-const AVATAR_URL = SERVER_URL + ":" + SERVER_PORT + "/avatar/80/";
+const AVATAR_URL = "avatars.dicebear.com/api/bottts/";
 export { SERVER_URL, SERVER_PORT, AVATAR_URL };' > src/config.js
 echo "Installing FE dependencies..."
 npm install

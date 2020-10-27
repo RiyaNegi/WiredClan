@@ -57,28 +57,28 @@ class Profile extends Component {
         <div className="box-shadow d-flex flex-column align-items-center profile-box p-3 mt-3">
           <div className="row"><img
             className=""
-            src={AVATAR_URL + this.props.user.userName + this.props.user.avatar}
+            src={"https://" + AVATAR_URL + this.props.user.userName + this.props.user.avatar + ".svg"}
             style={{ width: 80, height: 80, borderRadius: 80 / 2 }}
             alt="userIcon"
           />
-          {this.props.account && this.props.user.id === this.props.account.id && (
-            <div className="text-muted-profile font-weight-bold position-absolute editicon">
-              <a href={`/users/${this.props.user.id}/form`}> <FontAwesomeIcon
-                className="white-heart"
-                title="Edit Profile"
-                icon={faUserEdit}
-                size="1x"
-                color="rgba(214,214,214)"
-              /> </a>
-            </div>
-          )}</div>
+            {this.props.account && this.props.user.id === this.props.account.id && (
+              <div className="text-muted-profile font-weight-bold position-absolute editicon">
+                <a href={`/users/${this.props.user.id}/form`}> <FontAwesomeIcon
+                  className="white-heart"
+                  title="Edit Profile"
+                  icon={faUserEdit}
+                  size="1x"
+                  color="rgba(214,214,214)"
+                /> </a>
+              </div>
+            )}</div>
           <label className="mt-3 font-weight-bold text-center">
             {this.props.user.firstName} {this.props.user.lastName}
           </label>
           <label className="mt-3 font-weight-bold text-center">
-           Bio: {this.props.user.bio}
+            Bio: {this.props.user.bio}
           </label>
-          <hr class="mt-1 mb-2 divider"/>
+          <hr class="mt-1 mb-2 divider" />
           <div>
             <div className="d-flex flex-row align-items-center">
               <FontAwesomeIcon

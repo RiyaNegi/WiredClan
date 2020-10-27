@@ -10,7 +10,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../style/style2.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AVATAR_URL} from "../config"
+import { AVATAR_URL } from "../config"
 
 class Comments extends Component {
   constructor(props) {
@@ -130,7 +130,7 @@ class Comments extends Component {
               >
                 <div className="usericon">
                   <img
-                    src={ AVATAR_URL + comment.user.userName  + comment.user.avatar}
+                    src={"https://" + AVATAR_URL + comment.user.userName + comment.user.avatar + ".svg"}
                     style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                     alt="userIcon"
                   />
@@ -287,7 +287,7 @@ class Comments extends Component {
             <div className="d-flex">
               <div className="profile-icon">
                 <img
-                  src={AVATAR_URL + this.props.account.userName + this.props.account.avatar}
+                  src={"https://" + AVATAR_URL + this.props.account.userName + this.props.account.avatar + ".svg"}
                   style={{ width: 36, height: 36, borderRadius: 36 / 2 }}
                   alt="userIcon"
                 />

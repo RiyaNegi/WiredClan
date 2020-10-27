@@ -124,8 +124,8 @@ class PostsList extends React.Component {
                         <img
                           src={
                             this.props.user
-                              ? AVATAR_URL + this.props.user.userName + this.props.user.avatar
-                              : AVATAR_URL + post.user.userName + post.user.avatar
+                              ? "https://" + AVATAR_URL + this.props.user.userName + this.props.user.avatar + ".svg"
+                              : "https://" + AVATAR_URL + post.user.userName + post.user.avatar + ".svg"
                           }
                           style={{
                             width: 20,
