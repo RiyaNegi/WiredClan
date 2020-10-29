@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import * as postActions from "../../actions/postActions";
 import { connect } from "react-redux";
-
+import { AVATAR_URL } from "../../config";
 
 
 class renderMembers extends Component {
@@ -110,7 +110,7 @@ class renderMembers extends Component {
               <span className="">
                 {" "}
                 <img
-                  src={item.imageUrl}
+                  src={"https://" + AVATAR_URL + item.userName + item.avatar + ".svg"}
                   style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                   alt="userIcon"
                   className="mr-1"

@@ -88,9 +88,8 @@ class Hackathon extends Component {
 
   componentWillMount() {
     this.props.fetchTopContributors();
-    this.props.fetchHackathonDetails();
+    this.props.fetchIdeathonDetails();
     this.props.fetchTags();
-
   }
 
   handleClose() {
@@ -241,7 +240,7 @@ ceremony.                          </li>
                         <h5>Submission Format</h5>
                         <div className="text-muted">
                           <b>The participants are required to make a short video of 1-2 minutes as a part of their project submission. They have to share the link of the Google drive containing the video.
-                          They can also link it via YouTube in the post itself.</b>
+                          </b>
                           <li>
                             Tech Stack
                           </li>
@@ -266,13 +265,10 @@ ceremony.                          </li>
                           <li>
                             Features
                           </li>
-                          <li>
-                            <b>Public GitHub repository link</b>
-                          </li>
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {isExpired && <div className="d-flex pb-3 justify-content-center">
+                        {isExpired && false && <div className="d-flex pb-3 justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"

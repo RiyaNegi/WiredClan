@@ -36,7 +36,25 @@ export const fetchHackathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/DJ-SEPT-2020`
+                `/api/hackathons/CCET-OCT-2020`
+            )
+            .then((response) => {
+                dispatch({
+                    type: FETCH_HACKATHON_DETAILS,
+                    payload: response.data,
+                });
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    };
+};
+
+export const fetchIdeathonDetails = () => {
+    return (dispatch) => {
+        request
+            .get(
+                `/api/hackathons/IDEA-NOV-2020`
             )
             .then((response) => {
                 dispatch({
