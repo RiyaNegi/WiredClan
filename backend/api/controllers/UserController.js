@@ -42,7 +42,7 @@ const config = (router) => router
         mobile: req.body.mobile,
         college: req.body.college,
         avatar: req.body.avatar,
-        bio: req.body.bio
+        bio: req.body.bio,
       });
       user = user.get({ plain: true });
       return res.status(200).json(user);

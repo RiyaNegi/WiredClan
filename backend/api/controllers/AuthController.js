@@ -4,6 +4,7 @@ import Google from '../services/google.service';
 
 import User from '../models/User';
 import logger from '../../logger';
+import randomId from '../models/randomId';
 
 const config = (router) => router
   .post('/googleLogin', async (req, res) => {
@@ -22,6 +23,7 @@ const config = (router) => router
           });
 
         if (!user) {
+          const randomUserName = await randomId();
           const newUser = await User.create({
             email,
             password,
@@ -29,6 +31,7 @@ const config = (router) => router
             lastName,
             viaGoogle: true,
             registeredViaLoginViaGoogle: true,
+            userName: firstName + randomUserName().substring(1, 4),
             imageUrl: `https://api.adorable.io/avatars/80/${firstName}${lastName}.png`,
           });
           const token = authService().issue({ id: newUser.id });
@@ -88,11 +91,13 @@ const config = (router) => router
     body.confirmPassword = body.password;
     if (body.password === body.confirmPassword) {
       try {
+        const randomUserName = await randomId();
         const user = await User.create({
           email: body.email,
           password: body.password,
           firstName: body.firstName,
           lastName: body.lastName,
+          userName: body.firstName + randomUserName().substring(1, 4),
           year: body.year,
           mobile: body.mobile,
           college: body.college,
