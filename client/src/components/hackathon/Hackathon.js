@@ -184,7 +184,7 @@ class Hackathon extends Component {
                         <h5>Timeline</h5>
                         <div className="text-muted">
                           <ul>
-                            <li>The opening ceremony and theme release would take place on 29 Oct, 2020. The Google meet link will be shared on the discord channel itself.</li>
+                            <li>The opening ceremony and theme release would take place on 30 Oct, 2020. The Google meet link will be shared on the discord channel itself.</li>
                             <li>All the teams are requested to submit their projects in the given submission format by 9.00 AM on 2nd Nov, 2020.</li>
                           </ul>
                         </div>
