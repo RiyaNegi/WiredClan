@@ -29,7 +29,7 @@ module.exports = {
         userName: 'temp_5KySMfNFX',
       },
     }).then(async (users) => {
-      await users.asyncForEach(async (user) => {
+      await asyncForEach(users, async (user) => {
         const result = await user.update({ userName: `${user.firstName ? user.firstName : 'temp'}_${randomId()().substring(0, 3)}` });
       });
     });
