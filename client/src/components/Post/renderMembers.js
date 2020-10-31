@@ -28,14 +28,14 @@ class renderMembers extends Component {
     this.setState({ email: '', showMessage: null })
   }
 
-  handleAddClick(fields, { id, firstName, lastName, imageUrl }) {
+  handleAddClick(fields, { id, firstName, lastName, avatar, userName }) {
     return () => {
       if (fields.getAll() && fields.getAll().filter((item) => item.id === id).length > 0) {
         this.setState({ email: '', showMessage: "This user is already added in your team" })
         return
       }
       else {
-        fields.push({ id, firstName, lastName, imageUrl });
+        fields.push({ id, firstName, lastName, avatar, userName });
         if (this.props.editPost) {
           this.props.addTeammate(this.props.post.id, id)
         }
@@ -85,7 +85,7 @@ class renderMembers extends Component {
             <span className="font-weight-bold">Found this user:</span>{" "}
             <span>
               <img
-                src={this.props.searchedUser.imageUrl}
+                src={"https://" + AVATAR_URL + this.props.searchedUser.userName + this.props.searchedUser.avatar + ".svg"}
                 style={{ width: 20, height: 20, borderRadius: 20 / 2 }}
                 alt="userIcon"
                 className="mr-1 font-weight-bold"
