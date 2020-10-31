@@ -91,13 +91,35 @@ class Header extends PureComponent {
                     Home
                 </a>
                 </li>
-                <li className="nav-item pr-1">
+                <li className="nav-item pr-1 dropdown dropdown-hover">
                   <a
-                    className="nav-link" href="/hackathon">
-                    <strong>Hackathon</strong>
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    className="nav-link dropdown-toggle"
+                    href="/hackathon">
+                    <strong>Hackathons</strong>
                   </a>
+
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="/hackathon"
+                    >
+                      CCET ~hackocracy 2020
+                  </a>
+                    <a className="dropdown-item" href="/ideathon">
+                      TSEC Embark 2020
+                  </a>
+                  </div>
+
                 </li>
-                <li className="nav-item dropdown ">
+                <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
                     href="/"
@@ -148,6 +170,35 @@ class Header extends PureComponent {
                       Hackathon
                 </a>
                   </li>
+                  <li className="nav-item pr-1 dropdown dropdown-hover">
+                    <a
+                      id="navbarDropdownMenuLink"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      className="nav-link dropdown-toggle"
+                      href="/hackathon">
+                      <strong>Hackathons</strong>
+                    </a>
+
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
+                      <a
+                        className="dropdown-item"
+                        href="/hackathon"
+                      >
+                        CCET ~hackocracy 2020
+                  </a>
+                      <a className="dropdown-item" href="/ideathon">
+                        TSEC Embark 2020
+                  </a>
+                    </div>
+
+                  </li>
+
                   <li className="nav-item">
                     <a className="nav-link" href="/signup">
                       Sign Up

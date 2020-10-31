@@ -64,7 +64,7 @@ class Registration extends Component {
                 this.notify()
                 return
             }
-            this.props.createHackathonPost(params["title"], false,
+            this.props.createIdeathonPost(params["title"], false,
                 this.state.selectedLabelId, this.props.hackathonId, this.state.selectedIdeaCode);
         }
     }
@@ -112,7 +112,7 @@ class Registration extends Component {
                 <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {
-                        tags.filter((tag) => ['General', 'C/C++', 'Cloud', 'Java', 'Python'].includes(tag.text) === false).map(tag => (
+                        tags.filter((tag) => ['General'].includes(tag.text) === false).map(tag => (
 
                             <div className="col-12 col-md-4">
                                 <Field name="areaButton" component={() => <button key={tag.id} className={`card1 p-3 mt-3 w-100 ${this.state.selectedLabelId === tag.id && 'card1-selected'}`} href="#"

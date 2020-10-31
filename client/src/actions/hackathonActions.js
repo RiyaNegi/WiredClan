@@ -32,6 +32,31 @@ export const createHackathonPost = (title, published, tagId, hackathonId, ideaCo
     };
 };
 
+export const createIdeathonPost = (title, published, tagId, hackathonId, ideaCode) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_LOADING,
+            isLoading: true
+        });
+        request
+            .post(
+                `/api/posts`,
+                { title, published, tagId, hackathonId, ideaCode },
+            )
+            .then((response) => {
+                dispatch({
+                    type: CREATE_HACKATHON_POST,
+                    payload: response.data,
+                });
+                History.push("/ideathon")
+                History.go();
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    };
+};
+
 export const fetchHackathonDetails = () => {
     return (dispatch) => {
         request

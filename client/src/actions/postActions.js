@@ -165,7 +165,8 @@ export const updatePost = (postId, title, published, description, tagId, userId,
         { postId, title, published, description, tagId, hackathonId }
       )
       .then((response) => {
-        if (hackathonId) {
+        // TODO: Making this false until we're hosting 2 hackathons.
+        if (false && hackathonId) {
           History.push("/hackathon")
           History.go()
         }

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "./hackocracy.jpg"
+import hackathon from "./ideathon.png"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -31,8 +31,8 @@ class Hackathon extends Component {
       seconds: 0
     },
     isExpired: false,
-    targetDate: "Oct 30, 2020",
-    targetTime: "09:00:00",
+    targetDate: "Nov 1, 2020",
+    targetTime: "11:00:00",
   }
 
 
@@ -172,7 +172,7 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>~hackocracy 2020</h3></span>
+                      <span className="text-white"><h3>Embark 2020</h3></span>
                       <div className=" mt-2">
                         {/* <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
@@ -183,38 +183,53 @@ class Hackathon extends Component {
                         <h5>Timeline</h5>
                         <div className="text-muted">
                           <ul>
-                            <li>The opening ceremony and theme release would take place on 29 Oct, 2020. The Google meet link will be shared on the discord channel itself.</li>
-                            <li>All the teams are requested to submit their projects in the given submission format by 9.00 AM on 2nd Nov, 2020.</li>
+                            <li>Ideathon will commence on 1st of November, 2020 at 11AM and will
+conclude by 4PM 1st November, 2020.</li>
+                            <li>After 4PM, the teams will be sent a Google Meet Link where they will
+be giving their 5 minute presentation. </li>
                           </ul>
                         </div>
 
-                        <h5>Rules & Regulation</h5>
+                        <h5>Brief & Rules</h5>
 
                         <div className="text-muted">
-                          All teams must abide by the following rules stated by the organizers:
-                          <ol>
+                          Ideathon is a Startup Ideation Hackathon where teams or individuals
+                          can formulate a plan for and pitch their startup idea to our judges.
+                          The contestants will be judged on multiple factors, including but not
+                          limited to effective formulation of business plan, presentation skills,
+                          communication ability, accuracy of market research and analysis, and
+                          so on.<br />
+                            The project submission will be followed by a 5 minute presentation in
+front of our judges for every team.                           <ol>
 
                             <li>
-                              All the participants are requested to register on WiredClan website individually.
+                              The contestants/teams are allowed to submit a previously curated
+                              business plan on or before the deadline of 4 pm.
                           </li>
 
                             <li>
 
-                              All design elements, code, hardware builds, etc. for your project must be created during the event. While you may not begin coding in advance, you can plan and discuss with your team in advance. Written documents and design sketches are allowed.
-you.                          </li>
+                              All the participants are required to register on the WiredClan website
+individually.   </li>
 
                             <li>
-                              Plagiarism of any sort may result in direct disqualification from the competition.
-ceremony.                          </li>
+                              This is an Ideation Hackathon so don’t feel shy to be creative. All
+                              participants are allowed to submit videos or any other content they
+                              desire accompanied with the compulsory business plan and
+PowerPoint Presentation.                          </li>
 
                             <li>
-                              Teams must be comprised of 2-4 people.</li>
+                              The resources and statistics if mentioned in the business plan must be
+                              accurate to current markets and a detailed presentation should be
+accompanied with the business plan</li>
 
                             <li>
-                              The prizes will be awarded solely based on the decision of the judging panel.</li>
+                              Contestants can start uploading their submission from 1st November,
+                              2020, 11AM up until 4PM. Any submissions after 4PM will not be
+accepted. </li>
 
                             <li>
-                              The decision of the judging panel will be final and binding and can’t be challenged.
+                              Prizes will be awarded on the sole decision of our judging panel.
                           </li>
 
 
@@ -232,43 +247,21 @@ ceremony.                          </li>
                             <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li> */}
 
                           </ol>
-                          Please join the following social media platforms to get more updates:
-<br /><a className="text-decoration-none text-l-gray" href="https://www.instagram.com/acmccet">https://www.instagram.com/acmccet </a>
-                          <br /><a className="text-decoration-none text-l-gray" href="https://www.facebook.com/acmccet/">https://www.facebook.com/acmccet/</a>
                         </div>
 
                         <h5>Submission Format</h5>
                         <div className="text-muted">
-                          <b>The participants are required to make a short video of 1-2 minutes as a part of their project submission. They have to share the link of the Google drive containing the video.
-                          </b>
-                          <li>
-                            Tech Stack
-                          </li>
-                          <li>
-                            Project Description
-                          </li>
-                          <li>
-                            Software Design Description (SDD)
-                          </li>
-                          <li>
-                            Literature Survey
-                          </li>
-                          <li>
-                            Why is this solution different from past ones?
-                          </li>
-                          <li>
-                            Purpose/Aim of the project
-                          </li>
-                          <li>
-                            Scalability Description
-                          </li>
-                          <li>
-                            Features
-                          </li>
+                          Contestants are requested to submit the PowerPoint Presentation and
+                          the Business Plan document in a .pdf file format on the Wired Clan
+                          portal.<br /><br />
+                              Come on Entrepreneurs! Start IDEATING!!<br />
+                              MAY THE BEST START UP WIN!
+
+
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {isExpired && false && <div className="d-flex pb-3 justify-content-center">
+                        {isExpired && <div className="d-flex pb-3 justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
