@@ -18,7 +18,7 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedLabelId: undefined,
+            selectedLabelId: 'hBJkVgyWU',
             selectedIdeaCode: undefined,
         };
     }
@@ -109,7 +109,7 @@ class Registration extends Component {
                     <Field name="title" component={this.renderTitle}
                     />
                 </fieldset>
-                <h4 className="text-muted  mt-3">Category</h4>
+                {/* <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {
                         tags.filter((tag) => ['General'].includes(tag.text) === false).map(tag => (
@@ -128,7 +128,7 @@ class Registration extends Component {
                         ))
                     }
 
-                </div>
+                </div> */}
                 {false && <div>
                     <h4 className="text-muted mt-4">Problem Statement</h4>
                     <div className="col-12 row p-0 m-0">
