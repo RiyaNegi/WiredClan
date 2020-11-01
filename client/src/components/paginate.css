@@ -1,0 +1,21 @@
+.previous {
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.next {
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.pagination>li>a {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.active>a {
+    border: 1px solid white;
+}

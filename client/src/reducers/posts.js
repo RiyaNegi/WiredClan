@@ -3,18 +3,7 @@ import { FETCH_POSTS, FETCH_SEARCH, DELETE_POST, CREATE_LIKE, DELETE_LIKE, FETCH
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      if (action.page > 1) {
-        let posts = state.posts, drafts = state.drafts;
-        if (state.posts) {
-          posts = state.posts.concat(action.posts);
-        }
-        if (state.drafts) {
-          drafts = state.drafts.concat(action.drafts);
-        }
-
-        return { ...state, page: action.page, posts, drafts };
-      }
-      return { ...state, page: action.page, posts: action.posts, drafts: action.drafts };
+      return { ...state, page: action.page, posts: action.posts, drafts: action.drafts, postsCount: action.posts[0].postsCount };
     case FETCH_TAG:
       return {
         ...state, tag: action.payload,

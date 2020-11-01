@@ -63,7 +63,7 @@ function similarity(s1, s2) {
   return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 
-function optimizedDecorateListItem(post, currentUserId, comments, likes, hackathonId) {
+function optimizedDecorateListItem(post, currentUserId, comments, likes, hackathonId, postsCount) {
   const likesCount = likes.filter((obj) => {
     if (hackathonId) {
       return obj.postId === post.id
@@ -75,6 +75,7 @@ function optimizedDecorateListItem(post, currentUserId, comments, likes, hackath
 
   return {
     ...post,
+    postsCount: postsCount,
     commentsCount: comments.filter((obj) => obj.postId === post.id).length,
     comments: undefined,
     likesCount,
@@ -99,6 +100,14 @@ async function getAll({
 
   // limit = parseInt(limit, 10);
   limit = limit && parseInt(limit, 10) < 10 ? limit : 10;
+  const postsCount = await Post.findAll({
+    attributes: { exclude: ['description'] },
+    where: whereQuery,
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [User, Tag],
+  })
   const result = await Post.findAll({
     attributes: { exclude: ['description'] },
     where: whereQuery,
@@ -113,7 +122,7 @@ async function getAll({
   const comments = await Comment.findAll();
   const likes = await Like.findAll({ include: [User] });
 
-  return result.map((post) => optimizedDecorateListItem(post.get({ plain: true }), currentUserId, comments, likes, hackathonId));
+  return result.map((post) => optimizedDecorateListItem(post.get({ plain: true }), currentUserId, comments, likes, hackathonId, postsCount.length));
 }
 
 async function get({ id, userId }) {
