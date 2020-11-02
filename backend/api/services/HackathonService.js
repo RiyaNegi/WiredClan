@@ -37,7 +37,7 @@ async function postByUser({ id }, currentUserId) {
 
 async function _getAllDetails(hackathon, page, currentUserId) {
   const posts = await PostService.getAll({
-    hackathonId: hackathon.id, page,
+    hackathonId: hackathon.id, page, 20
   }, currentUserId);
   const postByCurrentUser = await postByUser({ id: hackathon.id }, currentUserId);
 
