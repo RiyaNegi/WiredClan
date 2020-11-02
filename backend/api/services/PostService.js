@@ -97,8 +97,8 @@ async function getAll({
     whereQuery.tagId = tagId;
   }
 
-  // limit = parseInt(limit, 10);
-  limit = limit && parseInt(limit, 10) < 10 ? limit : 10;
+  // limit = parseInt(limit, 15);
+  limit = limit && parseInt(limit, 15) < 15 ? limit : 15;
   const result = await Post.findAll({
     attributes: { exclude: ['description'] },
     where: whereQuery,
