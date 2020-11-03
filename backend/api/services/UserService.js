@@ -15,7 +15,7 @@ import PostService from './PostService';
 // import Hackathon from '../models/Hackathon';
 // import PostService from './PostService';
 
-async function get(id, currentUserId, page) {
+async function get(id, currentUserId, page, dpage) {
   let user = await User.findOne({
     where: Sequelize.or({
       id,
@@ -53,10 +53,11 @@ async function get(id, currentUserId, page) {
     likesCount += post.likesCount;
     return post;
   });
-  let publishedPostsCount = user.posts.length
+  user.postsCount = user.posts.length
+  user.draftsCount = user.drafts.length
+  user.drafts = user.drafts.slice((dpage - 1) * limit, dpage * limit);
   user.posts = user.posts.slice((page - 1) * limit, page * limit);
   user.likesCount = likesCount;
-  user.postsCount = publishedPostsCount
   return user;
 }
 

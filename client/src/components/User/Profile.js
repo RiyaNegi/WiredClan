@@ -20,14 +20,16 @@ class Profile extends Component {
   state = {
     edit: "edit",
     showModal: false,
+    page: 1,
+    dpage: 1,
   };
 
   componentWillMount() {
     let id = this.props.match.params.id;
     if (this.props.account && id === this.props.account.id) {
-      this.props.fetchUser(this.props.match.params.id, true);
+      this.props.fetchUser(this.props.match.params.id, true, this.state.page, this.state.dpage);
     } else {
-      this.props.fetchUser(this.props.match.params.id, false);
+      this.props.fetchUser(this.props.match.params.id, false, this.state.page, this.state.dpage);
     }
   }
 
@@ -43,7 +45,13 @@ class Profile extends Component {
   }
 
   handlePageClick = (data) => {
-    this.props.fetchUser(this.props.match.params.id, true, data.selected + 1)
+    this.setState({page: data.selected + 1})
+    this.props.fetchUser(this.props.match.params.id, true, data.selected + 1, this.state.dpage)
+  };
+
+  handleDraftPageClick = (data) => {
+    this.setState({dpage: data.selected + 1})
+    this.props.fetchUser(this.props.match.params.id, true, this.state.page, data.selected+1)
   };
 
   renderPosts(posts, { draft } = { draft: false }) {
@@ -187,6 +195,20 @@ class Profile extends Component {
                     <div className="mt-3">
                       {this.renderPosts(this.props.drafts, { draft: true })}
                     </div>
+                    <ReactPaginate
+                    previousLabel="&#8249;"
+                    nextLabel="&#8250;"
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={Math.ceil(this.props.user.draftsCount / 5)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={this.handleDraftPageClick}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    activeClassName={'active'}
+                    pageLinkClassName={'page'}
+                />
                   </Tab>
                 ) : (this.props.account &&
                   this.props.account.id === this.props.user.id && this.props.drafts.length === 0) && (<Tab eventKey="user-drafts" title="Drafts">

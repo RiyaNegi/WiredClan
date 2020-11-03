@@ -86,15 +86,16 @@ export const signoutUser = () => {
 
 };
 
-export const fetchUser = (id, draft, page) => {
+export const fetchUser = (id, draft, page, dpage) => {
   page = page === undefined ? 1 : page
+  dpage = dpage === undefined ? 1 : dpage
   return (dispatch) => {
     dispatch({
       type: RESET_POST_DETAILS,
     });
     request
       .get(
-        `/api/users/${id}?page=${page}`
+        `/api/users/${id}?page=${page}&dpage=${dpage}`
       )
       .then((response) => {
         dispatch({
