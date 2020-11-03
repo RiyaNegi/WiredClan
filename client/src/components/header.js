@@ -165,11 +165,6 @@ class Header extends PureComponent {
                       Home
                 </a>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/hackathon">
-                      Hackathon
-                </a>
-                  </li>
                   <li className="nav-item pr-1 dropdown dropdown-hover">
                     <a
                       id="navbarDropdownMenuLink"
