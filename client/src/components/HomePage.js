@@ -87,7 +87,7 @@ class HomePage extends PureComponent {
                     nextLabel="&#8250;"
                     breakLabel={'...'}
                     breakClassName={'break-me'}
-                    pageCount={Math.ceil(this.props.postsCount / 10)}
+                    pageCount={Math.ceil(this.props.postsCount / 15)}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={2}
                     onPageChange={this.handlePageClick}
