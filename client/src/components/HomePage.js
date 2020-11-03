@@ -83,8 +83,8 @@ class HomePage extends PureComponent {
             </div>
             <PostsList className="mt-2" posts={this.props.posts} />
                 <ReactPaginate
-                    previousLabel={'<'}
-                    nextLabel={'>'}
+                    previousLabel="&#8249;"
+                    nextLabel="&#8250;"
                     breakLabel={'...'}
                     breakClassName={'break-me'}
                     pageCount={Math.ceil(this.props.postsCount / 10)}
@@ -94,6 +94,7 @@ class HomePage extends PureComponent {
                     containerClassName={'pagination'}
                     subContainerClassName={'pages pagination'}
                     activeClassName={'active'}
+                    pageLinkClassName={'page'}
                 />
           </div>
 

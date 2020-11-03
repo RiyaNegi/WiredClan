@@ -10,6 +10,8 @@ import PostsList from "../Post/PostsList";
 import * as authActions from "../../actions/authActions";
 import { faFire as faHeartr, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { AVATAR_URL } from "../../config"
+import ReactPaginate from "react-paginate";
+import "../paginate.css"
 
 
 import "./user.css";
@@ -39,6 +41,10 @@ class Profile extends Component {
       }
     };
   }
+
+  handlePageClick = (data) => {
+    this.props.fetchUser(this.props.match.params.id, true, data.selected + 1)
+  };
 
   renderPosts(posts, { draft } = { draft: false }) {
     return (
@@ -159,6 +165,20 @@ class Profile extends Component {
                   ) : (this.props.posts.length > 0) && (
                     <Tab eventKey="user-posts" title="Posts">
                       <div className="mt-3">{this.renderPosts(this.props.posts)}</div>
+                      <ReactPaginate
+                    previousLabel="&#8249;"
+                    nextLabel="&#8250;"
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={Math.ceil(this.props.user.postsCount / 5)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    activeClassName={'active'}
+                    pageLinkClassName={'page'}
+                />
                     </Tab>
                   )}
               {(this.props.account &&
