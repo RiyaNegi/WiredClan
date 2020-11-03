@@ -98,8 +98,8 @@ async function getAll({
     whereQuery.tagId = tagId;
   }
 
-  // limit = parseInt(limit, 10);
-  limit = limit && parseInt(limit, 10) < 10 ? limit : 10;
+  // limit = parseInt(limit, 15);
+  limit = limit && parseInt(limit, 10) < 15 ? limit : 15;
   const postsCount = await Post.findAll({
     attributes: { exclude: ['description'] },
     where: whereQuery,
@@ -135,7 +135,7 @@ async function get({ id, userId }) {
     include: [
       {
         model: User,
-        attributes: ['userName', 'imageUrl', 'firstName', 'lastName',
+        attributes: ['userName', 'imageUrl', 'avatar', 'firstName', 'lastName',
           'college', 'year', 'department', 'id'],
       },
       {
@@ -160,7 +160,7 @@ async function get({ id, userId }) {
     include: [
       {
         model: User,
-        attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
+        attributes: ['userName', 'imageUrl', 'avatar', 'firstName', 'lastName', 'college',
           'year', 'department', 'id'],
       },
       {
@@ -168,7 +168,7 @@ async function get({ id, userId }) {
         as: 'replyComments',
         include: {
           model: User,
-          attributes: ['userName', 'imageUrl', 'firstName', 'lastName', 'college',
+          attributes: ['userName', 'imageUrl', 'avatar', 'firstName', 'lastName', 'college',
             'year', 'department', 'id'],
         },
       },

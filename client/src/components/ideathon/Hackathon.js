@@ -185,7 +185,7 @@ class Hackathon extends Component {
                           <ul>
                             <li>Ideathon will commence on 1st of November, 2020 at 11AM and will
 conclude by 4PM 1st November, 2020.</li>
-                            <li>After 4PM, the teams will be sent a Google Meet Link where they will
+                            <li>After 4PM, the teams will be sent a Zoom Link where they will
 be giving their 5 minute presentation. </li>
                           </ul>
                         </div>
@@ -251,9 +251,9 @@ accepted. </li>
 
                         <h5>Submission Format</h5>
                         <div className="text-muted">
-                          Contestants are requested to submit the PowerPoint Presentation and
-                          the Business Plan document in a .pdf file format on the Wired Clan
-                          portal.<br /><br />
+                          Contestants are requested to submit the PowerPoint Presentation via a Google drive link (make it public) and
+                          make a Business Plan document on Wired Clan
+                          portal. (PPT can be lnked in the document itself)<br /><br />
                               Come on Entrepreneurs! Start IDEATING!!<br />
                               MAY THE BEST START UP WIN!
 
@@ -301,11 +301,11 @@ accepted. </li>
               </div>
             </div>}
 
-            {/* {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
+            {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
               <h4 className="text-muted mt-4">Top Posts</h4>
               <h6 className="text-muted mt-2">(Votes by only google verified users counted here)</h6>
               <PostsList className="mt-2" posts={this.props.hackathonPosts} />
-            </div>} */}
+            </div>}
 
           </div>
 
