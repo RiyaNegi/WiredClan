@@ -47,6 +47,8 @@ async function get(id, currentUserId, page, dpage) {
       // likesCount += draft.likesCount;
       return draft;
     });
+    user.draftsCount = user.drafts.length
+    user.drafts = user.drafts.slice((dpage - 1) * limit, dpage * limit);
   }
   user.posts = allPosts.filter((post) => post.published).map((post) => {
     post = PostService.optimizedDecorateListItem(post, currentUserId, comments, likes);
@@ -54,8 +56,6 @@ async function get(id, currentUserId, page, dpage) {
     return post;
   });
   user.postsCount = user.posts.length
-  user.draftsCount = user.drafts.length
-  user.drafts = user.drafts.slice((dpage - 1) * limit, dpage * limit);
   user.posts = user.posts.slice((page - 1) * limit, page * limit);
   user.likesCount = likesCount;
   return user;
