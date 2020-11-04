@@ -21,15 +21,15 @@ class Profile extends Component {
     edit: "edit",
     showModal: false,
     page: 1,
-    dpage: 1,
+    draftpage: 1,
   };
 
   componentWillMount() {
     let id = this.props.match.params.id;
     if (this.props.account && id === this.props.account.id) {
-      this.props.fetchUser(this.props.match.params.id, true, this.state.page, this.state.dpage);
+      this.props.fetchUser(this.props.match.params.id, true, this.state.page, this.state.draftpage);
     } else {
-      this.props.fetchUser(this.props.match.params.id, false, this.state.page, this.state.dpage);
+      this.props.fetchUser(this.props.match.params.id, false, this.state.page, this.state.draftpage);
     }
   }
 
@@ -46,11 +46,11 @@ class Profile extends Component {
 
   handlePageClick = (data) => {
     this.setState({page: data.selected + 1})
-    this.props.fetchUser(this.props.match.params.id, true, data.selected + 1, this.state.dpage)
+    this.props.fetchUser(this.props.match.params.id, true, data.selected + 1, this.state.draftpage)
   };
 
   handleDraftPageClick = (data) => {
-    this.setState({dpage: data.selected + 1})
+    this.setState({draftpage: data.selected + 1})
     this.props.fetchUser(this.props.match.params.id, true, this.state.page, data.selected+1)
   };
 

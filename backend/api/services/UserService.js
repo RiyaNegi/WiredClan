@@ -15,7 +15,7 @@ import PostService from './PostService';
 // import Hackathon from '../models/Hackathon';
 // import PostService from './PostService';
 
-async function get(id, currentUserId, page, dpage) {
+async function get(id, currentUserId, page, draftpage) {
   let user = await User.findOne({
     where: Sequelize.or({
       id,
@@ -48,7 +48,7 @@ async function get(id, currentUserId, page, dpage) {
       return draft;
     });
     user.draftsCount = user.drafts.length
-    user.drafts = user.drafts.slice((dpage - 1) * limit, dpage * limit);
+    user.drafts = user.drafts.slice((draftpage - 1) * limit, draftpage * limit);
   }
   user.posts = allPosts.filter((post) => post.published).map((post) => {
     post = PostService.optimizedDecorateListItem(post, currentUserId, comments, likes);

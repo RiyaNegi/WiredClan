@@ -66,7 +66,7 @@ const config = (router) => router
   })
   .get('/:id', async (req, res) => {
     try {
-      const user = await UserService.get(req.params.id, req.session.userId, req.query.page, req.query.dpage);
+      const user = await UserService.get(req.params.id, req.session.userId, req.query.page, req.query.draftpage);
       return res.status(200).json(user);
     } catch (err) {
       logger.error(err);
