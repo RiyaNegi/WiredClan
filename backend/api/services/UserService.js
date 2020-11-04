@@ -28,7 +28,7 @@ async function get(id, currentUserId, page, draftpage) {
 
   const postIds = user.teammates.map((teammate) => teammate.postId);
   delete user.teammates;
-  let limit = limit && parseInt(limit, 10) < 5 ? limit : 5;
+  let limit = limit && parseInt(limit, 10) < 15 ? limit : 15;
   let allPosts = await Post.findAll({
     where: { id: postIds },
     order: [

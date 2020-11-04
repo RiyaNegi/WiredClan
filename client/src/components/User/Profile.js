@@ -178,7 +178,7 @@ class Profile extends Component {
                     nextLabel="&#8250;"
                     breakLabel={'...'}
                     breakClassName={'break-me'}
-                    pageCount={Math.ceil(this.props.user.postsCount / 5)}
+                    pageCount={Math.ceil(this.props.user.postsCount / 15)}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={2}
                     onPageChange={this.handlePageClick}
@@ -200,7 +200,7 @@ class Profile extends Component {
                     nextLabel="&#8250;"
                     breakLabel={'...'}
                     breakClassName={'break-me'}
-                    pageCount={Math.ceil(this.props.user.draftsCount / 5)}
+                    pageCount={Math.ceil(this.props.user.draftsCount / 15)}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={2}
                     onPageChange={this.handleDraftPageClick}
