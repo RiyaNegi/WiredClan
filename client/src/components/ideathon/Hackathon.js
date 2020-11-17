@@ -304,11 +304,11 @@ Join our discord server <a className="text-l-gray text-decoration-none text-gray
               </div>
             </div>}
 
-            {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
+            {/* {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
               <h4 className="text-muted mt-4">Top Posts</h4>
               <h6 className="text-muted mt-2">(Votes by only google verified users counted here)</h6>
               <PostsList className="mt-2" posts={this.props.hackathonPosts} />
-            </div>}
+            </div>} */}
 
           </div>
 
