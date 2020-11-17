@@ -48,7 +48,7 @@ export const createIdeathonPost = (title, published, tagId, hackathonId, ideaCod
                     type: CREATE_HACKATHON_POST,
                     payload: response.data,
                 });
-                History.push("/ideathon")
+                History.push("/flamingo")
                 History.go();
             })
             .catch((error) => {

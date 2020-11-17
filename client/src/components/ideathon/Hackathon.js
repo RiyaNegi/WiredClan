@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "./ideathon.png"
+import hackathon from "./flamingo_wiredclan.jpg"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -31,8 +31,8 @@ class Hackathon extends Component {
       seconds: 0
     },
     isExpired: false,
-    targetDate: "Nov 1, 2020",
-    targetTime: "11:00:00",
+    targetDate: "Nov 21, 2020",
+    targetTime: "9:00:00",
   }
 
 
@@ -172,7 +172,7 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>Embark 2020</h3></span>
+                      <span className="text-white"><h3>TIET's Flamingo, 2020</h3></span>
                       <div className=" mt-2">
                         {/* <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
@@ -180,7 +180,7 @@ class Hackathon extends Component {
 
 
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <h5>Timeline</h5>
+                        {/* <h5>Timeline</h5>
                         <div className="text-muted">
                           <ul>
                             <li>Ideathon will commence on 1st of November, 2020 at 11AM and will
@@ -188,49 +188,39 @@ conclude by 4PM 1st November, 2020.</li>
                             <li>After 4PM, the teams will be sent a Zoom Link where they will
 be giving their 5 minute presentation. </li>
                           </ul>
-                        </div>
+                        </div> */}
 
                         <h5>Brief & Rules</h5>
 
                         <div className="text-muted">
-                          Ideathon is a Startup Ideation Hackathon where teams or individuals
-                          can formulate a plan for and pitch their startup idea to our judges.
-                          The contestants will be judged on multiple factors, including but not
-                          limited to effective formulation of business plan, presentation skills,
-                          communication ability, accuracy of market research and analysis, and
-                          so on.<br />
-                            The project submission will be followed by a 5 minute presentation in
-front of our judges for every team.                           <ol>
+                          Flamingo is a UI/UX designing competition organized by ACM TIET. Flamingo celebrates the importance of design in conveying a message through the medium of art. Keeping that in mind, every participant would be given a situation based on our theme, and their goal would be to convey the same clearly and concisely, with a fling of beautiful artwork.
 
-                            <li>
-                              The contestants/teams are allowed to submit a previously curated
-                              business plan on or before the deadline of 4 pm.
-                          </li>
+<br /><br />
+Join our discord server <a className="text-l-gray text-decoration-none text-gray" href="https://discord.gg/DMdUMjZpnK">https://discord.gg/DMdUMjZpnK </a> to stay tuned.
+                           <ol>
 
-                            <li>
+                            <li>It is an individual contest
+</li>
+                            <li>The duration of the contest is 3 hours.</li>
+                            <li>Mention your target audience
+</li>
+                            <li>List how the user goals were addressed.
+</li>
+                            <li>Mention notable, unusual, or innovative user experience features and components.
+</li>
+                            <li>The contest will be held on the platform: Wired Clan
+</li>
+                            <li>Each participant can submit only one project.
+</li>
+                            <li>The project must contain the full names and email IDs of each participant.
+</li>
+                            <li>You need to fill the registration form as well as you need to register on the Wired Clan platform.
+</li>
+                            <li>Every participant is requested to join our discord server using the above mentioned link to stay updated.
+</li>
 
-                              All the participants are required to register on the WiredClan website
-individually.   </li>
 
-                            <li>
-                              This is an Ideation Hackathon so don’t feel shy to be creative. All
-                              participants are allowed to submit videos or any other content they
-                              desire accompanied with the compulsory business plan and
-PowerPoint Presentation.                          </li>
 
-                            <li>
-                              The resources and statistics if mentioned in the business plan must be
-                              accurate to current markets and a detailed presentation should be
-accompanied with the business plan</li>
-
-                            <li>
-                              Contestants can start uploading their submission from 1st November,
-                              2020, 11AM up until 4PM. Any submissions after 4PM will not be
-accepted. </li>
-
-                            <li>
-                              Prizes will be awarded on the sole decision of our judging panel.
-                          </li>
 
 
 
@@ -249,13 +239,26 @@ accepted. </li>
                           </ol>
                         </div>
 
-                        <h5>Submission Format</h5>
+                        <h5>Evaluation Criteria</h5>
                         <div className="text-muted">
-                          Contestants are requested to submit the PowerPoint Presentation via a Google drive link (make it public) and
-                          make a Business Plan document on Wired Clan
-                          portal. (PPT can be lnked in the document itself)<br /><br />
-                              Come on Entrepreneurs! Start IDEATING!!<br />
-                              MAY THE BEST START UP WIN!
+                          <li><strong>Originality</strong>: of the idea
+</li>
+                          <li><strong>Problem framing</strong>: definition, capturing the essence
+</li>
+                          <li><strong>Relevance</strong>: of the problem according to the problem statement chosen.
+</li>
+                          <li><strong>User experience</strong>: efficient, effective, memorable, learnable, error free, emotions
+</li>
+                          <li><strong>Innovativeness</strong>: of the design solution
+</li>
+                          <li><strong>Impact</strong>: comprehensibility and emotional significance
+</li>
+                          <li><strong>Presentation</strong>: of the entry and quality of the deliverable
+</li>
+                          <li><strong>Final Recommendation</strong>: why does this entry deserve or not deserve an award</li>
+
+
+                          <br />
 
 
 
