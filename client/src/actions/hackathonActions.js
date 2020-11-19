@@ -79,7 +79,7 @@ export const fetchIdeathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/IDEA-NOV-2020`
+                `/api/hackathons/FLAM-NOV-2020`
             )
             .then((response) => {
                 dispatch({

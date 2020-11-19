@@ -18,7 +18,7 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedLabelId: 'hBJkVgyWU',
+            selectedLabelId: 'hBJkVgyWU', // PROD hBJkVgyWU, DEV GtyhTgwJq
             selectedIdeaCode: undefined,
         };
     }
