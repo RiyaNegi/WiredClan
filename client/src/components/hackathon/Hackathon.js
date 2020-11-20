@@ -301,11 +301,11 @@ ceremony.                          </li>
                   <Link
                     className=" com-links edit-link"
                     to={{
-                      pathname: `/posts/${this.props.postByCurrentUser.id}/edit`,
+                      pathname: `/posts/${this.props.postByCurrentUser.id}`,
                       state: { edit: true },
                     }}
                   >
-                    <Button variant="primary">Edit</Button>{' '}
+
                   </Link>
                   {/* <Button className="ml-2" variant="success" onClick={this.handlePublish}>Publish</Button>{' '} */}
                 </div>
