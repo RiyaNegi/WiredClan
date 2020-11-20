@@ -260,6 +260,16 @@ Join our discord server <a className="text-l-gray text-decoration-none text-gray
 
                           <br />
 
+                          <strong>                          NOTE:
+
+                           PROBLEM STATEMENTS WILL BE RELEASED ON THE DISCORD SERVER AT 8:30.</strong>
+                          <br />
+Discord Voice channels will be active throughout the event contestants can clarify their doubts there.
+<br />
+                          <br />
+                          <h5>Submission Format</h5>
+Link of view only template of Adobe XD / Figma.
+
 
 
                         </div>
