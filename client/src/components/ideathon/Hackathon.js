@@ -274,13 +274,13 @@ Link of view only template of Adobe XD / Figma.
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
-                        {isExpired && <div className="d-flex pb-3 justify-content-center">
+                        {/* {isExpired && <div className="d-flex pb-3 justify-content-center">
                           <button
                             onClick={this.handleRegisterClick}
                             type="button"
                             class="new-post-button p-2 px-5 mt-3"
                           >START</button>
-                        </div>}
+                        </div>} */}
                       </div>
                     </div>
                     {/* <div className="col-12 mt-3"

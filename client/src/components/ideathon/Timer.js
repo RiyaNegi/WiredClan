@@ -78,7 +78,7 @@ class Timer extends Component {
                         </div>
                     </div>
                 ) : (
-                        <p className="alert-info p-3" >Contest Started.</p>
+                        <p className="alert-info p-3" >Contest Ended.</p>
                     )}
             </Fragment>
         );
