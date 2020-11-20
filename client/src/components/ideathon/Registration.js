@@ -99,7 +99,11 @@ class Registration extends Component {
                     />{" "}
                 </button>
             </div>
-            <label className="d-flex justify-content-center register-title"><h4>My Project</h4></label>
+            <h4 className="text-muted  mt-3">Problem Statements</h4>
+            <div className="col-12 row p-0 m-0">
+                <iframe height="400px" width="100%" src="https://docs.google.com/document/d/e/2PACX-1vTd39hYHVZRvvo1eNGa5qLgm7rxM17CNa51tAW2fmjfUV_XnG4VKX8JTiRuRABCc8lXWSguKfMPCMVM/pub?embedded=true"></iframe>
+            </div>
+            <label className="d-flex justify-content-center register-title pt-5"><h4>My Project</h4></label>
             <div className="mt-1 text-muted d-flex justify-content-center">You can edit this later, if needed.</div>
             <div className="mt-1 text-muted d-flex justify-content-center">Your idea won't be posted until you click "Publish" later on.</div>
 
@@ -109,6 +113,8 @@ class Registration extends Component {
                     <Field name="title" component={this.renderTitle}
                     />
                 </fieldset>
+
+
                 {/* <h4 className="text-muted  mt-3">Category</h4>
                 <div className="col-12 row p-0 m-0">
                     {

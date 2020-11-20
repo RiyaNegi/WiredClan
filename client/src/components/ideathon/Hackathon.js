@@ -32,7 +32,7 @@ class Hackathon extends Component {
     },
     isExpired: false,
     targetDate: "Nov 20, 2020",
-    targetTime: "21:05:00",
+    targetTime: "21:00:00",
   }
 
 
