@@ -8,7 +8,6 @@ const config = (router) => router
   .get('/', async (req, res) => {
     try {
       const result = await PostService.getAll(req.query, req.session.userId);
-
       return res.status(200).json({
         page: req.params.page,
         result,

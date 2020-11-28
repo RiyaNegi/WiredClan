@@ -11,6 +11,8 @@ import Leaderboard from "./Post/Leaderboard";
 import { Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import CommunityBox from "./communities/CommunityBox";
+import ReactPaginate from "react-paginate";
+import "./paginate.css"
 
 class HomePage extends PureComponent {
   constructor(props) {
@@ -53,6 +55,10 @@ class HomePage extends PureComponent {
     }
   };
 
+  handlePageClick = (data) => {
+    this.props.fetchPosts(data.selected + 1)
+  };
+
   render() {
     if (!this.props.posts || (this.props.posts.length !== 0 && !this.props.posts[0].user)) {
       return (
@@ -76,12 +82,20 @@ class HomePage extends PureComponent {
               <div className=" latest-line" />
             </div>
             <PostsList className="mt-2" posts={this.props.posts} />
-            <a href="#more" id="more" className="text-l-gray" onClick={(e) => {
-              e.preventDefault();
-              this.props.fetchPosts(this.props.page + 1)
-            }}>
-              More
-            </a>
+                <ReactPaginate
+                    previousLabel="&#8249;"
+                    nextLabel="&#8250;"
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={Math.ceil(this.props.postsCount / 15)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    activeClassName={'active'}
+                    pageLinkClassName={'page'}
+                />
           </div>
 
           <div className="col-md-5 col-lg-4 mt-4">
@@ -126,6 +140,7 @@ class HomePage extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
+    postsCount: state.posts.postsCount,
     account: state.auth.data,
     page: state.posts.page,
     authenticated: state.auth.authenticated,

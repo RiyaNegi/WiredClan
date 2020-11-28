@@ -15,7 +15,7 @@ import PostService from './PostService';
 // import Hackathon from '../models/Hackathon';
 // import PostService from './PostService';
 
-async function get(id, currentUserId) {
+async function get(id, currentUserId, page, draftpage) {
   let user = await User.findOne({
     where: Sequelize.or({
       id,
@@ -28,8 +28,12 @@ async function get(id, currentUserId) {
 
   const postIds = user.teammates.map((teammate) => teammate.postId);
   delete user.teammates;
+  let limit = limit && parseInt(limit, 10) < 15 ? limit : 15;
   let allPosts = await Post.findAll({
     where: { id: postIds },
+    order: [
+        ['createdAt'],
+      ],
     include: [Tag],
   });
   allPosts = allPosts.map((post) => post.get({ plain: true }));
@@ -43,12 +47,16 @@ async function get(id, currentUserId) {
       // likesCount += draft.likesCount;
       return draft;
     });
+    user.draftsCount = user.drafts.length
+    user.drafts = user.drafts.slice((draftpage - 1) * limit, draftpage * limit);
   }
   user.posts = allPosts.filter((post) => post.published).map((post) => {
     post = PostService.optimizedDecorateListItem(post, currentUserId, comments, likes);
     likesCount += post.likesCount;
     return post;
   });
+  user.postsCount = user.posts.length
+  user.posts = user.posts.slice((page - 1) * limit, page * limit);
   user.likesCount = likesCount;
   return user;
 }
