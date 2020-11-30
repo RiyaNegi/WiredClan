@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import hackathon from "./hackocracy.jpg"
+import hackathon from "./winterfall.jpg"
 import History from "../../history.js";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Post/Leaderboard";
@@ -31,7 +31,7 @@ class Hackathon extends Component {
       seconds: 0
     },
     isExpired: false,
-    targetDate: "Oct 30, 2020",
+    targetDate: "Dec 4, 2020",
     targetTime: "09:00:00",
   }
 
@@ -173,7 +173,7 @@ class Hackathon extends Component {
 
                   <div className="hackathon-register-box pt-3">
                     <div className='d-flex flex-column box-shadow'>
-                      <span className="text-white"><h3>~hackocracy 2020</h3></span>
+                      <span className="text-white"><h3>~Winerfall 2020</h3></span>
                       <div className=" mt-2">
                         {/* <div style={{ fontSize: '17px' }}>🏆 1st Prize: Rs 2,000</div>
                         <div style={{ fontSize: '17px' }}>🥈 2nd Prize: Rs 1,000</div>
@@ -181,13 +181,13 @@ class Hackathon extends Component {
 
 
                         <hr style={{ backgroundColor: '#505050' }} />
-                        <h5>Timeline</h5>
+                        {/* <h5>Timeline</h5>
                         <div className="text-muted">
                           <ul>
                             <li>The opening ceremony and theme release would take place on 30 Oct, 2020. The Google meet link will be shared on the discord channel itself.</li>
                             <li>All the teams are requested to submit their projects in the given submission format by 9.00 AM on 2nd Nov, 2020.</li>
                           </ul>
-                        </div>
+                        </div> */}
 
                         <h5>Rules & Regulation</h5>
 
@@ -233,42 +233,13 @@ ceremony.                          </li>
                             <li>Join the whatsapp group for any queries or updates  👉  <a href=" https://chat.whatsapp.com/LfZrhXXcD9L6c4pfz50YCp" > WiredClan</a></li> */}
 
                           </ol>
-                          Please join the following social media platforms to get more updates:
-<br /><a className="text-decoration-none text-l-gray" href="https://www.instagram.com/acmccet">https://www.instagram.com/acmccet </a>
-                          <br /><a className="text-decoration-none text-l-gray" href="https://www.facebook.com/acmccet/">https://www.facebook.com/acmccet/</a>
                         </div>
 
                         <h5>Submission Format</h5>
                         <div className="text-muted">
                           <b>The participants are required to make a short video of 1-2 minutes as a part of their project submission. They have to share the link of the Google drive containing the video.
                           They can also link it via YouTube in the post itself.</b>
-                          <li>
-                            Tech Stack
-                          </li>
-                          <li>
-                            Project Description
-                          </li>
-                          <li>
-                            Software Design Description (SDD)
-                          </li>
-                          <li>
-                            Literature Survey
-                          </li>
-                          <li>
-                            Why is this solution different from past ones?
-                          </li>
-                          <li>
-                            Purpose/Aim of the project
-                          </li>
-                          <li>
-                            Scalability Description
-                          </li>
-                          <li>
-                            Features
-                          </li>
-                          <li>
-                            <b>Public GitHub repository link</b>
-                          </li>
+
 
                         </div>
                         <hr style={{ backgroundColor: '#505050' }} />
@@ -281,10 +252,10 @@ ceremony.                          </li>
                         </div>}
                       </div>
                     </div>
-                    {/* <div className="col-12 mt-3"
+                    <div className="col-12 mt-3"
                     >
-                      <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList>
-                    </div> */}
+                      {/* <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList> */}
+                    </div>
                   </div>
                 </div>
               </React.Fragment>
