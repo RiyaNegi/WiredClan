@@ -61,7 +61,7 @@ export const fetchHackathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/CCET-OCT-2020`
+                `/api/hackathons/WINTER-DEC-2020`
             )
             .then((response) => {
                 dispatch({
