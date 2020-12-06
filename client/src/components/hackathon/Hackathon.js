@@ -254,7 +254,7 @@ ceremony.                          </li>
                     </div>
                     <div className="col-12 mt-3"
                     >
-                      {/* <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList> */}
+                      <IdeasList ideas={this.props.tags.map(tag => tag.ideas.map(idea => ({ ...idea, tagText: tag.text }))).flat()}></IdeasList>
                     </div>
                   </div>
                 </div>
@@ -283,11 +283,11 @@ ceremony.                          </li>
               </div>
             </div>}
 
-            {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
+            {/* {this.props.hackathonPosts.length > 0 && <div className="col-12 mt-3 pl-0">
               <h4 className="text-muted mt-4">Top Posts</h4>
               <h6 className="text-muted mt-2">(Votes by only google verified users counted here)</h6>
               <PostsList className="mt-2" posts={this.props.hackathonPosts} />
-            </div>}
+            </div>} */}
 
           </div>
 
