@@ -10,7 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@tinymce/tinymce-react": "^3.6.0",
     "autosize": "^4.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "eslint-plugin-react-app": "^6.2.2",
     "highlight.js": "^10.1.1",
