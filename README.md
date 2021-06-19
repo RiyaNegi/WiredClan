@@ -1,4 +1,14 @@
 # Wired Clan
+
+Wired Clan is a project that started with the aim to bridge the gap between theoretical knowledge and practical expertise among college students.
+Creating an exclusive community for students to learn and showcase their projects and also for conducting hackathons.
+It is a PERN stack project built using react and redux.
+
+![homepage](https://github.com/RiyaNegi/WiredClan/blob/dev/client/public/Screenshot%20from%202020-10-31%2012-21-18.png)
+![page](https://github.com/RiyaNegi/WiredClan/blob/dev/client/public/Screenshot%20from%202020-10-24%2011-31-25.png)
+![page](https://github.com/RiyaNegi/WiredClan/blob/dev/client/public/Screenshot%20from%202020-10-05%2012-38-37.png)
+
+
 ## Running Backend On Windows
 - ### Install POSTGRESQL and REDIS and set the environment variables for the same
 - ### cd into the backend folder and run the following installations
