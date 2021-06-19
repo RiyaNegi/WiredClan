@@ -111,10 +111,10 @@ class Header extends PureComponent {
                       className="dropdown-item"
                       href="/hackathon"
                     >
-                      CCET ~hackocracy 2020
+                      Winterfall 2020
                   </a>
-                    <a className="dropdown-item" href="/ideathon">
-                      TSEC Embark 2020
+                    <a className="dropdown-item" href="/flamingo">
+                      TIET Flamingo 2020
                   </a>
                   </div>
 
@@ -185,10 +185,10 @@ class Header extends PureComponent {
                         className="dropdown-item"
                         href="/hackathon"
                       >
-                        CCET ~hackocracy 2020
+                        Winterfall 2020
                   </a>
-                      <a className="dropdown-item" href="/ideathon">
-                        TSEC Embark 2020
+                      <a className="dropdown-item" href="/flamingo">
+                        TIET Flamingo 2020
                   </a>
                     </div>
 

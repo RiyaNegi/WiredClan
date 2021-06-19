@@ -63,7 +63,7 @@ class Timer extends Component {
             <Fragment>
                 {!isExpired && targetDate && targetTime ? (
                     <div className="counter p-3">
-                        <div className="d-flex font-weight-bold justify-content-center"><h5>Countdown for Hackathon</h5></div>
+                        <div className="d-flex font-weight-bold justify-content-center"><h5>Countdown for Contest</h5></div>
                         <div className="row justify-content-center mt-2">
                             {Object.entries(remaining).map((el, i) => (
                                 <div key={i} className="entry">
@@ -78,7 +78,7 @@ class Timer extends Component {
                         </div>
                     </div>
                 ) : (
-                        <p className="alert-info p-3" >Hackathon Started.</p>
+                        <p className="alert-info p-3" >Contest Ended.</p>
                     )}
             </Fragment>
         );

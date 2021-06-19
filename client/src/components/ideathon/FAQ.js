@@ -7,9 +7,18 @@ class FAQ extends Component {
         return <div className="faq-card p-3">
             <label className="text-muted">Code Of Conduct</label>
             <label className="faq-text">
-                By participating in Embark 2020, you agree to abide by the following code of conduct:
-                <li>Please treat all other hackers with the utmost respect.  We ask that you act kindly, behave professionally, and not insult or put down other attendees.  Remember that harassment and racist, sexist, or exclusionary jokes are not appropriate for this event and will result in direct disqualification of the complete team. If at any point you see a fellow hacker being harassed, please contact an organizer.</li>
-                <li>Please treat our sponsors, organizers, and judges with the utmost respect. Any disrespect might have further consequences. </li>
+                By participating in Flamingo, you agree to abide by the following code of conduct:
+                <li>Design competition is only for students.</li>
+                <li>Please note that plagiarized entries will be disqualified immediately.
+</li>
+                <li>If the entry belongs to a third party, the responsibility of obtaining the permission is solely of the participant.
+</li>
+                <li>We may publish your entry on our Insta Handle.Please ensure that it does not breach any third party confidentiality agreement.
+</li>
+                <li>We do not take any responsibility of any breach of IP confidentiality of the respective client or whomsoever owns the project.
+</li>
+                <li>We will not be liable for any misinterpreted entry, design or content.
+</li>
                 {/* <li>Icons provided by < a target="_blank" href="https://icons8.com" className="text-muted"> Icons8</a >.</li> */}
             </label>
             {/* <Link to="#" className="mt-0"><h6>Learn more</h6></Link> */}
@@ -19,3 +28,7 @@ class FAQ extends Component {
 }
 
 export default FAQ
+
+
+
+

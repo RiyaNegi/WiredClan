@@ -48,7 +48,7 @@ export const createIdeathonPost = (title, published, tagId, hackathonId, ideaCod
                     type: CREATE_HACKATHON_POST,
                     payload: response.data,
                 });
-                History.push("/ideathon")
+                History.push("/flamingo")
                 History.go();
             })
             .catch((error) => {
@@ -61,7 +61,7 @@ export const fetchHackathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/CCET-OCT-2020`
+                `/api/hackathons/WINTER-DEC-2020`
             )
             .then((response) => {
                 dispatch({
@@ -79,7 +79,7 @@ export const fetchIdeathonDetails = () => {
     return (dispatch) => {
         request
             .get(
-                `/api/hackathons/IDEA-NOV-2020`
+                `/api/hackathons/FLAM-NOV-2020`
             )
             .then((response) => {
                 dispatch({

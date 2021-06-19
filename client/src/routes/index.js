@@ -37,7 +37,7 @@ const Routes = () => {
         <Route path="/posts/:id/edit" component={EditPost} />
         <Route path="/users/:id" component={Profile} />
         <Route path="/hackathon" component={Hackathon} />
-        <Route path="/ideathon" component={Ideathon} />
+        <Route path="/flamingo" component={Ideathon} />
         <Route path="/community/:slug/" component={Community} />
         <Route path="/:slug/:id" component={postDetails} />
         <Route component={pageNotFound} />
